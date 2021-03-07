@@ -14,6 +14,9 @@
 # If not, see <https://store.webkul.com/license.html/>
 #################################################################################
 {
+        ruffy
+        doro
+        sanji
   "name"                 :  "Website Refer And Earn",
   "summary"              :  "Odoo Website Refer And Earn allows your customers to refer your business to their friends and earn Bonus Points.",
   "category"             :  "Website",
