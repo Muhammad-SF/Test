@@ -1,0 +1,12 @@
+.o_tooltip.o_animated.right, .o_tooltip.o_animated.left ,.o_tooltip.o_animated.bottom ,.o_tooltip.o_animated.top {
+	opacity: 0 !important;
+}
+.o_tooltip.o_animated{
+	opacity: 0 !important;	
+}
+.o_homepage_editor_welcome_message .o_tooltip_container > .o_tooltip{
+	opacity: 0 !important;
+}
+.progress{
+	opacity: 0;
+}

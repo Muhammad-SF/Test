@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <report
+        id="report_sales_receipt"
+        string="Sales Receipt"
+        model="account.voucher"
+        report_type="qweb-pdf"
+        file="sales_receipt_ext.report_salesreceipt"
+        name="sales_receipt_ext.report_salesreceipt"
+    />
+</odoo>

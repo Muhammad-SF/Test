@@ -1,0 +1,65 @@
+@roboto-font-path: '../fonts/Roboto';
+
+.roboto-font(@type, @weight, @style) {
+    @font-face {
+        font-family: 'Roboto';
+        src: url('@{roboto-font-path}/Roboto-@{type}-webfont.eot');
+        src: url('@{roboto-font-path}/Roboto-@{type}-webfont.eot?#iefix') format('embedded-opentype'),
+        url('@{roboto-font-path}/Roboto-@{type}-webfont.woff') format('woff'),
+        url('@{roboto-font-path}/Roboto-@{type}-webfont.ttf') format('truetype'),
+        url('@{roboto-font-path}/Roboto-@{type}-webfont.svg#Roboto') format('svg');
+        font-weight: @weight;
+        font-style: @style;
+    }
+
+    @font-face {
+        font-family: 'Roboto-@{type}';
+        src: url('@{roboto-font-path}/Roboto-@{type}-webfont.eot');
+        src: url('@{roboto-font-path}/Roboto-@{type}-webfont.eot?#iefix') format('embedded-opentype'),
+        url('@{roboto-font-path}/Roboto-@{type}-webfont.woff') format('woff'),
+        url('@{roboto-font-path}/Roboto-@{type}-webfont.ttf') format('truetype'),
+        url('@{roboto-font-path}/Roboto-@{type}-webfont.svg#Roboto') format('svg');
+    }
+}
+
+.roboto-font-pair(@type, @weight) {
+    .roboto-font('@{type}', @weight, normal);
+    .roboto-font('@{type}Italic', @weight, italic);
+}
+
+.roboto-font-pair('Thin', 100);
+.roboto-font-pair('Light', 300);
+.roboto-font-pair('Regular', 400);
+.roboto-font-pair('Medium', 500);
+.roboto-font-pair('Bold', 700);
+.roboto-font-pair('Black', 900);
+
+
+@font-face {
+  font-family: 'SegoeUI';
+  font-style: normal;
+  font-weight: 300;
+  src: url(/uppercrust_backend_theme/static/src/fonts/SegoeUi/Segoe-UI.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SegoeUIBold';
+  font-style: bold;
+  font-weight: 700;
+  src: url(/uppercrust_backend_theme/static/src/fonts/SegoeUi/Segoe-UI-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'SegoeUIBoldItalic';
+  font-style: italic;
+  font-weight: 700;
+  src: url(/uppercrust_backend_theme/static/src/fonts/SegoeUi/Segoe-UI-Bold-Italic.ttf) format('truetype');
+}
+
+
+@font-face {
+  font-family: 'SegoeUIItalic';
+  font-style: normal;
+  font-weight: 400;
+  src: url(/uppercrust_backend_theme/static/src/fonts/SegoeUi/Segoe-UI-Italic.ttf) format('truetype');
+}

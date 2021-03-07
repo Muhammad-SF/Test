@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+       <record id="view_res_partner_filter_inherit" model="ir.ui.view">
+            <field name="name">res.partner.view.search.inherit.mail</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="arch" type="xml">
+                    <filter name="inactive" position="after">
+                        <separator />
+                        <filter string="Available for mass mailing"
+                                name='not_opt_out' domain="[('opt_out', '=', False)]"
+                                help="Partners that did not ask not to be included in mass mailing campaigns" />
+                        <separator/>
+                        <filter string="My Activities" name="activities_my"
+                                domain="[('activity_ids.user_id', '=', uid)]"/>
+                        <separator/>
+                        <filter string="Late Activities" name="activities_overdue"
+                                domain="[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]"
+                                help="Show all records which has next action date is before today"/>
+                        <filter string="Today Activities" name="activities_today"
+                                domain="[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                        <filter string="Future Activities" name="activities_upcoming_all"
+                                domain="[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))
+                        ]"/>
+                        <separator/>
+                    </filter>
+            </field>
+        </record>
+
+
+<!--        <record id="view_res_partner_filter" model="ir.ui.view">
+            <field name="name">res.partner.select</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Search Partner">
+                   <field name="name"
+                       filter_domain="['|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self)]"/>
+                   <filter help="My Partners" domain="[('user_id','=',uid)]"/>
+                   <separator/>
+                   <filter string="Persons" name="type_person" domain="[('is_company','=',0)]"/>
+                   <filter string="Companies" name="type_company" domain="[('is_company','=',1)]"/>
+                   <separator/>
+                   <filter string="Customers" name="customer" domain="[('customer','=',1), ('parent_id', '=', False)]"/>
+                   <filter string="Vendors" name="supplier" domain="[('supplier','=',1), ('parent_id', '=', False)]"/>
+                   <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+                   <separator/>
+                   <field name="category_id" string="Tag" filter_domain="[('category_id','ilike', self)]"/>
+                   <field name="user_id"/>
+                   <field name="parent_id" domain="[('is_company','=',1)]" operator="child_of"/>
+                   <group expand="0" name="group_by" string="Group By">
+                       <filter name="salesperson" string="Salesperson" domain="[]" context="{'group_by' : 'user_id'}" />
+                       <filter string="Company" context="{'group_by': 'parent_id'}"/>
+                       <filter string="Country" context="{'group_by': 'country_id'}"/>
+                   </group>
+               </search>
+            </field>
+        </record>
+ -->
+</odoo>

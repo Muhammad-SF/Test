@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_scrap_return_form" model="ir.ui.view">
+            <field name="name">scrap.return.form</field>
+            <field name="model">scrap.return</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Scrap Return">
+                <field name="move_dest_exists" invisible="1"/>
+                <group attrs="{'invisible': [('move_dest_exists', '=', False)]}">
+                    <div class="oe_grey">
+                        <p>This picking appears to be chained with another operation. Later, if you receive the goods you are returning now, make sure to <b>reverse</b> the returned picking in order to avoid logistic rules to be applied again (which would create duplicated operations)</p>
+                    </div>
+                </group>
+                <group>
+                    <field name="product_return_moves" nolabel="1">
+                        <tree editable="top" create="0">
+                            <field name="product_id" readonly="1"/>
+                            <field name="quantity"/>
+                        </tree>
+                    </field>
+                </group>
+                <group>
+                    <field name="parent_location_id" invisible="1"/>
+                    <field name="original_location_id" invisible="1"/>
+                    <field name="location_id" options="{'no_create': True, 'no_open': True}" />
+                </group>
+                <footer>
+                    <button name="create_returns" string="Return" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_scrap_return_view">
+            <field name="name">Scrap Return</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">scrap.return</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+
+        <!--menuitem id="menu_scrap_return"
+            parent="module.xmlid"
+            sequence="20"
+            action="act_open_scrap_return_view"/-->
+
+    </data>
+</odoo>

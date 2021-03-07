@@ -1,0 +1,51 @@
+.o_user_menu  .dropdown-menu  img {
+    height: 20px;
+    margin: 2px;
+}
+.o_web_client{
+	.o_tooltip{
+		&.bottom, &.top, &.left, &.right{
+			display: none !important;
+		}
+	}
+	#oe_main_menu_navbar{
+		.oe_user_menu_placeholder{
+			.o_user_menu{
+				& > .dropdown-menu{
+					a{
+						padding: 3px 20px 3px 0px;
+						margin-left: 65px;
+						color: #343a40;
+					}
+				}
+			}
+		}
+	}
+	.o_main{
+			.o_main_content{
+				.o_content{
+					.o_mail_chat{
+						.o_mail_chat_content{
+							.ad_mail_request_permission{
+								overflow: hidden;
+							    text-overflow: ellipsis;
+							    display: block;
+							    text-align: center;
+							    padding-left: 5px;
+							    justify-content: center;
+							    flex: 1 1 auto;
+							}
+						}
+					}
+					.o_web_settings_dashboard{
+						.row{
+							& > .o_web_settings_dashboard_col:nth-child(4){
+								display: none;
+								visibility: hidden;
+							}
+						}
+					}
+				}
+			}
+	}
+}

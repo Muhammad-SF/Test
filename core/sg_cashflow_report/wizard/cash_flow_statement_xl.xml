@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_financial_report_wizard_inherit" model="ir.ui.view">
+        <field name="name">Account Financial Report Wizard Inherit</field>
+        <field name="model">accounting.report</field>
+        <field name="inherit_id" ref="account.accounting_report_view"/>
+        <field name="arch" type="xml">
+            <field name="account_report_id" position="after">
+                <field name="account_report_name" invisible="1"/>
+            </field>
+            <field name="debit_credit" position="attributes">
+                <attribute name="attrs">{'invisible': [('account_report_name','=','Statement Of Cash Flow')]}</attribute>
+            </field>
+            <field name="enable_filter" position="attributes">
+                <attribute name="attrs">{'invisible': [('account_report_name','=','Statement Of Cash Flow')]}</attribute>
+            </field>
+            <field name="date_from" position="attributes">
+                <attribute name="attrs">{'required': [('account_report_name','=','Statement Of Cash Flow')]}</attribute>
+            </field>
+            <field name="date_to" position="attributes">
+                <attribute name="attrs">{'required': [('account_report_name','=','Statement Of Cash Flow')]}</attribute>
+            </field>
+            <button name="check_report" position="after">
+                <button name="action_export" string="Export XLSX" type="object" icon="fa-cogs" class="oe_highlight" attrs="{'invisible': [('account_report_name','!=','Statement Of Cash Flow')]}"/>
+            </button>
+        </field>
+    </record>
+
+    <record id="view_cash_flow_statement_xl_report" model="ir.ui.view">
+        <field name="name">View Cash Flow Statement Xl Report</field>
+        <field name="model">cash.flow.statement</field>
+        <field name="arch" type="xml">
+            <form string="Statement Of Cash Flow Report">
+                <group>
+                    <field name="file" string='Filename' filename="filename" readonly="1"/>
+                    <field name="filename" invisible="1"/>
+                </group>
+                <footer>
+                    <button string="Generate XLSX" icon="fa-file-excel-o" name="action_generate_xls" class="oe_highlight" type="object"/>
+                    or
+                    <button name="cancel" string="Cancel" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_cashflow_statement_xls_report" model="ir.actions.act_window">
+        <field name="name">Excel Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="res_model">cash.flow.statement</field>
+        <field name="view_id" ref="sg_cashflow_report.view_cash_flow_statement_xl_report"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

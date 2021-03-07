@@ -1,0 +1,16 @@
+<odoo>
+  <data>
+
+      <record id="view_res_branch_form_inherit_service_charge" model="ir.ui.view">
+            <field name="name">view.res.branch.form.inherit.service.charge</field>
+            <field name="model">res.branch</field>
+            <field name="inherit_id" ref="branch.view_res_branch_form"></field>
+            <field name="arch" type="xml">
+                <field name="address" position="after">
+                    <field name="service_charge_id" required="1" string='Service Charge(%)'/>
+                    <field name="tax_id" required="1" string='Tax(%)' domain="[('amount_type', '=', 'percent')]"/>
+                </field>
+            </field>
+      </record>
+  </data>
+</odoo>

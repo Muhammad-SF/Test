@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_purchase_request_form_inherit_reorder" model="ir.ui.view">
+            <field name="name">purchase.request.form.inherit.wt</field>
+            <field name="model">purchase.request</field>
+            <field name="inherit_id" ref="std_material_request.view_purchase_request_form_inherit_wt"/>
+            <field name="arch" type="xml">
+                <field name='mr_id' position='attributes'>
+                    <attribute name="attrs">{'invisible': [('is_reorder', '!=', False)]}</attribute>
+                </field>
+                <field name='mr_id' position='after'>
+<!--                    <field name='source_origin' string='Source Document'/>-->
+                    <field name='is_reorder' invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+<!--        <record id="view_purchase_request_tree_inherit" model="ir.ui.view">-->
+<!--            <field name="name">purchase.request.form.inherit.wt</field>-->
+<!--            <field name="model">purchase.request</field>-->
+<!--            <field name="inherit_id" ref="purchase_request.view_purchase_request_tree"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <field name='origin' position='replace'>-->
+<!--                    <field name='source_origin' string='Source Document'/>-->
+<!--                </field>-->
+<!--            </field>-->
+<!--        </record>-->
+
+
+        <!--Inherit field in form view of Reordering Rules-->
+        <record id="reordering_rule_form_view_inherit" model="ir.ui.view">
+            <field name="name">reordering.rule.form.view.inherit</field>
+            <field name="model">stock.warehouse.orderpoint</field>
+            <field name="inherit_id" ref="stock.view_warehouse_orderpoint_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//div" position="after">
+                    <div class="oe_title">
+                        <h1>
+                            <field name="sequence" readonly="1"/>
+                        </h1>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='product_min_qty']" position="attributes">
+                    <attibute name="required">0</attibute>
+                </xpath>
+                <xpath expr="//field[@name='product_max_qty']" position="attributes">
+                    <attibute name="required">0</attibute>
+                </xpath>
+                <xpath expr="//sheet/group[last()]" position="replace">
+                    <notebook>
+                        <page string="Reordering Rule" name="reordering_name">
+                            <field name="order_pt_line_ids" mode="tree">
+                                <tree editable="top">
+                                    <field name="start_date" required="1"/>
+                                    <field name="end_date" required="1"/>
+                                    <field name="product_min_qty" required="1"/>
+                                    <field name="product_max_qty" required="1"/>
+                                    <field name="qty_multiple"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+                <xpath expr="//group" position="replace">
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}"/>
+                            <field name="branch_id" options="{'no_create': True, 'no_open': True}"/>
+<!--                            <field name="parent_location_id" readonly="1" invisible="1"/>-->
+                            <field name="warehouse_id" widget="selection" groups="stock.group_stock_multi_locations"/>
+                            <field name="location_id" groups="stock.group_stock_multi_locations"
+                                   options="{'no_open': True, 'no_create': True}"/>
+                            <field name="group_id" groups="stock.group_adv_location" invisible='1'/>
+                            <field name="product_id"/>
+                            <field name="product_uom" options="{'no_open': True, 'no_create': True}"
+                                   groups="product.group_uom"/>
+                        </group>
+                        <group>
+                            <field name="create_date" string="Created Date" readonly='1'/>
+                            <field name="pr_material_req" widget="radio" string="Action To Take"/>
+<!--                            <field name="mr_approving_matrix_id" domain="[('warehouse', '=', location_id)]"-->
+<!--                                   invisible="1"/>-->
+<!--                            <field name="pr_approving_matrix_id" invisible="1"/>-->
+                            <field name="supplier_id"
+                                   attrs="{'invisible': [('pr_material_req', 'not in', ['create_rfq', 'create_po'])], 'required': [('pr_material_req', 'in', ['create_rfq', 'create_po'])]}"/>
+                            <field name="source_loc_id"
+                                   attrs="{'invisible': [('pr_material_req', 'not in', ['create_internal_transfer'])], 'required': [('pr_material_req', 'in', ['create_internal_transfer'])]}"/>
+                            <field name="type_internal"
+                                   attrs="{'invisible': [('pr_material_req', 'not in', ['create_internal_transfer'])]}"/>                                   
+                            <field name="readonly" invisible="1"/>
+                            <label for="lead_days" invisible="1"/>
+                            <div class="o_row">
+                                <field name="lead_days" invisible="1"/>
+                                <field name="lead_type" invisible="1"/>
+                            </div>
+                            <field name="user_ids" widget="many2many_tags"
+                                   options='{ "no_create_edit": True, "no_open": True}' required="1"/>
+                        </group>
+                    </group>
+                </xpath>
+                <xpath expr="//sheet" position="after">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="reordering_rule_tree_view_inherit" model="ir.ui.view">
+            <field name="name">reordering.rule.tree.view.inherit</field>
+            <field name="model">stock.warehouse.orderpoint</field>
+            <field name="inherit_id" ref="stock.view_warehouse_orderpoint_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="replace">
+                    <tree>
+                        <field name="create_date" string="CREATED DATE"/>
+                        <field name="sequence"/>
+                        <field name="name"/>
+                        <field name="product_id"/>
+                        <field name="product_uom" options="{'no_open': True, 'no_create': True}"
+                               groups="product.group_uom"/>
+                        <field name="warehouse_id" groups="stock.group_stock_multi_locations"/>
+                        <field name="location_id" groups="stock.group_stock_multi_locations"/>
+                        <field name="pr_material_req"/>
+                    </tree>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="internal_transfer_form_inherit_reorder" model="ir.ui.view">
+            <field name="name">internal.transfer.form.inherit.reorder</field>
+            <field name="model">internal.transfer</field>
+            <field name="inherit_id" ref="std_material_request.internal_transfer_form_inherit_wt"/>
+            <field name="arch" type="xml">
+                <field name='mr_id' position='attributes'>
+                    <attribute name="string">Material Request</attribute>
+                    <attribute name="invisible">1</attribute>
+                </field>
+            </field>
+        </record>
+        <record id="stock.menu_procurement_compute" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
+        </record>
+    </data>
+</odoo>

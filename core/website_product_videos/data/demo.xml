@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<odoo>
+    <data noupdate="1">
+        <record id="product_video_1" model="product.video">
+            <field name="name">Magento Odoo Bridge</field>
+            <field name="product_tmpl_id" ref="product.product_product_9_product_template"/>
+            <field name="video_description">Magento Odoo Bridge allows the user to effectively and efficiently connect Magento E-Commerce with Odoo thus harnessing the powerful E-Commerce of Magento along with comprehensive features of Odoo. In this video, we are going to show you, how you can install and configure our Magento Odoo Connector in your Magento and Odoo. We will also give you an overview of all the settings at both end and their usage.</field>
+            <field name="video_url">https://youtu.be/bWIJCYTADAw</field>
+            <field name="video_id">bWIJCYTADAw</field>
+            <field name="image" type="base64" file="website_product_videos/static/img/mob.png"/>
+        </record>
+        <record id="product_video_2" model="product.video">
+            <field name="name">Odoo Marketplace Installation and Configuration</field>
+            <field name="product_tmpl_id" ref="product.product_product_9_product_template"/>
+            <field name="video_description">This video will help you install Odoo Multi-vendor marketplace module and will also help you with the steps involved in the module configuration.</field>
+            <field name="video_url">https://youtu.be/ZCkOWWcM9So</field>
+            <field name="video_id">ZCkOWWcM9So</field>
+            <field name="image" type="base64" file="website_product_videos/static/img/omp.png"/>
+        </record>
+        <record id="product_video_3" model="product.video">
+            <field name="name">Webkul Cultural Day July 2015</field>
+            <field name="product_tmpl_id" ref="product.product_product_9_product_template"/>
+            <field name="video_description">Webkul Cultural Day July 2015.</field>
+            <field name="video_url">https://vimeo.com/134644518</field>
+            <field name="video_id">134644518</field>
+            <field name="image" type="base64" file="website_product_videos/static/img/vimeo.png"/>
+        </record>
+    </data>
+</odoo>

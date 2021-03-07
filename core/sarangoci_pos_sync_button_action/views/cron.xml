@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+    <data>
+        <record model="ir.cron" id="pos_order">
+            <field name="name">Auto run sync button pos</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="model" eval="'pos.config'"/>
+            <field name="function" eval="'_cron_action_sync_button'"/>
+            <field name="args" eval="'()'" />
+        </record>
+    </data>
+</odoo>

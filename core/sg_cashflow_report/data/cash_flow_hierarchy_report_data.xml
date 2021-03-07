@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="account_financial_report_cash_flow_statement" model="account.financial.report">
+            <field name="name">Statement Of Cash Flow</field>
+            <field name="sign" eval="1"/>
+            <field name="sequence">11</field>
+            <field name="type">sum</field>
+        </record>
+
+        <record id="account_financial_report_operations" model="account.financial.report">
+            <field name="name">Operations</field>
+            <field name="sign" eval="1"/>
+            <field name="sequence">12</field>
+            <field name="parent_id" ref="account_financial_report_cash_flow_statement"/>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="type">sum</field>
+        </record>
+
+        <record id="account_financial_report_operations_cash_receipt_from" model="account.financial.report">
+            <field name="name">Cash Receipt From - Operations</field>
+            <field name="sign" eval="-1"/>
+            <field name="sequence">13</field>
+            <field name="parent_id" ref="account_financial_report_operations"/>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="type">account_type</field>
+            <field name="account_type_ids" eval="[(4,ref('account.data_account_type_receivable')), (4, ref('account.data_account_type_revenue'))]"/>
+        </record>
+
+        <record id="account_financial_report_operations_cash_paid_to" model="account.financial.report">
+            <field name="name">Cash Paid To - Operations</field>
+            <field name="sign" eval="-1"/>
+            <field name="sequence">14</field>
+            <field name="parent_id" ref="account_financial_report_operations"/>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="type">account_type</field>
+            <field name="account_type_ids" eval="[(4,ref('account.data_account_type_payable')), (4,ref('account.data_account_type_expenses'))]"/>
+        </record>
+
+        <record id="account_financial_report_operations_net" model="account.financial.report">
+            <field name="name">Net Cash Flow From Operations</field>
+            <field name="sign" eval="-1"/>
+            <field name="sequence">15</field>
+            <field name="parent_id" ref="account_financial_report_cash_flow_statement"/>
+            <field name="display_detail">no_detail</field>
+            <field name="type">account_report</field>
+            <field name="account_report_id" ref="account_financial_report_operations"/>
+        </record>
+
+        <record id="account_financial_report_investing_activities" model="account.financial.report">
+            <field name="name">Investing Activities</field>
+            <field name="sign" eval="1"/>
+            <field name="sequence">16</field>
+            <field name="parent_id" ref="account_financial_report_cash_flow_statement"/>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="type">sum</field>
+        </record>
+
+        <record id="account_financial_report_investing_activities_receipt_from" model="account.financial.report">
+            <field name="name">Cash Receipt From - Investing</field>
+            <field name="sign" eval="-1"/>
+            <field name="sequence">17</field>
+            <field name="parent_id" ref="account_financial_report_investing_activities"/>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="type">account_type</field>
+            <field name="account_type_ids" eval="[(4,ref('account.data_account_type_fixed_assets'))]"/>
+        </record>
+
+        <record id="account_financial_report_investing_activities_paid_to" model="account.financial.report">
+            <field name="name">Cash Paid To - Investing</field>
+            <field name="sign" eval="-1"/>
+            <field name="sequence">18</field>
+            <field name="parent_id" ref="account_financial_report_investing_activities"/>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="type">account_type</field>
+            <field name="account_type_ids" eval="[(4, ref('account.data_account_type_current_assets')), (4,ref('account.data_account_type_non_current_assets'))]"/>
+        </record>
+
+        <record id="account_financial_report_investing_activities_net" model="account.financial.report">
+            <field name="name">Net Cash Flow From Investing Activities</field>
+            <field name="sign" eval="-1"/>
+            <field name="sequence">19</field>
+            <field name="parent_id" ref="account_financial_report_cash_flow_statement"/>
+            <field name="display_detail">no_detail</field>
+            <field name="type">account_report</field>
+            <field name="account_report_id" ref="account_financial_report_investing_activities"/>
+        </record>
+
+        <record id="account_financial_report_financing_activities" model="account.financial.report">
+            <field name="name">Financing Activities</field>
+            <field name="sign" eval="1"/>
+            <field name="sequence">20</field>
+            <field name="parent_id" ref="account_financial_report_cash_flow_statement"/>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="type">sum</field>
+        </record>
+
+        <record id="account_financial_report_financing_activities_receipt_from" model="account.financial.report">
+            <field name="name">Cash Receipt From - Financing</field>
+            <field name="sign" eval="-1"/>
+            <field name="sequence">21</field>
+            <field name="parent_id" ref="account_financial_report_financing_activities"/>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="type">account_type</field>
+            <field name="account_type_ids" eval="[(4,ref('account.data_account_type_current_liabilities'))]"/>
+        </record>
+
+        <record id="account_financial_report_financing_activities_paid_to" model="account.financial.report">
+            <field name="name">Cash Paid To - Financing</field>
+            <field name="sign" eval="-1"/>
+            <field name="sequence">22</field>
+            <field name="parent_id" ref="account_financial_report_financing_activities"/>
+            <field name="display_detail">detail_with_hierarchy</field>
+            <field name="type">account_type</field>
+            <field name="account_type_ids" eval="[(4,ref('account.data_account_type_equity'))]"/>
+        </record>
+
+        <record id="account_financial_report_financing_activities_net" model="account.financial.report">
+            <field name="name">Net Cash Flow From Financing Activities</field>
+            <field name="sign" eval="-1"/>
+            <field name="sequence">23</field>
+            <field name="parent_id" ref="account_financial_report_cash_flow_statement"/>
+            <field name="display_detail">no_detail</field>
+            <field name="type">account_report</field>
+            <field name="account_report_id" ref="account_financial_report_financing_activities"/>
+        </record>
+
+    </data>
+</odoo>

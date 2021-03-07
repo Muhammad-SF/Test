@@ -1,0 +1,126 @@
+<odoo>
+    <data>
+        <record id="customer_receipt_form_view" model="ir.ui.view">
+			<field name="name">customer.receipt.form.view</field>
+			<field name="model">receipt.payment</field>
+			<field name="inherit_id" ref="sg_partner_payment.view_customer_receipt_form" />
+			<field name="arch" type="xml">
+				<field name="partner_id" position="attributes">
+                    <attribute name="required">1</attribute>
+                </field>
+			</field>
+		</record>
+
+        <record id="supplier_receipt_form_view" model="ir.ui.view">
+			<field name="name">supplier.receipt.form.view</field>
+			<field name="model">receipt.payment</field>
+			<field name="inherit_id" ref="sg_partner_payment.view_supplier_payment_form" />
+			<field name="arch" type="xml">
+                <field name="partner_id" position="attributes">
+                    <attribute name="string">Supplier</attribute>
+                    <attribute name="domain">[('supplier','=',1)]</attribute>
+                    <attribute name="options">{'no_create_edit': True,'no_create': True,'no_open': True, 'required': [('type','!=','supplier')]}</attribute>
+                </field>
+                <field name="line_cr_ids" position="before">
+                    <label for="vendor_bill_ids" string="Select Vendor Invoice"/>
+                    <field name="vendor_bill_ids" widget="many2many_tags" options="{'no_create': True}"/>
+                </field>
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name="statusbar_visible">draft,request_approval,approved,posted</attribute>
+                </xpath>
+                <!--<xpath expr="//field[@name='line_cr_ids']" position="attributes">-->
+                    <!--&lt;!&ndash;<attribute name="widget">manyone2many_list2many</attribute>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<attribute name="domain">[('amount', '=', 0)]</attribute>&ndash;&gt;-->
+                <!--</xpath>-->
+                <!--<xpath expr="//field[@name='line_cr_ids']/tree" position="replace">-->
+                    <!--<tree string="Credits" editable="bottom" >-->
+                        <!--<field name="move_line_id" invisible="1"/>-->
+                        <!--<field name="invoice_id"/>-->
+                        <!--<field name="account_id"/>-->
+                        <!--<field name="date" />-->
+                        <!--<field name="date_maturity"/>-->
+                        <!--<field name="amount_residual" invisible="1"/>-->
+                        <!--<field name="currency_id" invisible="1"/>-->
+                        <!--<field name="base_currency_id" invisible="1"/>-->
+                        <!--<field name="move_currency_id" invisible="1"/>-->
+                        <!--<field name="original_amount_currency" readonly="1" sum="Total"/>-->
+                        <!--<field name="original_amount" readonly="1" sum="Total"/>-->
+                        <!--<field name="amount_unreconciled_currency" readonly="1" sum="Total"/>-->
+                        <!--<field name="amount_unreconciled" readonly="1" sum="Total"/>-->
+                        <!--<field name="reconcile" context="{'reconcile': True}"/>-->
+                        <!--<field name="amount" sum="Total Allocation" context="{'amount': True}"/>-->
+                    <!--</tree>-->
+                <!--</xpath>-->
+				<xpath expr="//button[@name='action_post']" position="after">
+					<xpath expr="//button[@name='sell_product']" position="after">
+                        <field name="is_approver" invisible="1"/>
+                        <button name="request_for_approval" type="object" string="Request for Approval" states="draft" class="oe_highlight"/>
+                        <button name="approve_receipt" type="object" string="Approve" attrs="{'invisible':['|',('is_approver','!=',True),('state','!=','request_approval')]}" class="oe_highlight"/>
+                        <button name="reject_receipt" type="object" string="Reject" attrs="{'invisible':['|',('is_approver','!=',True),('state','!=','request_approval')]}"/>
+                    </xpath>
+				</xpath>
+                <xpath expr="//button[@name='action_post']" position="attributes">
+                    <attribute name="states">approved</attribute>
+                </xpath>
+                <field name="memo" position="after">
+                    <field name="approver"/>
+                </field>
+			</field>
+		</record>
+
+        <record id="view_receipt_payment_credit_tree" model="ir.ui.view">
+            <field name="name">receipt.payment.credit.tree</field>
+            <field name="model">receipt.payment.credit</field>
+            <field name="arch" type="xml">
+                <tree string="Credits">
+                    <field name="invoice_id"/>
+                    <field name="account_id" />
+                    <field name="date" />
+                    <field name="date_maturity"/>
+                    <field name="original_amount_currency" readonly="1" sum="Total"/>
+                    <field name="original_amount" readonly="1" sum="Total"/>
+                    <field name="amount_unreconciled_currency" readonly="1" sum="Total"/>
+                    <field name="amount_unreconciled" readonly="1" sum="Total"/>
+                    <field name="reconcile" context="{'reconcile': True}"/>
+                    <field name="amount" sum="Total Allocation" context="{'amount': True}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_receipt_payment_credit_search" model="ir.ui.view">
+            <field name="name">receipt.payment.credit.search</field>
+            <field name="model">receipt.payment.credit</field>
+            <field name="arch" type="xml">
+                <search string="Search">
+                    <field name="invoice_id" filter_domain="[('invoice_id','ilike',self)]"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="receipt_payment_credit_form_inherit">
+            <field name="name">receipt.payment.credit.inherit</field>
+            <field name="model">receipt.payment.credit</field>
+            <field name="inherit_id" ref="sg_partner_payment.receipt_payment_credit_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_id']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='payment_id']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='account_id']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='amount_unreconciled_currency']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='amount_unreconciled']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+                <xpath expr="//field[@name='amount']" position="attributes">
+                    <attribute name="readonly">0</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

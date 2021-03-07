@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_standard_prepayment_recurring">
+        <t t-foreach="docs" t-as="o">
+            <div class="page">
+                <t t-if="o._get_current_company()">
+                    <center><h1><span t-esc="o._get_current_company()"/></h1></center>
+                </t>
+                <center><h2>Prepayment Recurring Lines</h2></center>
+                <center><h3><span t-field="o.ref"/></h3></center>
+                <div class="row">
+                    <table width="100%" style="border-collapse: separate;border-spacing: 0 15px;">
+                        <tr width="100%">
+                            <td width="15%">Name</td>
+                            <td width="5%">:</td>
+                            <td width="15%" class="text-left">
+                                <span t-field="o.name"/>
+                            </td>
+                            <td width="30%"></td>
+                            <td width="15%">Start Date</td>
+                            <td width="5%">:</td>
+                            <td width="15%" class="text-left">
+                                <span t-field="o.date_start"/>
+                            </td>
+                        </tr>
+                        <tr width="100%">
+                            <td width="15%">Model</td>
+                            <td width="5%">:</td>
+                            <td width="15%" class="text-left">
+                                <span t-field="o.model_id.name"/>
+                            </td>
+                            <td width="30%"></td>
+                            <td width="15%">Period</td>
+                            <td width="5%">:</td>
+                            <td width="15%" class="text-left">
+                                <span t-field="o.period_nbr"/>
+                            </td>
+                        </tr>
+                        <tr width="100%">
+                            <td width="15%">Reference</td>
+                            <td width="5%">:</td>
+                            <td width="15%" class="text-left">
+                                <span t-field="o.ref"/>
+                            </td>
+                            <td width="30%"></td>
+                            <td width="15%">Period Type</td>
+                            <td width="5%">:</td>
+                            <td width="15%" class="text-left">
+                                <span t-field="o.period_type"/>
+                            </td>
+                        </tr>
+                        <tr width="100%">
+                            <td width="15%">Total Invoice</td>
+                            <td width="5%">:</td>
+                            <td width="15%" class="text-left">
+                                <span t-field="o.total_invoice"/>
+                            </td>
+                            <td width="30%"></td>
+                            <td width="15%">Number of Period</td>
+                            <td width="5%">:</td>
+                            <td width="15%" class="text-left">
+                                <span t-field="o.period_total"/>
+                            </td>
+                        </tr>
+                        <tr width="100%">
+                            <td width="15%">Cumulative Paid</td>
+                            <td width="5%">:</td>
+                            <td width="15%" class="text-left">
+                                <span t-field="o.cumulative_paid"/>
+                            </td>
+                            <td width="30%"></td>
+                            <td width="15%">Remaining Amount</td>
+                            <td width="5%">:</td>
+                            <td width="15%" class="text-left">
+                                <span t-field="o.remaining_amount"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <br/>
+                    <h4>Recurring Lines</h4>
+                    <br/>
+                    <table class="table table-condensed">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width:10px;border:1px solid black;">Date</th>
+                                <th class="text-center" style="width:20px;border:1px solid black;">Entry</th>
+                                <th class="text-center" style="width:20px;border:1px solid black;">Invoice Amount</th>
+                                <th class="text-center" style="width:10px;border:1px solid black;">Cumulative Paid</th>
+                                <th class="text-center" style="width:20px;border:1px solid black;">Remaining Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="o.lines_id">
+                                <t t-foreach="o.lines_id" t-as="line">
+                                    <tr>
+                                        <td class="text-center" style="width:10px;border:1px solid black;">
+                                            <span t-field="line.date"/>
+                                        </td>
+                                        <td class="text-center" style="width:20px;border:1px solid black;">
+                                            <span t-field="line.move_id.name"/>
+                                        </td>
+                                        <td class="text-right" style="width:20px;border:1px solid black;">
+                                            <span t-field="line.invoice_amount"/>
+                                        </td>
+                                        <td class="text-right" style="width:10px;border:1px solid black;">
+                                            <span t-field="line.cumulative_paid"/>
+                                        </td>
+                                        <td class="text-right" style="width:20px;border:1px solid black;">
+                                            <span t-field="line.remaining_amount"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="report_standard_prepayment_template">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="standard_prepayment.report_standard_prepayment_recurring"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>

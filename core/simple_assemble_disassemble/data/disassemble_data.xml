@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- Sequences for assemble-->
+        <record id="seq_res_assemble" model="ir.sequence">
+            <field name="name">Assemble</field>
+            <field name="code">res.assemble</field>
+            <field name="prefix">AS</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <!-- Sequences for disassemble-->
+        <record id="seq_res_disassemble" model="ir.sequence">
+            <field name="name">Disassemble</field>
+            <field name="code">res.disassemble</field>
+            <field name="prefix">DS</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

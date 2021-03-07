@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="views_commission_report_graph">
+            <field name="name">commission.report.ghaph</field>
+            <field name="model">commission.report</field>
+            <field name="arch" type="xml">
+                <graph string="Commission Report"  type="pivot" >
+                    <field name="sale_order" type="row"/>
+                    <field name="partner_id"  type="col"/>
+                    <field name="amount_total" type="measure"/>
+                    
+                </graph>
+            </field>
+        </record>
+       
+        <record id="view_commission_search" model="ir.ui.view">
+            <field name="name">commission.report.search</field>
+            <field name="model">commission.report</field>
+            <field name="arch" type="xml">
+                <search string="Search Commission">
+                   <group expand="0" string="Partner Type">
+                       <filter string="Partner" context="{'group_by':'partner_id'}" />
+                   </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_commission_report" model="ir.actions.act_window">
+            <field name="name">Commission Report</field>
+            <field name="res_model">commission.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">graph</field>
+            <field name="search_view_id" ref="view_commission_search"/>
+        </record>
+        
+        <menuitem parent="sales_team.menu_base_partner" id="menu_reporting_commission" sequence="30" name="Commission"/>
+        <menuitem action="action_commission_report" id="menu_commission_report" parent="menu_reporting_commission" sequence="3" string="Commission Report" />
+    </data>
+</odoo>

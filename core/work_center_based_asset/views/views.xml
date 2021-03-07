@@ -1,0 +1,36 @@
+<odoo>
+  <data>
+    <record id="mrp_workcenter_view" model="ir.ui.view">
+      <field name="name">mrp.workcenter.form</field>
+      <field name="model">mrp.workcenter</field>
+      <field name="inherit_id" ref="mrp.mrp_workcenter_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='name']" position="attributes">
+          <attribute name="required">False</attribute>
+        </xpath>
+        <xpath expr="//field[@name='name']" position="attributes">
+          <attribute name="invisible">1</attribute>
+        </xpath>
+        <xpath expr="//field[@name='name']" position="before">
+          <field name="name_assest" string="Work Center Name" />
+        </xpath>
+        <xpath expr="//field[@name='company_id']" position="after">
+          <field name="resource_id"/>
+        </xpath>
+      </field>
+    </record>
+    <record id="mrp_workcenter_name_assesttree_view" model="ir.ui.view">
+        <field name="name">mrp.workcenter.name.asest.tree</field>
+        <field name="model">mrp.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_workcenter_tree_view"/>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='name']" position="attributes">
+            <attribute name="invisible">1</attribute>
+          </xpath>
+          <xpath expr="//field[@name='code']" position="after">
+            <field name="name_assest" string='Name'/>
+          </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

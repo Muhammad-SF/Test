@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_pos_pos_form">
+            <field name="name">pos.order.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="pos_pricelist" readonly="True"/>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_pos_config_form">
+            <field name="name">pos.config.form.view.inherit</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_config_form"></field>
+            <field name="arch" type="xml">
+                <field name="iface_display_categ_images" position="after">
+                    <field name='allow_pricelist' />
+                    <field name='default_pricelist'/>
+                </field>
+            </field>
+        </record>
+        <record id="pos_pricelist_customer_form" model="ir.ui.view">
+            <field name="name">pos.pricelist.customer</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="point_of_sale.view_partner_property_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='point_of_sale']" position="inside">
+                    <field name="pos_pricelist_id" />
+                </xpath>
+            </field>
+        </record>
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <field name="default_code" position="after">
+                    <field name="default_selection"/>    
+                </field>
+            </field>
+        </record>
+        <record id="pos_pricelist_item_form_view" model="ir.ui.view">
+            <field name="name">pos.pricelist.item.form</field>
+            <field name="model">pos.pricelist.items</field>
+            <field name="arch" type="xml">
+                <form string="Pricelist Item">
+                    <h2><field name="name" placeholder="Pricelist Item name"/></h2>
+                    <group>
+                        <group>
+                            <field name="applied_on" widget="radio"/>
+                            <field name="categ_id" attrs="{'invisible':[('applied_on', '!=', 'product_category')], 'required':[('applied_on', '=', 'product_category')]}"/>
+                            <field name="product_tmpl_id" domain="[('available_in_pos', '=', True)]"
+                                   attrs="{'invisible':[('applied_on', '!=', 'product')],'required':[('applied_on', '=', 'product')]}"/>
+                            <field name="item1" attrs="{'invisible':[('applied_on', '!=', 'default_code')],'required':[('applied_on', '=', 'default_code')]}"/>
+                        </group>
+                        <group>
+                            <field name="min_quantity"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <label for="compute_price" string="Compute Price"/>
+                            <div>
+                                <field name="compute_price" widget="radio"/>
+                                <div attrs="{'invisible':[('compute_price', '!=', 'percentage')]}">
+                                    <field name="percent_price" nolabel="1" class="oe_inline"/>%%
+                                </div>
+                                <div attrs="{'invisible':[('compute_price', '!=', 'fixed')]}">
+                                    <field name="fixed_price" nolabel= "1"/>
+                                </div>
+                            </div>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="pos_pricelist_form_view" model="ir.ui.view">
+            <field name="name">pos.pricelist.form</field>
+            <field name="model">pos.pricelist</field>
+            <field name="arch" type="xml">
+                <form string="POS Price List">
+                    <sheet>
+                        <div class="oe_title">
+                            <h2><field name="name" placeholder="Pricelist Name"/></h2>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div>
+                            <field name="item_ids" nolabel="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="date_start"/>
+                                    <field name="date_end"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="pos_pricelist_tree_view" model="ir.ui.view">
+            <field name="name">pos.pricelist.tree</field>
+            <field name="model">pos.pricelist</field>
+            <field name="arch" type="xml">
+                <tree string="POS Price List">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_pos_pricelist" model="ir.actions.act_window">
+            <field name="name">Pricelists</field>
+            <field name="res_model">pos.pricelist</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Pricelist" id="pos_pricelist" action="action_pos_pricelist"
+                  parent="point_of_sale.menu_point_config_product" sequence="10" />
+    </data>
+</odoo>

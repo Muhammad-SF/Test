@@ -1,0 +1,28 @@
+<odoo>
+
+	<record id="apply_sale_promotion_form" model="ir.ui.view">
+        <field name="name">apply.sale.promotion.form</field>
+        <field name="model">apply.sale.promotion</field>
+        <field name="arch" type="xml">
+            <form string="Promotion">
+                <group>
+                	<field name='sale_promotion_id' context='{"from_wizard": True, "active_sale_id": context.get("active_sale_id")}'/>
+                </group>
+                <footer>
+                    <button name="action_apply" string="Apply" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="action_apply_sale_promotion">
+        <field name="name">Sale Promotions</field>
+        <field name="res_model">apply.sale.promotion</field>
+        <field name="view_type">form</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+    
+
+</odoo>

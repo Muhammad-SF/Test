@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_config_settings_inherit" model="ir.ui.view">
+        <field name="model">project.config.settings</field>
+        <field name="inherit_id" ref="project.view_config_settings" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='timesheets']" position="after">
+                <group string="Deadline Management">
+	                <field name="limit_task" colspan="2"/>
+		            <field name="proj_limit" widget="radio"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

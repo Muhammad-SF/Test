@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<template>
+    <t t-name="Indicator">
+        <div class="oe_working_schedule_calendar_status fa fa-circle">
+        </div>
+    </t>
+</template>

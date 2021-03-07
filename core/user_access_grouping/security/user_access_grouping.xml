@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!--<record model="res.groups" id="group_general_manager">-->
+            <!--<field name="name">General Manager</field>-->
+        <!--</record>-->
+    </data>
+</odoo>

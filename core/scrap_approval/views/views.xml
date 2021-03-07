@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="scrap_approval.list">
+      <field name="name">scrap_approval list</field>
+      <field name="model">scrap_approval.scrap_approval</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="scrap_approval.action_window">
+      <field name="name">scrap_approval window</field>
+      <field name="res_model">scrap_approval.scrap_approval</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="scrap_approval.action_server">
+      <field name="name">scrap_approval server</field>
+      <field name="model_id" ref="model_scrap_approval_scrap_approval"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="scrap_approval" id="scrap_approval.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="scrap_approval.menu_1" parent="scrap_approval.menu_root"/>
+    <menuitem name="Menu 2" id="scrap_approval.menu_2" parent="scrap_approval.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="scrap_approval.menu_1_list" parent="scrap_approval.menu_1"
+              action="scrap_approval.action_window"/>
+    <menuitem name="Server to list" id="scrap_approval" parent="scrap_approval.menu_2"
+              action="scrap_approval.action_server"/>
+    -->
+  </data>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+        <template id="assets_backend_index" name="index pos ui" inherit_id="point_of_sale.index">
+        <xpath expr="//head" position="inside">           
+            <script type="text/javascript" src="/voucher_gift_pos/static/src/libs/js/jquery-barcode-last.min.js"/>            
+        </xpath>
+    </template>
+    
+        <template id="assets" inherit_id="point_of_sale.assets">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/voucher_gift_pos/static/src/js/coupons.js"></script>
+                <script type="text/javascript" src="/voucher_gift_pos/static/src/js/pos_receipt.js"></script>
+	            <script type="text/javascript" src="/voucher_gift_pos/static/src/js/custom.js"></script>
+	            <link rel="stylesheet" href="/voucher_gift_pos/static/src/css/custom.css" id="pos-stylesheet"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

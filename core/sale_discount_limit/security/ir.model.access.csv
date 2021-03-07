@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sales_discount_limit,access_sales_discount_limit,model_sales_discount_limit,,1,0,0,0

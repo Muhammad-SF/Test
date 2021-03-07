@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_customer_prepayment_schedule_tree">
+            <field name="name">view.customer.prepayment.schedule.tree</field>
+            <field name="model">customer.prepayment.schedule</field>
+            <field name="arch" type="xml">
+	            <tree string="Prepayment Schedule">
+	            	<field name="invoice_id"/>
+	            	<field name="partner_id"/>
+	            	<field name="date"/>
+	            	<field name="frequency_method"/>
+	            	<field name="frequency"/>
+	            	<field name="state"/>
+	            </tree>
+      		</field>
+      	</record>
+
+      	<record model="ir.ui.view" id="view_customer_prepayment_schedule_form">
+            <field name="name">view.customer.prepayment.schedule.form</field>
+            <field name="model">customer.prepayment.schedule</field>
+            <field name="arch" type="xml">
+	            <form string="Prepayment Schedule">
+					<header>
+						<button name="action_confirm" string="Confirm" state="draft" type="object" class="oe_highlight" attrs="{'invisible':[('state', 'not in', ('draft'))]}"/>
+						<button name="action_cancelled" string="Cancel" state="draft" type="object" attrs="{'invisible':[('state', 'not in', ('draft'))]}"/>
+						<button name="action_convert_revenue" string="Convert to Revenue" state="inprogress" type="object" class="oe_highlight" attrs="{'invisible':[('state', 'not in', ('inprogress'))]}"/>
+               			<button name="action_cancel" string="Cancel" state="inprogress" type="object" attrs="{'invisible':[('state', 'not in', ('inprogress'))]}" />
+						<button name="compute" string="Compute" type="object" icon="fa-refresh" attrs="{'invisible': [('state','not in',['draft','inprogress'])]}"/>
+						<field name="state" widget="statusbar" statusbar_visible="draft,inprogress,done"/>
+					</header>
+	            	<sheet>
+	            		<group>
+		            		<group>
+		            			<field name="invoice_id" domain="[('type','=','out_invoice'),('state','=','open')]" required="1" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+		            			<field name="partner_id"/>
+			            		<field name="journal_id" domain="[('type','in',['bank','cash'])]" required="1" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+			            		<field name="date" required="1" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+			            	</group>
+			            	<group>
+			            		<field name="frequency_method" required="1" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+			            		<field name="frequency" required="1" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+								<field name="prepaid_account" required="1" domain="[('user_type_id.type','=','other')]" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+								<field name="revenue_account" required="1" domain="[('user_type_id.type','=','other')]" attrs="{'readonly':[('state', '!=', 'draft')]}"/>
+			            	</group>
+		            	</group>
+		            	<newline/>
+						<notebook>
+							<page string="Schedules">
+								<field name="lines" editable="bottom" attrs="{'readonly':[('state', '!=', 'draft')]}">
+									<tree>
+										<field name="name"/>
+										<field name="date"/>
+										<field name="amount"/>
+										<field name="customer_prepayment" invisible="1"/>
+										<field name="journal_id"/>
+										<field name="state" invisible="1"/>
+										<button name="do_payment" string="Pay" type="object" class="oe_highlight" attrs="{'invisible':['|',('journal_id', '!=', False),('state','=','cancelled')]}"/>
+									</tree>
+								</field>
+							</page>
+							<page string="Jounal Entries">
+								<field name="move_ids" readonly="1"/>
+							</page>
+						</notebook>
+	            	</sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+	            </form>
+      		</field>
+      	</record>
+
+		<record id="action_menu_customer_prepayment_schedule" model="ir.actions.act_window">
+	        <field name="name">Customer Prepayment Schedule</field>
+	        <field name="res_model">customer.prepayment.schedule</field>
+	        <field name="view_type">form</field>
+	        <field name="view_mode">tree,form</field>
+	        <field name="help" type="html">
+	          <p class="oe_view_nocontent_create">
+	            Click to setup a new bank account.
+	          </p><p>
+	            Configure your company's bank account and select those that must
+	            appear on the report footer.
+	          </p><p>
+	            If you use the accounting application of OpenERP, journals and
+	            accounts will be created automatically based on these data.
+	          </p>
+	        </field>
+	    </record>
+
+		<menuitem id="menu_customer_prepayment_schedule" name="Customer Prepayment" action="action_menu_customer_prepayment_schedule" parent="account.menu_finance_receivables" sequence="11"/>
+
+		<!--Automatic Customer Payment Scheduler-->
+		<record id="automatic_customer_prepayment_scheduler" model="ir.cron">
+            <field name="name">Customer Prepayment Scheduler</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model" eval="'customer.prepayment.schedule.line'"/>
+            <field name="function" eval="'customer_prepayment_scheduler'"/>
+            <field name="args" eval="'()'"/>
+            <field name="active" eval="True"/>
+        </record>
+
+    </data>
+</odoo>

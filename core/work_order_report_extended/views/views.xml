@@ -1,0 +1,85 @@
+<odoo>
+    <data>
+        <record id="custom_mrp_workorder_extended_report" model="ir.ui.view">
+            <field name="name">custom.mrp.work.order</field>
+            <field name="model">mrp.workorder</field>
+            <field name="inherit_id" ref="mrp.mrp_production_workcenter_form_view_inherit"/>
+            <field name="arch" type="xml">
+                <!-- view of payment illustration,booking_price,nup_price and nup_date-->
+                <xpath expr="//header/button[@name='button_start']" position="after">
+                	<button name="print_wo_report" string="Print" type="object" groups="mrp.group_mrp_manager,mrp.group_mrp_user"/>
+         
+                </xpath>
+            </field>
+         </record>
+         
+         <template id="wo_extended_report">
+        <t t-call="report.html_container">
+        	 <t t-foreach="docs" t-as="o">
+                
+                  <div class="page">
+                  	<div class="row" style="padding-top:5px;">
+                    	<div class="col-xs-6" style="padding-top:0px;align:center;">
+		                    <h4><b><u>Work Order Report</u></b></h4>
+		                    <span style="font-size:16px;"><![CDATA[&nbsp;&nbsp;]]><![CDATA[&nbsp;&nbsp;]]><![CDATA[&nbsp;&nbsp;]]>
+		                   To Produce : <t t-esc="o.product_id.name"/><br/>
+		                   Quantity Produced : <t t-esc="o.qty_produced"/><br/>
+		                    	</span>
+		                </div>
+		                <div class="col-xs-6" align="right" style="padding-top:0px;padding-left:0px;padding-right:0px;">
+		                  <img t-if="user.company_id.logo" t-att-src="'data:image/png;base64,%s' % user.company_id.logo" style="max-height:150px; max-width:150px;"/>
+		                </div>
+				   </div>
+				   <table style="width:100%;border:1px solid gray;margin-top:30px;">
+				   		<tr>
+				   			<th style="border:1px solid gray;">Product</th>
+				   			<th style="border:1px solid gray;">Quantity To Consume</th>
+				   			<th style="border:1px solid gray;">Quantity Consumed</th>
+				   		</tr>
+				   		<t t-foreach="o.workorder_bomlines" t-as="bom">
+				   			<t t-set="material_dic" t-value="o.check_consumed()"/>
+					   		<tr>
+					   			<td><t t-esc="bom.name.name"/></td>
+					   			<td><t t-esc="bom.product_qty"/></td>
+					   			<td><t t-set="product" t-value="bom.name.id"/>
+					   				<t t-set="count" t-value="0"/>
+					   				<t t-if="product in material_dic">
+					   					<t t-esc="material_dic[product]"/>
+					   					
+					   				</t>
+					   				<t t-esc="count"/>
+					   				
+					   			</td>
+					   		</tr>
+					   		
+				   		</t>
+				   </table>
+			</div></t></t></template>
+			
+			<report id="report_wo_extended"
+            string="Print"
+            model="mrp.workorder"
+            report_type="qweb-pdf"
+            name="work_order_report_extended.wo_extended_report"
+            file="work_order_report_extended.wo_extended_report"
+            menu="False"
+        	
+        />
+        
+	<record id="paperformat_report_wo" model="report.paperformat">
+			<field name="name">Print Work order Report</field>
+			<field name="default" eval="True"/>
+			<field name="format">A4</field>
+			
+			<field name="orientation">Portrait</field>
+			<!--Portrait  --><field name="margin_top">0</field>
+			<field name="margin_bottom">0</field>
+			<field name="margin_left">15</field>
+			<field name="margin_right">15</field>
+			<field name="header_line" eval="False"/>
+			<field name="header_spacing">0</field>
+			<field name="dpi">90</field>
+		</record>
+      </data>
+</odoo>
+               

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="1">
+        <record id="group_show_author_in_apps" model="res.groups">
+            <field name="name">Show Author and Website in Apps Dashboard</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="default_logo_module" model="ir.config_parameter">
+            <field name="key">sync_uppercrust_debranding.default_logo_module</field>
+            <field name="value">sync_uppercrust_debranding</field>
+        </record>
+    </data>
+</openerp>

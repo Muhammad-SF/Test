@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="wkf_receipt_payment" model="workflow">
+            <field name="name">receipt.payment</field>
+            <field name="osv">receipt.payment</field>
+            <field name="on_create">True</field>
+        </record>
+
+        <record id="act_receipt_payment_draft" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_receipt_payment"/>
+            <field name="flow_start">True</field>
+            <field name="name">Draft</field>
+             <field name="kind">function</field>
+            <field name="action">write({'state': 'draft'})</field>
+        </record>
+
+        <record id="act_receipt_payment_progress" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_receipt_payment"/>
+            <field name="name">In Progress</field>
+             <field name="kind">function</field>
+            <field name="action">action_progress()</field>
+        </record>
+
+        <record id="act_receipt_payment_posted" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_receipt_payment"/>
+            <field name="name">Posted</field>
+             <field name="kind">function</field>
+            <field name="action">action_post()</field>
+        </record>
+
+        <record id="act_receipt_payment_cancel" model="workflow.activity">
+            <field name="wkf_id" ref="wkf_receipt_payment"/>
+            <field name="name">Cancel</field>
+            <field name="kind">function</field>
+            <field name="action">action_cancel()</field>
+        </record>
+
+        <record id="trans_draft2progress" model="workflow.transition">
+           <field name="act_from" ref="act_receipt_payment_draft"/>
+           <field name="act_to" ref="act_receipt_payment_progress"/>
+           <field name="signal">in_progress</field>
+        </record>
+
+        <record id="trans_progress2posted" model="workflow.transition">
+           <field name="act_from" ref="act_receipt_payment_progress"/>
+           <field name="act_to" ref="act_receipt_payment_posted"/>
+           <field name="signal">post</field>
+        </record>
+
+        <record id="trans_draft2posted" model="workflow.transition">
+           <field name="act_from" ref="act_receipt_payment_draft"/>
+           <field name="act_to" ref="act_receipt_payment_posted"/>
+           <field name="signal">post</field>
+        </record>
+
+        <record id="trans_draft2cancel" model="workflow.transition">
+           <field name="act_from" ref="act_receipt_payment_draft"/>
+           <field name="act_to" ref="act_receipt_payment_cancel"/>
+           <field name="signal">cancel</field>
+        </record>
+
+        <record id="trans_progress2cancel" model="workflow.transition">
+           <field name="act_from" ref="act_receipt_payment_progress"/>
+           <field name="act_to" ref="act_receipt_payment_cancel"/>
+           <field name="signal">cancel</field>
+        </record>
+
+    </data>
+</odoo>

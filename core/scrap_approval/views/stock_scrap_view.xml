@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_stock_scrap_inherit_approval_form" model="ir.ui.view">
+            <field name="name">stock.scrap.form</field>
+            <field name="model">stock.scrap</field>
+            <field name="inherit_id" ref="stock.stock_scrap_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="replace">
+                    <field name="state" widget="statusbar" statusbar_visible="draft,waiting_approval,done"/>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button string="Request Approval" 
+                        icon="" states="draft" type="object" name="to_approval" class="oe_highlight"/>
+                    <button string="Approve" icon="" 
+                        states="waiting_approval" type="object" name="action_approval"/>
+                    <!--button string="Reject" icon=""
+                         states="waiting_approval" type="object" name="action_reject"/-->
+                    <button string="Reject" icon=""
+                        states="waiting_approval"
+                        type="action" name="%(act_open_scrap_reason_view)d"/>
+                    <button name="%(act_open_scrap_return_view)d" string="Return" type="action"
+                        attrs="{'invisible': ['|', ('return_stock_move_id','!=', False), ('state', 'not in', ['done'])]}" />
+                </xpath>
+                <xpath expr="//field[@name='date_expected']" position="after">
+                    <field name="user_id" readonly="1" />
+                    <field name="reason" readonly="1"  attrs="{'invisible': [('reason','=', False)]}"/>
+                    <field name="first_approve" invisible="1" />
+                    <field name="return_stock_move_id" readonly="1" attrs="{'invisible': [('return_stock_move_id','=', False)]}"/>
+                </xpath>
+                <xpath expr="//sheet" position="after">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <!--Inheriting search view -->
+
+        <record id="view_stock_scrap_search" model="ir.ui.view">
+            <field name="name">stock.scrap.search</field>
+            <field name="model">stock.scrap</field>
+            <field name="inherit_id" ref="stock.stock_scrap_search_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="inside">
+                    <filter string="Status" domain="[]" context="{'group_by':'state'}"/>
+                    <filter string="Requester" domain="[]" context="{'group_by':'user_id'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="stock.action_stock_scrap">
+            <field name="context">{'skip_stock_move': True}</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="product_normal_form_view_inherit_create_mo_from_so" model="ir.ui.view">
+            <field name="name">product.template.create_mo_from_so.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.view_template_property_form"/>
+            <field name="arch" type="xml">
+                <field name="route_ids" position="after">
+                    <field name="mo_creation_settings" widget="radio"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="mrp_plan_form_view_so_to_mo_extend" model="ir.ui.view">
+            <field name="name">mrp.plan.so.to.mo.ext</field>
+            <field name="model">mrp.plan</field>
+            <field name="inherit_id" ref="manufacturing_plan.mrp_plan_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sale_id']" position="attributes">
+                    <attribute name="widget">many2many_tags</attribute>
+                </xpath>
+                
+                <!--xpath expr="//form/sheet/group/field[@name='sale_id']" position="after">
+                    <field name="description" attrs="{'readonly' : [('state', '!=', 'draft')] }"/>
+                </xpath-->
+            </field>
+    </record>
+        
+        <!-- add sale.order Many2many in manufacturing order(production) form view-->
+        <record id="add_sale_id_mrp_production_form_view" model="ir.ui.view">
+            <field name="name">mrp.production.form</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group/group[2]/field[@name='origin']" position="after">
+                    <field name="sale_id" widget="many2many_tags" options="{'no_create_edit': True}" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+        
+    <!-- add manufacturing button in so form view -->
+    <record id="add_view_manufacturing_btn_view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form.sale.stock</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_view_invoice']" position="before">
+                <button type="object"
+                    name="action_view_mo"
+                    
+                    class="fad fa-industry-alt"
+                    icon="fa-industry"
+                    attrs="{'invisible': [('manufacturing_order_count', '=', 0)]}" 
+                    groups="base.group_user">
+                    <field name="manufacturing_order_count" widget="statinfo" string="Manufacturing"/>
+                </button>
+            </xpath>
+       </field>
+    </record>
+    
+    
+    
+        
+    </data>
+</odoo>

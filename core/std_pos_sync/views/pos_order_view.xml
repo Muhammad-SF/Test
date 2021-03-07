@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_pos_pos_form_sync_pos_id">
+            <field name="name">pos.order.form.sync.pos.id</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/field[@name='fiscal_position_id']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_pos_session_form_sync_pos_id">
+            <field name="name">pos.session.form.sync.pos.id</field>
+            <field name="model">pos.session</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/field[@name='config_id']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_pos_config_form_sync_pos_id">
+            <field name="name">pos.config.form.sync.pos.id</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_config_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/field[@name='active']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_sale_config_settings_form_pos_client">
+            <field name="name">pos.config.settings.form.client</field>
+            <field name="model">pos.config.settings</field>
+            <field name="inherit_id" ref="point_of_sale.view_sale_config_settings_form_pos"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[2]" position="after">
+                    <group>
+                        <label for="div" string="POS Sync"/>
+                        <div>
+                            <div>
+                                <field name="pos_client"/>
+                                <label for="pos_client"/>
+                            </div>
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

@@ -1,0 +1,40 @@
+<odoo>
+
+	<record id="apply_sale_promotion_automatically_form" model="ir.ui.view">
+        <field name="name">apply.sale.promotion.automatically.wiz.form</field>
+        <field name="model">apply.sale.promotion.automatically.wiz</field>
+        <field name="arch" type="xml">
+            <form string="Promotion">
+                <!--group-->
+                	<field name='promotion_gift_line' nolabel="1">
+                	    <tree string="Gifts Conditions" editable="1" create="0">
+		                    <field name="product_id" readonly="1"/>
+		                    <field name="account_id" invisible="1"/>
+		                    <field name="quantity_free"/>
+		                </tree>
+                	</field>
+                	<field name="sale_promotion_ids" invisible="1"/>
+                	<!--field name="number_of_product" invisible="1"/-->
+                	
+                	<group>
+            		    <field name="number_of_product" readonly="True"/>
+            		</group>
+                <!--/group-->
+                <footer>
+                    <button name="apply_auto_promotion" string="Apply" type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record model="ir.actions.act_window" id="action_apply_sale_promotion_automatically">
+        <field name="name">Free Gifts</field>
+        <field name="res_model">apply.sale.promotion.automatically.wiz</field>
+        <field name="view_type">form</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
+    
+
+</odoo>

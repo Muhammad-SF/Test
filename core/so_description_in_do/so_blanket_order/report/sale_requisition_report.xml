@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report 
+            string="Call for Tenders" 
+            id="action_report_sale_requisitions" 
+            model="sale.requisition" 
+            report_type="qweb-pdf"
+            name="so_blanket_order.report_sale_serequisitions" 
+            file="so_blanket_order.report.report_salerequisitions"
+         />
+    </data>
+</odoo>

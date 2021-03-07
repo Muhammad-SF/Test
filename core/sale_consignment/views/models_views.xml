@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Partner Inherit -->
+        <record id="wk_res_partner" model="ir.ui.view">
+            <field name="name">res.partner_form</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group" position="after">
+                    <group>
+                        <group string="Commission">
+                            <field name="is_consignment"/>
+                            <field name="consignment_percent" attrs="{'invisible': [('is_consignment', '=', False)],'required': [('is_consignment', '=', True)]}"/>
+                            <field name="consignment_wh" attrs="{'invisible': [('is_consignment', '=', False)],'required': [('is_consignment', '=', True)]}"/>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="sale_order_form_view_commission_button">
+            <field name="name">sale.order.form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <div style="float:right">
+                        <button class="fbutton oe_inline oe_stat_button" name="action_view_commission"
+                            type="object" string="Commission Detail" attrs="{'invisible': [('state', 'in', ['draft','cancel','sent'])]}">
+                        </button>
+                        <button class="fbutton oe_inline oe_stat_button" name="action_view_commission_invoice"
+                            type="object" string="Commission Invoice" attrs="{'invisible': [('state', 'in', ['draft','cancel','sent'])]}">
+                        </button>
+                    </div>
+                </xpath>
+                <button name="action_view_delivery" position="replace">
+                    <button name="action_view_delivery" string="View Delivery Order" type="object" class="oe_highlight" attrs="{'invisible': ['|',('picking_ids','=',False),'|',('picking_ids','=',[]),'|',('is_consignment','=',True)]}" groups="base.group_user"/>
+                </button>
+                <field name="company_id" position="after">
+                    <field name="is_consignment" invisible="1"/>
+                </field>
+                <field name="amount_total" position="after">
+                    <field name="commission_total"
+                           widget="monetary"
+                           options="{'currency_field': 'currency_id'}"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="commission_from_view" model="ir.ui.view">
+            <field name="name">commission.commission.from.view</field>
+            <field name="model">commission.commission</field>
+            <field name="arch" type="xml">
+                <form string="commission" create="false" edit="false">
+                    <sheet>
+                        <h1>
+                            <label string="Commission "/>
+                            <field name="name" class="oe_inline" readonly="1"/>
+                        </h1>
+                        <group>
+                            <group>
+                                <field name="partner_id" />
+                                <label for="commission" string="Partner Commission" class="oe_inline"/>
+                                <div class="oe_inline">
+                                    <field name="commission" class="oe_inline" /><b>%</b>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="sale_order" readonly="1"/>
+                                <field name="currency_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Commission Lines">
+                                <field name="commission_lines" readonly="1">
+                                    <tree string="commission Lines" editable="bottom">
+                                        <field name="product_id" />
+                                        <field name="name" />
+                                        <field name="price_unit" />
+                                        <field name="quantity"/>
+                                        <field name="price_subtotal"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <group>
+                            <group class="oe_subtotal_footer oe_right" colspan="2" name="commission_total">
+                                <label for="amount_total" />
+                                <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="commission_commission_tree" model="ir.ui.view">
+            <field name="name">commission.tree</field>
+            <field name="model">commission.commission</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Sale Commission" create="false" >
+                    <field name="name"/>   
+                    <field name="sale_order"/>
+                    <field name="partner_id"/>
+                    <field name="commission"/>
+                    <field name="amount_total"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='wk_commission_action' model="ir.actions.act_window">
+            <field name="name">Commission</field>
+            <field name="res_model">commission.commission</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="commission_commission_tree"/>
+        </record>
+
+        <menuitem parent="sales_team.menu_base_partner" id="menu_reporting_commission" sequence="30" name="Commission"/>
+        <menuitem id="sale_consignment_menu_menu" parent="menu_reporting_commission" name="Consignment Commissions" action="wk_commission_action" sequence="10"/>
+    </data>
+</odoo>

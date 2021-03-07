@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <record forcecreate="True" id="hr_rule_basic_sale_commission" model="hr.salary.rule">
+            <field name="name">Sale Commission</field>
+            <field name="sequence" eval="1"/>
+            <field name="code">SC</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = employee.emp_commission</field>
+        </record>
+
+        <!--<record id="a_commission_account" model="account.account">-->
+            <!--<field name="code">500001</field>-->
+            <!--<field name="name">Commission</field>-->
+            <!--<field name="user_type_id" ref="account.data_account_type_expenses"/>-->
+        <!--</record>-->
+
+        <!--<record id="commission_journal" model="account.journal">-->
+            <!--<field name="name">Commission Journal</field>-->
+            <!--<field name="code">CJ</field>-->
+            <!--<field name="type">purchase</field>-->
+            <!--<field name="default_debit_account_id" ref="a_commission_account"/>-->
+            <!--<field name="default_credit_account_id" ref="a_commission_account"/>-->
+            <!--<field name="refund_sequence" eval="True"/>-->
+        <!--</record>-->
+    </data>
+</openerp>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="product_product_consultant" model="product.product">
+            <field name="list_price">75.0</field>
+            <field name="standard_price">30.0</field>
+            <field name="uom_id" ref="product.product_uom_hour"/>
+            <field name="uom_po_id" ref="product.product_uom_hour"/>
+            <field name="name">Service</field>
+            <field name="categ_id" ref="product.product_category_all"/>
+            <field name="type">service</field>
+            <field name="sale_ok" eval="True"/>
+        </record>
+        <!--<record id="project_timesheet" model="project.project">-->
+            <!--<field name="name">Contracts</field>-->
+            <!--<field name="use_tasks">0</field>-->
+            <!--<field name="allow_timesheets">1</field>-->
+        <!--</record>-->
+
+        <record id="timesheet_journal" model="account.journal">
+            <field name="name">Timesheet Journal</field>
+            <field name="type">general</field>
+            <field name="code">TS</field>
+            <!--<field name="default_debit_account_id">TIMESHEET</field>-->
+            <!--<field name="default_credit_account_id">TIMESHEET</field>-->
+        </record>
+
+        <record id="sale_journal" model="account.journal">
+            <field name="name">Sale Journal</field>
+            <field name="type">general</field>
+            <field name="code">SALE</field>
+            <!--<field name="default_debit_account_id">TIMESHEET</field>-->
+            <!--<field name="default_credit_account_id">TIMESHEET</field>-->
+        </record>
+
+        <record id="expense_journal" model="account.journal">
+            <field name="name">Expenses Journal</field>
+            <field name="type">general</field>
+            <field name="code">EXPENSE</field>
+            <!--<field name="default_debit_account_id">TIMESHEET</field>-->
+            <!--<field name="default_credit_account_id">TIMESHEET</field>-->
+        </record>
+
+        <record id="purchase_journal" model="account.journal">
+            <field name="name">Purchase Journal</field>
+            <field name="type">general</field>
+            <field name="code">PURCHASE</field>
+            <!--<field name="default_debit_account_id">TIMESHEET</field>-->
+            <!--<field name="default_credit_account_id">TIMESHEET</field>-->
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,74 @@
+.o_web_client {
+    .o_main{
+        .o_main_content.ad_rightbar{
+            .o_content{
+                .o_bank_statement_reconciliation{
+                    .o_form_sheet_bg{
+                        padding: 0px;
+                        .oe_form_sheet{
+                            min-width: 100%;
+                            max-width: 100%;
+                            padding: 10px;
+                            .js_automatic_reconciliation{
+                                margin: 5px 15px 0px 0px;
+                            }
+                            .reconciliation_lines_container{
+                                .o_reconciliation_line{
+                                    table{
+                                        tbody{
+                                            tr{
+                                                td{
+                                                    .accounting_view{
+                                                        caption{
+                                                            height: 30px;
+                                                            .partner_name{
+                                                                font-size: 13px;
+                                                                text-transform: uppercase;
+                                                            }
+                                                        }
+                                                        & > tbody{
+                                                            tr{
+                                                                height: 38px;
+                                                                td{
+                                                                    &:not(:first-child):not(:last-child){
+                                                                        border-bottom: 1px solid;
+                                                                        border-color:  @border;
+                                                                        background: transparent !important;
+                                                                        &.cell_credit{
+                                                                            border-left: none;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                &:hover {
+                                                                    background: @tr-hover;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                    .action_pane.create{
+                                                        border: none;
+                                                        .create_form{
+                                                            .o_group.o_inner_group{
+                                                                tbody{
+                                                                    tr{
+                                                                        td{
+                                                                            border-right: none;
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

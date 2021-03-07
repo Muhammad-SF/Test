@@ -1,0 +1,83 @@
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="reordering_rule_form_view_inherit_run">
+			<field name="name">stock.warehouse.orderpoint.inherit</field>
+			<field name="model">stock.warehouse.orderpoint</field>
+			<field name="inherit_id" ref="reordering_rule_extended.reordering_rule_form_view_inherit" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='order_pt_line_ids']" position="attributes">
+					<attribute name="context">{'default_product_id': product_id, 'default_location_id': location_id}</attribute>
+				</xpath>
+				<xpath expr="//field[@name='order_pt_line_ids']//tree" position="attributes">
+					<attribute name="editable"></attribute>
+				</xpath>
+                <xpath expr="//field[@name='order_pt_line_ids']//tree" position="after">
+					<form string="Reordering Rule">
+						<sheet>
+							<group>
+								<group string="Period">
+								<label string="Period of time for this Reordering Rule"
+								colspan="4"/>
+									<field name="product_id" invisible="1"/>
+									<field name="location_id" invisible="1"/>
+									<field name="start_date" required="1"/>
+									<field name="end_date" required="1"/>
+								</group>
+								<group string="Reordering Rule">
+									<field name="product_min_qty" required="1" attrs="{'readonly':[('based_on_run_rate','=',True)]}"/>
+									<field name="product_max_qty" required="1"/>
+									<field name="qty_multiple"/>
+								</group>
+							</group>
+							<group>
+								<group string="Product Information">
+									<field name="qty_on_hand" string="Current Stock Level" readonly="1"/>
+									<field name="qty_on_hand_copy"  invisible="1"/>
+<!--									<field name="safe_stock" readonly="1"  force_save="1"/>
+									<field name="safe_stock_copy" invisible="1"/>	-->
+									<field name="stock_days" readonly="1"  force_save="1"/>
+									<field name="stock_days_copy" invisible="1"/>
+                                    <field name="process_day"/>
+                                    <field name="avg_lead_time"/>
+                                    <field name="avg_sales_daily"/>
+                                    <field name="lead_time_demand"/>
+								</group>
+								<group string="Based on Run Rate">
+									<field name="based_on_run_rate"/>
+									<field name="run_rate_data" required="1" attrs="{'invisible':[('based_on_run_rate','=',False)]}"/>
+									<field name="run_rate" attrs="{'invisible':[('based_on_run_rate','=',False)]}"/>
+									<field name="run_rate_copy"  invisible="1"/>
+									<field name="par_level" attrs="{'invisible':[('based_on_run_rate','=',False)]}"/>
+<!--								<field name="par_level_type" attrs="{'invisible':[('par_level','=',False)]}"/> -->
+									<field name="par_level_data" required="1" attrs="{'invisible':[('par_level','=',False)]}"/>
+								</group>
+							</group>
+						</sheet>
+					</form>
+				</xpath>
+			</field>
+		</record>
+
+   <!--  <record model="ir.ui.view" id="stock_reordering_rule_report_pivot">
+        <field name="name">stock.warehouse.orderpoint.report.pivot</field>
+        <field name="model">stock.warehouse.orderpoint</field>
+        <field name="arch" type="xml">
+            <pivot string="Reordering Rule Analysis" disable_linking="True">
+                <field name="warehouse_id" type="row"/>
+                <field name="product_id" type="row"/>
+                <field name="based_on_run_rate" type="row"/>
+                <field name="run_rate_data" type="measure"/>
+                <field name="qty_on_hand" type="measure"/>
+                <field name="run_rate" type="measure"/>
+                <field name="stock_days" type="measure"/>
+                <field name="product_min_qty" type="measure"/>
+                <field name="product_max_qty" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+ -->
+   <!--  <record id="stock.action_orderpoint_form" model="ir.actions.act_window">
+        <field name="view_mode">tree,form,pivot</field>
+    </record> -->
+	</data>
+</odoo>

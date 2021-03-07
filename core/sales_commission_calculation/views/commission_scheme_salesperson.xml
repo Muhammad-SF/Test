@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <!-- commission.scheme.salesperson form view -->
+        <record id="commission_scheme_salesperson_view_form" model="ir.ui.view">
+            <field name="name">commission.scheme.salesperson.view.form</field>
+            <field name="model">commission.scheme.salesperson</field>
+            <field name="arch" type="xml">
+                <form string="Commission Structure: Salesperson">
+                    <sheet>
+                        <group>
+                            <!-- Add your fields here -->
+                            <field name="name"/>
+                            <field name="commission_scheme_ids"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_window_commission_scheme_salesperson">
+            <field name="name">Commission Structure: Salesperson</field>
+            <field name="res_model">commission.scheme.salesperson</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem
+            name="Commission Structure: Salesperson"
+            action="act_window_commission_scheme_salesperson"
+            id="menu_commission_scheme_salesperson_view_form"
+            parent="sales_commission_calculation.menu_commission_and_rewards"/>
+    </data>
+</odoo>

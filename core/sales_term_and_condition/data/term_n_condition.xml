@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="standard_tnc" model="sale.tc">
+            <field name="name">Standard Terms and Condition</field>
+            <field name="active">True</field>
+            <field name="terms">I agree to the Terms &amp; Conditions stated overleaf and understand that full payment shall be made upon collection of costumes.
+            </field>
+        </record>
+    </data>
+</odoo>

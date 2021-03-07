@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="paperformat_sales_commission" model="report.paperformat">
+            <field name="name">European A4 Sales Commission</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">23</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+            id="report_sales_commission"
+            string="Sale Commission"
+            model="sale.commission.report.wizard"
+            report_type="qweb-pdf"
+            file="sale_commission_target_gt.report_sale_commission"
+            name="sale_commission_target_gt.report_sale_commission"
+            paperformat="paperformat_sales_commission"
+        />
+
+        <report
+            id="report_sales_commission_detail"
+            string="Sale Commission"
+            model="sale.commission.report.wizard"
+            report_type="qweb-pdf"
+            file="sale_commission_target_gt.report_sale_commission_detail"
+            name="sale_commission_target_gt.report_sale_commission_detail"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+		<template id="sg_income_tax_report.ir8a_incometax_form_report">
+			<t t-call="report.html_container">
+				<!-- <t t-call="report.external_layout"> -->
+				<t t-foreach="docs" t-as="o">
+				    <t t-foreach="get_data(data)" t-as="rec">
+						<div class="page">
+							<style>
+								.border {
+								border:1px solid black;
+								border-collapse:collapse;
+								}
+
+								.padding {
+								padding-top:3px;
+								padding-bottom:3px;
+								padding-left:3px;
+								padding-right:3px;
+								}
+							</style>
+							<div class='row'>
+									<table width="100%">
+										<tr>
+											<td style="font-size:12px;text-align: center;">
+												<b><span> FORM IR8A </span></b>
+											</td>
+										</tr>
+										<tr>
+											<td
+												style="font-size:9px;text-align: left;color: white;background-color: Black;"
+												class="padding border">
+												<span>
+													Return of Employee’s Remuneration for the
+													year ended
+													31, Dec.
+												</span>
+												<span t-esc="rec.get('previous_year')" />
+												<br />
+												<span>
+													Fill in this form and give it to your employee by 1 Mar,
+													<span t-esc="rec.get('year')" />
+													for his submission together with his Income Tax Return.
+												</span>
+											</td>
+										</tr>
+										<tr>
+											<td style="font-size:9px;text-align: left;">
+												<span>This Form will take about 10 minutes to complete.
+													Please get ready the employee’s personal particulars and
+													details of his/her employment income. Please read the
+													explanatory notes when completing this form.</span>
+											</td>
+										</tr>
+									</table>
+									<table class="border" width="100%">
+										<tr>
+											<td class="padding border" width="50%" style="font-size:9px;"
+												colspan="3">
+												<span>Employer’s Tax Ref. No. / UEN : </span>
+												<br />
+												<span t-esc="rec.get('employeer_tax')"></span>
+											</td>
+											<td class="padding border" width="50%" style="font-size:9px;"
+												colspan="3">
+												<span>Employee’s Tax Ref. No. : *NRIC / FIN (Foreign
+													Identification No.) : </span>
+												<br />
+												<span t-esc="rec.get('identification_id')"></span>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding border" width="50%" style="font-size:9px;"
+												colspan="3">
+												<span>Full Name of Employee as per NRIC / FIN : </span>
+												<br />
+												<span t-esc="rec.get('employee')"></span>
+											</td>
+											<td class="padding border" width="20%" style="font-size:9px;">
+												<span>Date of Birth : </span>
+												<br />
+												<span
+													t-esc="time.strftime('%d-%m-%Y',time.strptime(rec.get('birthday'), '%Y-%m-%d'))" />
+											</td>
+											<td class="padding border" width="10%" style="font-size:9px;">
+												<span>Sex : </span>
+												<br />
+												<span t-esc="rec.get('sex')"></span>
+											</td>
+											<td class="padding border" width="20%" style="font-size:9px;">
+												<span>Nationality : </span>
+												<br />
+												<span t-esc="rec.get('nationality')"></span>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding border" width="50%" style="font-size:9px;"
+												colspan="3">
+												<span>Residential Address : </span>
+												<br />
+												<span t-esc="rec.get('address_home')"></span>
+											</td>
+											<td class="padding border" width="50%" style="font-size:9px;"
+												colspan="3">
+												<span>Designation : </span>
+												<br />
+												<span t-esc="rec.get('job_name')"></span>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding border" width="50%" style="font-size:9px;"
+												colspan="3">
+												<span>If employment commenced and/or ceased during the year,
+													state:(See paragraph 7 of
+													the Explanatory Notes)</span>
+											</td>
+											<td class="padding border" width="25%" colspan="2"
+												style="font-size:9px;">
+												<span>Date of Commencement : </span>
+												<br />
+												<t t-if="rec.get('join_date')">
+												<span
+													t-esc="time.strftime('%d-%m-%Y',time.strptime(rec.get('join_date'), '%Y-%m-%d'))" />
+												</t>
+											</td>
+											<td class="padding border" width="25%" style="font-size:9px;">
+												<span>Date of *Cessation/Overseas Posting : </span>
+												<t t-if="rec.get('cessation_date')">
+													<span
+														t-esc="time.strftime('%d-%m-%Y',time.strptime(rec.get('cessation_date'), '%Y-%m-%d'))" />
+												</t>
+											</td>
+										</tr>
+										<tr>
+											<td class="border padding" width="50%"
+												style="font-size:9px;color: white;background-color: Black;"
+												colspan="5">
+												<span>
+													<b>INCOME</b>
+												</span>
+												<span>(Enter “NA” for items that are not applicable)</span>
+											</td>
+											<td class="padding" width="25%"
+												style="font-size:9px;color: white;background-color: Black;text-align: center;">
+												<span>
+													<b>$</b>
+												</span>
+											</td>
+										</tr>
+									</table>
+
+									<table width="100%">
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span>a) </span>
+											</td>
+											<td class="padding" width="72%" style="font-size:9px;">
+												<span>Gross Salary, Fees, Leave Pay, Wages and Overtime Pay:
+												</span>
+											</td>
+											<td class="padding" width="20%" style="font-size:9px;">
+												<table width="100%">
+													<tr>
+														<td class="border padding" style="font-size:9px;text-align: center;">
+															<t t-if="rec.get('gross_amt')">
+																<span t-esc="formatLang(rec.get('gross_amt'))"></span>
+															</t>
+															<t t-if="rec.get('gross_amt') &lt;=0">
+																<span>NA</span>
+															</t>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span>b) </span>
+											</td>
+											<td class="padding" width="72%" style="font-size:9px;">
+												<span>
+													<b>Bonus</b>
+												</span>
+												<span>
+													(non-contractual bonus paid in
+													<span t-esc="rec.get('previous_year')" />
+													and / or contractual bonus)
+													<b>(See paragraph 12b of the Explanatory Notes)</b>
+												</span>
+											</td>
+											<td class="padding" width="20%" style="font-size:9px;">
+												<table width="100%">
+													<tr>
+														<td class="border padding" style="font-size:9px;text-align: center;">
+															<t t-if="rec.get('bonus_amt')">
+																<span t-esc="formatLang(rec.get('bonus_amt'))"></span>
+															</t>
+															<t t-if="rec.get('bonus_amt') &lt;=0">
+																<span>NA</span>
+															</t>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span>c) </span>
+											</td>
+											<td class="padding" width="72%" style="font-size:9px;">
+												<span>
+													<b>Bonus</b>
+												</span>
+												<span>
+													<b>Director’s fees</b>
+													(approved at the company’s AGM/EGM on / /
+													<span t-esc="rec.get('previous_year')" />
+													)
+													<b>(See paragraph 12c of the Explanatory Notes)</b>
+												</span>
+											</td>
+											<td class="padding" width="20%"
+												style="font-size:9px;text-align: center;">
+												<table width="100%">
+													<tr>
+														<td class="border padding" style="font-size:9px;text-align: center;">
+															<t t-if="rec.get('director_fee')">
+																<span t-esc="formatLang(rec.get('director_fee'))"></span>
+															</t>
+															<t t-if="rec.get('director_fee') &lt;=0">
+																<span>NA</span>
+															</t>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span>d) </span>
+											</td>
+											<td class="padding" width="72%" style="font-size:9px;">
+												<span>
+													<b>Others: </b>
+												</span>
+											</td>
+											<td class="padding" width="20%" style="font-size:9px;">
+												<table width="100%">
+													<tr>
+														<td class="border padding" style="font-size:9px;text-align: center;">
+															<t t-if="rec.get('other_data')">
+																<span t-esc="formatLang(rec.get('other_data'))"></span>
+															</t>
+															<t t-if="rec.get('other_data') &lt;=0">
+																<span>NA</span>
+															</t>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+
+
+									<table width="100%">
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding" width="25%" style="font-size:9px;">
+												<span>1. Allowances: (i) Transport $ </span>
+												<span t-esc="formatLang(rec.get('transport_allowance'))"></span>
+											</td>
+											<td class="padding" width="22%" style="font-size:9px;">
+												<span>(ii) Entertainment $ </span>
+												<span t-esc="formatLang(rec.get('entertainment_allowance'))"></span>
+											</td>
+											<td class="padding" width="30%" style="font-size:9px;">
+												<span>(iii) Others $ </span>
+												<span t-esc="formatLang(rec.get('other_allowance'))"></span>
+											</td>
+											<td class="padding" width="20%" style="font-size:9px;">
+												<span></span>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding" width="25%" style="font-size:9px;">
+												<span>2. Gross Commission for the period</span>
+												<span t-esc="formatLang(rec.get('gross_commission'))"></span>
+											</td>
+											<td class="padding" width="22%" style="font-size:9px;">
+												<span t-esc="rec.get('fromdate')"></span>
+												to
+												<span t-esc="rec.get('todate')"></span>
+											</td>
+											<td class="padding" width="30%" style="font-size:9px;">
+												<span>
+													(See
+													<b>paragraph 12d (I) of the Explanatory Notes</b>
+													)
+													<br />
+													* Monthly
+												</span>
+											</td>
+											<td class="padding" width="20%"
+												style="font-size:9px;text-align: center;">
+												<t t-if="rec.get('gross_commission')">
+													<span t-esc="formatLang(rec.get('gross_commission'))"></span>
+												</t>
+												<t t-if="rec.get('gross_commission') &lt;=0">
+													<span>NA</span>
+												</t>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding" style="font-size:9px;" colspan="4">
+												<span>3. Pension</span>
+												<span t-esc="formatLang(rec.get('pension'))"></span>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding" style="font-size:9px;" colspan="4">
+												<span>
+													4. Lump sum payment
+													<b>(See paragraph 12d (II) of the Explanatory Notes)</b>
+												</span>
+												<span t-esc="formatLang(rec.get('exempt_remission'))"></span>
+											</td>
+										</tr>
+
+										<tr>
+											<td colspan="5">
+												<table width="100%">
+													<tr>
+														<td class="padding" width="3%" style="font-size:9px;">
+															<span></span>
+														</td>
+														<td class="padding" width="97%" style="font-size:9px;">
+															<table class="border" width="100%">
+																<tr>
+																	<td class="border padding" width="33.33%" style="font-size:9px;">
+																		<span>Gratuity : </span>
+																		<span t-esc="rec.get('gratu')"></span>
+																	</td>
+																	<td class="border padding" width="33.33%" style="font-size:9px;">
+																		<span>Notice Pay : </span>
+																		<span t-esc="rec.get('n_pay')"></span>
+																	</td>
+																	<td class="border padding" width="33.33%" style="font-size:9px;">
+																		<span>Ex-gratia payment : </span>
+																		<span t-esc="rec.get('gratia')"></span>
+																	</td>
+																</tr>
+
+																<tr>
+																	<td class="border padding" style="font-size:9px;"
+																		colspan="3">
+																		<span>Others (please state nature) : </span>
+																		<span t-esc="rec.get('other')"></span>
+																	</td>
+																</tr>
+
+																<tr>
+																	<td class="padding" width="33.33%" style="font-size:9px;">
+																		<span>Compensation for loss of office : </span>
+																		<span
+																			t-esc="formatLang(rec.get('compensation_loss_office'))"></span>
+																	</td>
+																	<td class="padding" width="33.33%" style="font-size:9px;">
+																		<span>Approval obtained from IRAS : </span>
+																		<span t-esc="rec.get('approve_obtain_iras')"></span>
+																	</td>
+																	<td class="padding" width="33.33%" style="font-size:9px;">
+																		<span>Date of approval : </span>
+																		<t t-if="rec.get('approval_date')">
+																			<span
+																				t-esc="time.strftime('%d-%m-%Y',time.strptime(rec.get('approval_date'), '%Y-%m-%d'))" />
+																		</t>
+																	</td>
+																</tr>
+
+																<tr>
+																	<td class="border padding" colspan="2" style="font-size:9px;">
+																		<span>Reason for payment : </span>
+																	</td>
+																	<td class="border padding" width="33.33%" style="font-size:9px;">
+																		<span>Length of service : </span>
+																	</td>
+																</tr>
+
+																<tr>
+																	<td class="border padding" colspan="3" style="font-size:9px;">
+																		<span>Basis of arriving at the payment : </span>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding" width="25%" style="font-size:9px;"
+												colspan="3">
+												<span>
+													5. Retirement benefits including
+													gratuities/pension/commutation
+													of pension/lump sum payments,
+													etc from
+													<br />
+													Pension/Provident Fund: Name of Fund :
+												</span>
+												<span t-esc="rec.get('fund_name')"></span>
+											</td>
+											<td class="padding" width="20%" style="font-size:9px;">
+												<span></span>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding" width="25%" style="font-size:9px;"
+												colspan="2">
+												<span>(Amount accrued up to 31 Dec 1992 $</span>
+												<span t-esc="formatLang(rec.get('retirement_benifit_up'))" />
+												)
+											</td>
+											<td class="padding" width="25%" style="font-size:9px;">
+												<span style="text-indent: 30px;">Amount accrued from 1993 : </span>
+												<span t-esc="formatLang(rec.get('retirement_benifit_from'))" />
+											</td>
+											<td class="padding" width="20%" style="font-size:9px;">
+												<span></span>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding" width="25%" style="font-size:9px;"
+												colspan="3">
+												<span>
+													6. Contributions made by employer to any Pension/Provident
+													Fund constituted outside Singapore :
+													<br />
+													(See
+													<b>paragraph 12d (III) of the Explanatory Notes. Give
+														details separately if tax concession is applicable.</b>
+													)
+												</span>
+											</td>
+											<td class="padding" width="20%"
+												style="font-size:9px;text-align: center;">
+												<span>
+													<t t-if="rec.get('contribution_employer')">
+														<span t-esc="formatLang(rec.get('contribution_employer'))" />
+													</t>
+													<t t-if="rec.get('contribution_employer') &lt;=0">
+														<span>NA</span>
+													</t>
+												</span>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding" width="25%" style="font-size:9px;"
+												colspan="3">
+												<span>
+													7. Excess/Voluntary contribution to CPF by employer (less
+													amount refunded/to be refunded):
+													<br />
+													(See
+													<b>paragraph 12d (IV) of the Explanatory Notes and complete
+														the Form IR8S</b>
+													)
+												</span>
+											</td>
+											<td class="padding" width="20%"
+												style="font-size:9px;text-align: center;">
+												<span>
+													<t t-if="rec.get('excess_voluntary_contribution_cpf_employer')">
+														<span
+															t-esc="formatLang(rec.get('excess_voluntary_contribution_cpf_employer'))" />
+													</t>
+													<t
+														t-if="rec.get('excess_voluntary_contribution_cpf_employer') &lt;=0">
+														<span>NA</span>
+													</t>
+												</span>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding" width="25%" style="font-size:9px;"
+												colspan="3">
+												<span>
+													8. Gains or profits from Employee Stock Option (ESOP) /
+													other forms of Employee Share Ownership (ESOW) Plans:
+													<br />
+													(See
+													<b>paragraph 12d (V) of the Explanatory Notes and complete
+														the Appendix 8B </b>
+													)
+												</span>
+											</td>
+											<td class="padding" width="20%"
+												style="font-size:9px;text-align: center;">
+												<span>
+													<t t-if="rec.get('gains_profit_share_option')">
+														<span t-esc="formatLang(rec.get('gains_profit_share_option'))" />
+													</t>
+												</span>
+												<t t-if="rec.get('gains_profit_share_option') &lt;=0">
+													<span>NA</span>
+												</t>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding" width="25%" style="font-size:9px;"
+												colspan="3">
+												<span>
+													9. Value of Benefits-in-kind
+													<br />
+													(See
+													<b>paragraphs 13 to 17 of the Explanatory Notes and
+														complete the Appendix 8A </b>
+													):
+												</span>
+											</td>
+											<td class="padding" width="20%"
+												style="font-size:9px;text-align: center;">
+												<span>
+													<t t-if="rec.get('benifits_in_kinds')">
+														<span t-esc="formatLang(rec.get('benifits_in_kinds'))" />
+													</t>
+												</span>
+												<t t-if="rec.get('benifits_in_kinds') &lt;=0">
+													<span>NA</span>
+												</t>
+											</td>
+										</tr>
+										<tr>
+											<td class="padding" width="25%"
+												style="font-size:9px;text-align: right;" colspan="4">
+												<span>
+													TOTAL (items d1 to d9)
+                                                </span>
+											</td>
+											<td class="padding" width="20%"
+												style="font-size:9px;text-align: center;">
+												<span>
+													<t t-if="rec.get('other_data')">
+														<span t-esc="formatLang(rec.get('other_data'))" />
+													</t>
+												</span>
+												<t t-if="rec.get('other_data') &lt;=0">
+													<span>NA</span>
+												</t>
+											</td>
+										</tr>
+									</table>
+
+									<table width="100%">
+										<tr>
+											<td class="padding" width="3%" style="font-size:9px;">
+												<span>e) </span>
+											</td>
+											<td>
+												<table class="border padding">
+													<tr>
+														<td class="border padding" width="20%" style="font-size:9px;">
+															<span>Employee’s income tax borne by employer?</span>
+															<br />
+															<span t-esc="rec.get('is_income')"></span>
+														</td>
+														<td class="border padding" width="80%" style="font-size:9px;">
+															<span>If yes and fully borne by employer, DO NOT enter
+																any amount in (i) and (ii)</span>
+															<br />
+															<span>(i) </span>
+															<span t-esc="rec.get('employee_income_tax')"></span>
+														</td>
+													</tr>
+												</table>
+											</td>
+										</tr>
+									</table>
+									<table class="border padding" width="100%">
+										<tr>
+											<td class="padding"
+												style="font-size:9px;color: white;background-color: Black;"
+												colspan="3">
+												<span>DEDUCTIONS (Enter “NA” for items that are not
+													applicable)</span>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding border" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding border" width="72%" style="font-size:9px;">
+												<span>
+													EMPLOYEE’S COMPULSORY contribution to * CPF / Designated
+													Pension or Provident Fund
+													<b>(less amount refunded/to be refunded)</b>
+													<br />
+													Name of Fund :
+												</span>
+												<span>(Please adopt the appropriate CPF rates published by
+													CPF Board on its website ‘www.cpf.gov.sg’.
+													Do not include
+													excess/voluntary contributions to CPF,
+													voluntary
+													contributions to Medisave Account,
+													voluntary contributions
+													to CPF Minimum Sum Topping-up Scheme and SRS
+													contributions
+													in this item)</span>
+											</td>
+											<td class="padding border" width="20%"
+												style="font-size:9px;text-align: center;">
+												<t t-if="rec.get('CPF_designated_pension_provident_fund')">
+													<span
+														t-esc="formatLang(rec.get('CPF_designated_pension_provident_fund'))"></span>
+												</t>
+												<t t-if="rec.get('CPF_designated_pension_provident_fund') &lt;=0">
+													<span>NA</span>
+												</t>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding border" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding border" width="72%" style="font-size:9px;">
+												<span>
+													<b>Donations</b>
+													deducted from salaries for :
+												</span>
+												<span>Yayasan Mendaki Fund/Community Chest of
+													Singapore/SINDA/CDAC/ECF/Other tax exempt donations</span>
+											</td>
+											<td class="padding border" width="20%"
+												style="font-size:9px;text-align: center;">
+												<t t-if="rec.get('donation_amt')">
+													<span t-esc="formatLang(rec.get('donation_amt'))"></span>
+												</t>
+												<t t-if="rec.get('donation_amt') &lt;=0">
+													<span>NA</span>
+												</t>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding border" width="3%" style="font-size:9px;">
+												<span></span>
+											</td>
+											<td class="padding border" width="72%" style="font-size:9px;">
+												<span>
+													<b>Life Insurance premiums deducted from salaries:</b>
+												</span>
+											</td>
+											<td class="padding border" width="20%"
+												style="font-size:9px;text-align: center;">
+												<t t-if="rec.get('donation_amt')">
+													<span t-esc="formatLang(rec.get('insurance'))"></span>
+												</t>
+												<t t-if="rec.get('insurance') &lt;=0">
+													<span>NA</span>
+												</t>
+											</td>
+										</tr>
+									</table>
+
+
+									<table class="border" width="100%">
+										<tr>
+											<td class="padding border"
+												style="font-size:9px;color: white;background-color: Black;"
+												colspan="5">
+												<span>DECLARATION (See paragraph 4 of the Explanatory Notes)
+												</span>
+											</td>
+										</tr>
+										<tr>
+											<td class="padding border" style="font-size:9px;" colspan="5">
+												<span>Name of Employer : </span>
+												<span t-esc="rec.get('company_name')"></span>
+											</td>
+										</tr>
+										<tr>
+											<td class="padding border" style="font-size:9px;" colspan="5">
+												<span>Address of Employer : </span>
+												<span t-esc="rec.get('company_street')"></span>
+											</td>
+										</tr>
+
+										<tr>
+											<td class="padding border" style="font-size:9px;" width="30%">
+												<span t-esc="rec.get('autho_user')"></span>
+												<br />
+												<span>Name of authorised person making the declaration
+												</span>
+											</td>
+											<td class="padding border" style="font-size:9px;" width="20%">
+												<span t-esc="rec.get('designation')"></span>
+												<br />
+												<span>Designation</span>
+											</td>
+											<td class="padding border" style="font-size:9px;" width="15%">
+												<span t-esc="rec.get('tel_no')"></span>
+												<br />
+												<span>Tel. No.</span>
+											</td>
+											<td class="padding border" style="font-size:9px;" width="17.5%">
+												<span>.</span>
+												<br />
+												<span>Signature</span>
+											</td>
+											<td class="padding border" style="font-size:9px;" width="17.5%">
+												<span t-esc="rec.get('date_today')"></span>
+												<br />
+												<span>Date</span>
+											</td>
+										</tr>
+									</table>
+
+									<table width="100%">
+										<tr>
+											<td colspan="2" style="text-align: center;font-size:9px;">
+												<span>
+													There are penalties for failing to give a return or
+													furnishing
+													an incorrect or late return.
+                                                </span>
+											</td>
+										</tr>
+										<tr>
+											<td style="text-align: left;font-size:9px;">
+												<span>IR8A(1/</span>
+												<span t-esc="rec.get('year')"></span>
+												)
+											</td>
+											<td style="text-align: right;font-size:9px;">
+												<span>* Delete where applicable</span>
+											</td>
+										</tr>
+									</table>
+							</div>
+						</div>
+					</t>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

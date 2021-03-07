@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_treasury_management_config_settings" model="ir.ui.view">
+            <field name="name">treasury_management settings</field>
+            <field name="model">treasury.management.config.settings</field>
+            <field name="arch" type="xml">
+                <form string="Configure Treasury Management" class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <group>
+                        <group string="Treasury Management" name="treasury_management">
+                            <label for="id" string="Main settings"/>
+                            <div>
+                                <div>
+                                    <label for="fc_account_ids"/>
+                                    <field name="fc_account_ids" widget="many2many_tags"/>
+                                </div>
+                            <div>
+                                <label for="fc_css_dict"/>
+                                <field name="fc_css_dict"/>
+                            </div>
+                            </div>
+
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_treasury_management_config_settings" model="ir.actions.act_window">
+            <field name="name">Configure Treasury Management</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">treasury.management.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem id="menu_financ_manag_config" name="Settings" parent="menu_financ_manag_settings"
+            sequence="10" action="action_treasury_management_config_settings"/>
+    </data>
+</odoo>

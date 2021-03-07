@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="hr_holidays_urgent_leave_form" model="ir.ui.view">
+        <field name="name">Hr Holidays Urgent Leave Form</field>
+        <field name="model">hr.holidays</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_new"/>
+        <field name="arch" type="xml">
+            <field name="holiday_status_id" position="after">
+                <field name="is_urgent" attrs="{'readonly':[('state','not in',['draft', 'confirm'])],'invisible':[('type','=','add')]}"/>
+            </field>
+            <xpath expr="//form/sheet/group/div/separator" position="attributes">
+                <attribute name="string">Reason For Urgent Leave</attribute>
+            </xpath>
+            <xpath expr="//form/sheet/group/div/field[@name='report_note']" position="attributes">
+                <attribute name="attrs">{'required':[('is_urgent','!=',False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="hr_holidays_urgent_leave_remarks_form" model="ir.ui.view">
+        <field name="name">Hr Holidays Urgent Leave Remarks Form</field>
+        <field name="model">hr.holidays</field>
+        <field name="inherit_id" ref="sg_hr_holiday.edit_holiday_extended"/>
+        <field name="arch" type="xml">
+            <field name="name" position="attributes">
+                <attribute name="string">Remarks</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!--Action For Urgent Leave-->
+    <record id="action_urgent_leave_request" model="ir.actions.act_window">
+        <field name="name">Urgent Leave</field>
+        <field name="res_model">hr.holidays</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="hr_holidays.edit_holiday_new"/>
+        <field name="context">{
+            'default_is_urgent': True,
+            'default_type': 'remove',
+            'search_default_my_leaves': 1,
+            'needaction_menu_ref':
+            [
+                'hr_holidays.menu_open_company_allocation',
+            ]
+        }</field>
+        <field name="domain">[('type','=','remove'),('is_urgent','=',True)]</field>
+        <field name="search_view_id" ref="hr_holidays.view_hr_holidays_filter"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create a new urgent leave request.
+          </p><p>
+            Once you have recorded your urgent request, it will be sent
+            to a manager for validation. Be sure to set the allow to override
+            limit leave type (recuperation, legal holidays, sickness) and enable urgent.
+          </p>
+        </field>
+    </record>
+
+    <record id="action_urgent_leave_request_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="hr_holidays.view_holiday"/>
+        <field name="act_window_id" ref="action_urgent_leave_request"/>
+    </record>
+
+    <record id="action_urgent_leave_request_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="3"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="hr_holidays.edit_holiday_new"/>
+        <field name="act_window_id" ref="action_urgent_leave_request"/>
+    </record>
+
+    <record id="action_urgent_leave_request_calendar" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">calendar</field>
+        <field name="view_id" ref="hr_holidays.view_holiday_new_calendar"/>
+        <field name="act_window_id" ref="action_urgent_leave_request"/>
+    </record>
+
+    <menuitem id="submenu_hr_holidays_urgent_leave" name="Urgent Leave" action="action_urgent_leave_request" parent="hr_holidays.menu_hr_holidays_my_leaves" sequence="23"/>
+
+</odoo>

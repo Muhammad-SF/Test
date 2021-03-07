@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_simple_stock_in_user,simple.stock.in,model_simple_stock_in,stock.group_stock_user,1,1,1,1
+access_simple_stock_in_line_user,simple.stock.in.line,model_simple_stock_in_line,stock.group_stock_user,1,1,1,1
+access_simple_stock_out_user,simple.stock.out,model_simple_stock_out,stock.group_stock_user,1,1,1,1
+access_simple_stock_out_line_user,simple.stock.out.line,model_simple_stock_out_line,stock.group_stock_user,1,1,1,1
+access_simple_stock_inventory_user,simple.stock.inventory,model_simple_stock_inventory,stock.group_stock_user,1,1,1,1
+access_simple_stock_inventory_line_user,simple.stock.inventory.line,model_simple_stock_inventory_line,stock.group_stock_user,1,1,1,1

@@ -1,0 +1,41 @@
+<odoo>
+  <data>
+
+    <record id="last_po_view_inherited" model="ir.ui.view">
+      <field name="name">Purchase Order</field>
+      <field name="model">purchase.order</field>
+      <field name="inherit_id" ref="purchase.purchase_order_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="//page/field[@name='order_line']/tree" position="attributes">
+              <attribute name="editable"/>
+          </xpath>
+
+          <xpath expr="//page/field[@name='order_line']/form/sheet/group/group/field[@name='price_unit']" position="after">
+              <field name="state" invisible="1"/>
+          </xpath>
+      </field>
+    </record>
+
+
+    <record id="last_po_inherited" model="ir.ui.view">
+      <field name="name">Order Lines</field>
+      <field name="model">purchase.order</field>
+      <field name="inherit_id" ref="purchase.purchase_order_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="//page/field[@name='invoice_lines']" position="after">
+              
+              <field name="p_line_ids">
+                  <tree>
+                    <field name="vendor_id"/>
+                    <field name="product_id"/>
+                    <field name="qty"/>
+                    <field name="price"/>
+                    <field name="date" widget="date"/>               
+                  </tree>
+              </field>
+          </xpath>
+      </field>
+    </record>
+
+  </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_search_padre" model="ir.ui.view">
+            <field name="name">account.account.search.padre</field>
+            <field name="model">account.account</field>
+            <field name="type">search</field>
+            <field name="inherit_id" ref="account.view_account_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="/search/field[@name='user_type_id']" position="after">
+                    <field name="parent_id"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

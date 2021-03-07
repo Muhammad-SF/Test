@@ -1,0 +1,112 @@
+<odoo>
+    <data>
+        <!-- Creating Purchase Request Access rights. -->
+
+        <record id="purchase_request.module_category_purchase_request" model="ir.module.category">
+            <field name="sequence">9</field>
+        </record>
+
+        <record id="purchase_request.group_purchase_request_user" model="res.groups">
+            <field name="name">User</field>
+        </record>
+
+        <record id="purchase_request.group_purchase_request_manager" model="res.groups">
+            <field name="name">Manager</field>
+        </record>
+
+        <!-- Creating Purchase Access rights. -->
+
+        <record id="group_purchase_admin" model="res.groups">
+            <field name="name">Admin</field>
+            <field name="implied_ids" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+            <field name="category_id" ref="base.module_category_purchase_management"/>
+        </record>
+
+        <record id="group_purchase_executive" model="res.groups">
+            <field name="name">Executive</field>
+            <field name="category_id" ref="base.module_category_purchase_management"/>
+            <field name="implied_ids" eval="[(4, ref('std_purchase_access_rights.group_purchase_admin'))]"/>
+        </record>
+
+        <record id="purchase.group_purchase_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="base.module_category_purchase_management"/>
+        <field name="implied_ids" eval="[(4, ref('std_purchase_access_rights.group_purchase_executive'))]"/>
+        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+    </record>
+
+        <!-- Extra Access Rights -->
+
+        <record id="group_manage_purchase_settings" model="res.groups">
+            <field name="name">Can manage Purchase Settings (incl. Approving Matrix)</field>
+            <field name="category_id" ref="base.module_category_usability"/>
+        </record>
+
+        <record id="group_manage_vendor_crud" model="res.groups">
+            <field name="name">Can Manage Vendors (CRUD)</field>
+            <field name="category_id" ref="base.module_category_usability"/>
+        </record>
+
+        <record id="group_manage_vendor_pricelist" model="res.groups">
+            <field name="name">Can manage Vendor Pricelist</field>
+            <field name="category_id" ref="base.module_category_usability"/>
+        </record>
+
+        <record id="purchase_order_users" model="ir.rule">
+            <field name="name">Purchase Order Own</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="domain_force">[('create_uid','=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        </record>
+
+        <record id="purchase_order_manager" model="ir.rule">
+            <field name="name">Purchase Order Manager</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="domain_force">[(1,'=', 1)]</field>
+            <field name="groups" eval="[(4, ref('purchase.group_purchase_manager'))]"/>
+        </record>
+
+        <record id="purchase_order_admin" model="ir.rule">
+            <field name="name">Purchase Order Admin</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="domain_force">[(1,'=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_purchase_admin'))]"/>
+        </record>
+
+        <record id="purchase_order_executive" model="ir.rule">
+            <field name="name">Purchase Order Executive</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="domain_force">[(1,'=', 1)]</field>
+            <field name="groups" eval="[(4, ref('group_purchase_executive'))]"/>
+        </record>
+
+       <record id="purchase_requisition_po_users" model="ir.rule">
+            <field name="name">Purchase Requisition Own</field>
+            <field name="model_id" ref="purchase_requisition.model_purchase_requisition"/>
+            <field name="domain_force">[('user_id','=', user.id)]</field>
+            <field name="groups" eval="[(4, ref('purchase.group_purchase_user'))]"/>
+        </record>
+
+        <record id="purchase_requisition_po_admin" model="ir.rule">
+            <field name="name">Purchase Requisition admin</field>
+            <field name="model_id" ref="purchase_requisition.model_purchase_requisition"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('group_purchase_admin'))]"/>
+        </record>
+
+        <record id="purchase_requisition_po_all_users" model="ir.rule">
+            <field name="name">Purchase Requisition All</field>
+            <field name="model_id" ref="purchase_requisition.model_purchase_requisition"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('purchase.group_purchase_manager'))]"/>
+        </record>
+
+        <record id="purchase_requisition_po_all_executive" model="ir.rule">
+            <field name="name">Purchase Requisition Executive</field>
+            <field name="model_id" ref="purchase_requisition.model_purchase_requisition"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4, ref('group_purchase_executive'))]"/>
+        </record>
+
+    </data>
+</odoo>

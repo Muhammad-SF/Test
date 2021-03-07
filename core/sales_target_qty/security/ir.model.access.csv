@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sales_target_qty_standardization,sales_target_qty_standardization,model_sales_target_qty,,1,1,1,1
+access_sales_target_qty_line_standardization,sales_target_qty_line_standardization,model_sales_target_qty_line,,1,1,1,1
+access_sales_target_product_line,access_sales_target_product_line,model_sales_target_product_line,base.group_user,1,1,1,1

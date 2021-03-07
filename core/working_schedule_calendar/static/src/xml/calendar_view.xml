@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<template>
+    <t t-name="CalendarView.sidebar.filters.inherit">
+         <div class="o_calendar_filter">
+             <div>
+                <div class="o_checkbox check_all">
+                    <input type="checkbox" name="selection"/><span/>
+                </div>
+                <span style="padding-left:24px;">
+                    Check All
+                </span>
+            </div>
+            <div class="o_calendar_contacts"/>
+        </div>
+
+
+    </t>
+    <t t-name="Indicator">
+        <div class="oe_working_schedule_calendar_status fa fa-circle">
+        </div>
+    </t>
+</template>

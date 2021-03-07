@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <!-- Set Paper Format for the GST F5 Report -->
+        <record id="gst_form5_tax_report_paperformat" model="report.paperformat">
+            <field name="name">GST Form 5</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">4</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- GST F5 Report Menu -->
+        <report id="gst_form5_report" 
+            string="GST Form 5 Qweb"
+            model="account.gstreturn"
+            report_type="qweb-pdf"
+            name="sg_account_report.gst_return_report_f5" 
+            file="sg_account_report.gst_return_report_f5"
+            menu="False" 
+            header="False" />
+
+        <!-- GST F5 Report Paper Format -->
+        <record id="gst_form5_report" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="gst_form5_tax_report_paperformat" />
+        </record>
+
+        <!-- Set Paper Format for the GST F7 Report -->
+        <record id="gst_form7_tax_report_paperformat" model="report.paperformat">
+            <field name="name">GST Form 7</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">4</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- GST F7 of Report Menu -->
+        <report id="gst_form7_report" 
+            string="GST Form 7 Qweb"
+            model="account.gstreturnf7"
+            report_type="qweb-pdf"
+            name="sg_account_report.gst_return_report_f7" 
+            file="sg_account_report.gst_return_report_f7"
+            menu="False" 
+            header="False" />
+
+        <!-- GST F7 of Report Paper Format -->
+        <record id="gst_form7_report" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="gst_form7_tax_report_paperformat" />
+        </record>
+
+        <!-- Set Paper Format for the Balance13 Column Report -->
+        <record id="balance_full13_report_paperformat" model="report.paperformat">
+            <field name="name">Balance 13 Columna</field>
+            <field name="default" eval="True" />
+            <field name="format">B3</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- Report of Balance 13 Columna -->
+        <report id="account_pf_balance_13_report"
+                string="Balance 13 Columna"
+                menu="True"
+                model="account.wizard.report"
+                report_type="qweb-pdf"
+                name="sg_account_report.account_full_13_balance_cols"
+                file="sg_account_report.account_full_13_balance_cols"
+                auto="False"
+                header="False" />
+
+        <!-- Balance 13 Columna of Report Paper Format -->
+        <record id="account_pf_balance_13_report" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="balance_full13_report_paperformat" />
+        </record>
+
+        <!-- Report of Balance 1 Columna -->
+        <report id="account_pf_balance_report"
+	            string="Balance 1 Columna"
+	            menu="True"
+	            model="account.wizard.report"
+	            report_type="qweb-pdf"
+	            name="sg_account_report.financial_report_balance_full_temp"
+	            file="sg_account_report.financial_report_balance_full_temp"
+	            auto="False"
+	            header="False" />
+        
+        <!-- Report of Balance 2 Columna -->
+        <report id="account_pf_balance_2_report"
+	            string="Balance 2 Columna"
+	            menu="True"
+	            model="account.wizard.report"
+	            report_type="qweb-pdf"
+	            name="sg_account_report.account_full_2_balance_cols"
+	            file="sg_account_report.account_full_2_balance_cols"
+	            auto="False"
+	            header="False" />
+        
+        <!-- Report of Balance 4 Columna -->
+        <report id="account_pf_balance_4_report"
+	            string="Balance 4 Columna"
+	            menu="True"
+	            model="account.wizard.report"
+	            report_type="qweb-pdf"
+	            name="sg_account_report.account_full_4_balance_cols"
+	            file="sg_account_report.account_full_4_balance_cols"
+	            auto="False"        
+	            header="False" />
+        
+	    <!-- Report of Balance 5 Columna -->
+        <report id="account_pf_balance_5_report"
+                string="Balance 5 Columna"
+                menu="True"
+                model="account.wizard.report"
+                report_type="qweb-pdf"
+                name="sg_account_report.account_full_5_balance_cols"
+                file="sg_account_report.account_full_5_balance_cols"
+                auto="False"
+                header="False" />
+        
+        <!-- Report of Balance QTR Columna -->
+        <report id="account_pf_balance_qtr_report"
+                string="Balance QTR Columna"
+                menu="True"
+                model="account.wizard.report"
+                report_type="qweb-pdf"
+                name="sg_account_report.account_full_qtr_balance_cols"
+                file="sg_account_report.account_full_qtr_balance_cols"
+                auto="False"
+                header="False" />
+
+         <!-- Report of Trial Balance -->
+         <report 
+            id="account.action_report_trial_balance"
+            model="account.balance.report"
+            string="Trial Balance"
+            report_type="qweb-pdf"
+            name="sg_account_report.account_trial_balance_temp" 
+            file="sg_account_report.account_trial_balance_temp"
+            />
+
+
+     </data>
+</odoo>

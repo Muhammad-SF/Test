@@ -1,0 +1,7 @@
+<odoo>
+    <template id="assets_backend_new_view" name="hm syatem " inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/sarangoci_modifier_vendorbill_status/static/src/css/arrowoci.css"/>
+        </xpath>
+    </template>
+</odoo>

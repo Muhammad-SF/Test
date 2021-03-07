@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_category_property_form_ext" model="ir.ui.view">
+        <field name="name">product.category.form.inherit</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="account.view_category_property_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='account_property']/group" position="inside">
+                <field name="sales_return_account_id"/>
+                <field name="purchase_return_account_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

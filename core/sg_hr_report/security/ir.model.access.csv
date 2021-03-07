@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_upload_xls_wiz_user,upload.xls.wiz,model_upload_xls_wiz,l10n_sg_hr_payroll.group_hr_payroll_admin,1,1,1,1
+access_cpf_rule_text_file_employee,cpf.rule.text.file,model_cpf_rule_text_file,base.group_user,1,1,1,1
+access_payroll_generic_summary_wizard_employee,payroll.generic.summary.wizard,model_payroll_generic_summary_wizard,base.group_user,1,1,1,1
+access_payroll_summary_wizard_employee,payroll.summary.wizard,model_payroll_summary_wizard,base.group_user,1,1,1,1
+access_view_bank_summary_report_wizard_employee,view.bank.summary.report.wizard,model_view_bank_summary_report_wizard,base.group_user,1,1,1,1
+access_view_cheque_summary_report_wizard_employee,view.cheque.summary.report.wizard,model_view_cheque_summary_report_wizard,base.group_user,1,1,1,1

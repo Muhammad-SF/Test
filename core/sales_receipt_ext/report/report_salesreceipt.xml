@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_salesreceipt_document">
+    <t t-call="report.external_layout">
+        <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+        <div class="page">
+            <div class="oe_structure"/>
+            <div class="row">
+                <div class="col-xs-6 pull-left">
+                    <table class="table1 table-condensed" style=" width:100%;height:150px;">
+                        <tr>
+                            <td colspan="6" style="font-size:12px;">
+                                <strong>TO :</strong><br/>
+                                <span t-if="o.partner_id.name" t-field="o.partner_id.name"/><br/>
+                                <span t-if="o.partner_id.street" t-field="o.partner_id.street"/><br t-if="o.partner_id.street"/>
+                                <span t-if="o.partner_id.street2" t-field="o.partner_id.street2"/><br t-if="o.partner_id.street2"></br>
+                                <span t-if="o.partner_id.city" t-field="o.partner_id.city"/><br t-if="o.partner_id.city and not o.partner_id.state_id"></br>
+                                <span t-if="o.partner_id.state_id" t-field="o.partner_id.state_id"/>
+                                <span t-if="o.partner_id.zip" t-field="o.partner_id.zip"/><br t-if="o.partner_id.zip"></br>
+                                <span t-if="o.partner_id.country_id" t-field="o.partner_id.country_id"/>
+                                <br t-if="o.partner_id.country_id"></br>
+                                <span t-if="o.partner_id.vat">TIN:
+                                    <span t-field="o.partner_id.vat"/>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr style="font-size:12px;">
+                            <th>ATTENTION</th>
+                            <td>
+                                :
+                                <span style="margin-left:2px" t-if="o.attention" t-field="o.attention"></span>
+                            </td>
+
+                            <th>TEL</th>
+                            <td>
+                                :
+                                <span t-field="o.partner_id.phone"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <h2>Sales Receipt #<span t-field="o.number"/></h2>
+             <div class="row mt32 mb32">
+                <div t-if="o.date" class="col-xs-3">
+                    <strong>Bill Date</strong>
+                    <p t-field="o.date"/>
+                </div>
+                  <div t-if="o.journal_id" class="col-xs-3">
+                    <strong>PAYMENT METHOD</strong>
+                    <p t-field="o.journal_id.name"/>
+                </div>
+                <div t-if="o.cheque_no" class="col-xs-3">
+                    <strong>CHEQUE NO:</strong>
+                    <p t-field="o.cheque_no"/>
+                </div>
+                <div t-if="o.currency_id" class="col-xs-3">
+                    <strong>Currency:</strong>
+                    <p t-field="o.currency_id.name"/>
+                </div>
+            </div>
+            <table class="table table-condensed">
+                <thead>
+                    <tr>
+                        <th><strong>S.NO.</strong></th>
+                        <th><strong>Description</strong></th>
+                        <th class="text-right"><strong>Qty</strong></th>
+                        <th class="text-right"><strong>Unit Price</strong></th>
+                        <th class="text-right"><strong>Discount(%)</strong></th>
+                        <th class="text-right"><strong>Net Price</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr t-foreach="o.line_ids" t-as="line">
+                        <td style="width: 10%" t-esc="line_index+1"/>
+                        <td>
+                            <span t-field="line.name"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.quantity"/>
+                            <span t-field="line.product_id.uom_id.name" groups="product.group_uom"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.price_unit"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.discount"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="line.price_subtotal"
+                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-xs-4 pull-right">
+                    <table class="table table-condensed">
+                        <tr>
+                            <td>Taxes</td>
+                            <td class="text-right">
+                                <span t-field="o.tax_amount"
+                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                        <tr class="border-black">
+                            <td><strong>Total</strong></td>
+                            <td class="text-right">
+                                <span t-field="o.amount"
+                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="oe_structure"/>
+        </div>
+    </t>
+</template>
+
+<template id="report_salesreceipt">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="sales_receipt_ext.report_salesreceipt_document" t-lang="o.partner_id.lang"/>
+        </t>
+    </t>
+</template>
+</odoo>

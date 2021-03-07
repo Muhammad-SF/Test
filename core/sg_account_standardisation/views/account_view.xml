@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>  	
+    <record id="account.menu_action_account_payments_receivable" model="ir.ui.menu">
+    	<field name="name">Customer Payments</field>
+    </record>
+
+	<record id="account.menu_action_account_payments_payable" model="ir.ui.menu">
+    	<field name="name">Supplier Payments</field>
+    </record>
+
+	<record id="account.menu_action_invoice_tree2" model="ir.ui.menu">
+    	<field name="name">Supplier Invoices</field>
+    </record>        
+</odoo>

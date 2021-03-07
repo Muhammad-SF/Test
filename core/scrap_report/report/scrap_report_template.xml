@@ -1,0 +1,69 @@
+<odoo>
+    
+    <record id="view_scrap_pivot" model="ir.ui.view">
+        <field name="name">scrap.report.form</field>
+        <field name="model">scrap.report</field>
+        <field name="arch" type="xml">
+            <pivot string="Scrap Report">
+                <field name="qty" type="measure"/>
+                <field name="product_id" type="row"/>
+                <field name="location_id" type="row"/>
+                <field name="owner_id" type="row"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_scrap_search" model="ir.ui.view">
+        <field name="name">scrap.report.search</field>
+        <field name="model">scrap.report</field>
+        <field name="arch" type="xml">
+            <search string="Scrap Report">
+                <field name="product_id"/>
+                <group expand="0" string="Extended Filters">
+                    <field name="owner_id"/>
+                    <field name="location_id"/>
+                    <field name="product_id"/>
+                </group>
+                <group expand="1" string="Group By">
+                    <filter string="Product" name="product" context="{'group_by':'product_id'}"/>
+                    <filter string="Location" name="location" context="{'group_by':'location_id'}"/>
+                    <filter string="Owner" name="owner" context="{'group_by':'owner_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="scrap_report_action" model="ir.actions.act_window">
+            <field name="name">Scrap Report</field>
+            <field name="res_model">scrap.report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="view_scrap_pivot"/>
+            <field name="search_view_id" ref="view_scrap_search"/>
+            <field name="context">{}</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a Scrap .
+              </p><p>
+                This menu gives you the full traceability of inventory
+                operations on a specific product. You can filter on the product
+                to see all the past or future movements for the product.
+              </p>
+            </field>
+        </record>
+
+    <record model="ir.actions.act_window.view" id="action_return_anaysis_pivot_all">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">pivot</field>
+        <field name="view_id" ref="view_scrap_pivot"/>
+        <field name="act_window_id" ref="scrap_report_action"/>
+    </record>
+
+    <menuitem id="menu_scrap_report_inv"
+          name="Scrap Report"
+          parent="stock.menu_warehouse_report"
+          action="scrap_report_action"
+          sequence="11"/>
+
+</odoo>

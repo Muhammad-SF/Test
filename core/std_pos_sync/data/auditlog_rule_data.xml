@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+    
+        <record id="product_attribute_auditlog_rule" model="auditlog.rule">
+            <field name="name">Product Attribute Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','product.attribute')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="product_attribute_value_auditlog_rule" model="auditlog.rule">
+            <field name="name">Product Attribute Value Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','product.attribute.value')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="product_template_auditlog_rule" model="auditlog.rule">
+            <field name="name">Product Template Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','product.template')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="product_product_auditlog_rule" model="auditlog.rule">
+            <field name="name">Product Variant Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','product.product')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="res_partner_auditlog_rule" model="auditlog.rule">
+            <field name="name">Partners Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','res.partner')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="branch_auditlog_rule" model="auditlog.rule">
+            <field name="name">Branch Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','res.branch')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="payment_term_auditlog_rule" model="auditlog.rule">
+            <field name="name">Payment Method Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','account.journal')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="pos_product_categ_auditlog_rule" model="auditlog.rule">
+            <field name="name">Pos Product Categories Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','pos.category')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="product_categ_auditlog_rule" model="auditlog.rule">
+            <field name="name">Product Categories Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','product.category')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="pos_promotion_auditlog_rule" model="auditlog.rule">
+            <field name="name">Pos Promotion Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','pos.promotion')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="loyalty_program_auditlog_rule" model="auditlog.rule">
+            <field name="name">Loyalty Program Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','loyalty.program')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="gift_voucher_pos_auditlog_rule" model="auditlog.rule">
+            <field name="name">Gift Voucher Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','gift.voucher.pos')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="gift_coupon_pos_auditlog_rule" model="auditlog.rule">
+            <field name="name">Gift Coupons Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','gift.coupon.pos')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="product_brand_auditlog_rule" model="auditlog.rule">
+            <field name="name">Product Brand Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','product.brand')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="True"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+        <record id="pos_config_auditlog_rule" model="auditlog.rule">
+            <field name="name">Point of Sale Config Auditlog Rule</field>
+            <field name="model_id" search="[('model','=','pos.config')]"/>
+            <field name="log_type">full</field>
+            <field name="log_write" eval="True"/>
+            <field name="log_create" eval="False"/>
+            <field name="state">subscribed</field>
+        </record>
+        
+    </data>
+</odoo>

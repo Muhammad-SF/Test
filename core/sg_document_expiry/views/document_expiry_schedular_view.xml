@@ -1,0 +1,16 @@
+<odoo>
+	<data>
+		<!-- create a scheduler for Expiry Documents-->
+		<record id="ir_cron_expiry_documents" model="ir.cron">
+            <field name="name">Immigration : Expiry Document Details With Report</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="nextcall" eval="time.strftime('%Y-01-07 00:01:01')"/>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'employee.immigration'" name="model"/>
+            <field eval="'get_expiry_documents'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+	</data>
+</odoo>

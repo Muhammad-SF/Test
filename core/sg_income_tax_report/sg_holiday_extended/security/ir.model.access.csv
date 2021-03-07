@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dependents_employee_extended,access_dependents_employee_extended,model_dependents,base.group_user,1,1,1,1
+access_sg_emp_holiday_group_config_extended,access_sg_emp_holiday_group_config_extended,model_holiday_group_config,base.group_user,1,0,0,0
+sg_resource_calendar_attendance_extended,access_sg_emp_holiday_group_config_extended,resource.model_resource_calendar_attendance,base.group_user,1,1,1,1
+sg_hr_hr_year_group_user,sg_hr_hr_year_group_user,model_hr_year,base.group_user,1,1,1,1
+sg_hr_hr_period_group_user,sg_hr_hr_period_group_user,model_hr_period,base.group_user,1,1,1,1
+sg_holiday_group_config_line_group_user,sg_holiday_group_config_line,model_holiday_group_config_line,base.group_user,1,1,1,1
+access_resource_calendar_group_user,access_resource_calendar,resource.model_resource_calendar,base.group_user,1,1,1,1

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_prepayement_schedule_convert_revenue" model="ir.ui.view">
+            <field name="name">prepayment.schedule.convert.revenue.form</field>
+            <field name="model">prepayment.schedule.convert.revenue</field>
+            <field name="arch" type="xml">
+	            <form string="Customer Prepayment Schedule">
+                <group>
+                    <field name= "date_id" required = "1" style ="width:40%%"/>
+                </group>
+                <footer>
+                    <button string="Confirm" name="convert_revenue" type="object" class="oe_highlight"/>
+                </footer>
+	            </form>
+            </field>
+        </record>
+
+         <record id="action_prepayment_schedule_convert_revenue" model="ir.actions.act_window">
+            <field name="name">Customer Invoice</field>
+            <field name="res_model">prepayment.schedule.convert.revenue</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>
+

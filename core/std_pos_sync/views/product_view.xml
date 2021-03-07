@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <!-- Product Attribute -->
+        <record model="ir.ui.view" id="attribute_tree_view_sync_pos_id">
+            <field name="name">product.attribute.tree.sync.pos.id</field>
+            <field name="model">product.attribute</field>
+            <field name="inherit_id" ref="product.attribute_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- Product Attribute Value -->
+        <record model="ir.ui.view" id="variants_tree_view_sync_pos_id">
+            <field name="name">product.attribute.value.tree.sync.pos.id</field>
+            <field name="model">product.attribute.value</field>
+            <field name="inherit_id" ref="product.variants_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- Product Template -->
+        <record model="ir.ui.view" id="product_template_form_view_sync_pos_id">
+            <field name="name">product.template.common.form.sync.pos.id</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page//group/group/field[@name='categ_id']" position="after">
+                    <field name="pt_pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- Product Variant -->
+        <record model="ir.ui.view" id="product_normal_form_view_sync_pos_id">
+            <field name="name">product.product.form.sync.pos.id</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='barcode']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- POS Product Category -->
+        <record model="ir.ui.view" id="product_pos_category_form_view_sync_pos_id">
+            <field name="name">pos.category.form.sync.pos.id</field>
+            <field name="model">pos.category</field>
+            <field name="inherit_id" ref="point_of_sale.product_pos_category_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/div/group/field[@name='sequence']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- Product Category -->        
+        <record model="ir.ui.view" id="product_category_form_view_view_sync_pos_id">
+            <field name="name">product.category.form.sync.pos.id</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/field[@name='type']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+ 
+        <!-- Product Brand -->       
+        <record model="ir.ui.view" id="view_product_brand_form_1_sync_pos_id">
+            <field name="name">product.brand.form.sync.pos.id</field>
+            <field name="model">product.brand</field>
+            <field name="inherit_id" ref="product_brand.view_product_brand_form_1"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/field[@name='name']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

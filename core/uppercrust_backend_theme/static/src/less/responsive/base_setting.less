@@ -1,0 +1,209 @@
+@o-base-settings-mobile-tabs-overflow-gap: 3%;
+@o-base-settings-mobile-tabs-height: 40px;
+.base_setting() {
+    .o_main {
+        .o_main_content.ad_rightbar {
+            .o_content {
+                & > .o_view_manager_content {
+                    .o_form_view.oe_form_configuration.o_base_settings {
+                        .o-flex-flow(column, nowrap);
+                        .o_setting_container {
+                            .o-flex-flow(column, nowrap);
+                        }
+                        .settings_tab {
+                            .o-flex(0, 0, @o-base-settings-mobile-tabs-height);
+                            .o-inline-flex-display();
+                            position: relative;
+                            overflow: hidden;
+                            padding: 0;
+                            background-color: @brand-secondary;
+                            .tab {
+                                display: block;
+                                .o-position-absolute(@left:100%);
+                                .size(auto, @o-base-settings-mobile-tabs-height);
+                                padding: @o-base-settings-mobile-tabs-height*0.25 @o-base-settings-mobile-tabs-height*0.4;
+                                text-align: center;
+                                font-size: 14px;
+                                font-weight: 500;
+                                line-height: inherit;
+                                .o-transition(0.2s, all);
+                                .o-transform(translate3d(0, 0, 0));
+                                @media (max-width: @screen-xs-max) {
+                                    max-width: 150px;
+                                    .app_name {
+                                        max-width: 100px;
+                                        overflow: hidden;
+                                        text-overflow: ellipsis;
+                                    }
+                                }
+                                .icon {
+                                    display: none;
+                                }
+                                .app_name {
+                                    display: block;
+                                    white-space: nowrap;
+                                }
+
+                                &:after {
+                                    content: '';
+                                    background: @odoo-brand-optional;
+                                    opacity: 0;
+                                    .o-position-absolute(auto, 0, 0, 0);
+                                    .size(100%, 3px);
+                                    .o-transition(0.2s, all);
+                                }
+
+                                &.previous, &.before {
+                                    left: 0% - @o-base-settings-mobile-tabs-overflow-gap;
+                                }
+
+                                &.current {
+                                    left: 50%;
+                                    color: white;
+
+                                    // Reset default style for 'selected' tabs
+                                    box-shadow: none;
+                                    background: none;
+
+                                    &:after {
+                                        opacity: 1;
+                                    }
+                                }
+
+                                &.next, &.after {
+                                    left: 100% + @o-base-settings-mobile-tabs-overflow-gap;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+//  override
+@media (max-width: 991px) {
+    .ad_rightbar{
+        flex: initial !important;
+        width: 100% !important;
+    }
+    html, body{
+        height:100vh !important;
+    }
+}
+.o_cp_left{margin-top: 18px !important;}
+@media (max-width: 767px) {
+    .o_cp_pager{margin: auto 25px auto 10px !important;}
+    .o_cp_left{margin-bottom: 10px !important ; margin-top: 10px !important;}
+    .o_display_keys_item{display:none !important}
+    .o_searchview_input{width: 100% !important;}
+    .search-bar{margin-top: 75px !important;}
+}
+@media (max-width: 425px) {
+    .o_button_import{display: block !important;}
+    .o_list_button_add{display: block !important;}
+}
+.sky-search{
+    margin-top: 5px;
+    display: block !important;
+    margin-right:10px !important;
+    select, input{border:1px solid #bbbbbb !important; padding:3px 10px !important;min-width:100px !important;}
+}
+.sky-search > div > span{
+    margin-right: 5px;
+}
+.o_thread_message_avatar {
+    border-radius: 50% !important;
+}
+.btn-default{border-radius: 35px !important;}
+.btn-primary{border-radius: 35px !important;}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus,.o_form_binary_form{
+    border-radius: 10px !important;
+}
+.o_center_panel 
+.navbar-nav {
+    margin: 0px 5px !important;
+}
+.oe_secondary_menu{
+    height: calc(100vh - 100px) !important;
+    padding: 0 5px !important;
+}
+#oe_main_menu_navbar{
+    height: 100vh !important;
+}
+.nav-stacked > li {padding-right: 15px !important;}
+.o_user_menu ul.dropdown-menu {
+    left: initial !important;
+    right: 5px !important;
+}
+
+.o_searchview .o_searchview_autocomplete li.o-selection-focus{
+    background-color: #1d2939 !important;
+}
+.top_menu_image,a#menu_toggle{
+    transition:ease all 0.15s;
+}
+.top_menu_image:hover{
+    padding:2px !important
+}
+.user_sidebar_menu{
+    padding-left:20px !important;
+    padding-right:5px !important;
+}
+a#menu_toggle:hover {
+    width: 42px !important;
+    height: 42px !important;
+    padding: 1px !important;
+    margin-bottom: 13px !important;
+}
+.side-menu li a,.side-menu li a img{
+    transition: 0.15s ease all;
+}
+.side-menu li a:hover{
+    padding-left: 3px !important;
+    padding-right: 3px !important;
+    padding-top: 4px !important;
+}
+.side-menu li a:hover img{
+    width: 86px !important;
+    height: 86px !important;
+}
+.o_searchview{
+    border-radius: 20px;
+    padding: 6px 25px 6px 10px;
+}
+
+.o_searchview .o_searchview_more{
+    right: 11px;
+    top: 9px;
+}
+.o_searchview .o_searchview_input{
+    padding-left: 5px;
+    padding-top:0px !important;
+}
+.btn-default.fa:hover{
+    background-color: #eeeeee !important;
+}
+.oe_menu_leaf .oe_menu_text {
+    white-space: initial !important;
+}
+.o_pivot table.table-condensed{position: relative;}
+.o_pivot table.table-condensed thead tr th{
+    background-color: #03436c !important;
+}
+@iterations: 15;
+.mixin-loop (@i) when (@i > 0) {
+  @i2:@i - 1;
+  .o_pivot table thead tr:nth-child(@{i}) th {
+    top:  calc(~"29px *" ~'@{i2}');
+    position: sticky; 
+  }
+  .mixin-loop(@i - 1);
+}
+.mixin-loop(@iterations);
+.o_list_number{text-align: left !important;}
+.o_pivot_cell_value.text-right{text-align: left !important;}
+.oe_form_field_status li {
+    float: right;
+}

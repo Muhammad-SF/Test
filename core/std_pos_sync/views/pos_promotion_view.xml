@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- POS PROMOTION -->
+        <record model="ir.ui.view" id="pos_promotion_form_sync_pos_id">
+            <field name="name">pos.promotion.form.sync.pos.id</field>
+            <field name="model">pos.promotion</field>
+            <field name="inherit_id" ref="pos_promotion.pos_promotion_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/field[@name='active']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

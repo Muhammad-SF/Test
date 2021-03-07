@@ -1,0 +1,1502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="report_form_ir21">
+			<t t-call="report.html_container">
+				<div class="page">
+					<t t-foreach="get_data" t-as="o">
+						<h5>
+							<center>FORM IR21</center>
+						</h5>
+						<table>
+							<table style="border: 1px solid black" width="100%">
+								<tr>
+									<td width="27%" align="left" style="font-size: 11px;margin-left:10px;">Comptroller of Income Tax
+									</td>
+									<td width="50%" align="left" style="font-size: 11px;">
+										<b>NOTIFICATION OF A NON-CITIZEN EMPLOYEE’S CESSATION OF</b>
+									</td>
+									<td width="23%" align="left" style="font-size: 11px;">Tel :&#160; 1800-3568300
+									</td>
+								</tr>
+
+								<tr>
+									<td width="27%" align="left" style="font-size: 11px;margin-left:10px;">55 Newton Road Revenue
+										House
+									</td>
+									<td width="50%" align="center" style="font-size: 11px;">
+										<b>EMPLOYMENT OR DEPARTURE FROM SINGAPORE</b>
+									</td>
+									<td width="23%" align="left" style="font-size: 11px;">Fax :&#160; 6351 2707
+									</td>
+								</tr>
+
+								<tr>
+									<td width="27%" align="left" style="font-size: 11px;margin-left:10px;">Singapore 307987</td>
+									<td width="50%" align="left">&#160;</td>
+									<td width="23%" align="left" style="font-size: 11px;">Website :&#160;
+										http://www.iras.gov.sg
+									</td>
+								</tr>
+							</table>
+
+							<table style="border: 1px solid black">
+								<tr>
+									<td width="100%" align="left" style="font-size: 12px;margin-left:10px;">
+										This form is to be
+										completed by the employer. You may wish to read
+										the Explanatory
+										Notes. It may take you up to 10 minutes to
+										fill in this form if
+										you have all relevant
+										information such as your employee's
+										employment records and income
+										information for year of departure
+										and the prior year, ready.
+									</td>
+								</tr>
+							</table>
+							<table>
+								<tr>
+									<td
+										style="border: 1px solid black; padding-right:20px;padding-left:20px;">
+										<b>A</b>
+									</td>
+									<td width="100%" style="border: 1px solid black;font-size: 11px;">
+										<b>TYPE OF FORM IR21 (Please cross (x) where appropriate) –
+											See Explanatory Note 6
+										</b>
+									</td>
+								</tr>
+							</table>
+							<table style="border: 1px solid black" width="100%">
+								<tr>
+									<td width="5%" align="center">1</td>
+									<td width="5%" align="center">
+										<input type="checkbox" id="oe_import_tracking" checked="checked" />
+									</td>
+									<td width="10%" align="left" style="font-size: 11px;">Original</td>
+									<td width="5%">2</td>
+									<td width="5%">
+										<input type="checkbox" id="oe_import_tracking" />
+									</td>
+									<td width="20%" style="font-size: 11px;">Additional, this is in addition to
+										Form IR21 dated
+									</td>
+									<td width="10%"
+										style="border-bottom: 1px solid black;margin-bottom:10px;"></td>
+									<td width="5%">3</td>
+									<td width="5%">
+										<input type="checkbox" id="oe_import_tracking" />
+									</td>
+									<td width="20%" style="font-size: 11px;">Amended, this supersedes Form IR21
+										dated
+									</td>
+									<td width="10%"
+										style="border-bottom: 1px solid black;margin-bottom:10px;"></td>
+								</tr>
+							</table>
+							<table style="border: 1px solid black">
+								<tr>
+									<td
+										style="border: 1px solid black; padding-right:20px;padding-left:20px;font-size: 11px;">
+										<b>B</b>
+									</td>
+									<td width="100%" style="border: 1px solid black;font-size: 11px;">
+										<b>EMPLOYER'S PARTICULARS</b>
+									</td>
+								</tr>
+							</table>
+
+							<table style="border: 1px solid black" width="100%">
+								<tr>
+									<td width="5%" align="center"
+										style="border-bottom: 1px solid white;font-size: 11px;">1</td>
+									<td width="25%" align="center"
+										style="border-bottom: 1px solid white;font-size: 11px;">*Company Tax Ref No:</td>
+									<td width="15%" align="left"
+										style="border-bottom: 1px solid black;font-size: 11px;">
+										<span t-esc="o.get('company_tax')" />
+									</td>
+									<td width="5%" align="center"
+										style="border-bottom: 1px solid white;font-size: 11px;">2</td>
+									<td width="15%" align="left"
+										style="border-bottom: 1px solid white;font-size: 11px;">Company’s Name:</td>
+									<td width="35%" align="left"
+										style="border-bottom: 1px solid black;font-size: 11px;">
+										<span t-esc="o.get('company_name')" />
+									</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-bottom: 1px solid white;font-size: 11px;">3</td>
+									<td colspan="5" width="95%" align="left"
+										style="border-bottom: 1px solid white;font-size: 11px;padding-left:38px">Company’s Address:</td>
+								</tr>
+								<tr>
+									<td width="30%" colspan="2" align="center"
+										style="border-bottom: 1px solid white;font-size: 11px;padding-left:60px">Blk/Hse No:</td>
+									<td width="15%" align="left"
+										style="border-bottom: 1px solid black;font-size: 11px;">
+										<span t-esc="o.get('comp_house_no')" />
+									</td>
+									<td width="20%" colspan="2" align="center"
+										style="border-bottom: 1px solid white;font-size: 11px;">Sty/Unit:</td>
+									<td width="35%" align="left"
+										style="border-bottom: 1px solid black;font-size: 11px;">
+										<span t-esc="o.get('comp_unit_no')" />
+									</td>
+								</tr>
+								<tr>
+									<td width="30%" colspan="2" align="center"
+										style="border-bottom: 1px solid white;border-top: 1px solid white;font-size: 11px;padding-left:60px">Street Name:</td>
+									<td width="70%" colspan="4" align="left"
+										style="border-bottom: 1px solid black;border-top: 1px solid white;font-size: 11px;">
+										<span t-esc="o.get('cmp_street')" />
+									</td>
+								</tr>
+								<tr>
+									<td width="30%" colspan="2" align="center"
+										style="border-bottom: 1px solid white;font-size: 11px;padding-left:60px"> &#160;</td>
+									<td width="30%" colspan="2" align="left"
+										style="border-bottom: 1px solid black;font-size: 11px;">
+										<span t-esc="o.get('street2')" />
+									</td>
+									<td width="20%" align="center"
+										style="border-bottom: 1px solid black;font-size: 11px;">
+										Singapore Postal Code:
+									</td>
+									<td width="20%" align="left"
+										style="border-bottom: 1px solid black;font-size: 11px;">
+										<span t-esc="o.get('sin_postal_code')" />
+									</td>
+								</tr>
+
+							</table>
+
+							<table style="border: 1px solid black">
+								<tr>
+									<td
+										style="border: 1px solid black; padding-right:20px;padding-left:20px;font-size: 11px;">
+										<b>C</b>
+									</td>
+									<td width="100%" style="border: 1px solid black;font-size: 11px;">
+										<b>EMPLOYEE’S PERSONAL PARTICULARS</b>
+									</td>
+								</tr>
+							</table>
+
+							<table width="100%" style="border: 1px solid black">
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">1</td>
+									<td width="30%" align="left" colspan="2" style="font-size: 11px;">
+										<span>Name:</span>
+										<br />
+										<span>(Mr/Mrs/Miss/Mdm)</span>
+									</td>
+									<td width="65" align="left" colspan="3"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('name')" />
+									</td>
+								</tr>
+
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">2</td>
+									<td width="15%" align="left" style="font-size: 11px;">Identification No.</td>
+									<td width="15%" align="center" style="font-size: 11px;">NRIC</td>
+
+									<td width="30%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('nric_no')" />
+									</td>
+									<td width="5%" align="center" style="font-size: 11px;">FIN</td>
+									<td width="30" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('fin_no')" />
+									</td>
+
+									<!-- <td width="30%" align="left" style="font-size: 11px;border-bottom: 
+										1px solid black;"><span t-esc="nric_no"/></td> <td width="5%" align="center" 
+										style="font-size: 11px;border-bottom: 1px solid white;border-top: 1px solid 
+										white;">FIN</td> <td width="30" align="left" style="font-size: 11px;border-bottom: 
+										1px solid black;"><span t-esc="fin_no"/></td> -->
+
+								</tr>
+
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">3</td>
+									<td width="15%" align="left" style="font-size: 11px;">Mailing Address</td>
+									<td width="15%" align="center" style="font-size: 11px;">Address line 1:</td>
+									<td width="30%" colspan="3" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('house_no')" />
+									</td>
+								</tr>
+
+								<tr>
+									<td width="5%" colspan="2" align="center" style="font-size: 11px;"> &#160;</td>
+									<td width="15%" align="center" style="font-size: 11px;">Address line 2:</td>
+									<td width="30%" colspan="3" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('street')" />
+									</td>
+								</tr>
+
+								<tr>
+									<td width="5%" colspan="2" align="center" style="font-size: 11px;"> &#160;</td>
+									<td width="15%" align="center" style="font-size: 11px;">Address line 3:</td>
+									<td width="30%" colspan="3" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('street2')" />
+									</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="font-size: 11px;border-bottom: 1px solid white;"> &#160;</td>
+									<td width="5%" colspan="2" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;"> Effective Date of Mailing Address</td>
+									<td width="15%" colspan="2" align="center"
+										style="font-size: 11px;border-bottom: 1px solid black;">&#160; </td>
+									<td width="30%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;">&#160;</td>
+								</tr>
+							</table>
+
+							<table style="border: 1px solid black;border-top: 0px solid black;"
+								width="100%">
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">4</td>
+									<td width="10%" align="left" style="font-size: 11px;">Date of Birth:</td>
+									<td width="15%" align="center"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('birthday')" />
+									</td>
+									<td width="5%" align="center" style="font-size: 11px;">5</td>
+									<td width="10%" align="left" style="font-size: 11px;">Gender*:</td>
+									<td width="15%" style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('gender')" />
+									</td>
+									<td width="5%" align="center" style="font-size: 11px;">6</td>
+									<td width="10%" align="left" style="font-size: 11px;">Nationality:</td>
+									<td width="25%" style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('nationality')" />
+									</td>
+								</tr>
+								<tr style="padding-bottom: 1em;">
+									<td width="5%" align="center" style="font-size: 11px;">7</td>
+									<td width="10%" align="left" style="font-size: 11px;">Marital:</td>
+									<td width="15%" align="center"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('marital')" />
+									</td>
+									<td width="5%" align="center" style="font-size: 11px;">8</td>
+									<td width="10%" align="left" style="font-size: 11px;">Tel No:</td>
+									<td width="15%" style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('mobile_phone')" />
+									</td>
+									<td width="5%" align="center" style="font-size: 11px;">9</td>
+									<td width="10%" align="left" style="font-size: 11px;">Email Address:</td>
+									<td width="25%" style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('work_email')" />
+									</td>
+								</tr>
+							</table>
+
+							<table>
+								<tr>
+									<td
+										style="border: 1px solid black; padding-right:20px;padding-left:20px;font-size: 11px;">
+										<b>D</b>
+									</td>
+									<td width="100%" style="border: 1px solid black;font-size: 11px;">
+										<b>EMPLOYEE’S EMPLOYMENT RECORDS</b>
+									</td>
+								</tr>
+							</table>
+
+							<table style="border: 1px solid black;" width="100%">
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">10</td>
+									<td width="20%" align="left" style="font-size: 11px;">Date of Arrival:</td>
+									<td width="5%" align="left" style="font-size: 11px;">11</td>
+									<td width="20%" align="left" style="font-size: 11px;">Date of Commencement:
+									</td>
+									<td width="5%" align="left" style="font-size: 11px;">12</td>
+									<td width="20%" align="left" style="font-size: 11px;">Date of Cessation:</td>
+									<td width="5%" align="left" style="font-size: 11px;">13</td>
+									<td width="20%" align="left" style="font-size: 11px;">Date of Departure:</td>
+								</tr>
+								<tr>
+									<td width="30%" colspan="3" style="font-size: 11px;">&#160;</td>
+									<td width="20%" align="left" style="font-size: 11px;">(DD/MM/YY)</td>
+									<td width="5%" align="left" style="font-size: 11px;">&#160;</td>
+									<td width="20%" align="left" style="font-size: 11px;">(DD/MM/YY)</td>
+									<td width="25%" colspan="2" style="font-size: 11px;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="left" style="font-size: 11px;">&#160;</td>
+									<td width="20%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('app_date')" />
+									</td>
+									<td width="5%" align="left" style="font-size: 11px;">&#160;</td>
+									<td width="20%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('join_date')" />
+									</td>
+									<td width="5%" align="left" style="font-size: 11px;">&#160;</td>
+									<td width="20%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('cessation_date')" />
+									</td>
+									<td width="5%" align="left" style="font-size: 11px;">&#160;</td>
+									<td width="20%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">&#160;</td>
+								</tr>
+
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">14</td>
+									<td width="20%" align="left" style="font-size: 11px;">Date Resignation Tendered
+									</td>
+									<td width="5%" align="left" style="font-size: 11px;">15</td>
+									<td width="70%" colspan="5" align="left" style="font-size: 11px;">Designation
+									</td>
+								</tr>
+
+								<tr>
+									<td width="5%" align="left" style="font-size: 11px;">&#160;</td>
+									<td width="20%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('last_date')" />
+									</td>
+									<td width="5%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;">&#160;</td>
+									<td width="70%" colspan="5" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('designation')" />
+									</td>
+								</tr>
+
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">16</td>
+									<td width="20%" colspan="7" align="left" style="font-size: 11px;">
+										<span>Give reasons if less than one month’s notice is given to
+											IRAS before employee’s cessation
+										</span>
+										<br />
+										<span>NA</span>
+									</td>
+								</tr>
+
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">17</td>
+									<td width="20%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">Amount of Monies Withheld Pending Tax Clearance</td>
+									<td width="5%" align="left" style="font-size: 11px;">18</td>
+									<td width="70%" colspan="5" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										Are these all the monies you can withhold from the date
+										of
+										notification of resignation/termination/posting overseas? To
+										provide reasons if “No” is checked.
+									</td>
+								</tr>
+
+								<tr>
+									<td width="5%" align="left" style="font-size: 11px;">&#160;</td>
+									<td width="20%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;border-top: 1px solid white;">(See Explanatory Note 6)</td>
+									<td width="5%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;border-top: 1px solid white;">&#160;</td>
+									<td width="70%" colspan="5" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;border-top: 1px solid white;">
+										<input type="checkbox" id="oe_import_tracking" checked="checked" />
+										Yes
+									</td>
+								</tr>
+
+
+								<tr>
+									<td width="5%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;">&#160;</td>
+									<td width="20%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">&#160;</td>
+									<td width="5%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;">&#160;</td>
+									<td width="20%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;">
+										<input type="checkbox" id="oe_import_tracking" />
+										No &#160;&#160;&#160;&#160;&#160;&#160;&#160;
+										&#160;&#160;&#160;&#160;&#160;&#160;Reason:
+									</td>
+									<td width="50%" colspan="4" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">&#160;</td>
+								</tr>
+
+							</table>
+							<table
+								style="border-bottom: 1px solid white;border-left: 1px solid black;border-right: 1px solid black;"
+								width="100%">
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">19</td>
+									<td width="28%" align="left" style="font-size: 11px;">Date Last Salary Paid
+									</td>
+									<td width="5%" align="left" style="font-size: 11px;">20</td>
+									<td width="28%" align="left" style="font-size: 11px;">Amount of Last Salary
+										Paid
+									</td>
+									<td width="5%" align="left" style="font-size: 11px;">21</td>
+									<td width="29%" align="left" style="font-size: 11px;">Period applicable for
+										Last Salary Paid
+									</td>
+								</tr>
+								<tr>
+									<td width="5%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;">
+										&#160; </td>
+									<td width="28%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('date_last_salary')"/>
+									</td>
+									<td width="5%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;">
+										&#160; </td>
+									<td width="28%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('last_salary')" />
+									</td>
+									<td width="5%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;">
+										&#160; </td>
+									<td width="29%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('salary_period')" />
+									</td>
+								</tr>
+							</table>
+
+							<table
+								style="border-bottom: 1px solid white;border-left: 1px solid black;border-right: 1px solid black;"
+								width="100%">
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">22</td>
+									<td width="45%" align="left" style="font-size: 11px;">Name of Bank to which
+										employee’s salary is credited
+									</td>
+									<td width="5%" align="left" style="font-size: 11px;">23</td>
+									<td width="45%" align="left" style="font-size: 11px;">Name &amp; Tel No of New
+										Employer, if known
+									</td>
+								</tr>
+								<tr>
+									<td width="5%" align="left" style="font-size: 11px;">&#160;</td>
+									<td width="45%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('bank_name')" />
+									</td>
+									<td width="5%" align="left" style="font-size: 11px;"></td>
+									<td width="45%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">NA</td>
+								</tr>
+							</table>
+
+							<table
+								style="border-bottom: 1px solid white;border-left: 1px solid black;border-right: 1px solid black;"
+								width="100%">
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">24</td>
+									<td width="35%" align="left" style="font-size: 11px;">
+										<span>Employee’s Income Tax Borne by Employer</span>
+										<br />
+										<span>** (See Explanatory Note10)</span>
+									</td>
+									<td width="20%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;">
+										<input type="checkbox" id="oe_import_tracking" checked="checked" />
+										No
+									</td>
+									<td width="20%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;">
+										<input type="checkbox" id="oe_import_tracking" />
+										Yes, Fully borne
+									</td>
+									<td width="20%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid white;">
+										<input type="checkbox" id="oe_import_tracking" />
+										Yes, Partially borne. Give details:
+									</td>
+								</tr>
+							</table>
+
+							<table>
+								<tr>
+									<td
+										style="border: 1px solid black; padding-right:20px;padding-left:20px;font-size: 11px;">
+										<b>E</b>
+									</td>
+									<td width="100%" style="border: 1px solid black;font-size: 11px;">
+										<b>SPOUSE’S AND CHILDREN’S PARTICULARS</b>
+									</td>
+								</tr>
+							</table>
+
+							<table
+								style="border-bottom: 1px solid ;border-left: 1px solid black;border-right: 1px solid black;"
+								width="100%">
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">1</td>
+									<td width="15%" align="left" style="font-size: 11px;">Name of Spouse:</td>
+									<td width="12%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('spouse_name')" />
+									</td>
+									<td width="5%" align="center" style="font-size: 11px;">2</td>
+									<td width="15%" align="left" style="font-size: 11px;">Date of Birth:</td>
+									<td width="12%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('spouse_dob')" />
+									</td>
+									<td width="5%" align="center" style="font-size: 11px;">3</td>
+									<td width="15%" align="left" style="font-size: 11px;">Ident No:</td>
+									<td width="12%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;border-right: 1px solid #000000;">
+										<span t-esc="o.get('spouse_ident')" />
+									</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">4</td>
+									<td width="15%" align="left" style="font-size: 11px;">Date of Marriage:</td>
+									<td width="10%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('marriage_date')" />
+									</td>
+									<td width="5%" align="center" style="font-size: 11px;">5</td>
+									<td width="15%" align="left" style="font-size: 11px;">Nationality:</td>
+									<td width="10%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('spouse_nationality')" />
+									</td>
+									<td width="5%" align="center" style="font-size: 11px;">6</td>
+									<td width="20%" align="left" style="font-size: 11px;">Name &amp;
+										Address of
+										Spouse’s Current Employer:
+									</td>
+									<td width="5%" align="left"
+										style="font-size: 11px;border-bottom: 1px solid black;border-right: 1px solid #000000;">
+										NA
+									</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center" style="font-size: 11px;">7</td>
+									<td width="10%" colspan="11" align="left"
+										style="font-size: 11px;border-right: 1px solid #000000;padding-bottom: 0.5em;">Children’s
+										Particulars (To furnish Name of Children
+										According to Order of
+										Birth)
+									</td>
+								</tr>
+							</table>
+							<table style="border: 1px solid black;" width="100%">
+								<tr>
+									<td width="5%" align="center"
+										style="font-size: 11px;border: 1px solid black;">No</td>
+									<td width="30%" align="center"
+										style="font-size: 11px;border: 1px solid black;">Name of Child</td>
+									<td width="20%" align="center"
+										style="font-size: 11px;border: 1px solid black;">Gender</td>
+									<td width="20%" align="center"
+										style="font-size: 11px;border: 1px solid black;">Date of Birth</td>
+									<td width="25%" align="center"
+										style="font-size: 11px;border: 1px solid black;">If child is above 16 years old, state name of school
+									</td>
+								</tr>
+								<t t-set="counter" t-value="1" />
+								<t t-foreach="o.get('child')" t-as="child_data">
+									<tr>
+										<td width="5%" align="center"
+											style="font-size: 11px;border: 1px solid black;">
+											<span t-esc="counter" />
+											<t t-set="counter" t-value="counter+1" />
+										</td>
+										<td width="5%" style="font-size: 11px;border: 1px solid black;"
+											align="center">
+											<span t-esc="child_data.get('child_name')" />
+										</td>
+										<td width="5%" style="font-size: 11px;border: 1px solid black;"
+											align="center">
+											<span t-esc="child_data.get('child_gender')" />
+										</td>
+										<td width="5%" style="font-size: 11px;border: 1px solid black;"
+											align="center">
+											<span t-esc="child_data.get('birth_date')" />
+										</td>
+										<td style="font-size: 11px;border: 1px solid black;">&#160;</td>
+									</tr>
+								</t>
+							</table>
+							<table style="border: 1px solid black;border-top: 0px solid black;"
+								width="100%">
+								<tr>
+									<td width="20%" align="left" style="font-size: 10px;padding-left:20px;">
+										FOR OFFICIAL USE
+									</td>
+									<td width="80%">
+									</td>
+								</tr>
+							</table>
+							<table
+								style="border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;"
+								width="100%">
+								<tr>
+									<td style="font-size: 11px;" rowspan="2" width="3%">&#160;</td>
+									<td style="font-size: 11px;" rowspan="2" align="left" width="12%">
+										<br />
+										[1] APP/ATT
+									</td>
+									<td style="font-size: 11px;" rowspan="2" align="left" width="20%">
+										<br />
+										[4] Dfee/ESOP/EXCPF/LS
+									</td>
+									<td style="font-size: 11px;" rowspan="2" align="left" width="8%">
+										<br />
+										[7] TOT
+									</td>
+									<td style="font-size: 11px;" rowspan="2" align="left" width="12%">
+										<br />
+										[9] NEMPT
+									</td>
+									<td style="font-size: 11px;border-right: 1px solid black;"
+										rowspan="2" align="left" width="25%">[MS] Std / Trnee / DTR / EMB /
+										NRE / NOR / SA / NCB/RB / CR /Decd / incpl / Nsgd/ Addr
+									</td>
+									<td
+										style="font-size: 11px;border-right: 1px solid black;border-bottom: 1px solid black;"
+										align="center" width="15">Date Rec’d</td>
+								</tr>
+								<tr>
+									<td style="font-size: 11px;" align="center" width="15%">Finalised
+										by and Date
+									</td>
+								</tr>
+							</table>
+							<table width="100%">
+								<tr>
+									<td width="50%" style="font-size: 10px;">
+										<center>* Please
+											delete where not applicable
+										</center>
+									</td>
+									<td width="50%" style="font-size: 10px;">
+										<center>** Please
+											cross (x) appropriate box (if
+											applicable)
+										</center>
+									</td>
+								</tr>
+							</table>
+							<p style="page-break-before:always;" />
+							<h5>
+								<center>FORM IR21</center>
+							</h5>
+							<table style="border: 1px solid black" width="100%">
+								<tr>
+									<td width="5%" align="center"
+										style="border-right: 1px solid black;font-size: 11px;">
+										<b>F</b>
+									</td>
+									<td width="95%" style="font-size: 10px;padding-left:20px;">
+										<b>INCOME RECEIVED / TO BE RECEIVED DURING THE YEAR OF
+											CESSATION / DEPARTURE AND THE PRIOR YEAR
+										</b>
+									</td>
+								</tr>
+							</table>
+
+							<table width="100%">
+								<tr>
+									<td width="5%"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-bottom: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="65%"
+										style="border-right: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-left:20px;">
+										<b>
+											Employee’s Name:
+											<span t-esc="o.get('name')" />
+										</b>
+									</td>
+									<td width="30%"
+										style="border-right: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-left:20px;">
+										<b>
+											FIN / NRIC No.:
+											<span t-esc="o.get('fin_no')" />
+											<span t-esc="o.get('nric_no')" />
+										</b>
+									</td>
+								</tr>
+							</table>
+
+							<table width="100%">
+								<tr>
+									<td width="50%"
+										style="border-right: 1px solid black;border-left: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="50%" align="center" colspan="2"
+										style="border-right: 1px solid black;border-bottom: 1px solid black;font-size: 11px;">Provide amount for each of the relevant year(s).</td>
+								</tr>
+
+								<tr>
+									<td width="50%" align="center"
+										style="border-right: 1px solid black;border-left: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="25%" align="center"
+										style="border-right: 1px solid black;border-bottom: 1px solid black;font-size: 11px;">
+										<b>Year of Cessation</b>
+									</td>
+									<td width="25%" align="center"
+										style="border-right: 1px solid black;border-bottom: 1px solid black;font-size: 11px;">
+										<b>Year Prior to Year of Cessation</b>
+									</td>
+								</tr>
+
+								<tr>
+									<td width="50%" align="center" style="border-left: 1px solid black;">&#160;</td>
+									<td width="25%" align="center" style="font-size: 10px;">
+										<b>D D / M M / Y Y</b>
+									</td>
+									<td width="25%" align="center"
+										style="font-size: 10px;border-right: 1px solid black;">
+										<b>D D / M M / Y Y</b>
+									</td>
+								</tr>
+							</table>
+							<table width="100%">
+								<tr>
+									<td width="5%" align="center" rowspan="2"
+										style="border-left: 1px solid black;">&#160;</td>
+									<td width="38%" rowspan="2" align="left" style="font-size: 11px;">
+										<b>INCOME</b>
+									</td>
+									<td width="7%" rowspan="2" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">
+										<b>FROM</b>
+									</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('start_date')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_start_date')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="6%" style="font-size: 11px;">
+										<b>To</b>
+									</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('end_date')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_end_date')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center" style="border-left: 1px solid black;">1</td>
+									<td width="38%" align="left" style="font-size: 10px;">Gross Salary, Fees, Leave
+										Pay, Wages and Overtime Pay
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('current_gross')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_gross')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center" style="border-left: 1px solid black;">2</td>
+									<td width="38%" align="left" style="font-size: 10px;">
+										(a) Contractual bonus
+										<b>(See Explanatory Note 12a)</b>
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">0.0</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">0.0</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" style="border-left: 1px solid black;">&#160;</td>
+									<td width="38%" align="left" style="font-size: 10px;">
+										(b) Non-Contractual Bonus
+										<b>(See Explanatory Note 12b)</b>
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">0.0</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">0.0</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" style="border-left: 1px solid black;">&#160;</td>
+									<td width="38%" align="left" style="font-size: 10px;">State date declared
+										payable
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="center"
+										style="border-right: 1px solid white;border-left: 1px solid white;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;">NA</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="center"
+										style="border-right: 1px solid white;border-left: 1px solid white;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;">NA</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center" style="border-left: 1px solid black;">3</td>
+									<td width="38%" align="left" style="font-size: 10px;">
+										Director’s Fees
+										<b>(See Explanatory Note 12c)</b>
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('director_fee')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('pre_dir_fees')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr style="border-bottom:1pt solid black;">
+									<td width="5%" style="border-left: 1px solid black;"></td>
+									<td width="38%" align="left" style="font-size: 10px;">Approved at the company’s
+										AGM/EGM on
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="center"
+										style="border-right: 1px solid white;border-left: 1px solid white;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;">NA</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="center"
+										style="border-right: 1px solid white;border-left: 1px solid white;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;">NA</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+
+								<tr>
+									<td width="5%" align="center" style="border-left: 1px solid black;">4</td>
+									<td width="38%" align="left" style="font-size: 11px;">
+										<b>OTHERS</b>
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" style="font-size: 11px;">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" style="font-size: 11px;">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 10px;">(a)</td>
+									<td width="38%" align="left" style="font-size: 10px;">
+										Gross Commission
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('curr_gross_commission')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_gross_commission')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+
+
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 10px;">(b)</td>
+									<td width="38%" align="left" style="font-size: 10px;">
+										Allowances
+										<b>(See Explanatory Note 12d)</b>
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('allowance')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_allowance')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 10px;">(c)</td>
+									<td width="38%" align="left" style="font-size: 10px;">Gratuity / Ex-Gratia</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('gratuity_payment_amt')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_gratuity_payment_amt')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 10px;">(d)</td>
+									<td width="38%" align="left" style="font-size: 10px;">Payment-In-Lieu of Notice
+										/ Notice Pay
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">0.0</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">0.0</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 10px;">(e)</td>
+									<td width="38%" align="left" style="font-size: 10px;">Compensation for Loss of
+										Office (See Explanatory Note 13)
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('compensation_loss_office')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid black;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_compensation_loss_office')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center" style="border-left: 1px solid black;">&#160;</td>
+									<td width="38%" align="left" style="font-size: 10px;">Reason and basis of
+										arriving at the amount (Excluding any
+									</td>
+									<td width="57%" colspan="6"
+										style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center" style="border-left: 1px solid black;">&#160;</td>
+									<td width="38%" align="left" style="font-size: 10px;">Notice Pay which should
+										be reflected at 4(d) above)
+									</td>
+									<td width="57%" colspan="6"
+										style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center" style="border-left: 1px solid black;">&#160;</td>
+									<td width="38%" align="left"
+										style="font-size: 10px;border-bottom: 1px solid black;">
+										<t t-if="o.get('compensation') == 'Y'">
+											Compensation / Retrenchment benefits paid
+										</t>
+										<t t-if="o.get('compensation') == 'N'">
+											No Compensation / Retrenchment benefits paid
+										</t>
+									</td>
+									<td width="57%" colspan="6"
+										style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" rowspan="2" align="center"
+										style="border-left: 1px solid black;font-size: 10px;">(f)</td>
+									<td width="38%" rowspan="2" align="left" style="font-size: 10px;">Retirement
+										Benefits (other than CPF Benefits) including
+										Gratuities/Pension/Commutation of pension/Lump sum Payments
+										etc. from Pension/Provident Fund.
+									</td>
+									<td width="57%" rowspan="2" colspan="6"
+										style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+							</table>
+							<table width="100%">
+								<tr>
+									<td width="5%" align="center" style="border-left: 1px solid black;">&#160;</td>
+									<td width="13%" align="left" style="font-size: 10px;">Name of Fund</td>
+									<td width="25%" align="left"
+										style="font-size: 10px;border-bottom: 1px solid black;">
+										<span t-esc="o.get('fund_name')" />
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('retirement_benifit_up')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_retirement_benifit_up')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">(g)</td>
+									<td width="38%" colspan="2" align="left" style="font-size: 10px;">Contributions
+										made by employer to any
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center" style="border-left: 1px solid black;">&#160;</td>
+									<td width="38%" colspan="2" align="left" style="font-size: 10px;">Pension/Provident
+										Fund constituted outside Singapore.
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center" style="border-left: 1px solid black;">&#160;</td>
+									<td width="38%" colspan="2" align="left" style="font-size: 10px;">
+										<b>(See Explanatory Note 14)</b>
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center" style="border-left: 1px solid black;">&#160;</td>
+									<td width="13%" align="left" style="font-size: 10px;">Name of Fund</td>
+									<td width="25%" align="left"
+										style="font-size: 10px;border-bottom: 1px solid black;">&#160;</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('contribution_employer')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_contribution_employer')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">(h)</td>
+									<td width="38%" colspan="2" align="left" style="font-size: 10px;">Excess/Voluntary
+										contribution to CPF by employer
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="38%" colspan="2" align="left" style="font-size: 10px;">
+										[Please complete Form IR8S]
+										<b>(See Explanatory Note 15)</b>
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('excess_voluntary_contribution_cpf_employer')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span
+											t-esc="o.get('prev_excess_voluntary_contribution_cpf_employer')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">(i)</td>
+									<td width="38%" colspan="2" align="left" style="font-size: 10px;">Total Gross
+										Amount of Gains from ESOP/ ESOW
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;"></td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+							</table>
+
+							<table width="100%">
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="38%" colspan="2" align="left" style="font-size: 10px;">
+										<b>(To complete Appendix 2) (See Explanatory Note 16)</b>
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="38%" colspan="2" align="left" style="font-size: 10px;">
+										<b>Unexercised ESOP/ESOW granted before 1 Jan 2003</b>
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="30%" align="left" style="font-size: 10px;">
+										<b>(Cross [x] the box if applicable)</b>
+									</td>
+									<td width="8%" align="right" style="font-size: 11px;">
+										<input type="checkbox" id="oe_import_tracking" />
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="38%" colspan="2" align="left" style="font-size: 10px;">
+										<b>Unexercised ESOP/ESOW granted on or after 1 Jan 2003</b>
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="30%" align="left" style="font-size: 10px;">
+										<b>(Cross [x] the box if applicable)</b>
+									</td>
+									<td width="8%" align="right" style="font-size: 11px;">
+										<input type="checkbox" id="oe_import_tracking" />
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">(j)</td>
+									<td width="38%" colspan="2" align="left" style="font-size: 10px;">
+										<b>Value of Benefits-in-kind</b>
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="30%" align="left" style="font-size: 10px;">
+										<b>(To complete Appendix 1 and cross [x] the box)</b>
+									</td>
+									<td width="8%" align="right" style="font-size: 11px;">
+										<input type="checkbox" id="oe_import_tracking" />
+									</td>
+									<td width="7%" style="font-size: 11px;">&#160;</td>
+									<td width="6%" style="font-size: 11px;"></td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+							</table>
+							<table width="100%">
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="20%" align="left" style="font-size: 10px;">&#160;</td>
+									<td width="25%" align="right" style="font-size: 10px;">
+										<b>SUBTOTAL OF ITEMS 4(a) to 4(j)</b>
+									</td>
+									<td width="6%" style="font-size: 11px;"></td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('sub_total')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_sub_total')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;border-bottom: 1px solid black;">&#160;</td>
+									<td width="20%" align="left"
+										style="font-size: 10px;border-bottom: 1px solid black;">&#160;</td>
+									<td width="25%" align="right"
+										style="font-size: 10px;border-bottom: 1px solid black;">
+										<b>TOTAL OF ITEMS 1 TO 4</b>
+									</td>
+									<td width="6%" style="font-size: 11px;border-bottom: 1px solid black;"></td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('total')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-bottom: 1px solid black;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_total')" />
+									</td>
+									<td width="5%"
+										style="font-size: 11px;border-left: 1px solid black;border-right: 1px solid black;border-bottom: 1px solid black;">&#160;</td>
+								</tr>
+							</table>
+
+							<table width="100%">
+								<tr>
+									<td width="5%" align="center" style="border-left: 1px solid black;">&#160;</td>
+									<td width="95%" colspan="7" align="left"
+										style="font-size: 11px;border-right: 1px solid black;">
+										<b>DEDUCTIONS</b>
+									</td>
+								</tr>
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">5</td>
+									<td width="45%" colspan="2" align="left" style="font-size: 10px;">EMPLOYEE’S
+										COMPULSORY contribution to *CPF/Approved Pension or Provident
+										Fund.
+									</td>
+									<td width="6%" style="font-size: 11px;"></td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('total')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_total')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="20%" align="left" style="font-size: 10px;">Name of Fund</td>
+									<td width="25%" style="font-size: 11px;border-bottom: 1px solid black">&#160;</td>
+									<td width="6%" style="font-size: 11px;"></td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">6</td>
+									<td width="45%" colspan="2" align="left" style="font-size: 10px;">
+										(
+										<b>DONATIONS</b>
+										deducted through salaries for:
+									</td>
+									<td width="6%" style="font-size: 11px;"></td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('donation')" />
+									</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">
+										<span t-esc="o.get('prev_donation')" />
+									</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">&#160;</td>
+									<td width="45%" colspan="2" align="left" style="font-size: 10px;">Mendaki Fund/
+										Com Chest / SINDA/ CDAC/ECF
+									</td>
+									<td width="6%" style="font-size: 11px;"></td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+
+								<tr>
+									<td width="5%" align="center"
+										style="border-left: 1px solid black;font-size: 11px;">7</td>
+									<td width="45%" colspan="2" align="left" style="font-size: 10px;">Contributions
+										deducted through salaries for Mosque Building Fund
+									</td>
+									<td width="6%" style="font-size: 11px;"></td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">&#160;</td>
+									<td width="5%" style="font-size: 11px;">&#160;</td>
+									<td width="17%" align="right"
+										style="border-right: 1px solid black;border-left: 1px solid black;border-top: 1px solid white;border-bottom: 1px solid black;font-size: 11px;padding-right:15px;">&#160;</td>
+									<td width="5%" style="font-size: 11px;border-right: 1px solid black;">&#160;</td>
+								</tr>
+							</table>
+
+							<table style="border: 1px solid black" width="100%">
+								<tr>
+									<td width="5%" align="center"
+										style="border-right: 1px solid black;font-size: 11px;">
+										<b>G</b>
+									</td>
+									<td width="95%" align="left" style="font-size: 10px;padding-left:20px;">
+										<b>DECLARATION</b>
+									</td>
+								</tr>
+							</table>
+							<table>
+								<tr>
+									<td colspan="8" style="font-size: 11px;">I, the undersigned, hereby give notice
+										under Section 68 of the Income Tax Act, that the employee
+										named in this form will cease to be employed and/or will
+										probably leave
+										Singapore on the date(s) stated. I also certify
+										that the information
+										given in this form and in any documents
+										attached is true,
+										correct and complete.
+									</td>
+								</tr>
+							</table>
+							<br />
+							<table width="100%">
+								<tr>
+									<td width="23%" align="center"
+										style="font-size: 11px;border-bottom: 1px solid black;"></td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+									<td width="23%" align="center"
+										style="font-size: 11px;border-bottom: 1px solid black;"></td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+									<td width="23%" align="center"
+										style="font-size: 11px;border-bottom: 1px solid black;"></td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+									<td width="23%" align="center"
+										style="font-size: 11px;border-bottom: 1px solid black;"></td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+
+								</tr>
+								<tr>
+									<td width="23%" align="center" style="font-size: 11px;">Full Name of Authorised
+										Personnel
+									</td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+									<td width="23%" align="center" style="font-size: 11px;">Designation</td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+									<td width="23%" align="center" style="font-size: 11px;">Signature</td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+									<td width="23%" align="center" style="font-size: 11px;">Date</td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+								</tr>
+								<tr>
+									<td width="23%" align="center"
+										style="font-size: 11px;border-bottom: 1px solid black;"></td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+									<td width="23%" align="center"
+										style="font-size: 11px;border-bottom: 1px solid black;"></td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+									<td width="23%" align="center"
+										style="font-size: 11px;border-bottom: 1px solid black;"></td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+									<td width="23%" align="center"
+										style="font-size: 11px;border-bottom: 1px solid black;"></td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+
+								</tr>
+								<tr>
+									<td width="23%" align="center" style="font-size: 11px;">Name of Contact Person
+									</td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+									<td width="23%" align="center" style="font-size: 11px;">Contact No</td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+									<td width="23%" align="center" style="font-size: 11px;">Fax</td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+									<td width="23%" align="center" style="font-size: 11px;">Email Address</td>
+									<td width="2%" align="center" style="font-size: 11px;"></td>
+								</tr>
+							</table>
+						</table>
+					</t>
+				</div>
+			</t>
+		</template>
+	</data>
+</odoo>

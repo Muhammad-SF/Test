@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+
+		<!-- Compensatory Days -->
+		<record model="hr.holidays.status" id="hr_holidays.holiday_status_comp">
+			<field name="name2">Compensatory Days</field>
+            <field name="default_leave_allocation">5</field>
+			<field name="name">CD</field>
+		</record>
+
+		<!-- Casual leave -->
+		<record model="hr.holidays.status" id="hr_holidays.holiday_status_cl">
+			<field name="name2" eval="'Legal Leaves '+time.strftime('%Y')" />
+            <field name="default_leave_allocation">12</field>
+		    <field name="name">CL</field>
+		</record>
+
+		<!-- Sick leave -->
+		<record model="hr.holidays.status" id="hr_holidays.holiday_status_sl">
+			<field name="name2">Sick Leaves</field>
+			<field name="name">SL</field>
+		</record>
+
+		<!--Unpaid Leave -->
+		<record model="hr.holidays.status" id="hr_holidays.holiday_status_unpaid">
+			<field name="name2">Unpaid</field>
+			<field name="name">UP</field>
+		</record>
+		
+		<!-- Unpaid Child Care Leave -->
+		<record model="hr.holidays.status" id="holiday_status_unpaid_cc">
+			<field name="name2">Unpaid Child Care Leave</field>
+			<field name="name">UCCL</field>
+			<field name="color_name">lightcyan</field>
+			<field name="limit">True</field>
+		</record>
+
+	</data>
+</odoo>

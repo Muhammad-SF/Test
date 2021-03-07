@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_scrap_approval_tree" model="ir.ui.view">
+            <field name="name">scrap.approval.tree</field>
+            <field name="model">scrap.approval</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <tree string="Scrap Approval Matrix">
+                <field name="name"/>
+                <field name="create_date" string="Create Date"/>
+                <field name="product_id"/>
+                <field name="scrap_qty"/>
+                <field name="product_uom_id"/>
+                <field name="location_id" groups="stock.group_stock_multi_locations"/>
+                <field name="scrap_location_id" groups="stock.group_stock_multi_locations"/>
+                <field name="state"/>
+            </tree>
+            </field>
+        </record>
+
+        <record id="view_scrap_approval_form" model="ir.ui.view">
+            <field name="name">scrap.approval.form</field>
+            <field name="model">scrap.approval</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Scrap Approval Matrix">
+                <header>
+                    <button string="Request Approval" 
+                        icon="" states="draft" type="object" name="to_approval" class="oe_highlight"/>
+                    <button string="Approve" icon="" 
+                        states="waiting_approval" type="object" name="action_approval"/>
+                    <button string="Reject" icon="" states="waiting_approval" type="object" name="action_reject"/>
+                    <field name="state" widget="statusbar"  />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="action_get_stock_move"
+                            string="Inventory Move" type="object"
+                            attrs="{'invisible':[('move_id','=',False)]}" icon="fa-arrows-v"/>
+                        <field name="move_id" invisible="1"/>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" nolabel="1"/></h1>
+                    </div>
+                    <group >
+                        <group>
+                            <field name="product_id" attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+                            <label for="scrap_qty" attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+                            <div class="o_row">
+                                <field name="scrap_qty" attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+                                <field name="product_uom_id" groups="product.group_uom" 
+                                    attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="lot_id"
+                                groups="stock.group_production_lot" attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+                            <field name="tracking" invisible="1"/>
+                            <field name="package_id" groups="stock.group_tracking_lot"/>
+                            <field name="employee_ids" widget="many2many_tags" required="1" 
+                                attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+                            <!--field name="owner_id" groups="stock.group_tracking_owner"/-->
+                            <field name="location_id" groups="stock.group_stock_multi_locations"
+                                attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+                            <field name="scrap_location_id" groups="stock.group_stock_multi_locations"
+                                attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+                            <field name="origin" attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+                            <field name="date_expected" attrs="{'readonly': [('state','not in', ['draft'])]}"/>
+                            <field name="user_id" readonly="1" />
+                            <!--field name="picking_id" attrs="{'invisible': [('picking_id', '=', False)]}"/-->
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_scrap_approval_search" model="ir.ui.view">
+            <field name="name">scrap.approval.search</field>
+            <field name="model">scrap.approval</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <search string="Scrap Approval Matrix">
+                <field name="name"/>
+            </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_scrap_approval_view">
+            <field name="name">Scrap Approval Matrix</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">scrap.approval</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_scrap_approval_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_scrap_approval_view_form">
+            <field name="act_window_id" ref="act_open_scrap_approval_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_scrap_approval_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_scrap_approval_view_tree">
+            <field name="act_window_id" ref="act_open_scrap_approval_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_scrap_approval_tree"/>
+        </record>
+
+        <menuitem id="menu_scrap_approval"
+            parent="approval_matrix.menu_approval_matrix"
+            sequence="800"
+            action="act_open_scrap_approval_view"/>
+    </data>
+</odoo>

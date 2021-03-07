@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_sales_config" model="ir.ui.view">
+            <field name="name">sale settings</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sale.view_sales_config"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='module_website_quote']" position="after">
+                    <div>
+                        <field name="group_template_required" class="oe_inline"/>
+                        <label for="group_template_required"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
+

@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <!-- commission.commission tree view -->
+        <record id="commission_view_tree" model="ir.ui.view">
+            <field name="name">commission.commission.view.tree</field>
+            <field name="model">commission.commission</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="salesperson"/>
+                    <field name="sales_team"/>
+                    <field name="so_reference"/>
+                    <field name="invoice_reference"/>
+                    <field name="payment_reference"/>
+                    <field name="date"/>
+                    <field name="commission_calculation_type"/>
+                    <field name="target_type"/>
+                    <field name="commission_scheme_id"/>
+                    <field name="base_amount"/>
+                    <field name="commission_amount"/>
+                    <field name="commission_line" invisible="1"/>
+                    <field name="interval"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- commission.commission pivot view -->
+        <record id="commission_product_view_pivot" model="ir.ui.view">
+            <field name="name">commission.commission.product.view.pivot</field>
+            <field name="model">commission.commission</field>
+            <field name="arch" type="xml">
+                <pivot string="Commission Report">
+                    <field name="salesperson"/>
+                    <field name="sales_team"/>
+                    <field name="payment_reference"/>
+                    <field name="date"/>
+                    <field name="commission_calculation_type"/>
+                    <field name="target_type"/>
+                    <field name="commission_scheme_id"/>
+                    <field name="base_amount" type="measure"/>
+                    <field name="commission_amount" type="measure"/>
+                    <field name="product_min_target" type="measure"/>
+                    <field name="product_max_target" type="measure"/>
+                    <field name="product_target_achieved" type="measure"/>
+                    <field name="interval"/>
+                    <field name="commission_line" invisible="1"/>
+                </pivot>
+            </field>
+        </record>
+        
+        <record id="commission_category_view_pivot" model="ir.ui.view">
+            <field name="name">commission.commission.category.view.pivot</field>
+            <field name="model">commission.commission</field>
+            <field name="arch" type="xml">
+                <pivot string="Commission Report">
+                    <field name="salesperson"/>
+                    <field name="sales_team"/>
+                    <field name="payment_reference"/>
+                    <field name="date"/>
+                    <field name="commission_calculation_type"/>
+                    <field name="target_type"/>
+                    <field name="commission_scheme_id"/>
+                    <field name="base_amount" type="measure"/>
+                    <field name="commission_amount" type="measure"/>
+                    <field name="product_category_min_target" type="measure"/>
+                    <field name="product_category_max_target" type="measure"/>
+                    <field name="product_category_target_achieved" type="measure"/>
+                    <field name="interval"/>
+                    <field name="commission_line" invisible="1"/>
+                </pivot>
+            </field>
+        </record>
+        
+        <record id="commission_total_view_pivot" model="ir.ui.view">
+            <field name="name">commission.commission.total.product.view.pivot</field>
+            <field name="model">commission.commission</field>
+            <field name="arch" type="xml">
+                <pivot string="Commission Report">
+                    <field name="salesperson"/>
+                    <field name="sales_team"/>
+                    <field name="payment_reference"/>
+                    <field name="date"/>
+                    <field name="commission_calculation_type"/>
+                    <field name="target_type"/>
+                    <field name="commission_scheme_id"/>
+                    <field name="base_amount" type="measure"/>
+                    <field name="commission_amount" type="measure"/>
+                    <field name="total_sales_min_target" type="measure"/>
+                    <field name="total_sales_max_target" type="measure"/>
+                    <field name="total_sales_target_achieved" type="measure"/>
+                    <field name="interval"/>
+                    <field name="commission_line" invisible="1"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- commission.commission search view -->
+        <record id="commission_commission_view_search" model="ir.ui.view">
+            <field name="name">commission.commission.view.search</field>
+            <field name="model">commission.commission</field>
+            <field name="arch" type="xml">
+                <search string="Commission">
+                    <!-- Add your fields here -->
+                    <field name="salesperson"/>
+                    <field name="sales_team"/>
+                    <field name="so_reference"/>
+                    <field name="invoice_reference"/>
+                    <field name="payment_reference"/>
+                    <field name="date"/>
+                    <field name="commission_calculation_type"/>
+                    <field name="target_type"/>
+                    <field name="commission_scheme_id"/>
+                    <field name="base_amount"/>
+                    <field name="commission_amount"/>
+                    <field name="commission_line" invisible="1"/>
+                </search>
+            </field>
+        </record>
+        
+        <record id="action_commission_product_view" model="ir.actions.act_window">
+            <field name="name">Product Commission</field>
+            <field name="res_model">commission.commission</field>
+            <field name="view_mode">pivot,tree</field>
+            <field name="domain">[('commission_line','=','Product')]</field>
+            <field name="search_view_id"
+				ref="commission_commission_view_search" />
+			<field name="view_ids"
+				eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'pivot', 'view_id': ref('commission_product_view_pivot')}),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('commission_view_tree')})]" />
+        </record>
+
+        <menuitem
+            name="Product Commission"
+            action="action_commission_product_view"
+            id="menu_report_commission_product"
+            parent="sales_commission_calculation.menu_commission_and_rewards"/>
+            
+        <record id="action_commission_category_view" model="ir.actions.act_window">
+            <field name="name">Category Commission</field>
+            <field name="res_model">commission.commission</field>
+            <field name="view_mode">pivot,tree</field>
+            <field name="domain">[('commission_line','=','Category')]</field>
+            <field name="search_view_id"
+				ref="commission_commission_view_search" />
+			<field name="view_ids"
+				eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'pivot', 'view_id': ref('commission_category_view_pivot')}),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('commission_view_tree')})]" />
+        </record>
+
+        <menuitem
+            name="Category Commission"
+            action="action_commission_category_view"
+            id="menu_report_commission_category"
+            parent="sales_commission_calculation.menu_commission_and_rewards"/>
+            
+        <record id="action_commission_total_view" model="ir.actions.act_window">
+            <field name="name">Total Sales Commission</field>
+            <field name="res_model">commission.commission</field>
+            <field name="view_mode">pivot,tree</field>
+            <field name="domain">[('commission_line','=','Total Sales')]</field>
+            <field name="search_view_id"
+				ref="commission_commission_view_search" />
+			<field name="view_ids"
+				eval="[(5, 0, 0),
+                (0, 0, {'view_mode': 'pivot', 'view_id': ref('commission_total_view_pivot')}),
+                (0, 0, {'view_mode': 'tree', 'view_id': ref('commission_view_tree')})]" />
+        </record>
+
+        <menuitem
+            name="Total Sales Commission"
+            action="action_commission_total_view"
+            id="menu_report_commission_total"
+            parent="sales_commission_calculation.menu_commission_and_rewards"/>
+    </data>
+</odoo>

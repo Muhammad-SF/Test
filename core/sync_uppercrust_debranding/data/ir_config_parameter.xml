@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="0">
+
+        <record id="hm-front-end-theme.login_form_disable_database_manager" model="ir.config_parameter">
+            <field name="key">login_form_disable_database_manager</field>
+            <field name="value">True</field>
+        </record>
+        
+        <record id="sync_app_system_name" model="ir.config_parameter">
+            <field name="key">sync_app_system_name</field>
+            <field name="value">EQUIP by HashMicro</field>
+        </record>
+
+        <record id="sync_app_system_title" model="ir.config_parameter">
+            <field name="key">sync_app_system_title</field>
+            <field name="value">EQUIP by HashMicro</field>
+        </record>
+
+        <record id="sync_app_system_url" model="ir.config_parameter">
+            <field name="key">sync_app_system_url</field>
+            <field name="value">www.hashmicro.com</field>
+        </record>
+
+        <record id="sync_app_show_lang" model="ir.config_parameter">
+            <field name="key">sync_app_show_lang</field>
+            <field name="value">True</field>
+        </record>
+        <record id="sync_app_show_debug" model="ir.config_parameter">
+            <field name="key">sync_app_show_debug</field>
+            <field name="value">True</field>
+        </record>
+        <record id="sync_app_show_documentation" model="ir.config_parameter">
+            <field name="key">sync_app_show_documentation</field>
+            <field name="value">False</field>
+        </record>
+        <record id="sync_app_show_documentation_dev" model="ir.config_parameter">
+            <field name="key">sync_app_show_documentation_dev</field>
+            <field name="value">True</field>
+        </record>
+        <record id="sync_app_show_support" model="ir.config_parameter">
+            <field name="key">sync_app_show_support</field>
+            <field name="value">False</field>
+        </record>
+        <record id="sync_app_show_account" model="ir.config_parameter">
+            <field name="key">sync_app_show_account</field>
+            <field name="value">True</field>
+        </record>
+        <record id="sync_app_show_share" model="ir.config_parameter">
+            <field name="key">sync_app_show_share</field>
+            <field name="value">False</field>
+        </record>
+        <record id="sync_app_show_poweredby" model="ir.config_parameter">
+            <field name="key">sync_app_show_poweredby</field>
+            <field name="value">True</field>
+        </record>
+        <record id="sync_app_stop_subscribe" model="ir.config_parameter">
+            <field name="key">sync_app_stop_subscribe</field>
+            <field name="value">False</field>
+        </record>
+
+        <record id="sync_app_documentation_url" model="ir.config_parameter">
+            <field name="key">sync_app_documentation_url</field>
+            <field name="value">https://www.equiperp.com</field>
+        </record>
+        <record id="sync_app_documentation_dev_url" model="ir.config_parameter">
+            <field name="key">sync_app_documentation_dev_url</field>
+            <field name="value">https://www.equiperp.com</field>
+        </record>
+        <record id="sync_app_support_url" model="ir.config_parameter">
+            <field name="key">sync_app_support_url</field>
+            <field name="value">https://www.equiperp.com</field>
+        </record>
+        <record id="sync_app_account_title" model="ir.config_parameter">
+            <field name="key">sync_app_account_title</field>
+            <field name="value">My EQUIP by Account</field>
+        </record>
+        <record id="sync_app_account_url" model="ir.config_parameter">
+            <field name="key">sync_app_account_url</field>
+            <field name="value">https://www.equiperp.com</field>
+        </record>
+        <!-- ==================================add me========================================== -->
+        <record id="sync_app_powered_first_title" model="ir.config_parameter">
+            <field name="key">sync_app_powered_first_title</field>
+            <field name="value">EQUIP</field>
+        </record>
+        <record id="sync_app_powered_first_url" model="ir.config_parameter">
+            <field name="key">sync_app_powered_first_url</field>
+            <field name="value">https://www.equiperp.com</field>
+        </record>
+        <record id="sync_app_powered_second_title" model="ir.config_parameter">
+            <field name="key">sync_app_powered_second_title</field>
+            <field name="value">HashMicro</field>
+        </record>
+        <record id="sync_app_powered_second_url" model="ir.config_parameter">
+            <field name="key">sync_app_powered_second_url</field>
+            <field name="value">https://www.hashmicro.com</field>
+        </record>
+
+        <record id="sync_app_company_fevicon" model="ir.config_parameter">
+            <field name="key">sync_app_company_fevicon</field>
+            <field name="value">iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NzU2QzM5REFEMjU2MTFFOTk1MTJGQTlERkFDNTkzNDAiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzU2QzM5RDlEMjU2MTFFOTk1MTJGQTlERkFDNTkzNDAiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGMUUxNjA4RDBDRDUxMUU5ODM4OEFBMTE5RDQyODI0RSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGMUUxNjA4RTBDRDUxMUU5ODM4OEFBMTE5RDQyODI0RSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PvIKJt0AAAH1SURBVHja7Ju/a8JAFMffxUSpSZAOHRyUttTJrVBw6ubQSagUURD8Mzr7h3RysqUO/gNF+g9YcCy1g6CL1F8VfyW9WLpUqtdELyZ5Dx6CeuE+3Lv3vvfIEV3XwUsmgMdM/P3FYzweoh931JN7PncjNMma35+p3143Gi9rgandOwCWxa6oX1JXNoX0hYsiWGbZwx8uAh6wALs6bXsuSyMwAiOwy5QWqynRKJxkMkB8PprX+SV2IggwaDbhrVwGfbHgBxxNpSBWKNi2Uu1aDT5bLX4hrU2ntoamsdJc97CZcNru0UHnC4xZGoERGIEReJ+V1ibr1uswbre/lRhrpdG0ZX09SiRAUhTnAM/6fXjK5UyPPy8W4Tiddk5Ia/O5NU1hcTx3YEII+AIB8+MlCZMWAiMwAiMwAiMwAiMwAv+cehaTiXktbmGsLcCC3w+CBT0syrKzzsOSqkKyWoVJt/uv/rHxRpFxfg7FYs5rAMiRyNIxaSEwAiMwAiMwB2AiirjCTjDTy/ReqcBsOASBKqOtvXNtKC2qzE6z2Z2JFtPA404HXkulnUzqIByGs3zeOyEtBoMe28OEYNJCYAQ2Dyx4DfjQ7kmx9LSmvR7Lo1SWOvxA/Wblj7KscitLDD0to1YbzcK/bD4aGfcdVu48ELyZ5nL7EmAAxShzeFWkqqkAAAAASUVORK5CYII=</field>
+        </record>
+    </data>
+</openerp>

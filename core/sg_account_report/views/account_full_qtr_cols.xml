@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+
+		<template id="account_full_qtr_balance_cols">
+			<t t-call="report.html_container">
+			    <t t-foreach="docs" t-as="o">
+					<div class="page">
+						<h1 align="center">Financial Balance Full QTR</h1>
+						<style>
+							.padding {
+							padding-top:3px;
+							padding-bottom:3px;
+							padding-left:3px;
+							padding-right:3px;
+							}
+	                    </style>
+	                    <div>
+	                        <table width="100%">
+	                            <tr>
+	                                <td style="font-size:12px;">
+	                                    <center><span t-field="o.company_id.name" /></center>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td style="font-size:12px;">
+	                                    <center><span t-field="o.afr_id.name" /></center>
+	                                </td>
+	                            </tr>
+	                        </table>
+		                    <table class="table table-condensed" t-if="data['form']['columns'] == 'qtr'">
+		                        <thead>
+		                            <tr>
+		                                <th>Name</th>
+		                                <th class="text-right">Q1</th>
+		                                <th class="text-right">Q2</th>
+		                                <th class="text-right">Q3</th>
+		                                <th class="text-right">Q4</th>
+		                                <th class="text-right">Ytd</th>
+		                            </tr>
+		                        </thead>
+		                        <tbody>
+		                            <tr t-foreach="get_account_lines_qtr" t-as="a">
+		                                <t t-if="a['level'] != 0">
+		                                    <t t-if="a.get('level') &gt; 3"><t t-set="style" t-value="'font-weight: normal;'"/></t>
+		                                    <t t-if="not a.get('level') &gt; 3"><t t-set="style" t-value="'font-weight: bold;'"/></t>
+		
+		                                    <td>
+		                                        <span style="color: white;" t-esc="'..' * a.get('level', 0)"/>
+		                                        <span t-att-style="style" t-esc="a.get('name')"/>
+		                                    </td>
+		                                    <td class="text-right" style="white-space: text-nowrap;">
+		                                        <span t-att-style="style" t-esc="a.get('balance1') or 0.0" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+		                                    </td>
+		                                    <td class="text-right" style="white-space: text-nowrap;">
+		                                        <span t-att-style="style" t-esc="a.get('balance2') or 0.0" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+		                                    </td>
+		                                    <td class="text-right" style="white-space: text-nowrap;">
+		                                        <span t-att-style="style" t-esc="a.get('balance3') or 0.0" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+		                                    </td>
+		                                    <td class="text-right" style="white-space: text-nowrap;">
+		                                        <span t-att-style="style" t-esc="a.get('balance4') or 0.0" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+		                                    </td>
+		
+		                                    <td class="text-right" style="white-space: text-nowrap;">
+		                                        <span t-att-style="style" t-esc="a.get('ytd') or 0.0" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+		                                    </td>
+		                                </t>
+		                            </tr>
+		                        </tbody>
+		                    </table>
+	                     </div>
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

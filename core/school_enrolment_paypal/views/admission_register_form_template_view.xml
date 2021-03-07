@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<template id="admission_register_form_inherit" inherit_id="online_school_enrollment.admission_register_form" name="Admission Form">
+		<xpath expr="//select[@id='payment_option']" position="inside">
+			<option value="paypal" name="paypal" id="paypal">Using Paypal</option>
+		</xpath>
+	</template>
+</odoo>

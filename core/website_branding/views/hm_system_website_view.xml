@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="Shop">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/website_branding/static/src/css/website_brand_hm.css" />
+        </xpath>
+    </template>
+
+    <record id="website.default_website" model="website">
+        <field name="social_twitter">https://www.hashmicro.com</field>
+        <field name="social_facebook">https://www.facebook.com/HashMicro</field>
+        <field name="social_googleplus">https://plus.google.com/+HashmicroWeb</field>
+        <field name="social_linkedin">https://www.linkedin.com/company/hashmicro</field>
+    </record>
+
+
+    <template id="website_copy_rights_layout"  inherit_id="website.layout_footer_copyright" name="Footer Copyright">
+        <xpath expr="//div[contains(@class, 'container mt16 mb8')]" position="replace">
+            <div class="container mt16 mb8">
+                <div class="pull-right" t-ignore="true" t-if="not editable">
+                    Create a <a href="https://www.hashmicro.com">free website</a> with
+                    <a class="label label-danger" href="https://www.hashmicro.com">Hashmicro</a>
+                </div>
+                <div class="pull-left text-muted" itemscope="itemscope" itemtype="http://schema.org/Organization">
+                    Copyright &amp;copy; <span t-field="res_company.name" itemprop="name">Company name</span>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="footer_default_brand_new" inherit_id="website.footer_default" customize_show="True" name="Automatic Footer">
+        <xpath expr="//div[contains(@id, 'info')]" position="replace">
+            <div class="col-md-4  col-lg-3" id="info">
+                <h4>Connect with us</h4>
+                <ul class="list-unstyled">
+                    <li><a href="/page/website.contactus">Contact us</a></li>
+                </ul>
+                <ul class="list-unstyled">
+                    <li t-ignore="true"><i class="fa fa-phone"></i> <span t-field="res_company.phone"></span></li>
+                    <li t-ignore="true"><i class="fa fa-envelope"></i>  <span t-field="res_company.email"></span></li>
+                </ul>
+                <h2>
+                    <a t-att-href="website.social_twitter" t-if="website.social_twitter"><img src="/hm_system/static/src/img/webicon.png" style="width: 26px;padding-bottom: 6px;"/></a>
+                    <a t-att-href="website.social_facebook" t-if="website.social_facebook"><i class="fa fa-facebook-square"/></a>
+                    <a t-att-href="website.social_linkedin" t-if="website.social_linkedin"><i class="fa fa-linkedin"/></a>
+                    <a t-att-href="website.social_youtube" t-if="website.social_youtube"><i class="fa fa-youtube-play"/></a>
+                    <a t-att-href="website.social_googleplus" t-if="website.social_googleplus" rel="publisher"><i class="fa fa-google-plus-square"/></a>
+                    <a t-att-href="website.social_github" t-if="website.social_github"><i class="fa fa-github"/></a>
+                </h2>
+            </div>
+        </xpath>
+    </template>
+
+
+    <template id="layout_add_favikol" inherit_id="website.layout" name="Main layout">
+        <xpath expr="//t[@t-set='x_icon']" position="replace">
+            <link rel="shortcut icon" href="/hm_system/static/src/img/favicon/favicon.ico" type="image/x-icon"/>
+        </xpath>
+    </template>
+
+</odoo>

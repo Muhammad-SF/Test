@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="other_income_approving_matrix_form" model="ir.ui.view">
+            <field name="name">Other Income Approving Matrix Form</field>
+            <field name="model">income.expense.approving.matrix</field>
+            <field name="arch" type="xml">
+                <form string="Other Income Approving Matrix">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="company_id" required="1"/>
+                                <field name="income_expense_branch_ids" required="1" widget="many2many_tags" domain="[('company_id', '=', company_id)]"/>
+                                <field name="type" invisible="1"/>
+                                <field name="is_income_expense" required="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Amount">
+                                <field name="income_expense_approving_matrix_line_ids" string="Amount" required="1" context="{'income_expense_approving_matrix_line_ids':income_expense_approving_matrix_line_ids}">
+                                    <tree string="Other Income / Other Expense Approving Matrix" editable="bottom">
+                                        <field name="sequence"/>
+                                        <field name="income_expense_user_ids" widget="many2many_tags" domain="[('company_ids', 'in', parent.company_id)]"/>
+                                        <field name="min_approver"/>
+                                        <field name="min_amount"/>
+                                        <field name="max_amount"/>
+                                    </tree>
+                                    <form string="Other Income Approving Matrix">
+                                        <group>
+                                            <group>
+                                                <field name="sequence" readonly="1"/>
+                                                <field name="income_expense_user_ids" widget="many2many_tags" domain="[('company_ids', 'in', parent.company_id)]"/>
+                                                <field name="min_approver"/>
+                                            </group>
+                                            <group>
+                                                <field name="min_amount"/>
+                                                <field name="max_amount"/>
+                                                <field name="income_expense_approving_matrix_id" invisible="1"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="other_income_approving_matrix_tree" model="ir.ui.view">
+            <field name="name">Other Income Approving Matrix Tree</field>
+            <field name="model">income.expense.approving.matrix</field>
+            <field name="arch" type="xml">
+                <tree string="Other Income Approving Matrix">
+                    <field name="name"/>
+                    <field name="income_expense_branch_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="other_income_approving_matrix_search" model="ir.ui.view">
+            <field name="name">Other Income Approving Matrix Search</field>
+            <field name="model">income.expense.approving.matrix</field>
+            <field name="arch" type="xml">
+                <search string="Other Income Approving Matrix Search">
+                    <field name="name"/>
+                    <field name="income_expense_branch_ids"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_other_income_approving_matrix" model="ir.actions.act_window">
+            <field name="name">Other Income Approving Matrix</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">income.expense.approving.matrix</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="other_income_approving_matrix_search"/>
+            <field name="view_id" ref="other_income_approving_matrix_tree"/>
+            <field name="context">{'income_expense':True,'default_type': 'income','default_is_income_expense':True, 'form_view_ref': 'other_income_approving_matrix_form'}</field>
+            <field name="domain">[('is_income_expense','=',True),('type', '=', 'income')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to create a other income approving matrix.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="submenu_other_income_approving_matrix" parent="approval_matrix_config.menu_approving_matrix" sequence="8" action="action_other_income_approving_matrix" groups="sg_expensevoucher.group_income_expense_matrix"/>
+
+        <record id="sg_expensevoucher.submenu_other_income_approving_matrix" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0, [ref('sg_expensevoucher.group_income_expense_matrix')])]"/>
+        </record>
+
+<!--        <record id="approval_matrix_config.menu_approving_matrix" model="ir.ui.menu">-->
+<!--            <field name="groups_id" eval="[(4, ref('sg_expensevoucher.group_income_expense_matrix'))]"/>-->
+<!--        </record>-->
+
+        <!--Other Expense Approving Matrix-->
+        <record id="other_expense_approving_matrix_form" model="ir.ui.view">
+            <field name="name">Other Expense Approving Matrix Form</field>
+            <field name="model">income.expense.approving.matrix</field>
+            <field name="arch" type="xml">
+                <form string="Other Expense Approving Matrix">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="company_id" required="1"/>
+                                <field name="income_expense_branch_ids" required="1" widget="many2many_tags" domain="[('company_id', '=', company_id)]"/>
+                                <field name="type" invisible="1"/>
+                                <field name="is_income_expense" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Amount">
+                                <field name="income_expense_approving_matrix_line_ids" string="Amount" required="1" context="{'income_expense_approving_matrix_line_ids':income_expense_approving_matrix_line_ids}">
+                                    <tree string="Other Income / Other Expense Approving Matrix" editable="bottom">
+                                        <field name="sequence"/>
+                                        <field name="income_expense_user_ids" widget="many2many_tags" domain="[('company_ids', 'in', parent.company_id)]"/>
+                                        <field name="min_approver"/>
+                                        <field name="min_amount"/>
+                                        <field name="max_amount"/>
+                                    </tree>
+                                    <form string="Other Expense Approving Matrix">
+                                        <group>
+                                            <group>
+                                                <field name="sequence" readonly="1"/>
+                                                <field name="income_expense_user_ids" widget="many2many_tags" domain="[('company_ids', 'in', parent.company_id)]"/>
+                                                <field name="min_approver"/>
+                                            </group>
+                                            <group>
+                                                <field name="min_amount"/>
+                                                <field name="max_amount"/>
+                                                <field name="income_expense_approving_matrix_id" invisible="1"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="other_expense_approving_matrix_tree" model="ir.ui.view">
+            <field name="name">Other Expense Approving Matrix Tree</field>
+            <field name="model">income.expense.approving.matrix</field>
+            <field name="arch" type="xml">
+                <tree string="Other Expense Approving Matrix">
+                    <field name="name"/>
+                    <field name="income_expense_branch_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="other_expense_approving_matrix_search" model="ir.ui.view">
+            <field name="name">Other Expense Approving Matrix Search</field>
+            <field name="model">income.expense.approving.matrix</field>
+            <field name="arch" type="xml">
+                <search string="Other Expense Approving Matrix Search">
+                    <field name="name"/>
+                    <field name="income_expense_branch_ids"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_other_expense_approving_matrix" model="ir.actions.act_window">
+            <field name="name">Other Expense Approving Matrix</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">income.expense.approving.matrix</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="other_expense_approving_matrix_search"/>
+            <field name="view_id" ref="other_expense_approving_matrix_tree"/>
+            <field name="context">{'income_expense':True,'default_type': 'expense','default_is_income_expense':True, 'form_view_ref': 'other_expense_approving_matrix_form'}</field>
+            <field name="domain">[('is_income_expense','=',True),('type', '=', 'expense')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to create a other expense approving matrix.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="submenu_other_expense_approving_matrix" parent="approval_matrix_config.menu_approving_matrix" sequence="9" action="action_other_expense_approving_matrix" groups="sg_expensevoucher.group_income_expense_matrix"/>
+
+        <record id="sg_expensevoucher.submenu_other_expense_approving_matrix" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0, [ref('sg_expensevoucher.group_expense_matrix')])]"/>
+        </record>
+
+        <record id="approval_matrix_config.menu_approving_matrix" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('sg_expensevoucher.group_income_expense_matrix')), (4, ref('sg_expensevoucher.group_expense_matrix'))]"/>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!-- Employee Information Report Menu -->
+        <report id="employee_info_report" 
+                string="Employee's information"
+                model="hr.employee" 
+                report_type="qweb-pdf"
+                name="sg_hr_employee.employee_information_report" 
+                menu="True" 
+                header="False" />
+     </data>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="SessionReportPrintButton">
+        <div class='control-button oe_hidden'>
+            <i class='fa fa-calculator' /> Session Report
+        </div>
+    </t>
+
+    <t t-extend="Chrome">
+	    <t t-jquery="div.pos-rightheader" t-operation="append">
+	    	<div class="oe_status session_report">
+	            <i class="fa fa-calculator session_report"></i>
+	    	</div>
+	        
+	    </t>
+	</t>
+
+	
+</templates>

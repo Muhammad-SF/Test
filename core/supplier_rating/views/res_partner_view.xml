@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="vendor_ratings_weightage" model="ir.ui.view">
+        <field name="name">Vendor Ratings and Weightage</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//notebook" position="inside">
+                    <page name="ratings_weightage"
+                          string="Vendor Ratings And Weightage"
+                          attrs="{'invisible': [('supplier','=',False)]}">
+
+                        <field name="ratings_weightage_ids">
+                            <tree editable="bottom" create="false" delete="false">
+                                <field name='rating_id'/>
+                                <field name='weightage'/>
+                            </tree>
+                        </field>
+
+                    </page>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+</odoo>

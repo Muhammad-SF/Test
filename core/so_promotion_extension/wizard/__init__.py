@@ -1,0 +1,1 @@
+import apply_promotion_on_so_auto

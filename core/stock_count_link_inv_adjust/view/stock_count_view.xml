@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="stock_count_form_inherit" model="ir.ui.view">
+            <field name="name">stock.count.form.inherit</field>
+            <field name="model">stock.count</field>
+            <field name="inherit_id" ref="ops_app_stock_take.stock_count_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_ids']" position="replace">
+                    <field name="line_ids" attrs="{'readonly': [('state', '=', 'open')]}">
+                            <tree editable="bottom" colors="red: state=='cancel'">
+                                <field name="product_id" readonly="1"/>
+                                <field name="state" invisible="1"/>
+                                <field name="existing_qty"/>
+                                <button name="view_existing_data" string="View Existing Quants" type="object" icon="fa-list"/>
+                                <field name="count_qty"  attrs="{'readonly': [('state', '!=', 'in_progress')]}"/>
+                                <field name="tracking" invisible="1"/>
+                                <button name="view_count_data" string="View Stock Count" type="object" icon="fa-list" attrs="{'invisible': [('tracking', '=', 'none')]}"/>
+                                <button name="action_recount" string="Recount" type="object" help="Recount" icon="fa-refresh" attrs="{'invisible': [('state', '!=', 'in_progress')]}"/>
+                            </tree>
+                        </field>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

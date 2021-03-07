@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+<!--        <record id="report.paperformat_us" model="report.paperformat">-->
+<!--            <field name="orientation">Landscape</field>-->
+<!--        </record>-->
+
+        <report id="report_standard_prepayment"
+            string="Standard Prepayment Report"
+            model="account.subscription"
+            report_type="qweb-pdf"
+            file="standard_prepayment.report_standard_prepayment_template"
+            name="standard_prepayment.report_standard_prepayment_template"
+        />
+
+<!--        <record id="report_petty_cash" model="ir.actions.report.xml">-->
+<!--			<field name="paperformat_id" ref="report.paperformat_us" />-->
+<!--		</record>-->
+    </data>
+</odoo>

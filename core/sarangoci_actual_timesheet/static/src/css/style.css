@@ -1,0 +1,25 @@
+table .label-col{
+    position: relative;
+    min-width: 170px;
+}
+table .label-col span{
+    height: 26px;
+    display: block;
+    margin-left: auto;
+    line-height: 24px;
+}
+table a{
+    height: 18px;
+    display: block;
+    margin-top: 10px;
+}
+table tr .oe_timesheet_weekly_label{
+    height: 18px;
+    display: block;
+    margin-top: 10px;
+}
+table input, table select{
+    margin-bottom: 4px;
+    margin-left: auto;
+    display: block !important;
+}

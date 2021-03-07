@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<!-- Customize default MRP Work orders views to add Workorder ID and BOM Lines fields -->
+
+	<record id="mrp_production_workcenter_form_view_inherit_add_fields" model="ir.ui.view">
+		<field name="name">mrp.production.work.order.form</field>
+		<field name="model">mrp.workorder</field>
+		<field name="inherit_id" ref="mrp.mrp_production_workcenter_form_view_inherit"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='button_scrap']" position="after">
+                <button name="create_material_request" attrs="{'invisible': [('state', 'not in', ('ready','progress'))]}" type="object" string="Material Requests" class="oe_highlight"/>
+            </xpath>
+			<xpath expr="//div[@name='button_box']" position="inside">
+                <field name="material_request_count" invisible="1"/>
+                <button name="action_view_material_requests" type="object" attrs="{'invisible': [('material_request_count', '=', 0)]}" class="oe_stat_button" icon="fa-file-text">
+                    <div class="o_form_field o_stat_info">
+                        <span class="o_stat_value"><field name="material_request_count" widget="statinfo" nolabel="1"/></span>
+                        <span class="o_stat_text">Material Requests</span>
+                    </div>
+                </button>
+            </xpath>
+			<xpath expr="//div[@name='button_box']" position="before">
+				<div class="oe_left" style="width: 500px;">
+					<div class="oe_title" style="width: 390px;">
+						<label class="oe_edit_only" for="workorder_id" string="Work Order #"/>
+						<h1><field name="workorder_id" required="1" class="oe_inline"/></h1>
+					</div>
+					<!--<label for="is_sequence" string="Is Sequence"/>-->
+					<!--<field name="is_sequence"/>-->
+				</div>
+			</xpath>
+			<xpath expr="//form/sheet/group/group[1]" position="inside">
+				<field name="is_sequence" invisible="True"/>
+				<field name="sequence_run" readonly="True" invisible="True"/>
+				<field name="compute_qty_production" invisible="1"/>
+			</xpath>
+			<xpath expr="//notebook" position="inside">
+				<page string="Planned Amount">
+					<field name="workorder_bomlines" widget="one2many_list" nolabel="1" readonly="1">
+						<tree string="Planned Amount">
+							<field name="sequence" widget="handle"/>
+							<field name="name"/>
+							<field name="product_qty"/>
+							<field name="product_uom_id" options="{'no_open':True,'no_create':True}" groups="product.group_uom"/>
+							<field name="bomline_id" invisible="1"/>
+							<field name="actual_usage"/>
+							<field name="is_wip" readonly="True"/>
+						</tree>
+						<form string="Planned Amount">
+							<group>
+								<group>
+									<field name="name"/>
+									<field name="product_uom_id" options="{'no_open':True,'no_create':True}" groups="product.group_uom"/>
+								</group>
+								<group>
+									<field name="product_qty"/>
+									<field name="actual_usage"/>
+								</group>
+							</group>
+						</form>
+					</field>
+				</page>
+			</xpath>
+			<xpath expr="//notebook/page[3]/group/group/div[1]/div" position="attributes">
+				<attribute name="attrs">{}</attribute>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="mrp_production_workcenter_tree_view_inherit_add_fields" model="ir.ui.view">
+		<field name="name">mrp.production.work.order.tree</field>
+		<field name="model">mrp.workorder</field>
+		<field name="inherit_id" ref="mrp.mrp_production_workcenter_tree_view_inherit"></field>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='name']" position="before">
+				<field name="workorder_id"/>
+			</xpath>
+		</field>
+	</record>
+
+
+	<!-- Kanban View Extend -->
+	<record id="mrp.workcenter_line_kanban_inherit_add_fields" model="ir.ui.view">
+		<field name="name">mrp.production.work.order.kanban</field>
+		<field name="model">mrp.workorder</field>
+		<field name="inherit_id" ref="mrp.workcenter_line_kanban"></field>
+		<field name="arch" type="xml">
+			<xpath expr="//kanban[@class='o_kanban_small_column']/field[@name='name']" position="before">
+				<field name="workorder_id"/>
+			</xpath>
+			<xpath expr="//div[@class='oe_kanban_content']/div" position="replace">
+				<div>
+	                <span><strong><t t-esc="record.workorder_id.value"/></strong></span>
+	                <br/>
+	                <span><strong><t t-esc="record.product_id.value"/></strong></span>
+				</div>
+			</xpath>
+		</field>
+	</record>
+
+	<!-- Search view extension -->
+
+	<record id="workorder_search_filter" model="ir.ui.view">
+        <field name="name">workorder.search.filter</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.view_mrp_production_workcenter_form_view_filter"/>
+        <field name="arch" type="xml">
+			<field name="name" position="after">
+				<field name="workorder_id" string="Work Order ID"/>
+			</field>
+            <xpath expr="//search" position="inside">
+				<separator/>
+                <filter string="Today" name="today" domain="[('date_planned_start','&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59))), ('date_planned_start','&gt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0)))]"/>
+                <filter string="This Week" name="thisweek" domain="[ ('date_planned_start','&gt;=',(context_today()+relativedelta(weeks=-1,days=1,weekday=0)).strftime('%Y-%m-%d')), ('date_planned_start','&lt;',(context_today()+relativedelta(weekday=6)).strftime('%Y-%m-%d'))]"/>
+                <filter string="Last Week" name="lastweek" domain="[('date_planned_start', '&gt;=', ((context_today()+relativedelta(weeks=-2,days=1, weekday=0)).strftime('%Y-%m-%d'))),('date_planned_start', '&lt;=', ((context_today()+relativedelta(weeks=-1,weekday=6)).strftime('%Y-%m-%d')))]"/>
+                <filter string="This Month" name="thismonth" domain="[('date_planned_start','&lt;',(context_today()+relativedelta(months=1)).strftime('%Y-%m-01')), ('date_planned_start','&gt;=',time.strftime('%Y-%m-01'))]"/>
+                <filter string="Last Month" name="lastmonth" domain="[('date_planned_start','&lt;',(context_today()).strftime('%Y-%m-01')), ('date_planned_start','&gt;=',(context_today()-relativedelta(months=1)).strftime('%Y-%m-01'))]"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <!-- User Logout Menu -->
+    <t t-extend="UserMenu">
+        <t t-jquery="a[data-menu='account']" t-operation="after">
+        <!-- <t t-jquery="a.o_menu_logout" t-operation="before"> -->
+            <li>
+                <a href="#" data-menu="hasmicro">About HashMicro</a>
+            </li>
+            <li>
+                <a href="#" data-menu="about_equip">About EQUIP</a>
+            </li>
+            
+            <switch-lang/>
+            <!-- <li>
+                <a href="#" data-menu="debug">Activate the developer mode</a>
+            </li>
+            <li>
+                <a href="#" data-menu="debugassets">Activate the developer mode (with assets)</a>
+            </li>
+            <li>
+                <a href="#" data-menu="quitdebug">Deactivate the developer mode</a>
+            </li> -->
+            
+        </t>
+    </t>
+
+    <t t-extend="UserMenu.Actions">
+        <t t-jquery="li.divider" t-operation="replace"/>
+    </t>
+    <!-- User Logout Menu -->
+
+    <!-- Client Action -->
+    <t t-extend="mail.client_action">
+        <t t-jquery=".o_mail_request_permission" t-operation="replace">
+            <span class="ad_mail_request_permission">Your permission is required to<a href="#"> enable desktop notifications</a>.</span>
+        </t>
+    </t>
+    <!-- Client Action -->
+
+    <!-- Deshboard view -->
+    <t t-extend="DashboardApps">
+        <t t-jquery=".pull-left" t-operation="replace"/>
+        <t t-jquery=".pull-right" t-operation="replace"/>
+    </t>
+    <t t-extend="DashboardShare">
+        <t t-jquery=".o_web_settings_dashboard_share" t-operation="replace">
+            <div class="text-center o_web_settings_dashboard_share">
+                <i class="fa fa-bug fa-4x text-muted"/>
+                <div class="o_web_settings_dashboard_header">Devloper</div>
+                <t t-set="server_version" t-value="widget.data.server_version"/>
+                <t t-set="debug" t-value="widget.data.debug"/>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a t-if="debug != true" class="oe_activate_debug_mode pull-right" href="?debug" >Activate the developer mode</a>
+                        <br t-if="debug != true"/>
+                        <a t-if="debug != 'assets'" class="oe_activate_debug_mode pull-right" href="?debug=assets" >Activate the developer mode (with assets)</a>
+                        <br t-if="debug != 'assets'"/>
+                        <a t-if="debug != false" class="oe_activate_debug_mode pull-right" href="/web" >Deactivate the developer mode</a>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </t>
+    <t t-extend="DashboardPlanner">
+        <t t-jquery=".o_web_settings_dashboard_planner" t-operation="replace">
+            <!-- <div class="text-center o_web_settings_dashboard_planner">
+                <i class="fa fa-check-square-o fa-4x text-muted"/>
+                <div class="o_web_settings_dashboard_header">
+                    <span class="o_web_settings_dashboard_planner_overall_progress">
+                        <t t-esc="widget.overall_progress"/></span>%
+                    Implementation
+                </div>
+                <div>
+                    <small class="text-muted text-center o_web_settings_dashboard_compact_subtitle">
+                        Follow these implementation guides.
+                    </small>
+                </div>
+                <hr/>
+                <t t-set="planners" t-value="widget.planners"/>
+                <t t-call="DashboardPlanner.PlannersList"/>
+            </div> -->
+        </t>
+    </t>
+    <t t-extend="PlannerLauncher">
+        <t t-jquery=".o_planner_systray" t-operation="replace"/>
+    </t>
+    <t t-extend="PlannerDialog">
+        <t t-jquery=".o_planner_dialog" t-operation="replace">
+        </t>
+    </t>
+    <t t-extend="ImportView">
+        <t t-jquery=".pull-right" t-operation="replace">
+        </t>
+    </t>
+
+    <t t-extend="DashboardTranslations">
+        <t t-jquery=".o_web_settings_dashboard_translations" t-operation="attributes">
+            <attribute name="class">text-center o_web_settings_dashboard_translations</attribute>
+        </t>
+    </t>
+</templates>

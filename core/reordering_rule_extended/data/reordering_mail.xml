@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="send_mail_to_user" model="mail.template">
+            <field name="name">Reordering mail</field>
+            <field name="model_id" ref="reordering_rule_extended.model_user_mail_data"/>
+            <field name="email_from">
+                <![CDATA["${object.company_id.name|safe}" <${(object.company_id.email)|safe}>]]></field>
+            <field name="email_to">${object.email|safe}</field>
+            <field name="subject">${object.company_id.name|safe} Reordering Rule Trigger - EQUIP Auto Mail</field>
+            <field name="body_html">
+                <![CDATA[
+                <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+                <p style="color:#34095f;">Hi <strong>${object.name}</strong>,</p>
+                % for details in object.get_name_list():
+                <p style="color:#34095f;">This ${details} has been create with details below:</p>
+                <br/>
+                % if object.get_warehouse_location(action_name=details, company=True) != False
+                    <p style="text-align:left;color: black;">
+                        Company : ${object.get_warehouse_location(action_name=details, company=True)}
+                    </p>
+                % endif
+                % if object.get_warehouse_location(action_name=details, warehouse=True) != False
+                    <p style="text-align:left;color: black;">
+                        Warehouse : ${object.get_warehouse_location(action_name=details, warehouse=True)}
+                    </p>
+                % endif
+                % if object.get_warehouse_location(action_name=details, source_location=True) != False
+                    <p style="text-align:left;color: black;">
+                        Source Location : ${object.get_warehouse_location(action_name=details, source_location=True)}
+                    </p>
+                % endif
+                % if object.get_warehouse_location(action_name=details, location=True) != False
+                    <p style="text-align:left;color: black;">
+                       Destination Location : ${object.get_warehouse_location(action_name=details, location=True)}
+                    </p>
+                % endif
+                % if object.get_warehouse_location(action_name=details, lead=True) != False
+                    <p style="text-align:left;color: black;">
+                        Lead Time : ${object.get_warehouse_location(action_name=details, lead=True)}
+                    </p>
+                % endif
+                % if object.get_warehouse_location(action_name=details, supplier=True) != False
+                    <p style="text-align:left;color: black;">
+                        Supplier : ${object.get_warehouse_location(action_name=details, supplier=True)}
+                    </p>
+                % endif
+                <br/>
+                <table style="border:1px solid;" width="100%">
+                    <tbody>
+                        <tr style="border-bottom:1px solid;">
+                            <td style="text-align:left;color: black;border-right:1px solid;border-bottom:1px solid;">
+                                Reordering Rule #
+                            </td>
+                            <td style="text-align:left;color: black;border-right:1px solid;border-bottom:1px solid;">
+                                Product
+                            </td>
+                            <td style="text-align:left;color: black;border-right:1px solid;border-bottom:1px solid;">
+                                Minimal Quantity
+                            </td>
+                            <td style="text-align:left;color: black;border-right:1px solid;border-bottom:1px solid;">
+                                Maximum Quantity
+                            </td>
+                            <td style="text-align:left;color: black;border-right:1px solid;border-bottom:1px solid;">
+                                Current Quantity
+                            </td>
+                            <td style="text-align:left;color: black;border-bottom:1px solid;">
+                                Requested Quantity
+                            </td>
+                        </tr>
+                            % for det in object.get_data_value_details(action_name=details):
+                                <tr style="border-bottom:1px solid;">
+                                    <td style="text-align:left;color: black;border-right:1px solid;">
+                                        ${det.reordering_rule}
+                                    </td>
+                                    <td style="text-align:left;color: black;border-right:1px solid;">
+                                        ${det.product_id.name or ''}
+                                    </td>
+                                    <td style="text-align:left;color: black;border-right:1px solid;">
+                                        ${det.minimum_qty or '0'}
+                                    </td>
+                                    <td style="text-align:left;color: black;border-right:1px solid;">
+                                        ${det.maximum_qty or '0'}
+                                    </td>
+                                    <td style="text-align:left;color: black;border-right:1px solid;">
+                                        ${det.current_qty or '0'}
+                                    </td>
+                                    <td style="text-align:left;color: black;">
+                                        ${det.product_qty or '0'}
+                                    </td>
+                                </tr>
+                            %endfor
+                    </tbody>
+                </table>
+                <br/>
+                <br/>
+                %endfor
+                </div>
+                <br/>
+                <p>This email is automatically generated from <a href="https://www.equiperp.com">EQUIP ERP</a></p>
+                <div style="text-align: margin-top: 16px;">
+                    <a href="/web/login" style="padding: 5px 10px; font-size: 12px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; vertical-align: middle; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B; border-radius:3px">Login</a>
+                </div>
+                <p>Thank you.</p>
+                <p><a href="www.hashmicro.com">www.hashmicro.com</a></p>
+                </div>]]>
+            </field>
+        </record>
+
+    </data>
+</odoo>

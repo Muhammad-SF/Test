@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="view_sale_commission_report_wizard" model="ir.ui.view">
+		<field name="name">Sales Commission</field>
+		<field name="model">sale.commission.report.wizard</field>
+		<field name="arch" type="xml">
+			<form string="Sales Commission Report Wizard">
+				<sheet>
+					<group>
+						<field name="report_type" required='1'/>
+						<field name="starting_month" attrs="{'invisible': [('report_type', 'in', ('summary', False))], 'required': [('report_type', '=', 'details')]}"/>
+						<field name="ending_month" attrs="{'invisible': [('report_type', 'in', ('summary', False))], 'required': [('report_type', '=', 'details')]}"/>
+						<field name="year" required="1"/>
+						<field name="user_id" domain="[('sale_team_id','!=',False)]" widget="many2many_tags"/>
+						<!--<field name="start_date" invisible="1"/>-->
+						<!--<field name="end_date" invisible="1"/>-->
+					</group>
+				</sheet>
+				<footer>
+					<button name="print_commission_report" string="Print Report" type="object" class="btn-primary"/>
+					<button string="Cancel" class="btn-default" special="cancel" />
+				</footer>
+			</form>
+		</field>
+	</record>
+
+	<record id="action_view_sale_commission_report_wizard" model="ir.actions.act_window">
+		<field name="name">Sales Commission Report</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">sale.commission.report.wizard</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+		<field name="groups_id" eval="[]" />
+	</record>
+
+	<menuitem name="Sales Commission" id="menu_sale_commission_report_wizard"
+		parent="sales_team.menu_sale_report"
+	  	action="action_view_sale_commission_report_wizard"
+	/>
+
+</odoo>

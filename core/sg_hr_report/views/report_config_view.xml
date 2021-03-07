@@ -1,0 +1,23 @@
+<openerp>
+	<data>
+		<record id="inherit_view_hr_payroll_configuration_report" model="ir.ui.view">
+			<field name="name">inherit.view.hr.payroll.configuration.report</field>
+			<field name="model">hr.payroll.config.settings</field>
+			<field name="inherit_id" ref="hr_payroll.view_hr_payroll_configuration"/>
+			<field name="arch" type="xml">
+				<xpath expr="//form/group[1]/div[1]" position="inside">
+					<div>
+						<div>
+							<field name="module_sg_cimb_report" class="oe_inline"/>
+							<label for="module_sg_cimb_report"/>
+						</div>
+						<div>
+							<field name="module_sg_ocbc_report" class="oe_inline"/>
+							<label for="module_sg_ocbc_report"/>
+						</div>
+					</div>				
+				</xpath>
+			</field>
+		</record>
+	</data>
+</openerp>

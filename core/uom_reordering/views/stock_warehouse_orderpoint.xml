@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <!--    Change "Counter Code" to "Branch Counter Code" in form view of Branch-->
+        <record model="ir.ui.view" id="view_warehouse_orderpoint_form_inherit">
+            <field name="name">view.warehouse.orderpoint.form.inherit</field>
+            <field name="model">stock.warehouse.orderpoint</field>
+            <field name="inherit_id" ref="stock.view_warehouse_orderpoint_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_uom']" position="attributes">
+                    <attribute name="invisible">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="after">
+                    <field name="purchase_product_uom"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!--  Change "Counter Code" to "Branch Counter Code" in tree view of Branch-->
+       
+    </data>
+</odoo>

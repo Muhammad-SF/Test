@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="pos_sync_button_action">
+            <field name="name">pos_sync_button_action</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_config_kanban" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='container o_kanban_card_content o_visible']" position="inside">
+                    <div class="row">
+                        <div class="col-xs-6 o_kanban_primary_left">
+                            <button class="btn btn-primary" name="action_sync_button" type="object">Sync</button>
+                        </div>
+                        <div class="col-xs-6 o_kanban_primary_right">
+                            <span>Last sync date : <field name="last_sync_date"/></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6 o_kanban_primary_left">
+                            <button class="btn btn-primary" name="action_sync_order_button" type="object">Sync Order</button>
+                        </div>
+                        <div class="col-xs-6 o_kanban_primary_right">
+                            <span>Last sync date : <field name="last_sync_order_date"/></span>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="pos_config_settings_form" model="ir.ui.view">
+            <field name="name">pos.config.settings.form</field>
+            <field name="model">pos.config.settings</field>
+            <field name="inherit_id" ref="point_of_sale.view_sale_config_settings_form_pos"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='module_pos_reprint']" position="after">
+                    <field name="synchronize_user" widget="radio"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_class_assignment_form_school_student_group_inherit" model="ir.ui.view">
+    		<field name="name">View Class Assignment Form School Student Group Inherit</field>
+            <field name="model">class.assignment</field>
+            <field name="inherit_id" ref="school_assignment_ems.view_class_assignment_form"/>
+            <field name="groups_id" eval="[(6,0, [ref('school.group_school_student')])]"/>
+            <field name="arch" type="xml">
+               <xpath expr="//form" position="attributes">
+                   <attribute name="create">false</attribute>
+                   <attribute name="edit">false</attribute>
+               </xpath>
+            </field>
+        </record>
+
+        <record id="view_class_assignment_tree_school_student_group_inherit" model="ir.ui.view">
+    		<field name="name">View Class Assignment Tree School Student Group Inherit</field>
+            <field name="model">class.assignment</field>
+            <field name="inherit_id" ref="school_assignment_ems.view_class_assignment_tree"/>
+            <field name="groups_id" eval="[(6,0, [ref('school.group_school_student')])]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_assignment_grade_form_school_student_group_inherit" model="ir.ui.view">
+    		<field name="name">View Assignment Grade Form School Student Group Inherit</field>
+            <field name="model">assignment.grade</field>
+            <field name="inherit_id" ref="school_assignment_ems.view_assignment_grade_form"/>
+            <field name="groups_id" eval="[(6,0, [ref('school.group_school_student')])]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">false</attribute>
+                    <attribute name="edit">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_assignment_grade_tree_school_student_group_inherit" model="ir.ui.view">
+    		<field name="name">View Assignment Grade Tree School Student Group Inherit</field>
+            <field name="model">assignment.grade</field>
+            <field name="inherit_id" ref="school_assignment_ems.view_assignment_grade_tree"/>
+            <field name="groups_id" eval="[(6,0, [ref('school.group_school_student')])]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

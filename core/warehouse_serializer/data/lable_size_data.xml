@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="label_size_01" model="label.size">
+            <field name="width">100</field>
+            <field name="height">20</field>
+        </record>
+    </data>
+</odoo>

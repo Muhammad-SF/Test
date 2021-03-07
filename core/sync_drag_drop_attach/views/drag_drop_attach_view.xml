@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    	<template id="assets_backend" name="web_tests assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+            	<link rel="stylesheet" href="/sync_drag_drop_attach/static/src/less/drag_drop_attach.less"/>
+                <script type="text/javascript" src="/sync_drag_drop_attach/static/src/js/drag_drop_attach.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

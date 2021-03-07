@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="hr_payroll_summary_report_tmp">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="o">
+					<div class="page">
+						<style>
+							.font_size{
+							font-size:13px;
+							padding-top:5px;
+							padding-bottom:5px;
+							padding-left:3px;
+							padding-right:3px;
+							}
+					   </style>
+						<div class="oe_structure" />
+						<template id="ergobit_css" inherit_id="web.layout">
+							<xpath expr="//head" position="inside">
+								<link rel="stylesheet" href="/sg_hr_report/static/src/css/payslip.css" />
+							</xpath>
+						</template>
+						<div style="color: blue; font-weight: bold; size: 9px;text-align:center">
+							<table width="100%">
+								<tr class="text-center">
+									<td colspan="2">
+										<strong> Payroll Summary Report </strong>
+									</td>
+								</tr>
+								<tr>
+									<td width="50%" class="text-center">
+										<b>
+											<strong> Company :</strong>
+											<span t-esc="res_company.name" />
+										</b>
+									</td>
+									<td width="50%" class="text-center ">
+										<strong> Periods :</strong>
+										<span
+											t-esc="datetime.datetime.strptime(data.get('date_from','') , '%Y-%m-%d').strftime('%d-%m-%Y')" />
+										to
+										<span
+											t-esc="datetime.datetime.strptime(data.get('date_to','') , '%Y-%m-%d').strftime('%d-%m-%Y')" />
+									</td>
+								</tr>
+							</table>
+						</div>
+						<table class="table table-condensed font_size" width="100%">
+							<thead>
+								<tr class="font_size">
+									<th width="9%" />
+									<th width="9%" />
+									<th width="9%" />
+									<th class="text-center" width="9%">
+										Total Wage
+	                                       </th>
+									<th class="text-center" width="9%">
+										Leave Deduction
+	                                       </th>
+									<th class="text-center" width="9%">
+										Bonus
+	                                       </th>
+									<th class="text-center" width="9%">
+										Commission
+	                                       </th>
+									<th class="text-center" width="9%">
+										Other Deduction
+	                                       </th>
+									<th class="text-center" width="9%">
+										EE CPF
+	                                       </th>
+									<th class="text-center" width="9%">
+										Gross
+	                                       </th>
+									<th class="text-center" width="9%">
+										SDL
+	                                       </th>
+								</tr>
+								<tr class="font_size">
+									<th width="9%" class="text-center">
+										Employee ID
+                                    </th>
+									<th width="9%" class="text-center">
+										Employee Name
+                                    </th>
+                                    <th width="9%" class="text-center">
+										Account Number
+                                    </th>
+									<th class="text-center" width="9%">
+										Total OT
+                                    </th>
+									<!--
+									<th class="text-center" width="9%">
+										Basic Back Pay
+                                    </th>
+									-->
+									<th class="text-center" width="9%">
+										Other Addition
+                                    </th>
+									<th class="text-center" width="9%">
+										Incentive
+                                    </th>
+									<th class="text-center" width="9%">
+										Donation
+                                    </th>
+									<th class="text-center" width="9%">
+										ER CPF
+                                    </th>
+									<th class="text-center" width="9%">
+										Net Wage
+                                    </th>
+									<th class="text-center" width="9%">
+										FWL
+                                    </th>
+								</tr>
+							</thead>
+							<tbody class="table-striped">
+								<t t-foreach="get_name" t-as="lines">
+									<tr t-foreach="lines.get('lines')" t-as="line"
+										class="font_size text-right">
+										<td width="9%" class="text-left">
+											<span />
+											<br />
+											<span t-esc="line.get('eid')" />
+										</td>
+										<td width="9%" class="text-left">
+											<span />
+											<br />
+											<span t-esc="line.get('ename')" />
+										</td>
+										<td width="9%" class="text-left">
+											<span />
+											<br />
+											<span t-esc="line.get('bank_acc_id')" />
+										</td>
+										<td width="9%">
+											<p t-esc="line.get('twage')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0px;" />
+											<p t-esc="line.get('overtime')" 
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0px;" />
+										</td>
+										<td width="9%">
+											<p t-esc="line.get('lvd')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<!--
+											<p t-esc="line.get('backpay')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											-->
+											<p t-esc="line.get('exa')" 
+                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                style="margin:0;" />
+										</td>
+										<td width="9%">
+											<p t-esc="line.get('bonus')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<p t-esc="line.get('incentive')" 
+                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                style="margin:0;" />
+										</td>
+										<td width="9%">
+											<p t-esc="line.get('commission')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<p t-esc="line.get('donation')" 
+                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                style="margin:0;" />
+										</td>
+										<td width="9%">
+											<p t-esc="line.get('exd')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<p t-esc="line.get('pf')" 
+                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                style="margin:0;" />
+										</td>
+										<td width="9%">
+											<p t-esc="line.get('cpf')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<p t-esc="line.get('net')" 
+                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                style="margin:0;" />
+										</td>
+										<td width="9%">
+											<p t-esc="line.get('gross')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<p t-esc="line.get('fwl')" 
+                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                style="margin:0;" />
+										</td>
+										<td width="9%">
+											<p t-esc="line.get('sdl')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											
+										</td>
+									</tr>
+									<tr class="font_size">
+										<td width="9%" class="text-left" colspan="3">
+											<br />
+											<b>
+												Total :
+												<span t-esc="lines.get('total').get('name')" />
+											</b>
+										</td>
+										<td width="9%" class="text-right">
+											<strong>
+												<p t-esc="lines.get('total').get('twage')" 
+													t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+													style="margin:0;" />
+												<p t-esc="lines.get('total').get('overtime')" 
+													t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+													style="margin:0;" />
+											</strong>
+										</td>
+										<td width="9%" class="text-right">
+											<strong>
+												<p t-esc="lines.get('total').get('lvd')"
+													t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+													style="margin:0;" />
+												<!--
+												<p t-esc="lines.get('total').get('backpay')" 
+													t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+													style="margin:0;" />
+												-->
+												<p t-esc="lines.get('total').get('exa')" 
+                                                    t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                    style="margin:0;" />
+											</strong>
+										</td>
+										<td width="9%" class="text-right">
+											<strong>
+												<p t-esc="lines.get('total').get('bonus')"
+													t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+													style="margin:0;" />
+												<p t-esc="lines.get('total').get('incentive')" 
+                                                    t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                    style="margin:0;" />
+											</strong>
+										</td>
+										<td width="9%" class="text-right">
+											<strong>
+												<p t-esc="lines.get('total').get('commission')"
+													t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+													style="margin:0;" />
+												<p t-esc="lines.get('total').get('donation')" 
+                                                    t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                    style="margin:0;" />
+											</strong>
+										</td>
+										<td width="9%" class="text-right">
+											<strong>
+												<p t-esc="lines.get('total').get('exd')"
+													t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+													style="margin:0;" />
+												<p t-esc="lines.get('total').get('pf')" 
+                                                    t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                    style="margin:0;" />
+											</strong>
+										</td>
+										<td width="9%" class="text-right">
+											<strong>
+												<p t-esc="lines.get('total').get('cpf')"
+													t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+													style="margin:0;" />
+												<p t-esc="lines.get('total').get('net')" 
+                                                    t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                    style="margin:0;" />
+											</strong>
+										</td>
+										<td width="9%" class="text-right">
+											<strong>
+												<p t-esc="lines.get('total').get('gross')"
+													t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+													style="margin:0;" />
+												<p t-esc="lines.get('total').get('fwl')" 
+                                                    t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                    style="margin:0;" />
+											</strong>
+										</td>
+										<td width="9%" class="text-right">
+											<strong>
+												<p t-esc="lines.get('total').get('sdl')"
+													t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+													style="margin:0;" />
+												
+											</strong>
+										</td>
+									</tr>
+								</t>
+								<hr />
+								<tr t-foreach="finalgrouptotal" t-as="total_line" class="font_size">
+									<td width="9%" class="text-left">
+										<span />
+										<span>
+											<b>Grand Total : </b>
+										</span>
+									</td>
+									<td width="9%" class="text-left">
+										<span />
+										<span>
+											<b>Total Employee</b>
+										</span>
+									</td>
+									<td width="9%" class="text-left">
+										<span />
+									</td>
+									<td width="9%" class="text-right">
+										<strong>
+											<p t-esc="total_line.get('twage')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<p t-esc="total_line.get('overtime')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+										</strong>
+									</td>
+									<td width="9%" class="text-right">
+										<strong>
+											<p t-esc="total_line.get('lvd')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<!--
+											<p t-esc="total_line.get('backpay')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											-->
+											<p t-esc="total_line.get('exa')"
+                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                style="margin:0;" />
+										</strong>
+									</td>
+									<td width="9%" class="text-right">
+										<strong>
+											<p t-esc="total_line.get('bonus')" 
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<p t-esc="total_line.get('incentive')"
+                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                style="margin:0;" />
+										</strong>
+									</td>
+									<td width="9%" class="text-right">
+										<strong>
+											<p t-esc="total_line.get('commission')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<p t-esc="total_line.get('donation')" 
+                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                style="margin:0;" />
+										</strong>
+									</td>
+									<td width="9%" class="text-right">
+										<strong>
+											<p t-esc="total_line.get('exd')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<p t-esc="total_line.get('pf')" 
+                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                style="margin:0;" />
+										</strong>
+									</td>
+									<td width="9%" class="text-right">
+										<strong>
+											<p t-esc="total_line.get('cpf')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<p t-esc="total_line.get('net')" 
+                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                style="margin:0;" />
+										</strong>
+									</td>
+									<td width="9%" class="text-right">
+										<strong>
+											<p t-esc="total_line.get('gross')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											<p t-esc="total_line.get('fwl')" 
+                                                t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+                                                style="margin:0;" />
+										</strong>
+									</td>
+									<td width="9%" class="text-right">
+										<strong>
+											<p t-esc="total_line.get('sdl')"
+												t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"
+												style="margin:0;" />
+											
+										</strong>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

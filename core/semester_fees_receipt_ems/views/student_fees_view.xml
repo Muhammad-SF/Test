@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherited Student Fees Structure Line Form View -->
+    <record id="view_student_fees_structure_line_form_pergas" model="ir.ui.view">
+        <field name="name">student.fees.structure.line.form.pergas</field>
+        <field name="model">student.fees.structure.line</field>
+        <field name="inherit_id" ref="school_fees.view_student_fees_structure_line_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group/field[@name='type']" position="after">
+                <field name="number_of_months" attrs="{'invisible':[('type','!=','month')], 'required':[('type','=','month')]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>   

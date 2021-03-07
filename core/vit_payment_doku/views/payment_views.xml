@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="acquirer_form_doku" model="ir.ui.view">
+            <field name="name">acquirer.form.doku</field>
+            <field name="model">payment.acquirer</field>
+            <field name="inherit_id" ref="payment.acquirer_form"/>
+            <field name="arch" type="xml">
+                <xpath expr='//group[@name="acquirer"]' position='after'>
+                    <group attrs="{'invisible': [('provider', '!=', 'doku')]}">
+                        <field name="doku_sharedkey"/>
+                        <field name="doku_mall_id"/>
+                        <field name="doku_use_notify"/>
+                        <field name="doku_chain_merchant"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="transaction_form_doku" model="ir.ui.view">
+            <field name="name">acquirer.transaction.form.doku</field>
+            <field name="model">payment.transaction</field>
+            <field name="inherit_id" ref="payment.transaction_form"/>
+            <field name="arch" type="xml">
+                <xpath expr='//notebook' position='inside'>
+                    <page string="Doku TX Details">
+                        <group>
+                            <field name="doku_txn_type"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

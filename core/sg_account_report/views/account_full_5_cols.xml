@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+	
+		<template id="account_full_5_balance_cols">
+			<t t-call="report.html_container">
+			    <t t-foreach="docs" t-as="o">
+					<div class="page">
+						<h1 align="center">Lines Balance Sheet Initial | Debit | Credit | Period | YTD (Expressed In SGD)</h1>
+						<style>
+							.padding {
+							padding-top:3px;
+							padding-bottom:3px;
+							padding-left:3px;
+							padding-right:3px;
+							}
+	                    </style>
+	                    <div>
+	                        <table width="100%">
+	                            <tr>
+	                                <td style="font-size:12px;">
+	                                    <center><span t-field="o.company_id.name" /></center>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td style="font-size:12px;">
+	                                    <center><span t-field="o.afr_id.name" /></center>
+	                                </td>
+	                            </tr>
+	                        </table>
+	                        <table class="table table-condensed">
+	                            <thead>
+	                                <tr>
+	                                    <th>
+	                                        <strong>Account Name</strong>
+	                                    </th>
+	                                    <th>
+	                                        <strong>INITIAL</strong>
+	                                    </th>
+	                                    <th class="text-right">
+	                                        <strong>DEBIT</strong>
+	                                    </th>
+	                                    <th class="text-right">
+	                                        <strong>CREDIT</strong>
+	                                    </th>
+	                                    <th class="text-right">
+	                                        <strong>PERIOD</strong>
+	                                    </th>
+	                                    <th class="text-right">
+	                                        <strong>YTD</strong>
+	                                    </th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                <tr t-foreach="lines(data)" t-as="rec">
+	                                    <t t-if="not rec.get('type')"><t t-set="style" t-value="'font-weight: bold;'"/></t>
+	                                    <td>
+	                                        <span t-att-style="style" t-esc="rec.get('name')" />
+	                                    </td>
+	                                    <td>
+	                                        <span t-esc="formatLang(rec.get('change_sign', 1.0) * rec.get('balanceinit'), digits=2)" />
+	                                    </td>
+	                                    <td class="text-right">
+	                                        <span t-esc="rec.get('debit',0.0)" />
+	                                    </td>
+	                                    <td class="text-right">
+	                                        <span t-esc="rec.get('credit',0.0)" />
+	                                    </td>
+	                                    <td class="text-right">
+	                                        <span t-esc="formatLang(rec.get('change_sign', 1.0) * rec.get('ytd'), digits=2)" />
+	                                    </td>
+	                                    <td class="text-right">
+	                                        <span t-esc="formatLang(rec.get('change_sign', 1.0) * rec.get('balance',0.0), digits=2)" />
+	                                    </td>
+	                                </tr>
+	                            </tbody>
+	<!--                        <t t-foreach="lines(data)" t-as="rec"> -->
+	<!--                            <table width="100%"> -->
+	<!--                                <tr> -->
+	<!--                                    <td>Code</td> -->
+	<!--                                    <td>Account Name</td> -->
+	<!--                                    <td>Balance</td> -->
+	<!--                                </tr> -->
+	<!--                                <tr> -->
+	<!--                                    <span t-field="rec['code']" /> -->
+	<!--                                    <span t-field="rec['name']" /> -->
+	<!--                                    <span t-field="rec['balance']" /> -->
+	<!--                                </tr> -->
+	                        </table>
+	<!--                        </t> -->
+	                    </div>
+					</div>
+				</t>
+			</t>
+		</template>
+
+	</data>
+</odoo>

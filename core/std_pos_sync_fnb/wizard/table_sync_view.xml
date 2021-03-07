@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_manual_table_sync_wizard" model="ir.ui.view">
+            <field name="name">table.sync.wizard.form</field>
+            <field name="model">table.sync.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Restaurant Table Sync">
+                    <group>
+                        <span>This action will sync this computer with the master server’s data. Do you want to continue ? </span>
+                    </group>
+                    <footer>
+                       <button name="action_table_sync" string="Sync From Master" type="object" class="oe_highlight"/>
+                       <button name="action_table_sync_to_master" string="Sync To Master" type="object" class="oe_highlight"/>
+                       <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_manual_table_sync_wizard" model="ir.actions.act_window">
+            <field name="name">Restaurant Table Sync</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">table.sync.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_manual_table_sync_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem 
+		    id="menu_manual_table_sync_wizard" 
+		    name="Restaurant Table Sync"
+			parent="std_pos_sync.menu_manual_sync" 
+			action="action_manual_table_sync_wizard" 
+			sequence="130" />
+			
+    </data>
+</odoo>

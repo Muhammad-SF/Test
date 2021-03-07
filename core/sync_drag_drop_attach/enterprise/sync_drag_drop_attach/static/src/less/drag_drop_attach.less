@@ -1,0 +1,37 @@
+@height: 420px;
+@position: absolute;
+@overflow: hidden;
+
+.hidden_formview_drop {
+  display: none;
+
+  .msg_content {    
+    position: @position;
+    font-size: xx-large;
+    font-style: italic;
+    color: rgb(190, 190, 190);
+    left: 0;  
+    right: 0;
+    text-align: center;
+    top: 45%;  
+  }
+
+}
+.hidden_drop_formview_highlight {
+  border: 4px dashed #CCC !important;
+  background: rgb(232, 232, 232) none repeat scroll 0 0;
+  display: block;
+  left: 6.5%;
+  margin: auto;
+  min-height: @height - 3;
+  overflow: @overflow;
+  padding: 24px 16px;
+  position: @position;
+  width: 1172px;
+  z-index: 0;
+}
+.adjust_sheet {
+  opacity: 0;
+  overflow: @overflow;
+  height: @height;
+}

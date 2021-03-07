@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="all_transfer_log_activity_report">
+            <t t-call="report.html_container">
+                <t t-set="data_report_margin_top" t-value="12" />
+                <t t-set="data_report_header_spacing" t-value="9" />
+                <t t-set="data_report_dpi" t-value="110" />
+                <t t-call="report.internal_layout">
+                    <div class="page">
+                        <t t-if="data['form']['picking_name'] == 'Delivery Orders'">
+                            <h2 class="text-center">Delivery Order Log Activity Report</h2>
+                        </t>
+                        <t t-if="data['form']['picking_name'] == 'Receipts'">
+                            <h2 class="text-center">Receiving Notes Activity Log Report</h2>
+                        </t>
+                        <t t-if="data['form']['picking_name'] == 'Internal Transfer Out'">
+                            <h2 class="text-center">Transfer Out Activity Log Report</h2>
+                        </t>
+                        <t t-if="data['form']['picking_name'] == 'Internal Transfer IN'">
+                            <h2 class="text-center">Transfer In Activity Log Report</h2>
+                        </t>
+                        <div class="row">
+                            <t t-if="data['form']['picking_name'] in ['Delivery Orders', 'Receipts']">
+                                <div class="col-xs-2 text-center"
+                                    style="border-width:1px;border-style:ridge;">
+                                    <strong>Company</strong>
+                                    <p t-esc="data['form']['company_id'][1]" />
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <div class="col-xs-3 text-center"
+                                    style="border-width:1px;border-style:ridge;">
+                                    <strong>Company</strong>
+                                    <p t-esc="data['form']['company_id'][1]" />
+                                </div>
+                            </t>
+                            <div class="col-xs-3 text-center"
+                                style="border-width:1px;border-style:ridge;">
+                                <strong>Source Location</strong>
+                                <p t-esc="get_location_name(data['form']['location_ids'])" />
+                            </div>
+                            <div class="col-xs-3 text-center"
+                                style="border-width:1px;border-style:ridge;">
+                                <strong>Destination Location</strong>
+                                <p t-esc="get_dest_location_name(data['form']['location_dest_ids'])" />
+                            </div>
+                            <t t-if="data['form']['picking_name'] in ['Delivery Orders', 'Receipts']">
+                                <div class="col-xs-2 text-center"
+                                    style="border-width:1px;border-style:ridge;">
+                                    <strong>Period</strong>
+                                    <p t-esc="data['form']['start_date'] + ' to ' + data['form']['end_date']" />
+                                </div>
+                            </t>
+                            <t t-else="">
+                                <div class="col-xs-3 text-center"
+                                    style="border-width:1px;border-style:ridge;">
+                                    <strong>Period</strong>
+                                    <p t-esc="data['form']['start_date'] + ' to ' + data['form']['end_date']" />
+                                </div>
+                            </t>
+                            <t t-if="data['form']['picking_name'] in ['Delivery Orders', 'Receipts']">
+                                <div class="col-xs-2 text-center"
+                                    style="border-width:1px;border-style:ridge;">
+                                    <t t-if="data['form']['picking_name'] == 'Delivery Orders'">
+                                        <strong>Customer</strong>
+                                        <p t-esc="get_customer_name(data['form']['customer_ids'])" />
+                                    </t>
+                                    <t t-if="data['form']['picking_name'] == 'Receipts'">
+                                        <strong>Vendor</strong>
+                                        <p t-esc="get_customer_name(data['form']['vendor_ids'])" />
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th class="text-left"
+                                            style="color:#0F33C6;font-size: 17px;">
+                                            <strong
+                                                t-esc="data['form']['company_id'][1]" />
+                                        </th>
+                                        <th class="text-center">Timestamp</th>
+                                        <th class="text-center">User</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Processed Time</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="final_data" t-as="f_data">
+                                        <tr>
+                                            <td colspan="5">
+                                                <b>
+                                                    <span t-esc="f_data"/>
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <t t-set='flag' t-value='0'/>
+                                        <tr t-foreach="final_data.get(f_data)" t-as="f">
+                                            <td>
+                                                <t t-if="flag == 0">
+                                                    <b><span t-esc="f.get('origin')"/></b>
+                                                    <t t-set='flag' t-value='1'/>
+                                                </t>
+                                                <t t-if="flag == 1">
+
+                                                </t>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="f.get('timestamp')"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="f.get('user')"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="f.get('status')"/>
+                                            </td>
+                                            <td class="text-center">
+                                                <span t-esc="f.get('process_time')"/>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <p style="page-break-before:always;">
+                            </p>
+                    </div>
+                </t>
+            </t>
+        </template>
+        <template id="delivery_log_activity_report">
+            <t t-call="transfer_activity_log.all_transfer_log_activity_report"/>
+        </template>
+        <template id="received_log_activity_report">
+            <t t-call="transfer_activity_log.all_transfer_log_activity_report"/>
+        </template>
+        <template id="transfer_in_log_activity_report">
+           <t t-call="transfer_activity_log.all_transfer_log_activity_report"/>
+        </template>
+        <template id="transfer_out_log_activity_report">
+            <t t-call="transfer_activity_log.all_transfer_log_activity_report"/>
+        </template>
+        <report
+            id="action_delivery_log_activity"
+            model="transfer.activity.log"
+            string="Delivery Orders Activity Log"
+            report_type="qweb-pdf"
+            name="transfer_activity_log.delivery_log_activity_report"
+            file="transfer_activity_log.delivery_log_activity_report"
+            menu="False"
+        />
+        <report
+            id="action_received_log_activity"
+            model="transfer.activity.log"
+            string="Receiving Notes Activity Log"
+            report_type="qweb-pdf"
+            name="transfer_activity_log.received_log_activity_report"
+            file="transfer_activity_log.received_log_activity_report"
+            menu="False"
+        />
+        <report
+            id="action_transfer_in_log_activity"
+            model="transfer.activity.log"
+            string="Transfer IN Activity Log"
+            report_type="qweb-pdf"
+            name="transfer_activity_log.transfer_in_log_activity_report"
+            file="transfer_activity_log.transfer_in_log_activity_report"
+            menu="False"
+        />
+        <report
+            id="action_transfer_out_log_activity"
+            model="transfer.activity.log"
+            string="Transfer Out Activity Log"
+            report_type="qweb-pdf"
+            name="transfer_activity_log.transfer_out_log_activity_report"
+            file="transfer_activity_log.transfer_out_log_activity_report"
+            menu="False"
+        />
+    </data>
+</odoo>

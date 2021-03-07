@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id='assets_backend' inherit_id='web.assets_backend'>
+            <xpath expr="." position="inside">
+		        <link rel="stylesheet" href="/sales_form_view_equip/static/src/less/form_view.less" />
+                <script type="text/javascript" src='/sales_form_view_equip/static/src/js/form_view.js'></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_order_form_inherit_sale_mrp" model="ir.ui.view">
+      <field name="name">sale.order.form.sale.mrp</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="//button[@name='action_view_invoice']" position="before">
+              <button type="object"
+                  name="action_view_planing"
+                  class="oe_stat_button"
+                  icon="fa-wrench" groups="mrp.group_mrp_manager" attrs="{'invisible':[('plan_count', '=', 0)]}">
+                  <field name="plan_count" widget="statinfo" string="Planning"/>
+              </button>
+              <button type="object"
+                  name="action_view_production"
+                  class="oe_stat_button"
+                  icon="fa-cog" groups="mrp.group_mrp_manager" attrs="{'invisible':[('mrp_count', '=', 0)]}">
+                  <field name="mrp_count" widget="statinfo" string="Manufacturing Order"/>
+              </button>
+          </xpath>
+      </field>
+    </record>
+    <record id="products_template_form_inherit_planing" model="ir.ui.view">
+        <field name="name">product.template.planing.form</field>
+        <field name="model">product.template</field>
+        <field name="priority" eval="70"/>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <field name="route_ids" position="before">
+                <field name="is_mo_plaining"/>
+            </field>
+        </field>
+    </record>
+</odoo>

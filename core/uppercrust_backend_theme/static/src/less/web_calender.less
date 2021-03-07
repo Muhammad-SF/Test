@@ -1,0 +1,34 @@
+@colors: fade(@brand-primary, 75), fade(@brand-secondary, 75), fade(@calender-tag-info, 75), fade(@calender-tag-danger, 75),
+fade(@calender-tag-success, 75), fade(@calender-tag-warning, 75), fade(@calender-tag-primary, 75), fade(@calender-tag-muted, 75),
+fade(@brand-primary, 50), fade(@brand-secondary, 50), fade(@calender-tag-info, 50), fade(@calender-tag-danger, 50),
+fade(@calender-tag-success, 50), fade(@calender-tag-warning, 50), fade(@calender-tag-primary, 50), fade(@calender-tag-muted, 50),
+fade(@brand-primary, 25), fade(@brand-secondary, 25), fade(@calender-tag-info, 25), fade(@calender-tag-danger, 25),
+fade(@calender-tag-success, 25), fade(@calender-tag-warning, 25), fade(@calender-tag-primary, 25), fade(@calender-tag-muted, 25);
+@length: length(@colors);
+@range: length(@colors);
+
+.o_calendar_container {
+    .calendar_color_loop(@range) when (@range < @length+1
+) {
+    @color: extract(@colors, @range);
+    .o_calendar_color_@{range} {
+        color: @white;
+        background-color: @color !important;
+        border-color: @color !important;
+        opacity: 1;
+        &:hover {
+            color: @white !important;
+        }
+    }
+    .calendar_color_loop(@range + 1);
+} .calendar_color_loop(1);
+
+    .underline_color_loop(@range) when (@range < @length+1
+) {
+    @color: extract(@colors, @range);
+    .o_underline_color_@{range} {
+        border-bottom: 4px solid @color !important;
+    }
+    .underline_color_loop(@range + 1);
+} .underline_color_loop(1);
+}

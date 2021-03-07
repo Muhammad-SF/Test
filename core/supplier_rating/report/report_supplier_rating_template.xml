@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="supplier_rating.supplier_rating_report">
+		<t t-call="report.html_container">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<div class="oe_structure" />
+					<div class="row">
+						<table width="100%">
+							<tr>
+								<td style="width:100%">
+									<h2>
+										<strong>
+											<span t-field="o.name"/>
+										</strong>
+									</h2>
+								</td>
+							</tr><!-- end of 1st row -->
+
+							<tr>
+								<td style="font-size:18px;width:100%;">
+									<strong>Vendor:</strong>
+									&amp;nbsp;
+									<span t-field="o.partner_id.name"/>
+								</td>
+
+							</tr><!-- end of 2nd row -->
+
+							<tr>
+								<td style="font-size:18px;width:100%;">
+									<strong>Rating Date:</strong>
+									&amp;nbsp;
+									<span t-field="o.date_rating"/>
+								</td>
+
+							</tr><!-- end of 3rd row -->
+
+							<tr>
+								<td style="font-size:18px;width:100%;">
+									<strong>Average Rating:</strong>
+									&amp;nbsp;
+									<span t-field="o.average_rating" />
+								</td>
+
+							</tr><!-- end of 4th row -->
+						</table><!-- end of 1st table -->
+					</div>
+					<div class="row" style="margin-top:20px;">
+						<table width="100%" style="font-size:15px;">
+							<tr>
+								<td style="border:1px solid black;width:12%;padding-left:5px;">
+									<strong>Rating Name</strong>
+								</td>
+								<td style="border:1px solid black;width:33%;padding-left:5px;">
+									<strong>Description</strong>
+								</td>
+								<td style="border:1px solid black;width:13%;padding-left:5px;">
+									<strong>Rating</strong>
+								</td>
+								<td style="border:1px solid black;width:10%;padding-left:5px;">
+									<strong>Weightage</strong>
+								</td>
+								<td style="border:1px solid black;width:10%;padding-left:5px;">
+									<strong>Score</strong>
+								</td>
+								<td style="border:1px solid black;width:22%;padding-left:5px;">
+									<strong>Remarks</strong>
+								</td>
+							</tr>
+							<tr t-foreach="o.rating_lines" t-as="line">
+								<td style="border:1px solid black;padding-left:5px;">
+									<span t-field="line.name" />
+								</td>
+								<td style="border:1px solid black;padding-left:5px;">
+									<span t-field="line.description" />
+								</td>
+								<td style="border:1px solid black;padding-left:5px;">
+									<span t-field="line.value_name" />
+								</td>
+								<td style="border:1px solid black;text-align:center;">
+									<span t-field="line.weightage" />
+								</td>
+								<td style="border:1px solid black;text-align:center;">
+									<span t-field="line.score" />
+								</td>
+								<td style="border:1px solid black;padding-left:5px;">
+									<span t-field="line.remarks" />
+								</td>
+							</tr>
+							<tr>
+								<td style="border:1px solid black;">
+								</td>
+								<td style="border:1px solid black;">
+								</td>
+								<td style="border:1px solid black;">
+								</td>
+								<td style="border:1px solid black;text-align:center;">
+									<strong>
+										<span
+											t-esc="sum(line.weightage for line in o.rating_lines)" />
+									</strong>
+								</td>
+								<td style="border:1px solid black;text-align:center;">
+									<strong>
+										<span t-field="o.total_score" />
+									</strong>
+								</td>
+								<td style="border:1px solid black;">
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+
+
+
+
+
+</odoo>

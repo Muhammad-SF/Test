@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="sarangoci_actual_timesheet.ActualTimesheet">
+        <div class="oe_timesheet_weekly">
+            <table class="table table-condensed table-responsive">
+                <tr>
+                    <th class="oe_timesheet_first_col">
+                        Employee
+                    </th>
+                    <th>Job</th>
+                    <th>Detail</th>
+                    <t t-foreach="widget.dates" t-as="date">
+                        <th t-att-class="'oe_timesheet_weekly_date_head' + (moment().format('DD-MM-YYYY') === moment(date).format('DD-MM-YYYY') ? ' oe_timesheet_weekly_today' : '')">
+                            <t t-esc="moment(date).format('ddd')"/>
+                            <br/>
+                            <t t-esc="moment(date).format('MMM DD')"/>
+                        </th>
+                    </t>
+                </tr>
+                <tr t-foreach="widget.employees" t-as="employee">
+                    <td class="oe_timesheet_weekly_branch" style="text-align:left">
+                        <a href="javascript:void(0)" t-att-data-id="JSON.stringify(employee.employee)">
+                            <t t-esc="widget.employee_names[employee.employee]"/>
+                        </a>
+                    </td>
+                    <td>
+                        <span>
+                            <t t-esc="widget.employee_jobs[employee.employee]"/>
+                        </span>
+                    </td>
+                    <td class="label-col">
+                        <span class="oe_timesheet_weekly_option_box">Type</span>
+                        <span class="oe_timesheet_weekly_box">Jam Masuk</span>
+                        <span class="oe_timesheet_weekly_box">Actual First Time Clock In</span>
+                        <span class="oe_timesheet_weekly_box">Actual First Time Clock Out</span>
+                        <span class="oe_timesheet_weekly_box">Actual Last Time Clock In</span>
+                        <span class="oe_timesheet_weekly_box">Actual Last Time Clock Out</span>
+                        <span class="oe_timesheet_weekly_box">System Overtime</span>
+                        <span class="oe_timesheet_weekly_box">Inputted Overtime</span>
+                    </td>
+                    <t t-set="day_count" t-value="0"/>
+                    <t t-foreach="employee.days" t-as="day">
+                        <td t-att-class="moment().format('DD-MM-YYYY') === moment(day.day).format('DD-MM-YYYY') ? 'oe_timesheet_weekly_today' : ''"
+                        t-att-data-date="day.lines[0].date" t-att-data-id="day.id">
+                            <select name="option" t-if="!widget.get('effective_readonly')"
+                                    t-att-data-employee-option="employee.employee"
+                                    t-att-data-day-count="day_count" class="oe_timesheet_weekly_option">
+                                <option value="P">P</option>
+                                <option value="M">M</option>
+                                <option value="S">S</option>
+                                <option value="F">F</option>
+                                <option value="Off">Off</option>
+                                <option value="Ijin">Ijin</option>
+                                <option value="Sakit">Sakit</option>
+                                <option value="Cuti">Cuti</option>
+                                <option value="Alpha">Alpha</option>
+                            </select>
+                            <span t-if="widget.get('effective_readonly')" t-att-data-employee-option="employee.employee"
+                                  t-att-data-day-count="day_count" class="oe_timesheet_weekly_option_box"/>
+                            <t t-if="moment() &lt; moment(day.day) || moment().format('DD-MM-YYYY') === moment(day.day).format('DD-MM-YYYY') ">
+                                <input t-if="!widget.get('effective_readonly')" class="oe_timesheet_weekly_input"
+                                       t-att-data-start-time="employee.employee"
+                                       t-att-data-day-count="day_count" type="text"/>
+                                <span t-att-data-first-clock-in="employee.employee"
+                                      t-att-data-day-count="day_count" class="oe_timesheet_weekly_box"/>-
+                                <span t-att-data-first-clock-out="employee.employee"
+                                      t-att-data-day-count="day_count" class="oe_timesheet_weekly_box"/>
+                                <span t-att-data-last-clock-in="employee.employee"
+                                      t-att-data-day-count="day_count" class="oe_timesheet_weekly_box"/>
+                                <span t-att-data-last-clock-out="employee.employee"
+                                      t-att-data-day-count="day_count" class="oe_timesheet_weekly_box"/>
+                                <span t-att-data-overtime-hours="employee.employee"
+                                      t-att-data-day-count="day_count" class="oe_timesheet_weekly_box"/>
+                                <span t-att-data-overtime-input="employee.employee"
+                                      t-att-data-day-count="day_count" class="oe_timesheet_weekly_box"/>
+                                <input t-if="!widget.get('effective_readonly')" class="oe_timesheet_weekly_input"
+                                       t-att-data-employee-to="employee.employee"
+                                       t-att-data-day-count="day_count" type="text"/>
+                            </t>
+                            <t t-if="moment() &gt; moment(day.day) &amp;&amp; moment().format('DD-MM-YYYY') != moment(day.day).format('DD-MM-YYYY')">
+                                <t t-if="widget.get('effective_readonly')">
+                                    <a t-if="widget.get('effective_readonly')" t-att-data-start-time="employee.employee"
+                                       t-att-data-day-count="day_count" class="oe_timesheet_weekly_overtime_box"/>
+                                    <a t-att-data-first-clock-in="employee.employee" t-att-data-employee="employee.employee"
+                                       t-att-data-day-count="day_count" class="oe_timesheet_weekly_attendance"/>
+                                    <a t-att-data-first-clock-out="employee.employee" t-att-data-employee="employee.employee"
+                                       t-att-data-day-count="day_count" class="oe_timesheet_weekly_attendance"/>
+                                    <a t-att-data-last-clock-in="employee.employee" t-att-data-employee="employee.employee"
+                                       t-att-data-day-count="day_count" class="oe_timesheet_weekly_attendance"/>
+                                    <a t-att-data-last-clock-out="employee.employee" t-att-data-employee="employee.employee"
+                                       t-att-data-day-count="day_count" class="oe_timesheet_weekly_attendance"/>
+                                    <a t-if="widget.get('effective_readonly')"
+                                       t-att-data-overtime-hours="employee.employee" t-att-data-employee="employee.employee"
+                                       t-att-data-day-count="day_count" class="oe_timesheet_weekly_attendance"/>
+                                    <a t-if="widget.get('effective_readonly')"
+                                       t-att-data-overtime-input="employee.employee"
+                                       t-att-data-day-count="day_count" class="oe_timesheet_weekly_overtime_box"/>
+                                </t>
+                                <t t-if="!widget.get('effective_readonly')">
+                                    <input t-if="!widget.get('effective_readonly')" class="oe_timesheet_weekly_input"
+                                           t-att-data-start-time="employee.employee"
+                                           t-att-data-day-count="day_count" type="text"/>
+                                    <a t-att-data-first-clock-in="employee.employee" t-att-data-employee="employee.employee"
+                                       t-att-data-day-count="day_count" class="oe_timesheet_weekly_attendance"/>
+                                    <a t-att-data-first-clock-out="employee.employee" t-att-data-employee="employee.employee"
+                                       t-att-data-day-count="day_count" class="oe_timesheet_weekly_attendance"/>
+                                    <a t-att-data-last-clock-in="employee.employee" t-att-data-employee="employee.employee"
+                                       t-att-data-day-count="day_count" class="oe_timesheet_weekly_attendance"/>
+                                    <a t-att-data-last-clock-out="employee.employee" t-att-data-employee="employee.employee"
+                                       t-att-data-day-count="day_count" class="oe_timesheet_weekly_attendance"/>
+                                    <!--<input t-if="!widget.get('effective_readonly')" class="oe_timesheet_weekly_input" t-att-data-first-clock-in="employee.employee"-->
+                                    <!--t-att-data-day-count="day_count" type="text"/>-->
+                                    <!--<input t-if="!widget.get('effective_readonly')" class="oe_timesheet_weekly_input" t-att-data-first-clock-out="employee.employee"-->
+                                    <!--t-att-data-day-count="day_count" type="text"/>-->
+                                    <!--<input t-if="!widget.get('effective_readonly')" class="oe_timesheet_weekly_input" t-att-data-last-clock-in="employee.employee"-->
+                                    <!--t-att-data-day-count="day_count" type="text"/>-->
+                                    <!--<input t-if="!widget.get('effective_readonly')" class="oe_timesheet_weekly_input" t-att-data-last-clock-out="employee.employee"-->
+                                    <!--t-att-data-day-count="day_count" type="text"/>-->
+                                    <span t-att-data-overtime-hours="employee.employee" t-att-data-day-count="day_count" t-att-data-employee="employee.employee"
+                                          class="oe_timesheet_weekly_attendance">0</span>
+                                    <input t-if="!widget.get('effective_readonly')" class="oe_timesheet_weekly_input"
+                                           t-att-data-overtime-input="employee.employee"
+                                           t-att-data-day-count="day_count" type="text"/>
+                                    <t t-if="widget.canBeAprrove()">
+                                        <button t-if="!widget.get('effective_readonly')" style="float:right"
+                                                class="btn btn-xs btn-default cancel_btn">Cancel
+                                        </button>
+                                        <button t-if="!widget.get('effective_readonly')" style="float:right" t-att-data-employee="employee.employee"
+                                                class="btn btn-xs btn-primary approve_btn">Approve
+                                        </button>
+                                    </t>
+                                </t>
+                            </t>
+                            <t t-set="day_count" t-value="day_count + 1"/>
+                        </td>
+                    </t>
+                </tr>
+                <!--Hide add employee line-->
+                <!--<tr>-->
+                <!--<td class="o_add_timesheet_line" colspan="2">-->
+                <!--<div>-->
+                <!--<button t-if="!widget.get('effective_readonly')" class="btn btn-sm btn-primary oe_edit_only oe_timesheet_button_add">Add a Line</button>-->
+                <!--</div>-->
+                <!--</td>-->
+                <!--<t t-set="day_count" t-value="0"/>-->
+                <!--<t t-foreach="widget.dates" t-as="date">-->
+                <!--<td class="oe_timesheet_total">-->
+                <!--<span class="oe_timesheet_weekly_box" t-att-data-day-total="day_count"/>-->
+                <!--<t t-set="day_count" t-value="day_count + 1"/>-->
+                <!--</td>-->
+                <!--</t>-->
+                <!--</tr>-->
+            </table>
+            <div t-if="widget.employees.length == 0">
+                <div class="oe_view_nocontent oe_edit_only">
+                    <p class="oe_view_nocontent_create">Click to add employees, overtime or estimated overtime.</p>
+                    <p>You will be able to register your overtime and estimated overtime for future.</p>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--# ____________________________Umar-Aziz_______________________________-->
+        <record id="view_task_form2_inherit" model="ir.ui.view">
+            <field name="name">view.task.form2.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header/field[@name='stage_id']" position="before">
+                    <button name="start_work" type="object" attrs="{'invisible': [('task_running','!=',False)]}" help="Click to start working on this task with auto calculate timesheet">
+                        <i class="fa fa-play" style="font-size:14px;color:green"/>
+                    </button>
+                    <button name="stop_work_wizard" type="object" attrs="{'invisible': [('task_running','=',False)]}" help="Click to stop working on this task">
+                        <i class="fa fa-pause" style="font-size:14px;color:red"/>
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="work_start" attrs="{'invisible': [('task_running','=',False)]}"/>
+                    <field name="task_running" invisible="1"/>
+                    <field name="work_hours" widget="float_time"/>
+                </xpath>
+                <xpath expr="/form/sheet/notebook/page/field[@name='timesheet_ids']/tree/field[@name='name']" position="after">
+                    <field name="start_time" widget="float_time"/>
+                    <field name="finish_time" widget="float_time"/>
+                </xpath>
+            </field>
+        </record>
+        <!--____________________adding play and pause buttons in kanban view ______________________-->
+        <record id="view_task_kanban_inherit" model="ir.ui.view">
+            <field name="name">view.task.kanban.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_kanban"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='color']" position="after">
+                    <field name="task_running"/>
+                </xpath>
+                <xpath expr="//div[@class='oe_kanban_bottom_left']" position="inside">
+
+                    <div t-if="record.task_running.raw_value == false">
+                        <a name="start_work" type="object">
+                            <img src='/task_timer/static/img/play.png' width="30px" height="30px"/>
+                        </a>
+                    </div>
+                    <div t-if="record.task_running.raw_value">
+                        <a name="stop_work_kanban" type="object">
+                            <img src='/task_timer/static/img/pause.png' width="30px" height="30px"/>
+                        </a>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!--____________________filtering by active tasks ______________________-->
+        <record id="view_task_search_form_inherit" model="ir.ui.view">
+            <field name="name">view.task.search.form.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_search_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//filter[@name='message_needaction']" position="after">
+                    <filter string="Running Tasks" name="running_tasks" domain="[('task_running','!=',False)]"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</openerp>

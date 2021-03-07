@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <template id="project_locktask_kanban123" name="project_locktask_kanban assets"
+                  inherit_id="web.assets_backend">
+            <xpath expr="//script[last()]" position="after">
+                <script type="text/javascript" src="/sg_hr_employee/static/src/js/kanban_locktask.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

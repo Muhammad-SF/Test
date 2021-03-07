@@ -1,0 +1,8 @@
+<odoo>
+    <data>
+          <record model="product.product" id="cash_product">
+            <field name="name">Cash Advance</field>
+            <field name="type">service</field>
+          </record>
+    </data>
+</odoo>

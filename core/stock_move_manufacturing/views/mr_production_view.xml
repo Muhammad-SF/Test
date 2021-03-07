@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="mrp_production_form_view_add_location" model="ir.ui.view">
+            <field name="name">mrp.production.form.inherit.view</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//form/header" position="inside">
+                    <button name="create_internal_transfer" string="Transfer Stock" type="object" attrs="{'invisible': [('state', '=', 'confirmed'), ('stock_location_id', '=', False) ]}" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="location_id"/>
+                    <field name="stock_location_id"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="mrp_production_form_inherit_view_add_line" model="ir.ui.view">
+            <field name="name">mrp.production.form.inherit.view</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="manufacturing_order_extended.mrp_production_form_view_ro"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_raw_ids']/tree/field[@name='quantity_done']" position="after">
+                    <!--<field name="product_uom_id"/>-->
+                    <field name="location_id"/>
+                </xpath>
+                
+            </field>
+        </record>
+    </data>
+</odoo>

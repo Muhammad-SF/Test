@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_config_settings_receipt_supplier_inherit" model="ir.ui.view">
+            <field name="name">View Account Config Settings Receipt Supplier Inherit</field>
+            <field name="model">account.config.settings</field>
+            <field name="inherit_id" ref="account.view_account_config_settings"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/group[last()]" position="after">
+                    <group name="receipt_supplier_matrix" invisible="1">
+                        <label string=""/>
+                        <div>
+                            <field name="group_receipt_supplier_matrix"/>
+                            <label for="group_receipt_supplier_matrix"/>
+                        </div>
+                        <label string=""/>
+                        <div>
+                            <field name="group_supplier_matrix"/>
+                            <label for="group_supplier_matrix"/>
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

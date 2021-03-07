@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <template id="assets_backend" name="web_editor_modifier assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <script type="text/javascript"
+                        src="/web_editor_modifier/static/src/js/web_editor_summernote.js"></script>
+            </xpath>
+        </template>
+    </data>
+</odoo>

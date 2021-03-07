@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pos_coupon_generation_wizard_view_form" model="ir.ui.view">
+        <field name="name">pos_generate_coupons.form</field>
+        <field name="model">pos_generate_coupons</field>
+        <field name="arch" type="xml">
+            <form string="Expense refuse reason">
+                <separator string="Generate Coupons"/>
+			<group>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="voucher_val"/>
+                <field name="type"/>
+			</group>
+                <footer>
+                    <button string='Generate' name="generate_coupons" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <record id="pos_coupon_generation_wizard_action" model="ir.actions.act_window">
+        <field name="name">Generate Coupons Yasar</field>
+        <field name="res_model">pos_generate_coupons</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="pos_coupon_generation_wizard_view_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

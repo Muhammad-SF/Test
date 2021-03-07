@@ -1,0 +1,27 @@
+<odoo>
+        <record model="ir.ui.view" id="hr_expense_form">
+            <field name="name">Hr Expense</field>
+            <field name="model">hr.expense</field>
+            <field name="inherit_id" ref="hr_expense.hr_expense_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/field[@name='product_id']" position="before">
+                    <field name="is_advance" invisible="1"/>
+                    <field name="product" invisible="1"/>
+                    <field name="is_product" invisible="1"/>
+                </xpath>
+                <xpath expr="//sheet/group/group/field[@name='product_id']" position="attributes"> 
+                    <attribute name="attrs">{'invisible': [('is_product','=',True)]}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="simple_cash_advance_action">
+            <field name="name">Simple Cash Advance</field>
+            <field name="res_model">hr.expense</field>
+            <field name="domain">[('is_advance','=',True)]</field>
+            <field name="context">{'default_is_advance': True, 'default_is_product': True,}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem name="Cash Advance" id="simple_cash_advance" parent="sg_hr_employee.menu_root_hr_parent" sequence="0" action="simple_cash_advance_action" />
+</odoo>

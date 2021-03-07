@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_frontend" inherit_id="website.assets_frontend" name="sale sale">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/sarangoci_purchase_website/static/src/css/sarangoci_purchase_website.css" />
+            <script type="text/javascript" src="/sarangoci_purchase_website/static/src/js/sarangoci_purchase_website.js"></script>
+        </xpath>
+    </template>
+
+    <!-- My sale Cart -->
+    <template id="header" inherit_id="website.layout" name="Header Sale My Sale Cart Link">
+        <xpath expr="//header//ul[@id='top_menu']/li" position="before">
+            <t t-set="sale_request" t-value="website.get_sale_request()" />
+            <li t-att-class="'' if sale_request and len(sale_request.get('line_ids', [])) else 'hidden'">
+                <a href="/sale/cart">
+                    <i class="fa fa-saleping-cart"></i>
+                    My cart <sup t-attf-class="my_cart_quantity label label-primary" t-esc="sale_request and len(sale_request.get('line_ids', [])) or ''" />
+                </a>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="cart_lines" name="Sale Cart Lines">
+        <div t-if="not sale_request or not sale_request.get('line_ids')" class="js_cart_lines well well-lg">
+          Your cart is empty!
+        </div>
+        <table class="table table-striped table-condensed js_cart_lines" id="cart_products" t-if="sale_request and sale_request.get('line_ids')">
+            <thead>
+                <tr>
+                    <th width="100">Product</th>
+                    <th></th>
+                    <th>Description</th>
+                    <th width="130" class="text-center">Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="sale_request.get('line_ids')" t-as="line">
+                    <tr>
+                        <td colspan="2" t-if="not line.get('product_tmpl_id')"></td>
+                        <td align="center" t-if="line.get('product_tmpl_id')">
+                            <img class="img img-responsive img-rounded" t-att-src="'data:image/png;base64,%s' % line.get('image')" />
+                        </td>
+                        <td t-if="line.get('product_tmpl_id')">
+                            <div>
+                                <a t-attf-href="/sale/product/#{ line.get('product_tmpl_slug') }">
+                                    <strong t-esc="line.get('display_name')" />
+                                </a>
+                            </div>
+                            <div class="text-muted">
+                                <t t-foreach="line.get('attribute_values')" t-as="attr_val">
+                                    <span t-esc="attr_val[0]"/>:<span t-esc="attr_val[1]"/><br/>
+                                </t>
+                            </div>
+                            <a href='#' class='js_delete_product no-decoration'> <small><i class='fa fa-trash-o'></i> Remove</small></a>
+                        </td>
+                        <td>
+                            <span t-esc="line.get('description')"/>
+                        </td>
+                        <td class="text-center" id="td-qty">
+                            <div class="input-group oe_website_spinner">
+                                <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json" data-no-instant="">
+                                    <i class="fa fa-minus"></i>
+                                </a>
+                                <input type="text" class="js_quantity form-control quantity" t-att-data-product-id="line.get('product_id')" t-att-value="int(line.get('product_qty'))" />
+                                <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json" data-no-instant="">
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+    </template>
+
+    <template id="so_created" name="Purchase Order Created">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="container oe_website_sale">
+                    <h4 class="mb32 text-center">Your Purchase Order <span t-esc="purchase_order.name"/> has been submitted!</h4>
+                    <!--<h4 class="mb32 text-center">Your Purchase Order <span t-esc="purchase_order.name"/> &amp; Sale Order <span t-esc="purchase_order.sale_order_id.name"/>  has been submitted!</h4>-->
+                    <div class="row">
+                        <div class="col-md-11 col-sm-11">
+                            <table class="table table-striped table-condensed js_cart_lines" id="cart_products" t-if="purchase_order and purchase_order.order_line">
+                                <thead>
+                                    <tr>
+                                        <th width="100">Product</th>
+                                        <th></th>
+                                        <th>Description</th>
+                                        <th width="130" class="text-center">Unit Price</th>
+                                        <th width="130" class="text-center">Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="purchase_order.order_line" t-as="line">
+                                        <tr>
+                                            <td colspan="2" t-if="not line.product_id"></td>
+                                            <td align="center" t-if="line.product_id">
+                                                <span t-field="line.product_id.image_small" t-options="{'widget': 'image', 'class': 'img-rounded'}" />
+                                            </td>
+                                            <td t-if="line.product_id.product_tmpl_id">
+                                                <div>
+                                                    <a t-attf-href="/sale/product/#{ slug(line.product_id.product_tmpl_id) }">
+                                                        <strong t-esc="line.product_id.with_context(display_default_code=False).display_name" />
+                                                    </a>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div t-esc="line.name">
+                                                </div>
+                                            </td>
+                                            <td class="text-center" id="td-price">
+                                                <div>
+                                                    <span/>
+                                                </div>
+                                            </td>
+                                            <td class="text-center" id="td-qty">
+                                                <div>
+                                                    <span t-esc="int(line.product_qty)" />
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="cart" name="Sale Cart">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="container oe_website_sale">
+
+                    <h1 class="mb32">Material Chart</h1>
+                    <div class="row">
+                        <div class="col-md-11 col-sm-11 oe_cart">
+                            <t t-call="sarangoci_purchase_website.cart_lines" />
+                            <div class="clearfix" />
+                            <a t-if="not optional_products and sale_request and sale_request.get('line_ids')" class="btn btn-primary pull-right mb32" href="/sale/confirm">
+                                <span class="hidden-xs">Confirm</span>
+                                <span class="fa fa-long-arrow-right" />
+                            </a>
+                            <div class="oe_structure" />
+                        </div>
+                    </div>
+                </div>
+                <div class="oe_structure" />
+            </div>
+        </t>
+    </template>
+
+     <template id="cart_popover" name="Cart Popover">
+        <div t-if="not sale_request or not sale_request.get('line_ids')" class="well well-lg">
+                  Your cart is empty!
+                </div>
+        <t t-if="sale_request and sale_request.get('line_ids')">
+            <t t-foreach="sale_request.get('line_ids')" t-as="line">
+                <div class="row mb8 cart_line">
+                    <div class="col-xs-3">
+                        <img class="img img-responsive img-rounded" t-att-src="'data:image/png;base64,%s' % line.get('image')" />
+                    </div>
+                    <div class="col-xs-9">
+                        <a t-attf-href="/sale/product/#{ line.get('product_tmpl_slug') }">
+                            <span t-esc="line.get('display_name')" class="h6" />
+                        </a>
+                        <br />
+                        <small>Qty: <t t-esc="int(line.get('product_qty'))" /></small>
+                    </div>
+                </div>
+            </t>
+            <div class="text-center">
+                <a class="btn btn-primary" href="/sale/cart">
+                       View Cart (<t t-esc="cart_quantity" /> items)
+                     </a>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="continue_sale" inherit_id="sarangoci_purchase_website.cart" customize_show="True" name="Continue Shopping Button">
+        <xpath expr="//a[@href='/sale/confirm']" position="before">
+            <a href="/sale" class="btn btn-default mb32">
+                <span class="fa fa-long-arrow-left" />
+                <span class="hidden-xs">Continue Buying</span>
+                <span class="visible-xs-inline">Continue</span>
+            </a>
+        </xpath>
+    </template>
+
+    <template id="products_item" name="Products item">
+        <form action="/sale/cart/update" method="post">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+            <div itemscope="itemscope" itemtype="http://schema.org/Product">
+                <div class="oe_product_image">
+                    <a itemprop="url" t-att-href="keep('/sale/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))">
+                        <span itemprop="image" t-attf-content="{{request.httprequest.url_root}}web/image/product.template/{{product.id}}/image" t-field="product.image" t-options="{'widget': 'image', 'resize': None if product_image_big else '300x300', 'zoom': 'image'}" t-att-alt="product.name" />
+                    </a>
+                </div>
+                <section>
+                    <h5>
+                        <strong>
+                            <a itemprop="name" t-att-href="keep('/sale/product/%s' % slug(product), page=(pager['page']['num'] if pager['page']['num']&gt;1 else None))" t-att-content="product.name" t-field="product.name" />
+                        </strong>
+                    </h5>
+                </section>
+            </div>
+        </form>
+    </template>
+
+    <template id="search" name="Search Box">
+        <form t-att-action="keep('/sale'+ ('/category/'+slug(category)) if category else None, search=0)" method="get" t-att-class="search_class">
+            <t t-if="attrib_values">
+                <t t-foreach="attrib_values" t-as="a">
+                    <input type="hidden" name="attrib" t-att-value="'%s-%s' % (a[0], a[1])" />
+                </t>
+            </t>
+            <t t-call="website.website_search_box" />
+        </form>
+    </template>
+
+    <template id="search count" inherit_id="website.website_search_box" active="False" customize_show="True" name="Show # found">
+        <xpath expr="//button[contains(@class, 'oe_search_button')]" position="inside">
+            <span t-if='search and search_count' class='oe_search_found'> <small>(<t t-esc="search_count"/> found)</small></span>
+        </xpath>
+    </template>
+
+    <!-- /sale product listing -->
+    <template id="products" name="Products">
+        <t t-call="website.layout">
+            <t t-set="additional_title">Material</t>
+            <div id="wrap" >
+                <div class="oe_structure" />
+                <div class="container oe_website_sale">
+                    <div class="products_pager">
+                        <div class="row" style="width: 100%;">
+                            <t t-call="sarangoci_purchase_website.search">
+                                <t t-set="search_class" t-value="'pagination form-inline o_sarangoci_purchase_website_search'"/>
+                            </t>
+                            <t t-call="website.pager" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-sm-4 col-xs-12" id="products_grid_before">
+                            <ul class="nav nav-pills nav-stacked mt16">
+                                <li t-att-class=" '' if category else 'active' ">
+                                    <a t-att-href="keep('/sale',category=0)" class="o_not_editable">All Products</a>
+                                </li>
+                                <t t-foreach="categories" t-as="c">
+                                    <t t-call="sarangoci_purchase_website.categories_recursive" />
+                                </t>
+                            </ul>
+                        </div>
+                        <div class="col-md-9 col-sm-8" id="products_grid">
+                            <table width="100%">
+                                <tbody>
+                                    <tr t-ignore="true">
+                                        <td t-foreach="range(0,rows)" t-as="row" t-attf-width="#{100/rows}%"></td>
+                                    </tr>
+                                    <tr t-foreach="bins" t-as="tr_product">
+                                        <t t-foreach="tr_product" t-as="td_product">
+                                            <t t-if="td_product">
+                                                <t t-set="product" t-value="td_product['product']" />
+                                                <td t-att-colspan="td_product['x'] != 1 and td_product['x']" t-att-rowspan="td_product['y'] != 1 and td_product['y']" t-attf-class="oe_product oe_grid oe-height-2 oe_image_full">
+                                                    <div class="oe_product_cart">
+                                                        <t t-set="product_image_big" t-value="td_product['x']+td_product['y'] &gt; 2" />
+                                                        <t t-call="sarangoci_purchase_website.products_item" />
+                                                    </div>
+                                                </td>
+                                            </t>
+                                            <td t-if="not td_product" class="oe-height-2" />
+                                        </t>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <t t-if="not bins">
+                                <div class="text-center text-muted oe_product">
+                                    <h3 class="css_editable_display">No product defined.</h3>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                    <div class="products_pager">
+                        <t t-call="website.pager" />
+                    </div>
+                </div>
+                <div class="oe_structure mb32" />
+            </div>
+        </t>
+    </template>
+
+    <!-- /sale/product product page -->
+    <template id="product" name="Product">
+        <t t-call="website.layout">
+            <t t-set="additional_title" t-value="product.name" />
+            <div itemscope="itemscope" itemtype="http://schema.org/Product" id="wrap" >
+                <section t-attf-class="container mt8 oe_website_sale" id="product_detail">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <ol class="breadcrumb">
+                                <li>
+                                    <a t-att-href="keep(category=0)">Products</a>
+                                </li>
+                                <li class="active">
+                                    <span t-field="product.name" />
+                                </li>
+                            </ol>
+                        </div>
+                        <!-- <div class="col-sm-3 mb8">
+                            <t t-call="sarangoci_purchase_website.search" />
+                        </div> -->
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <span itemprop="image" t-attf-content="{{request.httprequest.url_root}}web/image/product.template/{{product.id}}/image" t-field="product.image" t-options="{'widget': 'image', 'class': 'product_detail_img', 'alt-field': 'name', 'zoom': 'image'}"/>
+                        </div>
+                        <div class="col-sm-5 col-lg-4 col-lg-offset-1" id="product_details">
+                            <h1 itemprop="name" t-field="product.name">Product Name</h1>
+                            <span itemprop="url" style="display:none;" t-esc="'%ssale/product/%s' % (request.httprequest.url_root, slug(product))"/>
+                            <t t-set="attribute_value_ids" t-value="get_attribute_value_ids(product)"/>
+                            <form action="/sale/cart/update" class="js_add_cart_variants" method="POST">
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                                <div class="js_product" t-if="product.product_variant_ids">
+                                    <t t-placeholder="select">
+                                        <input type="hidden" class="product_id" name="product_id" t-att-value="product.product_variant_id.id if len(product.product_variant_ids) == 1 else '0'" />
+                                        <t t-call="sarangoci_purchase_website.variants">
+                                            <t t-set="ul_class" t-value="'nav-stacked'" />
+                                        </t>
+                                    </t>
+                                    <p t-if="len(product.product_variant_ids) &gt; 1" class="css_not_available_msg bg-danger" style="padding: 15px;">Product not available</p>
+                                    <a id="add_to_cart" class="btn btn-primary btn-lg mt8 js_check_product a-submit" href="#">Add to Cart</a>
+                                </div>
+                            </form>
+                            <hr t-if="product.description_sale" />
+                            <div>
+                                <p t-field="product.description_sale" class="text-muted" />
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                </section>
+                <!-- <div itemprop="description" t-field="product.website_description" class="oe_structure mt16" id="product_full_description" /> -->
+                <t t-set="head">
+                    <!-- Facebook and linkedin sharing data -->
+                    <meta property="og:type" content="website" />
+                    <meta property="og:url" t-att-content="request.httprequest.url" />
+                    <meta property="og:image" t-attf-content="#{request.httprequest.url_root}web/image/product.template/#{product.id}/image" />
+                    <meta property="og:description" t-att-content="product.description_sale" />
+                    <!--  Twitter sharing data -->
+                    <meta name="twitter:card" content="summary_large_image" />
+                    <meta name="twitter:site" t-attf-content="@#{res_company.name}" />
+                    <meta name="twitter:title" t-att-content="product.name" />
+                    <meta name="twitter:description" t-att-content="product.description_sale" />
+                    <meta name="twitter:image" t-attf-content="#{request.httprequest.url_root}web/image/product.template/#{product.id}/image" />
+                </t>
+            </div>
+        </t>
+    </template>
+
+    <template id="product_attributes" inherit_id="sarangoci_purchase_website.product" customize_show="True" name="Product attributes">
+        <xpath expr="//p[@t-field='product.description_sale']" position="after">
+            <hr t-if="sum([(1 if len(l.value_ids)==1 else 0) for l in product.attribute_line_ids])" />
+            <p class="text-muted">
+                <t t-foreach="product.attribute_line_ids.sorted(key=lambda x: x.attribute_id.sequence)" t-as="variant_id">
+                    <t t-if="len(variant_id.value_ids)==1">
+                        <span t-field="variant_id.attribute_id" />: <span t-field="variant_id.value_ids[0].name" /><br /></t>
+                </t>
+            </p>
+        </xpath>
+    </template>
+
+    <template id="variants">
+      <t t-set="attribute_value_ids" t-value="get_attribute_value_ids(product)"/>
+      <ul t-attf-class="list-unstyled js_add_cart_variants #{ul_class}" t-att-data-attribute_value_ids="attribute_value_ids">
+        <t t-foreach="product.attribute_line_ids.sorted(key=lambda x: x.attribute_id.sequence)" t-as="variant_id">
+          <li t-if="len(variant_id.value_ids) > 1">
+
+            <strong t-field="variant_id.attribute_id.name"/>
+              <ul class="list-unstyled">
+                  <t t-set="inc" t-value="0"/>
+                  <t t-foreach="variant_id.value_ids" t-as="value_id">
+                      <li class="form-group js_attribute_value" style="margin: 0;">
+                          <label class="control-label" style="margin: 0 20px;">
+                              <input type="radio" t-att-class="'js_variant_change' if variant_id.attribute_id.create_variant else None" t-att-checked="'checked' if not inc else None" t-att-name="'attribute-%s-%s' % (product.id, variant_id.attribute_id.id)" t-att-value="value_id.id" style="vertical-align: top; margin-right: 10px;"/>
+                              <span t-field="value_id.name"/>
+                          </label>
+                      </li>
+                      <t t-set="inc" t-value="inc+1"/>
+                  </t>
+              </ul>
+          </li>
+        </t>
+      </ul>
+    </template>
+
+    <template id="product_quantity" inherit_id="sarangoci_purchase_website.product" customize_show="True" name="Select Quantity">
+      <xpath expr="//a[@id='add_to_cart']" position="before">
+        <div class="css_quantity input-group oe_website_spinner" contenteditable="false">
+            <a t-attf-href="#" class="mb8 input-group-addon js_add_cart_json">
+                <i class="fa fa-minus"></i>
+            </a>
+            <input type="text" class="form-control quantity" data-min="1" name="add_qty" value="1"/>
+            <a t-attf-href="#" class="mb8 input-group-addon float_left js_add_cart_json">
+                <i class="fa fa-plus"></i>
+            </a>
+        </div>
+      </xpath>
+    </template>
+
+    <template id="product_variants" inherit_id="sarangoci_purchase_website.product" active="False" customize_show="True" name="List View of Variants">
+      <xpath expr="//t[@t-placeholder='select']" position="replace">
+        <input type="hidden" t-if="len(product.product_variant_ids) == 1" name="product_id" t-att-value="product.product_variant_id.id"/>
+        <t t-call="sarangoci_purchase_website.variants">
+          <t t-set="ul_class" t-value="'nav-stacked'"/>
+        </t>
+        <t t-if="len(product.product_variant_ids) &gt; 1">
+          <label label-default="label-default" class="radio" t-foreach="product.product_variant_ids" t-as="variant_id">
+            <input type="radio" name="product_id" class="js_product_change" t-att-checked="'checked' if variant_id_index == 0 else None" t-att-value="variant_id.id" t-att-data-lst_price="variant_id.lst_price" t-att-data-price="variant_id.price"/>
+            <span t-esc="variant_id.name_get()[0][1]"/>
+          </label>
+        </t>
+      </xpath>
+    </template>
+
+    <template id="invoice_address" name="Invoice Address">
+        <t t-call="website.layout">
+            <div>
+                <div class="container oe_website_sale">
+                    <h4 class="mb32 text-center">Please add Invoice address to <span t-esc="name"/> !</h4>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="shipping_address" name="Shipping Address Issue">
+        <t t-call="website.layout">
+            <div>
+                <div class="container oe_website_sale">
+                    <h4 class="mb32 text-center">Please add Shipping address to <span t-esc="name"/> !</h4>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="branch_warehouse" name="Branch Warhouse">
+        <t t-call="website.layout">
+            <div>
+                <div class="container oe_website_sale">
+                    <h4 class="mb32 text-center">Branch <span t-esc="name"/> doesn't have Warehouse !</h4>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- ###########FT############# -->
+
+    <template id="categories_recursive" name="Category list">
+        <li t-att-class="'active' if c.id == int(category or 0) else None">
+            <a t-att-href="keep('/sale/category/' + slug(c), category=0)" t-field="c.name"></a>
+            <ul t-if="c.child_id" class="nav nav-pills nav-stacked nav-hierarchy">
+                <t t-foreach="c.child_id" t-as="c">
+                    <t t-call="sarangoci_purchase_website.categories_recursive" />
+                </t>
+            </ul>
+        </li>
+    </template>
+
+    <!--<template id="products_categories" inherit_id="sarangoci_purchase_website.products" active="False" customize_show="True" name="Product Categories">-->
+        <!--<xpath expr="//div[@id='products_grid_before']" position="inside">-->
+            <!--<ul class="nav nav-pills nav-stacked mt16">-->
+                <!--<li t-att-class=" '' if category else 'active' ">-->
+                    <!--<a t-att-href="keep('/sale',category=0)" class="o_not_editable">All Products</a>-->
+                <!--</li>-->
+                <!--<t t-foreach="categories" t-as="c">-->
+                    <!--<t t-call="sarangoci_purchase_website.categories_recursive" />-->
+                <!--</t>-->
+            <!--</ul>-->
+        <!--</xpath>-->
+        <!--<xpath expr="//div[@id='products_grid_before']" position="attributes">-->
+            <!--<attribute name="class">col-md-3 col-sm-4 col-xs-12</attribute>-->
+        <!--</xpath>-->
+        <!--<xpath expr="//div[@id='products_grid']" position="attributes">-->
+            <!--<attribute name="class">col-md-9 col-sm-8</attribute>-->
+        <!--</xpath>-->
+    <!--</template>-->
+
+    <!--<template id="option_collapse_categories_recursive_TM" name="Collapse Category Recursive">-->
+        <!--<li t-att-class="'active' if categ.id == int(category or 0) else None">-->
+            <!--<i t-if="categ.child_id" t-attf-class="text-primary fa #{'fa-chevron-down' if categ.id in parent_category_ids else 'fa-chevron-right'}" />-->
+            <!--<a t-att-href="keep('/sale/category/' + slug(categ), category=0)" t-field="categ.name"></a>-->
+            <!--<ul t-if="categ.child_id" class="nav nav-pills nav-stacked nav-hierarchy" t-att-style="'display:block;' if categ.id in parent_category_ids else 'display:none;'">-->
+                <!--<t t-foreach="categ.child_id" t-as="categ">-->
+                    <!--<t t-call="sarangoci_purchase_website.option_collapse_categories_recursive_TM" />-->
+                <!--</t>-->
+            <!--</ul>-->
+        <!--</li>-->
+    <!--</template>-->
+
+    <!--<template id="option_collapse_products_categories_TM" name="Collapsible Category List" inherit_id="sarangoci_purchase_website.products_categories" active="False" customize_show="True">-->
+        <!--<xpath expr="//div[@id='products_grid_before']/ul" position="replace">-->
+            <!--<ul class="nav nav-pills nav-stacked mt16" id="o_shop_collapse_category">-->
+                <!--<li t-att-class=" '' if category else 'active' ">-->
+                    <!--<a t-att-href="keep('/sale',category=0)" class="o_not_editable">All Products</a>-->
+                <!--</li>-->
+                <!--<t t-foreach="categories" t-as="categ">-->
+                    <!--<t t-call="sarangoci_purchase_website.option_collapse_categories_recursive_TM" />-->
+                <!--</t>-->
+            <!--</ul>-->
+        <!--</xpath>-->
+    <!--</template>-->
+
+
+
+</odoo>

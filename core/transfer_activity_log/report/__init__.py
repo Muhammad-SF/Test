@@ -1,0 +1,4 @@
+import delivery_order_log_activity_tmpl
+import received_notes_log_activity_tmpl
+import transfer_in_log_activity_tmpl
+import transfer_out_log_activity_tmpl

@@ -1,0 +1,119 @@
+// dashborad [start]
+.o_web_client {
+    .o_main {
+        .o_main_content.ad_rightbar {
+            .o_content {
+                .o_view_manager_content, .o_dashboards {
+                    // dashborad for sale,POS, inventory, invoice etc.. [start]
+                    .o_kanban_dashboard {
+                        padding: 10px;
+                        .o_sales_dashboard {
+                            margin: 0px;
+                            padding: 0px;
+                            .table.table-condensed {
+                                border-spacing: 10px 2px;
+                                tbody {
+                                    tr {
+                                        & > .o_text {
+                                            color: @Label;
+                                            .o_highlight{
+                                                width: 100%;
+                                                overflow: hidden;
+                                                white-space: nowrap;
+                                                text-overflow: ellipsis;
+                                            }
+                                        }
+                                        & > .o_main {
+                                            background-color: @brand-secondary;
+                                            &:hover {
+                                                background-color: darken(@brand-secondary, 7%);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            .hidden-xs.table.table-condensed {
+                                tbody {
+                                    tr {
+                                        & > .o_secondary {
+                                            background-color: @h-deshboard;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        .o_kanban_record {
+                            .o_kanban_card_header {
+                                background-color: @h-deshboard;
+                                .o_kanban_manage_button_section {
+                                    .o_kanban_manage_toggle_button {
+                                        color: @brand-secondary;
+                                    }
+                                }
+                            }
+                            .container.o_kanban_card_manage_pane, .container.o_kanban_card_content {
+                                .row {
+                                    .o_kanban_card_manage_section {
+                                        div {
+                                            .oe_kanban_action_a {
+                                                color: @brand-secondary;
+                                            }
+                                        }
+                                    }
+                                    a {
+                                        color: @brand-secondary;
+                                    }
+                                    .o_kanban_primary_bottom {
+                                        input {
+                                            border: none;
+                                            border-bottom: 1px solid @border;
+                                            &:focus {
+                                                .border-animation;
+                                                outline: none;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            .o_project_kanban_boxes {
+                                .o_project_kanban_box:nth-child(odd) {
+                                    background-color: @brand-secondary;
+                                    span {
+                                        color: @white
+                                    }
+                                }
+                                .o_project_kanban_box:nth-child(even) {
+                                    background-color: @h-deshboard;
+                                    span {
+                                        color: @Label;
+                                    }
+                                }
+                            }
+                            .o_project_kanban_main {
+                                .o_kanban_card_manage_pane, .o_project_kanban_manage {
+                                    a {
+                                        color: @brand-secondary;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // dashborad for sale,POS, inventory, invoice etc.. [end]
+                    //dashborad for website admin [start]
+                    .o_website_dashboard {
+                        .o_dashboard_visits, .o_dashboard_leads, .o_dashboard_sales {
+                            .o_box {
+                                box-shadow: none;
+                                h2, h3, h4 {
+                                    color: @brand-secondary;
+                                }
+                            }
+                        }
+                    }
+                    //dashborad for website admin [end]
+                }
+            }
+        }
+    }
+}

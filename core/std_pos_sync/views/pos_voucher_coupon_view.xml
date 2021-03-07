@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- VOUCHER -->
+        <record model="ir.ui.view" id="gift_voucher_pos_form_sync_pos_id">
+            <field name="name">gift.voucher.pos.form.sync.pos.id</field>
+            <field name="model">gift.voucher.pos</field>
+            <field name="inherit_id" ref="vouchers_pos.gift_voucher_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/field[@name='max_value']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- COUPON -->
+        <record model="ir.ui.view" id="gift_coupon_pos_form_sync_pos_id">
+            <field name="name">gift.coupon.pos.form.sync.pos.id</field>
+            <field name="model">gift.coupon.pos</field>
+            <field name="inherit_id" ref="vouchers_pos.gift_coupon_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/field[@name='end_date']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

@@ -1,0 +1,70 @@
+<odoo>
+    <record model="ir.ui.view" id="barcode_number_form_view_id">
+        <field name="name">view.barcode.number</field>
+        <field name="model">barcode.number</field>
+        <field name="arch" type="xml">
+            <form string="Lot number serializer">
+                <group>
+                    <group>
+                        <field name="digits"/>
+                        <field name="current_number"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="barcode_number_tree_view_id">
+        <field name="name">view.generate.number</field>
+        <field name="model">barcode.number</field>
+        <field name="arch" type="xml">
+            <tree string="Lot number serializer">
+                <field name="digits"/>
+                <field name="current_number"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model ="ir.actions.act_window" id="barcode_number_serializer_action">
+        <field name="name">Generate Barcode Number</field>
+        <field name="res_model">barcode.number</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+            </p>
+        </field>
+    </record>
+    <!--bARCODE ACTION MENU-->
+    <act_window id="change_password_wizard_actions"
+            name="Serialize"
+            src_model="product.product"
+            res_model="generate.barcode.number"
+            view_type="form" view_mode="form"
+            key2="client_action_multi" target="new"
+            />
+
+    <!--bARCODE WIZARD POPUP-->
+    <record model="ir.ui.view" id="barcode_number_form_view_id">
+        <field name="name">view.barcode.number</field>
+        <field name="model">generate.barcode.number</field>
+        <field name="arch" type="xml">
+            <form string="Lot number serializer">
+                <group>
+                    <group>
+                        <h2>Are you sure do you want to generate Serialize for selected product(s)?</h2>
+                    </group>
+                    <footer>
+                        <button string="Yes" name="generate_barcode_number" type="object" class="btn-primary"/>
+                        or
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+
+    <menuitem id="barcode_number_serializer_list" name="Barcode Number Serializer" parent="stock.menu_product_in_config_stock" sequence="760" action="barcode_number_serializer_action"/>
+</odoo>

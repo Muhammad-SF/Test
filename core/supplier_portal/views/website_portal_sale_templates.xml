@@ -1,0 +1,665 @@
+<odoo>
+
+    <!--<template id="assets_frontend" inherit_id="website.assets_frontend" name="Website Portal Sale">-->
+      <!--<xpath expr="." position="inside">-->
+          <!--<link rel='stylesheet' href='/website_portal_sale/static/src/less/website_portal_sale.less'/>-->
+          <!--<script type="text/javascript" src="/supplier_portal/static/src/js/supplier_portal.js"></script>-->
+      <!--</xpath>-->
+    <!--</template>-->
+
+
+    <template id="portal_my_home_menu_portal_supplier" name="Portal layout : sales menu entries" inherit_id="website_portal.portal_layout" priority="25">
+        <xpath expr="//ul[contains(@class,'o_portal_submenu')]" position="inside">
+            <li>
+                <a href="/my/rfq">RFQ</a>
+            </li>
+            <li>
+                <a href="/my/purchase">Purchase Order</a>
+            </li>
+            <li>
+                <a href="/my/delivery">Delivery Order</a>
+            </li>
+            <li>
+                <a href="/my/invoices">Invoices</a>
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_rfq" name="Portal My Home : sales entries" inherit_id="website_portal.portal_my_home" priority="25">
+        <xpath expr="//div[contains(@class,'o_my_home_content')]" position="inside">
+            <h3 class="page-header">
+                <a href="/my/rfq">Your RFQ
+                    <small class="ml8">
+                        <t t-if="rfq_count">
+                            <span class='badge'><t t-esc="rfq_count"/></span>
+                        </t>
+                        <t t-if="not rfq_count">
+                            There are currently no RFQ for your account.
+                        </t>
+                    </small>
+                </a>
+            </h3>
+            <h3 class="page-header">
+                <a href="/my/purchase">Your Purchase Order
+                    <small class="ml8">
+                        <t t-if="order_count">
+                            <span class='badge'><t t-esc="order_count"/></span>
+                        </t>
+                        <t t-if="not order_count">
+                            There are currently no orders for your account.
+                        </t>
+                    </small>
+                </a>
+            </h3>
+            <h3 class="page-header">
+                <a href="/my/delivery">Your Delivery Order
+                    <small class="ml8">
+                        <t t-if="do_count">
+                            <span class='badge'><t t-esc="do_count"/></span>
+                        </t>
+                        <t t-if="not do_count">
+                            There are currently no orders for your account.
+                        </t>
+                    </small>
+                </a>
+            </h3>
+            <h3 class="page-header">
+                <a href="/my/invoices">Your Invoices
+                    <small class="ml8">
+                        <t t-if="invoice_count">
+                            <span class='badge'><t t-esc="invoice_count"/></span>
+                        </t>
+                        <t t-if="not invoice_count">
+                            There are currently no invoices for your account.
+                        </t>
+                    </small>
+                </a>
+            </h3>
+        </xpath>
+    </template>
+
+    <template id="portal_my_quotations" name="My RFQ">
+      <t t-call="website_portal.portal_layout">
+        <h3 class="page-header">Your RFQ</h3>
+        <t t-if="not quotations">
+            <p>There are currently no RFQ for your account.</p>
+        </t>
+        <t t-if="quotations">
+            <table class="table table-hover o_my_status_table">
+                <thead>
+                  <tr class="active">
+                      <th>Quotation #</th>
+                      <th>Date Order</th>
+                      <th></th>
+                      <th>Total</th>
+                    </tr>
+                </thead>
+                <t t-foreach="quotations" t-as="quotation">
+                    <tr>
+                        <td>
+                            <a t-attf-href="/my/purchase/#{quotation.id}?#{keep_query()}"><t t-esc="quotation.name"/></a>
+                        </td>
+                        <td><span t-field="quotation.date_order"/></td>
+                        <td>
+                          <t t-if="quotation.state == 'cancel'">
+                            <span class="label label-default"><i class="fa fa-fw fa-remove"/> Cancelled</span>
+                          </t>
+                          <!--<t t-if="quotation.date_order and quotation.date_order &lt; date">-->
+                            <!--<span class="label label-default"><i class="fa fa-fw fa-clock-o"/> Expired</span>-->
+                          <!--</t>-->
+                        </td>
+                        <td><span t-field="quotation.amount_total" t-options='{"widget": "monetary", "display_currency": quotation.currency_id}'/>
+                        </td>
+                    </tr>
+                </t>
+            </table>
+            <div t-if="pager" class="o_portal_pager text-center">
+              <t t-call="website.pager"/>
+            </div>
+        </t>
+      </t>
+    </template>
+
+    <template id="portal_my_purchase" name="My Purchase">
+      <t t-call="website_portal.portal_layout">
+        <h3 class="page-header">Your Orders</h3>
+        <t t-if="not orders">
+            <p>There are currently no orders for your account.</p>
+        </t>
+        <t t-if="orders">
+            <table class="table table-hover o_my_status_table">
+                <thead>
+                  <tr class="active">
+                    <th>Purchase Order #</th>
+                    <th>Order Date</th>
+                    <th></th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <t t-foreach="orders" t-as="order">
+                    <tr>
+                        <td>
+                            <a t-attf-href="/my/purchase/{{order.id}}?{{keep_query()}}"><t t-esc="order.name"/></a>
+                        </td>
+                        <td><span t-field="order.date_order"/></td>
+                        <!--<td>-->
+                            <!--<t t-if="order.state == 'progress'">-->
+                                <!--<span class="label label-info"><i class="fa fa-fw fa-clock-o"/> Invoiced</span>-->
+                            <!--</t>-->
+                            <!--<t t-if="order.state in ['shipping_except','invoice_except']">-->
+                                <!--<span class="label label-danger"><i class="fa fa-fw fa-warning"/> Problem</span>-->
+                            <!--</t>-->
+                            <!--<t t-if="order.state == 'done'">-->
+                                <!--<span class="label label-default"><i class="fa fa-fw fa-check"/> Done</span>-->
+                            <!--</t>-->
+                        <!--</td>-->
+                        <td><span t-field="order.amount_total" t-options='{"widget": "monetary", "display_currency": order.currency_id}'/></td>
+                    </tr>
+                </t>
+            </table>
+            <div t-if="pager" class="o_portal_pager text-center">
+              <t t-call="website.pager"/>
+            </div>
+        </t>
+      </t>
+    </template>
+
+    <template id="portal_my_delivery" name="My Delivery">
+      <t t-call="website_portal.portal_layout">
+        <h3 class="page-header">Your DO</h3>
+        <t t-if="not orders">
+            <p>There are currently no orders for your account.</p>
+        </t>
+        <t t-if="orders">
+            <table class="table table-hover o_my_status_table">
+                <thead>
+                  <tr class="active">
+                    <th>Delivery Order #</th>
+                    <th>Scheduled Date</th>
+                    <th></th>
+                    <th>Source Location</th>
+                  </tr>
+                </thead>
+                <t t-foreach="orders" t-as="order">
+                    <tr>
+                        <td>
+                            <a t-attf-href="/my/delivery/{{order.id}}?{{keep_query()}}"><t t-esc="order.name"/></a>
+                        </td>
+                        <td><span t-field="order.min_date"/></td>
+                        <!--<td>-->
+                            <!--<t t-if="order.state == 'progress'">-->
+                                <!--<span class="label label-info"><i class="fa fa-fw fa-clock-o"/> Invoiced</span>-->
+                            <!--</t>-->
+                            <!--<t t-if="order.state in ['shipping_except','invoice_except']">-->
+                                <!--<span class="label label-danger"><i class="fa fa-fw fa-warning"/> Problem</span>-->
+                            <!--</t>-->
+                            <!--<t t-if="order.state == 'done'">-->
+                                <!--<span class="label label-default"><i class="fa fa-fw fa-check"/> Done</span>-->
+                            <!--</t>-->
+                        <!--</td>-->
+                        <td></td>
+                        <td><span t-field="order.location_dest_id.name"/></td>
+                    </tr>
+                </t>
+            </table>
+            <div t-if="pager" class="o_portal_pager text-center">
+              <t t-call="website.pager"/>
+            </div>
+        </t>
+      </t>
+    </template>
+
+    <template id="delivery_order_form" name="Delivery Order">
+      <t t-call="website.layout">
+        <div id="wrap">
+            <div class="container">
+              <div class="oe_structure">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <ol class="breadcrumb mt8">
+                            <li><a href="/my/home"><i class="fa fa-home"/></a></li>
+                            <li>
+                              <a t-attf-href="/my/#{'rfq' if order.state == 'sent' else 'delivery'}?{{ keep_query()}}">
+                                <t>
+                                    My Delivery Order
+                                </t>
+                              </a>
+                            </li>
+                            <li>
+                              <t>
+                                  Delivery Order
+                              </t>
+                              <t t-esc="order.name"/>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+              </div>
+              <div id="optional_placeholder"></div>
+              <div class="container">
+
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <h4>
+                            <t>
+                              Delivery <Order></Order>
+                            </t>
+                            <span t-esc="order.name"/>
+                          </h4>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel-body">
+                      <!-- <hr/> -->
+                        <div>
+                          <strong>Scheduled Date :</strong><span t-field="order.min_date" t-options='{"widget": "date"}'/>
+                        </div>
+                        <div>
+                          <strong>Destination Location Zone :</strong><span t-field="order.location_dest_id.name"/>
+                        </div>
+                      <div class='row'>
+                        <div class="col-md-6">
+                          <div>
+                            <strong>Partner :</strong><span t-esc="order.partner_id.name"></span>
+                          </div>
+                            <div>
+                                <strong>Invoice address</strong>
+                            </div>
+                          <div>
+                            <!--<address t-field="order.partner_invoice_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>-->
+                          </div>
+                          <!--<t t-set="invoices" t-value="[i for i in order.invoice_ids if i.state not in ['draft', 'cancel']]"/>-->
+                          <!--<t t-if="invoices">-->
+                            <!--<div>-->
+                              <!--<strong>Invoices</strong>-->
+                            <!--</div>-->
+                            <!--<div>-->
+                              <!--<t t-foreach="invoices" t-as="i">-->
+                                <!--<t t-set="report_url" t-value="'/report/pdf/account.report_invoice/%s' % i.id"/>-->
+                                <!--<div>-->
+                                  <!--<a t-att-href="report_url"><span class="fa fa-download"/></a>-->
+                                  <!--<a t-att-href="report_url"><span t-esc="i.number"/></a>-->
+                                  <!--<span class="text-muted" t-field="i.date_invoice"/>-->
+                                  <!--<t t-if="i.state == 'paid'">-->
+                                    <!--<span class="label label-success orders_label_text_align"><i class="fa fa-fw fa-check"/> Paid</span>-->
+                                  <!--</t>-->
+                                  <!--<t t-if="i.state != 'paid'">-->
+                                    <!--<span class="label label-info orders_label_text_align"><i class="fa fa-fw fa-clock-o"/> Waiting</span>-->
+                                  <!--</t>-->
+                                <!--</div>-->
+                              <!--</t>-->
+                            <!--</div>-->
+                          <!--</t>-->
+                        </div>
+                        <div id="shipping_address" class="col-md-6">
+                          <div>
+                            <strong>Shipping Address</strong>
+                          </div>
+                          <div>
+                            <!--<address t-field="order.partner_shipping_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>-->
+                          </div>
+                        </div>
+                      </div>
+
+                      <hr/>
+
+                      <div class="row">
+                        <div class="col-md-4">
+                          <strong>Product</strong>
+                        </div>
+                        <div class="col-md-2 text-right">
+                          <strong>From</strong>
+                        </div>
+                        <div class="col-md-2 text-right">
+                          <strong>To</strong>
+                        </div>
+                        <div class="col-md-2 text-right">
+                          <strong>To Do</strong>
+                        </div>
+                          <div class="col-md-2 text-right">
+                          <strong>Done</strong>
+                        </div>
+                      </div>
+                      <t t-foreach="order.pack_operation_product_ids" t-as="ol">
+                        <div class="row orders_vertical_align">
+                            <div class="col-md-2 text-center">
+                                <img t-att-src="ol.product_id.image_small and ('data:image/png;base64,' + ol.product_id.image_small) or '/web/static/src/img/placeholder.png'"/>
+                            </div>
+                            <div id='product_name' class="col-md-2">
+                              <strong t-esc="ol.product_id.name"/>
+                            </div>
+                          <div class="col-md-2 text-right">
+                            <span t-field="ol.from_loc"/>
+                              <!--<input type="text" class="js_quantity form-control quantity" t-att-data-product-id="line.get('product_id')" t-att-value="int(line.get('product_qty'))" t-options='{"widget": "monetary", "display_currency": order.currency_id}'/>-->
+                          </div>
+                          <div class="col-md-2 text-right">
+                            <!--<t t-if="ol._name == 'sale.order.line'">-->
+                              <!--<span t-esc="ol.product_uom_qty"/>-->
+                            <!--</t>-->
+                            <!--<t t-if="ol._name == 'account.invoice.line'">-->
+                              <!--<span t-esc="ol.quantity"/>-->
+                            <!--</t>-->
+                              <span t-esc="ol.to_loc"/>
+                          </div>
+                          <div class="col-md-2 text-right">
+                            <span t-field="ol.product_qty"/>
+                          </div>
+                            <div class="col-md-2 text-right">
+                            <span t-field="ol.qty_done"/>
+                          </div>
+                        </div>
+                      </t>
+
+                      <hr/>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div>
+                            <strong>Contact</strong>
+                          </div>
+                          <div t-field="user_id.partner_id" t-options='{"widget": "contact", "fields": ["email", "phone"]}'/>
+                        </div>
+                        <!--<div class="col-md-6">-->
+                          <!--<div class="row">-->
+                            <!--<div class="col-md-10 text-right">-->
+                              <!--Untaxed Amount:-->
+                            <!--</div>-->
+                            <!--<div class="col-md-2 text-right">-->
+                              <!--<span t-field="order.amount_untaxed" t-options='{"widget": "monetary", "display_currency": order.currency_id}'/>-->
+                            <!--</div>-->
+                          <!--</div>-->
+                          <!--<div class="row">-->
+                            <!--<div class="col-md-10 text-right">-->
+                              <!--Taxes:-->
+                            <!--</div>-->
+                            <!--<div class="col-md-2 text-right">-->
+                              <!--<span t-field="order.amount_tax" t-options='{"widget": "monetary", "display_currency": order.currency_id}'/>-->
+                            <!--</div>-->
+                          <!--</div>-->
+                          <!--<div class="row">-->
+                            <!--<div class="col-md-10 text-right">-->
+                              <!--<strong>Total:</strong>-->
+                            <!--</div>-->
+                            <!--<div class="col-md-2 text-right">-->
+                              <!--<strong><span t-field="order.amount_total" t-options='{"widget": "monetary", "display_currency": order.currency_id}'/></strong>-->
+                            <!--</div>-->
+                          <!--</div>-->
+                        <!--</div>-->
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+              <div class="oe_structure mb32"/>
+          </div>
+        </div>
+      </t>
+    </template>
+
+    <template id="portal_my_invoices" name="My Invoices">
+      <t t-call="website_portal.portal_layout">
+        <h3 class="page-header">Your Invoices</h3>
+        <t t-if="not invoices">
+            <p>There are currently no invoices for your account.</p>
+        </t>
+        <t t-if="invoices">
+            <table class="table table-hover o_my_status_table">
+                <thead>
+                  <tr class="active">
+                    <th>Invoice #</th>
+                    <th>Invoice Date</th>
+                    <th>Due Date</th>
+                    <th></th>
+                    <th></th>
+                    <th>Amount Due</th>
+                  </tr>
+                </thead>
+                <t t-foreach="invoices" t-as="invoice">
+                    <tr>
+                        <td class= "cell_overflow">
+                            <a t-att-href="'/my/invoices/pdf/'+str(invoice.id)" t-att-title="invoice.number"><t t-esc="invoice.number"/></a>
+                        </td>
+                        <td><span t-field="invoice.date_invoice"/></td>
+                        <td><span t-field="invoice.date_due"/></td>
+                        <td>
+                            <t t-if="invoice.state == 'open'">
+                                <span class="label label-info"><i class="fa fa-fw fa-clock-o"/> Waiting for Payment</span>
+                            </t>
+                            <t t-if="invoice.state == 'paid'">
+                                <span class="label label-default"><i class="fa fa-fw fa-check"/> Paid</span>
+                            </t>
+                            <t t-if="invoice.state == 'cancel'">
+                                <span class="label label-default"><i class="fa fa-fw fa-remove"/> Cancelled</span>
+                            </t>
+                        </td>
+                        <td>
+                          <a t-if="invoice.state == 'open'" t-attf-href="/website_payment/pay?reference=#{invoice.number}&amp;amount=#{invoice.residual}&amp;currency_id=#{invoice.currency_id.id}&amp;country_id=#{invoice.partner_id.country_id.id}" alt="Pay Now" class="btn btn-xs btn-primary"><i class="fa fa-arrow-circle-right"/> Pay Now</a>
+                        </td>
+                        <td><span t-field="invoice.residual" t-options='{"widget": "monetary", "display_currency": invoice.currency_id}'/></td>
+                    </tr>
+                </t>
+            </table>
+            <div t-if="pager" class="o_portal_pager text-center">
+                <t t-call="website.pager"/>
+            </div>
+        </t>
+      </t>
+    </template>
+
+    <template id="orders_followup" name="Purchase Order">
+      <t t-call="website.layout">
+        <div id="wrap">
+            <div class="container">
+                <form t-attf-action="/my/rfq/#{(order.id)}/edit" name="edit_price" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" t-att-value="csrf_token"/>
+              <div class="oe_structure">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <ol class="breadcrumb mt8">
+                            <li><a href="/my/home"><i class="fa fa-home"/></a></li>
+                            <li>
+                              <a t-attf-href="/my/#{'rfq' if order.state == 'sent' else 'rfq'}?{{ keep_query()}}">
+                                <t t-if="order.state in ('draft', 'sent', 'bid', 'cancel', 'confirmed', 'to approve')">
+                                    My RFQ
+                                </t>
+                                <t t-if="order.state not in ('draft', 'sent', 'bid', 'cancel', 'confirmed', 'to approve')">
+                                    My Purchase Order
+                                </t>
+                              </a>
+                            </li>
+                            <li>
+                              <t t-if="order.state in ('draft', 'sent', 'bid', 'cancel', 'confirmed', 'to approve')">
+                                  RFQ
+                              </t>
+                              <t t-if="order.state not in ('draft', 'sent', 'bid', 'cancel', 'confirmed', 'to approve')">
+                                  Purchase Order
+                              </t>
+                              <t t-esc="order.name"/>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+              </div>
+              <div id="optional_placeholder"></div>
+              <div class="container">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <h4>
+                                    <t t-if="order.state in ('draft', 'sent', 'bid', 'cancel', 'confirmed', 'to approve')">
+                                      Quotation
+                                    </t>
+                                    <t t-if="order.state != 'sent'">
+                                      Order
+                                    </t>
+                                    <span t-esc="order.name"/>
+                                  </h4>
+                            </div>
+
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-default oe_highlight">Save</button>
+                            </div>
+                                <!--<form t-attf-action="/my/rfq/#{(order.id)}/edit" name="edit_price" method="post" enctype="multipart/form-data">-->
+                                        <!--<input type="hidden" name="csrf_token" t-att-value="csrf_token"/>-->
+                                        <!--<input type="text" name="test"/>-->
+                                        <!--<button type="submit" class="btn btn-default oe_highlight">Edit</button>-->
+                                <!--</form>-->
+                                <!--<form action="/save" name="save_price" method="post">-->
+                                        <!--<button type="submit" class="btn btn-default oe_highlight">Save</button>-->
+                                <!--</form>-->
+                        <!--</div>-->
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel-body">
+                      <!-- <hr/> -->
+                      <div class="col-md-6">
+                          <strong>Order Date :</strong><span t-field="order.date_order" t-options='{"widget": "date"}'/>
+                      </div>
+                        <div class="col-md-6">
+                            <label class="control-label" for="file">Attachment:</label>
+                            <t t-set="base_url" t-value="request.env['ir.config_parameter'].get_param('web.base.url')"/>
+                            <input type="file" name="file" accept="image/*,application/pdf"/>
+                            <a t-attf-href="{{base_url}}/web/content?model=purchase.order&amp;id={{order.id}}&amp;field=attachment&amp;filename_field=file_name&amp;filename={{order.file_name}}&amp;download=true"><span t-if="order.attachment" class="fa fa-download"/></a>
+                            <a t-attf-href="{{base_url}}/web/content?model=purchase.order&amp;id={{order.id}}&amp;field=attachment&amp;filename_field=file_name&amp;filename={{order.file_name}}&amp;download=true"><span t-esc="order.file_name"/></a>
+
+                      </div>
+                        <div>
+                          <strong>Scheduled Date :</strong><span t-field="order.date_planned" t-options='{"widget": "date"}'/>
+                      </div>
+                      <div class='row'>
+                        <div class="col-md-6">
+                          <div>
+                            <strong>Vendor :</strong><span t-esc="order.partner_id.name"></span>
+                          </div>
+                            <div>
+                                <strong>Invoice address</strong>
+                            </div>
+                          <div>
+                            <!--<address t-field="order.partner_invoice_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>-->
+                          </div>
+                          <!--<t t-set="invoices" t-value="[i for i in order.invoice_ids if i.state not in ['draft', 'cancel']]"/>-->
+                          <!--<t t-if="invoices">-->
+                            <!--<div>-->
+                              <!--<strong>Invoices</strong>-->
+                            <!--</div>-->
+                            <!--<div>-->
+                              <!--<t t-foreach="invoices" t-as="i">-->
+                                <!--<t t-set="report_url" t-value="'/report/pdf/account.report_invoice/%s' % i.id"/>-->
+                                <!--<div>-->
+                                  <!--<a t-att-href="report_url"><span class="fa fa-download"/></a>-->
+                                  <!--<a t-att-href="report_url"><span t-esc="i.number"/></a>-->
+                                  <!--<span class="text-muted" t-field="i.date_invoice"/>-->
+                                  <!--<t t-if="i.state == 'paid'">-->
+                                    <!--<span class="label label-success orders_label_text_align"><i class="fa fa-fw fa-check"/> Paid</span>-->
+                                  <!--</t>-->
+                                  <!--<t t-if="i.state != 'paid'">-->
+                                    <!--<span class="label label-info orders_label_text_align"><i class="fa fa-fw fa-clock-o"/> Waiting</span>-->
+                                  <!--</t>-->
+                                <!--</div>-->
+                              <!--</t>-->
+                            <!--</div>-->
+                          <!--</t>-->
+                        </div>
+                        <div id="shipping_address" class="col-md-6">
+                          <div>
+                            <strong>Shipping Address</strong>
+                          </div>
+                          <div>
+                            <!--<address t-field="order.partner_shipping_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>-->
+                          </div>
+                        </div>
+                      </div>
+
+                      <hr/>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <strong>Product</strong>
+                        </div>
+                        <div class="col-md-2 text-right">
+                          <strong>Unit Price</strong>
+                        </div>
+                        <div class="col-md-2 text-right">
+                          <strong>Quantity</strong>
+                        </div>
+                        <div class="col-md-2 text-right">
+                          <strong>Subtotal</strong>
+                        </div>
+                      </div>
+
+                      <t t-foreach="order.order_line" t-as="ol">
+                        <div class="row orders_vertical_align">
+                            <div class="col-md-3 text-center">
+                                <img t-att-src="ol.product_id.image_small and ('data:image/png;base64,' + ol.product_id.image_small) or '/web/static/src/img/placeholder.png'"/>
+                            </div>
+                            <div id='product_name' class="col-md-3">
+                              <strong t-esc="ol.product_id.name"/>
+                            </div>
+                          <div class="col-md-2 text-right">
+                            <span t-field="ol.price_unit" t-options='{"widget": "monetary", "display_currency": order.currency_id}' t-if="state == 'purchase'"/>
+                                <input class="text-right" t-att-name="str(ol.id) + 'price'" type="number" t-att-value="int(ol.price_unit) or 0" t-options='{"widget": "monetary", "display_currency": order.currency_id}' t-if="state == 'rfq'" />
+                          </div>
+                          <div class="col-md-2 text-right">
+                              <span t-esc="ol.product_qty" t-if="state == 'purchase'"/>
+                              <input class="text-right" t-att-name="str(ol.id) + 'qty'" type="number" t-att-value="int(ol.product_qty) or 0" t-if="state == 'rfq'" />
+                          </div>
+                          <div class="col-md-2 text-right">
+                            <span t-field="ol.price_subtotal" t-options='{"widget": "monetary", "display_currency": order.currency_id}'/>
+                          </div>
+                        </div>
+                      </t>
+
+                      <hr/>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div>
+                            <strong>Contact</strong>
+                          </div>
+                          <div t-field="user_id.partner_id" t-options='{"widget": "contact", "fields": ["email", "phone"]}'/>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="row">
+                            <div class="col-md-10 text-right">
+                              Untaxed Amount:
+                            </div>
+                            <div class="col-md-2 text-right">
+                              <span t-field="order.amount_untaxed" t-options='{"widget": "monetary", "display_currency": order.currency_id}'/>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-10 text-right">
+                              Taxes:
+                            </div>
+                            <div class="col-md-2 text-right">
+                              <span t-field="order.amount_tax" t-options='{"widget": "monetary", "display_currency": order.currency_id}'/>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-10 text-right">
+                              <strong>Total:</strong>
+                            </div>
+                            <div class="col-md-2 text-right">
+                              <strong><span t-field="order.amount_total" t-options='{"widget": "monetary", "display_currency": order.currency_id}'/></strong>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+              <div class="oe_structure mb32"/>
+            </form>
+          </div>
+
+        </div>
+      </t>
+    </template>
+
+</odoo>

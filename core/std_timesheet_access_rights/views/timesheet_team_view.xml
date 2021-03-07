@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- timesheet.team Tree View -->
+    <record id="timesheet_team_tree_view" model="ir.ui.view">
+        <field name="name">timesheet.team.tree.view</field>
+        <field name="model">timesheet.team</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" required="1"/>
+                <field name="leader_ids"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- timesheet.team Form View -->
+    <record id="timesheet_team_form_view" model="ir.ui.view">
+        <field name="name">timesheet_team_form_view</field>
+        <field name="model">timesheet.team</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" required="1"/>
+                        <field name="leader_ids" widget="many2many_tags"/>
+                    </group>
+                    <notebook>
+                        <page string="Members" name="members">
+                            <field name="member_ids">
+                                <tree editable="bottom">
+                                    <field name="user_id" required="1"/>
+                                    <field name="role"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="user_id" required="1"/>
+                                        <field name="role"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- timesheet.team Action -->
+    <record id="timesheet_team_action" model="ir.actions.act_window">
+        <field name="name">Timesheet Team</field>
+        <field name="res_model">timesheet.team</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="main_menu_timesheet_team"
+              name="Timesheet Team"
+              sequence="5"
+              parent="hr_timesheet.timesheet_menu_root"
+              groups="std_timesheet_access_rights.view_own_timesheet_team,std_timesheet_access_rights.view_all_timesheet_team,std_timesheet_access_rights.manage_own_timesheet_team,std_timesheet_access_rights.manage_all_timesheet_team"/>
+
+    <menuitem id="menu_timesheet_team"
+              name="Timesheet Team"
+              sequence="1"
+              parent="main_menu_timesheet_team"
+              action="timesheet_team_action"
+              groups="std_timesheet_access_rights.view_own_timesheet_team,std_timesheet_access_rights.view_all_timesheet_team,std_timesheet_access_rights.manage_own_timesheet_team,std_timesheet_access_rights.manage_all_timesheet_team"/>
+
+    <!-- Inherit hr_timesheet_team.team model form view -->
+    <record id="inherit_hr_timesheet_sheet_form_hm" model="ir.ui.view">
+        <field name="name">inherit.hr.timesheet.sheet.form.hm</field>
+        <field name="model">hr_timesheet_sheet.sheet</field>
+        <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form"/>
+        <field name="arch" type="xml">
+            <field name="timesheet_ids" position="attributes">
+                <attribute name="attrs">{'readonly': [('state','=','done')]}</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record id="hr_all_timesheet_sheet_tree_simplified" model="ir.ui.view">
+            <field name="name">hr.timesheet.sheet.tree</field>
+            <field name="model">hr_timesheet_sheet.sheet</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="state == 'draft'" decoration-muted="state == 'done'" decoration-bf="message_needaction == True" string="Timesheets">
+                    <field name="employee_id"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="department_id" invisible="1"/>
+                    <field name="total_attendance" widget="float_time" groups="hr.group_hr_attendance"/>
+                    <field name="total_timesheet" widget="float_time"/>
+                    <field name="total_difference" widget="float_time" groups="hr.group_hr_attendance"/>
+                    <field name="state" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+    <record id="hr_all_timesheet_sheet_form" model="ir.ui.view">
+        <field name="name">hr.timesheet.sheet.form</field>
+        <field name="model">hr_timesheet_sheet.sheet</field>
+        <field name="arch" type="xml">
+            <form string="Timesheet">
+                <header>
+                    <button name="action_timesheet_confirm"
+                            states="draft"
+                            string="Submit to Manager"
+                            type="object"
+                            class="oe_highlight"/>
+                    <button name="action_timesheet_done"
+                            states="confirm"
+                            string="Approve"
+                            type="object"
+                            groups="hr_timesheet.group_hr_timesheet_user,std_timesheet_access_rights.timesheet_leader" class="oe_highlight"/>
+                    <button name="action_timesheet_draft"
+                            states="done"
+                            string="Set to Draft"
+                            type="object"
+                            groups="hr_timesheet.group_hr_timesheet_user,std_timesheet_access_rights.timesheet_leader"/>
+                    <button name="action_timesheet_draft"
+                            states="confirm"
+                            string="Refuse"
+                            type="object"
+                            groups="hr_timesheet.group_hr_timesheet_user,std_timesheet_access_rights.timesheet_leader"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,confirm,done"/>
+    <!--                <button name="action_submit" string="Submit" type="object" class="oe_highlight" attrs="{'invisible': [('state2', '=', 'confirm')]}"/>-->
+    <!--                <field name="state2" widget="statusbar" statusbar_visible="draft,confirm"/>-->
+                    <field name="state" widget="statusbar" statusbar_visible="new,confirm,done"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="employee_id" class="oe_edit_only"/>
+                        <h1><field name="employee_id" class="oe_inline" placeholder="Employee's Name"/></h1>
+                        <field name="user_id" invisible="1"/>
+                    </div>
+                    <group>
+                        <group>
+                            <label for="date_from" string="Timesheet Period"/>
+                            <div><field name="date_from" class="oe_inline"/> to <field name="date_to" class="oe_inline"/></div>
+                            <field name="name" invisible="1"/>
+                            <field name="department_id" invisible="1"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Details" class="o_hr_timesheet_sheet_details">
+                            <field name="timesheet_ids" context="{'employee_id': employee_id, 'user_id':user_id, 'timesheet_date_from': date_from, 'timesheet_date_to': date_to}" nolabel="1" attrs="{'readonly': [('state','=','done')]}">
+                                <tree editable="bottom" string="Timesheet Activities">
+                                    <field name="date"/>
+                                    <field name="name"/>
+                                    <field name="project_id" required="1"/>
+                                    <field name="employee_id" invisible="1"/>
+                                    <field name="task_id" required="1" domain="[('employee_ids.employee_id', '=', context.get('employee_id')), ('project_id', '=', project_id)]"/>
+                                    <field name="stage_id" readonly="1"/>
+                                    <field name="unit_amount" widget="float_time" string="Hours" sum="Hours"/>
+                                    <field name="user_id" invisible="1"/>
+                                </tree>
+                                <form string="Timesheet Activities">
+                                    <group>
+                                        <field name="date"/>
+                                        <field name="name"/>
+                                        <field name="project_id"/>
+                                        <field name="unit_amount" widget="float_time" string="Hours"/>
+                                        <field name="user_id" invisible="1"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Summary">
+                            <widget type="weekly_timesheet" attrs="{'readonly': [['state', '!=', 'draft']]}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="act_hr_timesheet_sheet_my_timesheets1" model="ir.actions.act_window">
+        <field name="name">All Timesheets</field>
+        <field name="res_model">hr_timesheet_sheet.sheet</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_ids"
+					   eval="[(5, 0, 0),
+							  (0, 0, {'view_mode': 'tree', 'view_id': ref('hr_all_timesheet_sheet_tree_simplified')}),
+							  (0, 0, {'view_mode': 'form', 'view_id': ref('hr_all_timesheet_sheet_form')})]"/>
+    </record>
+
+    <menuitem id="menu_all_timesheet"
+              name="All Timesheet"
+              sequence="4"
+              parent="hr_timesheet.menu_hr_time_tracking"
+              action="act_hr_timesheet_sheet_my_timesheets1"
+              groups="std_timesheet_access_rights.timesheet_leader,std_timesheet_access_rights.timesheet_admin,hr_timesheet.group_hr_timesheet_user"/>
+</odoo>

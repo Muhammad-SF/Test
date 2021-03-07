@@ -1,0 +1,56 @@
+<odoo>
+    <record id="account_model_access_access" model="ir.model.access">
+            <field name="name">account.model.access</field>
+            <field name="model_id" ref="acc_recurring_entries.model_account_model"/>
+            <field name="group_id" ref="account.group_account_invoice"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+    </record>
+    <record id="account_model_line_access_access" model="ir.model.access">
+            <field name="name">account_model_line.access</field>
+            <field name="model_id" ref="acc_recurring_entries.model_account_model_line"/>
+            <field name="group_id" ref="account.group_account_invoice"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+    </record>
+    <record id="account_subscription_access_access" model="ir.model.access">
+            <field name="name">account_subscription.access</field>
+            <field name="model_id" ref="acc_recurring_entries.model_account_subscription"/>
+            <field name="group_id" ref="account.group_account_invoice"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+    </record>
+    <record id="account_subscription_line_access_access" model="ir.model.access">
+            <field name="name">account.subscription.line.access</field>
+            <field name="model_id" ref="acc_recurring_entries.model_account_subscription_line"/>
+            <field name="group_id" ref="account.group_account_invoice"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+    </record>
+    <record id="account_subscription_generate_access_access" model="ir.model.access">
+            <field name="name">account_subscription_generate_access</field>
+            <field name="model_id" ref="acc_recurring_entries.model_account_subscription_generate"/>
+            <field name="group_id" ref="account.group_account_invoice"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+    </record>
+    <record id="generate_recurring_entries_access_access" model="ir.model.access">
+            <field name="name">generate_recurring_entries.access</field>
+            <field name="model_id" ref="acc_recurring_entries.model_generate_recurring_entries"/>
+            <field name="group_id" ref="account.group_account_invoice"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+    </record>
+</odoo>

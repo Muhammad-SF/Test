@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <record id="view_export_import_timesheet_form" model="ir.ui.view">
+            <field name="name">export.import.product.form</field>
+            <field name="model">export.import.product</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Export Import Product">
+                <field name="state" invisible="1" />
+                <field name="name" invisible="1" />
+                <group>
+                    <group>
+                        <field name="import_or_export" required="1" states="choose"/>
+                    </group>
+                    <group>
+                        <field name="import_data" attrs="{'required': [('import_or_export','=', 'import')], 'invisible': ['|', ('import_or_export', '=', 'export'),('state', '=', 'result')]}" />
+                    </group>
+                </group>
+                <group states="result">
+                    <field name="error_log" readonly="1" />
+                    <field name="line_create" readonly="1" />
+                    <field name="line_update" readonly="1" />
+                    <field name="line_error" readonly="1" />
+                </group>
+                <div states="get">
+                    <h2>Export Complete</h2>
+                    <p>Here is the exported Product file: <field name="export_data" readonly="1" filename="name"/></p>
+                    <field name="export_error_log" readonly="1" />
+                </div>
+                <footer states="choose">
+                    <button string="Export"
+                        type="object" name="import_export_product"
+                        attrs="{'invisible': [('import_or_export','=', 'import')]}" class="oe_highlight"/>
+                    <button string="Import" type="object"
+                        name="import_export_product"
+                        attrs="{'invisible': [('import_or_export','=', 'export')]}" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" special="cancel" class="oe_link" />
+                </footer>
+                <footer states="get,result">
+                    <button string="Ok" type="object" name="action_done"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_export_import_product">
+            <field name="name">Export Import Product</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">export.import.product</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.values" id="export_import_time_sheet">
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="name">Export Import Timesheet</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('act_open_export_import_product'))" />
+            <field name="key">action</field>
+            <field name="model">product.template</field>
+        </record>
+    </data>
+</odoo>

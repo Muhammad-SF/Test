@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_invoice_signature_form" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Signature">
+                    <group>
+                        <group>
+                            <field name="create_uid" readonly="1" />
+                            <field name="create_date" readonly="1" />
+                        </group>
+                        <group>
+                            <label for="signature" string="Signature"/>
+                            <h2>
+                                <field name="signature" widget="image" readonly="1" />
+                            </h2>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="confirmed_id" readonly="1" />
+                            <field name="confirmed_date_time" readonly="1" />
+                        </group>
+                        <group>
+                            <label for="confirmed_signature" string="Signature"/>
+                            <h2>
+                                <field name="confirmed_signature" widget="signature" readonly="1" />
+                            </h2>
+
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            </field>
+        </record>
+
+        <record id="view_supplier_invoice_signature_form" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Signature">
+                    <h2>
+                        <field name="signature" widget="image"/>
+                    </h2>
+                </page>
+            </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

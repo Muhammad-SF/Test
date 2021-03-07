@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- Add Working Schedule menu under Human Resources > Settings > Configuration -->
+        <menuitem id="working_schedule_mgmnt_menu" name="Working Schedule" groups="hr.group_hr_manager"
+            parent="sg_hr_employee.parent_menu_confg_hr" sequence="4"/>
+
+        <!-- Shift Pattern View -->
+        <record id="view_working_schedule_shift_pattern_tree" model="ir.ui.view">
+            <field name="name">Working Schedule Shift Pattern Tree</field>
+            <field name="model">resource.calendar.shift.pattern</field>
+            <field name="arch" type="xml">
+                <tree string="Shift Patterns">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_working_schedule_shift_pattern_search" model="ir.ui.view">
+            <field name="name">Working Schedule Shift Pattern Search</field>
+            <field name="model">resource.calendar.shift.pattern</field>
+            <field name="arch" type="xml">
+                <search string="Search Shift Patterns">
+                    <field name="name"/>
+                    <field name="company_id"/>
+                    <group expand="0" string="Group By">
+                        <filter name="company" string="Companies" domain="[]" context="{'group_by':'company_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_working_schedule_shift_pattern_form" model="ir.ui.view">
+            <field name="name">Working Schedule Shift Pattern Form</field>
+            <field name="model">resource.calendar.shift.pattern</field>
+            <field name="arch" type="xml">
+                <form string="Shift Patterns">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="no_of_work_days"/>
+                                <field name="no_of_days"/>
+                            </group>
+                            <group>
+                                <field name="company_id"/>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_working_schedule_shift_pattern" model="ir.actions.act_window">
+            <field name="name">Shift Patterns</field>
+            <field name="res_model">resource.calendar.shift.pattern</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="view_working_schedule_shift_pattern_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new shift pattern.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_working_schedule_shift_pattern" id="working_schedule_shift_pattern_mgmt" parent="working_schedule_mgmnt_menu" sequence="1"/>
+
+        <record id="working_schedule_shift_pattern_mgmt" model="ir.ui.menu">
+            <field name="active" eval="False"/>
+        </record>
+    </data>
+</odoo>

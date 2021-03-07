@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+<!--	#############################################################
+								HR Holidays						
+		############################################################# -->
+        
+        
+        <record id="edit_holiday_status_form_extended" model="ir.ui.view">
+            <field name="name">hr.holidays.status.extended</field>
+            <field name="model">hr.holidays.status</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[1]/group[2]/field[@name='company_id']" position="replace">
+                    <field name="company_id"/>
+                </xpath>
+            </field>
+        </record>
+         
+        <!-- Form View : Inherit Leave Request Form view --> 
+        <record id="sg_hr_holiday_extended" model="ir.ui.view">
+            <field name="name">sg.hr.holidays.extended</field>
+            <field name="model">hr.holidays</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_new"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='department_id']" position="before">
+                    <field name="leave_config_id" attrs="{'required': [('type', '=', 'remove')],'invisible': [('type', '!=', 'remove')]}"/>
+                </xpath>
+                <xpath expr="//field[@name='department_id']" position="after">
+                    <field name="leave_type_code" invisible="1"/>
+                    <field name="gender" invisible="1"/>
+                    <field name="child_birthdate" attrs="{'required':['&amp;',('type','=','remove'),'|',('leave_type_code','in',['ECL','CCL','UICL']),'&amp;',('leave_type_code','in',['PL']),('gender','=','male')],'invisible':['|',('type','!=','remove'),'|',('leave_type_code','not in',['ECL','CCL','UICL','PL']),'&amp;',('gender','!=','male')]}"/>
+                    <field name="compassionate_immidiate" attrs="{'required':[('leave_type_code','=','CL'),('type','=','remove')],'invisible':['|',('leave_type_code','!=','CL'),('type','!=','remove')]}"/>
+                    <field name="compassionate_other" attrs="{'required':[('leave_type_code','=','CLO'),('type','=','remove')],'invisible':['|',('leave_type_code','!=','CLO'),('type','!=','remove')]}"/>
+                    <field name="off_in_lieu_detail" attrs="{'required':[('leave_type_code','=','OIL'),('type','=','remove')],'invisible':['|',('leave_type_code','!=','OIL'),('type','!=','remove')]}"/>
+					<field name="remainig_days" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Form View : Inherit Allocation Request Form view --> 
+        <record model="ir.ui.view" id="inherit_edit_holiday_new_extended">
+            <field name="name">Allocation Request Extended</field>
+            <field name="model">hr.holidays</field>
+            <field name="inherit_id" ref="hr_holidays.edit_holiday_new"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+				<xpath expr="//field[@name='employee_id']" position="attributes">
+					<attribute name="groups">hr.group_hr_user</attribute>
+				</xpath>
+				<xpath expr="//field[@name='holiday_type']" position="attributes">
+					<attribute name="attrs">{'readonly':[('state','!=','draft'),'|',('type', '=', 'add'),('type', '=', 'remove')]}</attribute>
+				</xpath>
+                <xpath expr="//field[@name='holiday_type']" position="before">
+				<!--<field name="earn_date" invisible="1"/-->
+				<!--<field name="unallocated" invisible="1"/-->
+                    <field name="day" invisible="1" />
+                    <field name="half_day_related" invisible="1"/>
+                </xpath>
+                <xpath expr="//form/sheet/group/group/div" position="replace">
+                    <div>
+                        <div attrs="{'invisible': [('type', '=', 'add')]}">
+                            <field name="date_from" attrs="{'required':[('type', '=', 'remove')]}" class="oe_inline"/>
+                            <label string=" - " class="oe_inline"/>
+                            <field name="date_to"  attrs="{'required':[('type', '=', 'remove')],'readonly':['|',('state', 'in', ('validate','refuse'))]}" class="oe_inline"/>
+                        </div>
+                        <div>
+                            <b><field name="number_of_days_temp" attrs="{'readonly': ['|',('type', '=', 'remove'),('state', '=', 'validate')]}" class="oe_inline"/> days</b>
+                        </div>
+                        <div><newline/>
+	                        <label string="Half Day" attrs="{'invisible': ['|',('type', '=', 'add'),('half_day_related', '=',False)]}" class="oe_inline"/><field name="half_day" attrs="{'invisible': ['|',('type', '=', 'add'),('half_day_related', '=',False)],'readonly':[('state','=','validate')]}" class="oe_inline"/>
+                        	<field name="am_or_pm" nolabel="1" attrs="{'invisible': [('half_day', '=', False)],'required': [('half_day', '=', True)]}" class="oe_inline"/>
+                        </div>
+                    </div>
+                    <field name="hr_year_id" required="True" domain="[('state', '=', 'open')]" attrs="{'readonly':[('state', 'in', ('validate','refuse'))]}" />
+                	<field name="leave_expire" invisible="1"/>
+				</xpath>
+            </field>
+        </record>
+
+
+<!--	#############################################################
+								Leave Types						
+		############################################################# -->
+
+        <!-- Form View : Inherit Leave Types Form view --> 
+        <record model="ir.ui.view" id="sg_holiday_hr_extended_form">
+            <field name="name">sg.holiday.hr.extended.form</field>
+            <field name="model">hr.holidays.status</field>
+            <field name="inherit_id" ref="sg_hr_holiday.edit_holiday_extended_status_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='carry_forward_leaves']" position="before">
+                    <page string="Details" name="Others">
+	                     <group col='4' colspan="2">
+	                         <field name="paid_leave"/>
+	                         <field name="allow_half_day"/>
+	                         <field name="count_days_by"/>
+		                     <field name="pro_rate"/>
+		                     <field name="pre_approved"/>
+		                     <field name="no_of_days" attrs="{'invisible':[('pre_approved','=',False)], 'required':[('pre_approved','=',True)]}"/>
+	                         <field name="earned_leave" invisible="1"/>
+	                     </group>
+                    </page>
+				</xpath>
+                <xpath expr="//field[@name='default_leave_allocation']" position="after">
+                    <field name="carryover" class="oe_inline" />
+                    <field name="carry_no_of_days" attrs="{'invisible':[('carryover','in',('none','up_to','unlimited'))], 'required':[('carryover','=','no_of_days')]}" class="oe_inline"/>
+				</xpath>
+                <xpath expr="//group[@name='default_allocations']" position="after">
+                    <group col="8" colspan="1" string="Misc">
+                    	<field name="max_leave_kept" colspan="6"/><newline/>
+                    	<field name="incr_leave_per_year" colspan="6"/><newline/>
+                    	<field name="number_of_year" colspan="6"/><newline/>
+                    </group>
+				</xpath>
+                <xpath expr="//field[@name='cry_frd_leave']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+				<xpath expr="//page[@name='carry_forward_leaves']" position="attributes">
+					<attribute name="invisible">1</attribute>
+				</xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

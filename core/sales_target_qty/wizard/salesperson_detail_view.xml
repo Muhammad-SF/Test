@@ -1,0 +1,115 @@
+<odoo>
+  	<data>	
+	      <record id="show_in_detail_form_view" model="ir.ui.view">
+	          <field name="name">salesperson.detail.form</field>
+	          <field name="model">salesperson.detail</field>
+	          <field name="arch" type="xml">
+	            <form>
+	            	<sheet>
+	              		<group>
+	              			<field name="sale_target_qty_year" string="Sales Qty Target" readonly="1"/>
+	              			<field name="product_id" readonly="1"/>
+	              			<field name="crm_team_id" invisible="1"/>
+	              		</group>
+	              		<field name="sales_per_target_qty_line_ids" invisible="context.get('is_actual_target',False)">
+	              			<tree editable="bottom" create="false">
+	              				<field name="member_id"/>
+	              				<field name="product_id" invisible="1"/>
+								<field name="t_january"/>
+								<field name="t_february"/>
+								<field name="t_march"/>
+								<field name="t_april"/>
+								<field name="t_may"/>
+								<field name="t_june"/>
+								<field name="t_july"/>
+								<field name="t_august"/>
+								<field name="t_september"/>
+								<field name="t_october"/>
+								<field name="t_november"/>
+								<field name="t_december"/>
+	              			</tree>
+
+	              			<form>
+				                <label for="year"/>
+				                <field name="year" readonly="1"/>
+				                <field name="show_year" readonly="1"/>
+				                  <group>
+				                    <group string="Sales Qty Target">
+				                        <field name="t_january" />
+				                        <field name="t_february" />
+				                        <field name="t_march"/>
+				                        <field name="t_april"/>
+				                        <field name="t_may"/>
+				                        <field name="t_june"/>
+				                        <field name="t_july"/>
+				                        <field name="t_august"/>
+				                        <field name="t_september"/>
+				                        <field name="t_october"/>
+				                        <field name="t_november"/>
+				                        <field name="t_december"/>
+				                    </group>
+				                  </group>
+				            </form>
+	              		</field>
+	              		<field name="actual_sales_per_target_qty_line_ids" invisible="not context.get('is_actual_target',False)">
+	              			<tree editable="bottom" create="false">
+	              				<field name="member_id"/>
+	              				<!-- <field name="show_year"/> -->
+								<!-- <field name="year"/> -->
+								<!-- <field name="product_id"/> -->
+								<!-- <field name="line_product_id" invisible="1"/> -->
+	              				<field name="january"/>
+								<field name="february"/>
+								<field name="march"/>
+								<field name="april"/>
+								<field name="may"/>
+								<field name="june"/>
+								<field name="july"/>
+								<field name="august"/>
+								<field name="september"/>
+								<field name="october"/>
+								<field name="november"/>
+								<field name="december"/>
+	              			</tree>
+
+	              			<form>
+				                <label for="year"/>
+				                <field name="year" readonly="1"/>
+				                  <group>
+				                    <group string="Actual Sales Qty Target">
+				                        <field name="january" />
+				                        <field name="february" />
+				                        <field name="march"/>
+				                        <field name="april"/>
+				                        <field name="may"/>
+				                        <field name="june"/>
+				                        <field name="july"/>
+				                        <field name="august"/>
+				                        <field name="september"/>
+				                        <field name="october"/>
+				                        <field name="november"/>
+				                        <field name="december"/>
+				                    </group>
+				                  </group>
+				            </form>
+	              		</field>      
+	              		<!-- <field name="sales_target_qty_line_ids"/> -->
+	            	</sheet>
+					<footer>
+						<button string="Save" name="save_details" class="oe_primary" />
+						<button string="Close" class="oe_link" special="cancel" />
+                </footer>
+	            </form>
+	          </field>
+	      </record>
+	      
+	      <record id="action_show_in_detail" model="ir.actions.act_window">
+	        <field name="name">Product Detail</field>
+	        <field name="res_model">salesperson.detail</field>
+	        <field name="type">ir.actions.act_window</field>
+	        <field name="view_type">form</field>
+	        <field name="view_mode">form</field>
+	        <field name="target">new</field>
+	      </record>
+   	</data>
+</odoo>

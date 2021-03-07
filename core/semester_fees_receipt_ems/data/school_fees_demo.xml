@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html>
+
+<odoo>
+    <data>
+        <!--record id="demo_student_fees_structure_line_13" model="student.fees.structure.line">
+            <field name="name">Semester Fee</field>
+            <field name="code">13</field>
+            <field name="type">others</field>
+            <field name="number_of_months">4</field>
+            <field name="amount">18000</field>
+        </record-->
+        
+        
+        <!--record id="fees_receipt_ems.demo_student_fees_structure_3" model="student.fees.structure">
+            <field name="name">Enrollment Fees Structure</field>
+            <field name="code">EFS</field>
+            <field eval="[(6,0,[ref('fees_receipt_ems.demo_student_fees_structure_line_10'),ref('demo_student_fees_structure_line_13')])]" name="line_ids" />
+        </record-->
+    </data>
+</odoo>

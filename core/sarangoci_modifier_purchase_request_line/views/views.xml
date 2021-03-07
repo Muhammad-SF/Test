@@ -1,0 +1,33 @@
+<odoo>
+  <data>
+    <record id="inherit_replace_order_line" model="ir.ui.view">
+        <field name="name">purchase.request.line</field>
+        <field name="model">purchase.request.line</field>
+        <field name="inherit_id" ref="purchase_request_to_rfq.purchase_request_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="replace">
+                <tree string="Purchase Request Lines" create="false">
+                    <field name="request_id"/>
+                    <field name="branch_id"/>
+                    <field name="date_required"/>
+
+                    <field name="request_state"/>
+                    <field name="requested_by"/>
+                    <field name="product_id"/>
+                    <field name="name"/>
+                    <field name="product_qty"/>
+                    <field name="product_uom_id" groups="product.group_uom"/>
+                    <!--<field name="assigned_to"/>-->
+                    <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+                    <field name="supplier_id"/>
+
+                    <field name="purchased_qty"/>
+                    <field name="purchase_state"/>
+                    <field name="received_quantity"/>
+                    <button name="button_approved" type="object" string="Approve" attrs="{'invisible': [('request_state', '!=', 'to_approve')]}"/>
+                </tree>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

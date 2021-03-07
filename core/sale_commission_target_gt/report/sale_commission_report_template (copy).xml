@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_sale_commission_document">
+    <t t-call="report.external_layout">
+        <t t-if="data['sale_commission_data']['report_type'] == 'summary'">
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="col-md-12 text-center">
+                    <h3><b>Commission Report for the Year <t t-esc="data['sale_commission_data']['selected_year']"/></b></h3>
+                </div>
+                <div class="col-md-12 row">
+                    <h4><b>Printed on: </b><t t-esc="time.strftime('%d/%m/%Y')"/></h4>
+                </div>
+                <table class="table table-bordered" style="page-break-inside: avoid;">
+                    <tr>
+                    <th colspan="1"></th>
+                    <t t-foreach="data['sale_commission_data']['all_months']" t-as="one_month">
+                        <t t-if="one_month == 1">
+                            <th colspan="2">January</th>
+                        </t>
+                        <t t-if="one_month == 2">
+                            <th colspan="2">February</th>
+                        </t>
+                        <t t-if="one_month == 3">
+                            <th colspan="2">March</th>
+                        </t>
+                        <t t-if="one_month == 4">
+                            <th colspan="2">April</th>
+                        </t>
+                        <t t-if="one_month == 5">
+                            <th colspan="2">May</th>
+                        </t>
+                        <t t-if="one_month == 6">
+                            <th colspan="2">Jun</th>
+                        </t>
+                        <t t-if="one_month == 7">
+                            <th colspan="2">July</th>
+                        </t>
+                        <t t-if="one_month == 8">
+                            <th colspan="2">August</th>
+                        </t>
+                        <t t-if="one_month == 9">
+                            <th colspan="2">September</th>
+                        </t>
+                        <t t-if="one_month == 10">
+                            <th colspan="2">October</th>
+                        </t>
+                        <t t-if="one_month == 11">
+                            <th colspan="2">November</th>
+                        </t>
+                        <t t-if="one_month == 12">
+                            <th colspan="2">December</th>
+                        </t>
+                    </t>
+                    </tr>
+                    <tr>
+                        <th colspan="1">Employees</th>
+                        <t t-foreach="data['sale_commission_data']['all_months']" t-as="one_month">
+                            <th>Sales Amount</th>
+                            <th>Commission</th>
+                        </t>
+                    </tr>
+                    <t t-foreach="data['sale_commission_data']['sale_commission_user_data']" t-as="one_user_data">
+                        <tr>
+                            <td><t t-esc="one_user_data['sales_person']"/></td>
+                            <t t-foreach="one_user_data['commission_data']" t-as="one_commission_data">
+                                <td><t t-esc="one_commission_data['total_sales']"/></td>
+                                <td><t t-esc="one_commission_data['total_commission']"/></td>
+                            </t>
+                        </tr>
+                    </t>
+
+                </table>
+            </div>
+        </t>
+        <t class="row" t-if="data['sale_commission_data']['report_type'] == 'details'">
+            <t t-foreach="data['sale_commission_data']['sale_commission_user_data']" t-as="one_user_data">
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="col-md-12 text-center">
+                        <h3><b>Commission Report for the Month of <t t-esc="data['sale_commission_data']['starting_month']"/>-<t t-esc="data['sale_commission_data']['ending_month']"/></b></h3>
+                    </div>
+                    <div class="col-md-12 row">
+                        <h4><b>Printed on: </b><t t-esc="time.strftime('%d/%m/%Y')"/></h4>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </t>
+
+</template>
+
+<template id="report_sale_commission">
+    <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="doc">
+            <t t-call="sale_commission_target_gt.report_sale_commission_document"/>
+        </t>
+    </t>
+</template>
+</odoo>

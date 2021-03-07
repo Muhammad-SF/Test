@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="module_category_timesheet_team_line" model="ir.module.category">
+            <field name="name">Timesheet Team</field>
+        </record>
+
+        <record id="view_own_timesheet_team" model="res.groups">
+            <field name="name">View own Timesheet Team</field>
+            <field name="category_id" ref="std_timesheet_access_rights.module_category_timesheet_team_line"/>
+        </record>
+
+        <record id="timesheet_user_own_timesheet" model="ir.rule">
+            <field name="name">user can view own timesheet team</field>
+            <field name="model_id" ref="model_timesheet_team"/>
+            <field name="domain_force">['|',('leader_ids','in',user.id),('members','in',user.id)]</field>
+            <field name="groups" eval="[(4, ref('std_timesheet_access_rights.view_own_timesheet_team'))]"/>
+        </record>
+
+        <record id="view_all_timesheet_team" model="res.groups">
+            <field name="name">View all Timesheet Team</field>
+            <field name="category_id" ref="std_timesheet_access_rights.module_category_timesheet_team_line"/>
+        </record>
+
+        <record id="manage_own_timesheet_team" model="res.groups">
+            <field name="name">Manage own Timesheet Team</field>
+            <field name="category_id" ref="std_timesheet_access_rights.module_category_timesheet_team_line"/>
+        </record>
+
+        <record id="timesheet_user_manage_own_timesheet_team" model="ir.rule">
+            <field name="name">User can manage own Timesheet Team</field>
+            <field name="model_id" ref="model_timesheet_team"/>
+            <field name="domain_force">['|',('leader_ids','in',user.id),('members','in',user.id)]</field>
+            <field name="groups" eval="[(4, ref('std_timesheet_access_rights.manage_own_timesheet_team'))]"/>
+        </record>
+
+        <record id="manage_all_timesheet_team" model="res.groups">
+            <field name="name">Manage all Timesheet Team</field>
+            <field name="category_id" ref="std_timesheet_access_rights.module_category_timesheet_team_line"/>
+        </record>
+    </data>
+</odoo>

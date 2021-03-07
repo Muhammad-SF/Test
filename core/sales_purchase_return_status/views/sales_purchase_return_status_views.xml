@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <data>
+
+        <record id="sale_order_form_view_inherit_return_status" model="ir.ui.view">
+            <field name="name">sale.order.inherit.return.status</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']//tree/field[@name='product_uom_qty']" position="after">
+                    <field name="sale_return_qty" readonly='1'/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_order_form_inherit_sale_stock_inh123" model="ir.ui.view">
+            <field name="name">view_order_form_inherit_sale_stock_123</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock"/>
+            <field name="arch" type="xml">
+                <field name='picking_policy' position='after'>
+                    <field name='return_status_config' invisible='1'/>
+                    <field name="sale_return_status" attrs="{'invisible': [('return_status_config','=',False)]}"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="purchase_order_form_inherit_add_return_status" model="ir.ui.view">
+            <field name="name">purchase.order.form.inherit.add.return.status</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='incoterm_id']" position="after">
+                    <field name="return_status" attrs="{'invisible': [('return_status_purchase_config','=',False)]}"/>
+                    <field name="return_status_purchase_config" invisible="1"/>
+
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']//tree/field[@name='qty_invoiced']" position="after">
+                    <field name="return_qty" readonly='1'/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_purchase_return_status_configuration" model="ir.ui.view">
+            <field name="name">purchase.config.settings.inherit</field>
+            <field name="model">purchase.config.settings</field>
+            <field name="inherit_id" ref="purchase.view_purchase_configuration"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/group[2]" position="after">
+                    <group string="Return Status" name="purchase_return_status">
+                        <field name="return_status_purchase"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_sale_return_status_config_settings" model="ir.ui.view">
+            <field name="name">crm settings</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sale.view_sales_config"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='quotations_sales']" position="before">
+                    <group string="Return Status" name="sale_return_status">
+                        <field name="return_status_sale"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_order_tree_inherit" model="ir.ui.view">
+            <field name="name">sale.order.list.view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="after">
+                     <field name="sale_return_status"/>
+                </xpath>
+            </field>
+        </record>
+
+         <record id="purchase_order_tree_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.list.view</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_status']" position="after">
+                     <field name="return_status"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

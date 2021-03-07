@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+ <record id="invoice_landed_cost_module_form_view" model="ir.ui.view">
+            <field name="name">invoice.landed.cost.module.form.view</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+            <field name="date_due" position="after">
+            	<field name="bi_acount_journal_id"/>
+            </field>
+            <notebook position="inside">
+	            <page name="Landed Cost" string ="Landed Cost">
+	            
+	            	<field name="bi_landed_cost" nolabel="1">
+	            	<tree string="Cost Lines" editable="bottom">
+                                        <field name="product_id" domain="[('landed_cost_ok', '=', True)]" />
+                                        <field name="name"/>
+                                        <field name="account_id"/>
+                                        <field name="split_method"/>
+                                        <field name="price_unit"/>
+                                    </tree>
+	            	
+	            	
+	            	</field>
+	            </page>
+	            <page name="Container Numbers" string ="Container Numbers">
+	            
+	            	<field name="bi_container_number" nolabel="1">
+	            	<tree string="Container Numbers" editable="bottom">
+                                        <field name="name"/>
+                                    </tree>
+	            	
+	            	
+	            	</field>
+	            </page>
+            </notebook>
+            </field>
+        </record>
+
+
+  </data>
+</openerp>
+ 
+

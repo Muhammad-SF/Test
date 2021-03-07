@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record id="mrp_routing_form_view_inherit" model="ir.ui.view">
+            <field name="name">mrp.routing.form</field>
+            <field name="model">mrp.routing</field>
+            <field name="inherit_id" ref="mrp.mrp_routing_form_view"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='operation_ids']" position="inside">
+                    <!--<field name="operation_ids">-->
+                        <tree>
+                            <!-- <field name="sequence" widget="handle"/> -->
+                            <field name="is_sequence" invisible='1'/>
+                            <field name="sequence_run"/>
+                            <field name="name"/>
+                            <field name="workcenter_id"/>
+                            <field name="time_cycle" widget="float_time"/>
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                        </tree>
+                    <!--</field>-->
+
+                </xpath>
+            </field>
+        </record>
+
+        <record id="mrp_routing_workcenter_form_view_inherit" model="ir.ui.view">
+            <field name="name">mrp.routing.workcenter.form</field>
+            <field name="model">mrp.routing.workcenter</field>
+            <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='sequence']" position="after">
+                    <field name="is_sequence"/>
+                    <field name="sequence_run"
+                           attrs="{'invisible': [('is_sequence','=', False)], 'required': [('is_sequence','=', True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='sequence']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

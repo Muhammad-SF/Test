@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_common" inherit_id="web.assets_common">
+        <xpath expr="//script[contains(@src, '/web/static/src/js/config.js')]"
+               position="replace">
+            <script src="/uppercrust_backend_theme/static/src/js/freamwork/config.js"/>
+        </xpath>
+    </template>
+    <template id="assets_backend" name="Uppercrust theme assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+             <!-- <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/lib/custom_checkbox.less"/> -->
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/lib/custom_radiobutton.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/lib/minicolors/jquery.minicolors.css"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/lib/circle.less"/>
+
+            <!-- ===================custome me================ -->
+            
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/website.js"/>
+            <script type="text/javascript" src="/uppercrust_backend_theme/static/src/lib/shortcut.js"></script>
+            <!-- ============end============================================ -->
+
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/variable.less" type="text/less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/other_variable.less" type="text/less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/left_menu.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/webclient.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/layout.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/fonts.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/control_panel_veiw.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/chart_of_account_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/tree_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/kanban_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/graph_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/pivot_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/form_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/calendar.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/chat_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/mailbox_mail.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/import_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/dashboard_colors.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/dashboard.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/hr_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/web_calender.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/loading.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/accounting_dashboard.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/error_message_view.less"/>
+
+            <!-- GLobal search less -->
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/global_search.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/input_global_search.less"/>
+            <!-- GLOBLE SEARCH -->
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/global_search/global_auto_complete.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/global_search/global_search.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/global_search/iscroll.js"/>
+            <!-- JS Path - start -->
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/lib/minicolors/jquery.minicolors.min.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/views/web_planner.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/main_view.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/freamwork/controlpanel.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/freamwork/view_manager.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/freamwork/crash_manager.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/views/form/form_renderer.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/views/list/list_controller.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/views/pivot/pivot_view.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/views/graph/graph_renderer.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/fields/basic_fields.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/views/quick_menu.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/views/menu.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/views/search_view.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/views/sidebar.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/views/import_action.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/freamwork/chat_window.js"/>
+            <script type="text/javascript"
+                    src="/uppercrust_backend_theme/static/src/js/freamwork/dashboard.js"/>
+
+            <!-- Responsive Less-->
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/responsive/left_menu.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/responsive/kanban_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/responsive/control_panel_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/responsive/list_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/responsive/form_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/responsive/configration.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/responsive/mail_view.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/responsive/base_setting.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/responsive/base_configuration.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/responsive/dashboard.less"/>
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/responsive/pivot_view.less"/>
+
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/less/responsive/responsive_xs.less"/>
+            <!-- Calc css -->
+            <link rel="stylesheet"
+                  href="/uppercrust_backend_theme/static/src/css/layout.css"/>
+        </xpath>
+    </template>
+
+    <!-- Left Menu View -[start] -->
+    <template id="uppercrust_backend_theme.webclient_bootstrap"
+              inherit_id="web.webclient_bootstrap">
+        <xpath expr="//nav[@id='oe_main_menu_navbar']" position="replace">
+            <t t-set="top_menus" t-value="request.env['ir.ui.menu'].get_top_menus()"/>
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav id="oe_main_menu_navbar" role="navigation"
+                         class="navbar navbar-inverse"
+                         groups="base.group_user,base.group_portal">
+                        <div class="nav toggle ad_navbar">
+                            <div class="o_toggle_menu">
+                                <li class="ad_logo">
+                                    <a t-att-href="'/web/?debug' if debug else '/web'"
+                                       class="ad-sm-logo">
+                                        <img class="img img-responsive"
+                                             t-attf-src="/web/image/res.company/#{request.env.user.company_id.id}/theme_icon/60x60"/>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a id="menu_toggle" accesskey="H"
+                                       title="Menu" class="round-button-menu">
+                                       <img class="img img-responsive"
+                                            src="/uppercrust_backend_theme/static/src/img/icon_expand.png"/>
+                                    </a>
+                                </li>
+                                <t t-foreach="top_menus" t-as="top_menu_id">
+                                  <li class="top_menu">
+                                      <t t-set="debug_param"
+                                         t-value="'?&amp;debug=' if debug else ''"/>
+                                      <a t-att-href="'/web%s#menu_id=%s&amp;action=%s' % (debug_param, top_menu_id['id'], top_menu_id['action'] and top_menu_id['action'].split(',')[1] or '')"
+                                        class="top_menu_link oe_menu_toggler"
+                                         t-att-data-menu="top_menu_id['id']"
+                                         t-att-data-menu-xmlid="top_menu_id.get('xmlid')"
+                                         t-att-data-action-model="top_menu_id['action'].split(',')[0] if(top_menu_id['action'] and top_menu_id['action'].split(',')[0] != 'ir.actions.server') else None"
+                                         t-att-data-action-id="top_menu_id['action'].split(',')[1] if(top_menu_id['action'] and top_menu_id['action'].split(',')[0] != 'ir.actions.server') else None">
+                                          <img class="top_menu_image" t-if="top_menu_id['web_icon_data']"
+                                               t-att-src="'data:image/png;base64,%s' % (top_menu_id['web_icon_data'])" />
+                                           <img class="top_menu_image" t-else=""
+                                               src="/uppercrust_backend_theme/static/src/img/no_modul_ioc.png"/>
+                                      </a>
+                                  </li>
+                                </t>
+                            </div>
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right oe_systray_debug" style="display: none;"/>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('o_main')]" position="replace">
+            <div class="o_main">
+                <div class="ad_leftbar o_sub_menu"
+                     groups="base.group_user,base.group_portal">
+                    <div class="ad_right_panel">
+                        <t t-call="web.menu_secondary"/>
+                        <span class="oe_back_btn">
+                            <i class="fa fa-angle-double-left"/>
+                        </span>
+                    </div>
+                </div>
+                <div class="o_sub_menu o_uppercrust_submenu" groups="base.group_user,base.group_portal">
+                    <t t-call="uppercrust_backend_theme.sidebar_submenus"/>
+                </div>
+                <div class="o_main_content ad_rightbar"/>
+                <!-- ========================================== -->
+                <div id="myModal" class="modal fade" role="dialog">
+                  <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"></button>
+                        <h4 class="modal-title">EQUIP Shortcuts</h4>
+                      </div>
+                      <div class="modal-body">
+                        <ul class="shortcut_display" style="font-size:14px">
+                            <li>Use the following shortcuts to speed up your system usage!</li>
+                            <li><b>Alt + Q</b> - Open Main menu</li>
+                            <li><b>Alt + A</b> - Open the Sub Menu</li>
+                            <li><b>Alt + Z</b> - Global search</li>
+                            <li><b>Alt + C</b> - Create</li>
+                            <li><b>Alt + S</b> - Save</li>
+                            <li><b>Alt + R</b> - Edit</li>
+                            <li><b>Alt + X</b> - Discard</li>
+                            <li><b>Alt + 1</b> - Previous record in list view &amp; form view</li>
+                            <li><b>Alt + 2</b> - Next record in list view &amp; form view</li>
+                            <li><b>Alt + 3</b> - Back to Previous screen from form view</li>
+                            <li><b>Alt + 4</b> - List View</li>
+                            <li><b>Alt + 5</b> - Pivot View</li>
+                            <li><b>Alt + 6</b> - Kanban View</li>
+                            <li><b>Alt + B</b> – Place cursor on the search bar</li>
+                            <li><b>Alt + I</b> - Open Calendar</li>
+                            <li><b>Alt + W</b> - Open the Filter and Grouping Menu</li>
+                            <li><b>Alt + V</b> - Change View Menu</li>
+                            <li><b>Alt + U</b> - Open User Menu</li>
+                            <li><b>Alt + T</b> - Open the Actions Menu in Form View</li>
+                            <li><b>Alt + Up Arrow</b> - Back to the previous Breadcrumb</li>
+                        
+                        </ul>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template id="uppercrust_backend_theme.sidebar_submenus">
+      <a class="o_sub_menu_logo o_menu_logo" t-att-href="'/web/?debug' if debug else '/web'">
+          <img src='/web/binary/theme_logo'/>
+      </a>
+      <div class="o_sub_menu_content">
+          <t t-foreach="menu_data['children']" t-as="menu">
+              <div style="display: none" class="oe_secondary_menu" t-att-data-menu-parent="menu['id']">
+                  <div class="menu_header">
+                    <span t-esc="menu['name']"/>
+                  </div>
+                  <t t-foreach="menu['children']" t-as="menu">
+                      <div class="oe_secondary_menu_section" t-att-data-menu-xmlid="menu.get('xmlid')">
+                          <t t-if="menu['children']"><t t-esc="menu['name']"/></t>
+                          <t t-if="not menu['children']"><t t-call="web.menu_link"/></t>
+                      </div>
+                      <t t-call="web.menu_secondary_submenu"/>
+                  </t>
+              </div>
+          </t>
+      </div>
+      <div class="o_sub_menu_footer">
+          Powered by <a href="http://www.odoo.com" target="_blank"><span>Odoo</span></a>
+      </div>
+    </template>
+
+    <template id="uppercrust_backend_theme.menu_secondary"
+              inherit_id="web.menu_secondary">
+        <!-- =======add me========================================= -->
+         <!-- <xpath expr="//div[hasclass('o_sub_menu_content')]" position="before">
+              <div class="o_menu_search o_bar_hidden" style="width: 145px;margin-left: 78px;">
+                  <input type="text" placeholder="Search..." class="o_menu_search_input" onfocus="this.value = this.value;"/>
+              </div>
+              <br/>
+              <br/>
+         </xpath> -->
+        <!-- ==========================end=============================== -->
+        <xpath expr="//a[hasclass('o_sub_menu_logo')]" position="replace">
+          <a class="o_sub_menu_logo" t-att-href="'/web/?debug' if debug else '/web'">
+              <!-- <span class="oe_logo_edit">Edit Company data</span> -->
+              <img class="img"
+                   t-attf-src="/web/image/res.company/#{request.env.user.company_id.id}/theme_icon/60x60"/>
+          </a>
+        </xpath>
+        <xpath expr="//div[hasclass('o_sub_menu_content')]" position="replace">
+            <div class="search-container">
+              <input type="text" id="appDrawerSearchInput" class="search-box" placeholder="Search.."/>
+              <span class="search-button fa fa-search"></span>
+            </div>
+            <div class="panel-body menus_list">
+                <div id="search-main-menu">
+                </div>
+                <span class='submenu'>Sub-Menus</span>
+                <ul id="appDrawerSearchResults" class="row list-unstyled oe_application_menu_placeholder" style="display: block;">
+                    </ul>
+            </div>
+            <div class="oe_application_menu_placeholder" id="sidebar-menu">
+                <div class="menu_section">
+                    <t t-set="menu_proper_data" t-value="request.env['ir.ui.menu'].menu_data_proper(menu_data['children'])"/>
+                    <t t-foreach="menu_proper_data" t-as="menu_children_data">
+                        <t t-if="len(menu_children_data) > 1">
+                          <div class="display_menu">
+                              <t t-foreach="menu_children_data" t-as="menu">
+                                  <ul class="nav side-menu">
+                                      <li>
+                                          <t t-set="debug_param"
+                                             t-value="'?&amp;debug=' if debug else ''"/>
+                                          <a t-att-href="'/web%s#menu_id=%s&amp;action=%s' % (debug_param, menu['id'], menu['action'] and menu['action'].split(',')[1] or '')"
+                                             t-att-class="'oe_menu_toggler' if menu.get('children') else 'oe_menu_leaf'"
+                                             t-att-data-menu="menu['id']"
+                                             t-att-data-menu-xmlid="menu.get('xmlid')"
+                                             t-att-data-action-model="menu['action'].split(',')[0] if(menu['action'] and menu['action'].split(',')[0] != 'ir.actions.server') else None"
+                                             t-att-data-action-id="menu['action'].split(',')[1] if(menu['action'] and menu['action'].split(',')[0] != 'ir.actions.server') else None">
+                                              <img t-if="menu['web_icon_data']"
+                                                   t-att-src="'data:image/png;base64,%s' % (menu['web_icon_data'])"/>
+                                               <img t-else=""
+                                                   src="/uppercrust_backend_theme/static/src/img/no_modul_ioc.png"/>
+                                              <span class="oe_menu_text" style="font-weight: 500">
+                                                  <t t-esc="menu['name']"/>
+                                              </span>
+                                          </a>
+                                      </li>
+                                  </ul>
+                              </t>
+                            </div>
+                          </t>
+                          <t t-elif="len(menu_children_data) == 1">
+                            <div class="display_menu">
+                                <t t-foreach="menu_children_data" t-as="menu">
+                                    <ul class="nav side-menu">
+                                        <li>
+                                            <t t-set="debug_param"
+                                               t-value="'?&amp;debug=' if debug else ''"/>
+                                            <a t-att-href="'/web%s#menu_id=%s&amp;action=%s' % (debug_param, menu['id'], menu['action'] and menu['action'].split(',')[1] or '')"
+                                               t-att-class="'oe_menu_toggler' if menu.get('children') else 'oe_menu_leaf'"
+                                               t-att-data-menu="menu['id']"
+                                               t-att-data-menu-xmlid="menu.get('xmlid')"
+                                               t-att-data-action-model="menu['action'].split(',')[0] if(menu['action'] and menu['action'].split(',')[0] != 'ir.actions.server') else None"
+                                               t-att-data-action-id="menu['action'].split(',')[1] if(menu['action'] and menu['action'].split(',')[0] != 'ir.actions.server') else None">
+                                               <img t-if="menu['web_icon_data']"
+                                                    t-att-src="'data:image/png;base64,%s' % (menu['web_icon_data'])"/>
+                                                <img t-else=""
+                                                    src="/uppercrust_backend_theme/static/src/img/no_modul_ioc.png"/>
+                                                <span class="oe_menu_text" style="font-weight: 500">
+                                                    <t t-esc="menu['name']"/>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </t>
+                              </div>
+                          </t>
+                      </t>
+                </div>
+            </div>
+        </xpath>
+<!--         <xpath expr="//div[hasclass('oe_secondary_menu')]" position="replace">
+            <div style="display:none;" class="oe_secondary_menu"
+                 t-att-data-menu-parent="menu['id']">
+                <a class="ad_main_menu_detals">
+                    <img t-if="menu['web_icon_data']"
+                         t-att-src="'data:image/png;base64,%s' % (menu['web_icon_data'])"/>
+                    <img t-else=""
+                         src="/uppercrust_backend_theme/static/src/img/no_modul_ioc.png"/>
+                    <span class="oe_menu_text">
+                        <t t-esc="menu['name']"/>
+                    </span>
+                </a>
+                <div class="ad_sub_menu">
+                    <t t-foreach="menu['children']" t-as="menu">
+                        <div t-att-class="'oe_secondary_menu_section link' if not menu['children'] else 'oe_secondary_menu_section'"
+                             t-att-data-menu-xmlid="menu.get('xmlid')">
+                            <t t-if="menu['children']">
+                                <t t-esc="menu['name']"/>
+                            </t>
+                            <t t-if="not menu['children']">
+                                <t t-call="web.menu_link"/>
+                            </t>
+                        </div>
+                        <t t-call="web.menu_secondary_submenu"/>
+                    </t>
+                </div>
+            </div>
+        </xpath> -->
+    </template>
+</odoo>

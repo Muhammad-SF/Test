@@ -1,0 +1,103 @@
+<odoo>
+    <data>
+
+        <menuitem id="menu_attendances" name="Attendances" parent="sg_hr_employee.parent_menu_confg_hr"/>
+        <menuitem action="resource.action_resource_calendar_form" id="menu_working_schedule" name="Working Schedule"
+                  parent="menu_attendances" sequence="1"/>
+
+        <record id="resource_calendar_form_flexible_calendar_schedule" model="ir.ui.view">
+            <field name="name">Working Schedule - Flexible Schedule options</field>
+            <field name="model">resource.calendar</field>
+            <field name="inherit_id" ref="resource.resource_calendar_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='leave_ids']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="resource_calendar_form_flexible_calendar_schedule_inehrit" model="ir.ui.view">
+            <field name="name">Working Schedule - Flexible Schedule options</field>
+            <field name="model">resource.calendar</field>
+            <field name="inherit_id" ref="working_schedule_calendar.resource_calendar_form_flexible_calendar_schedule"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='attendance_ids']" position="replace">
+                    <field name="attendance_ids" attrs="{'invisible': [('schedule', '!=', 'fixed_schedule')]}">
+                        <tree editable="bottom">
+                            <field name="name"/>
+                            <field name="dayofweek"/>
+                            <field name="hour_from" widget="float_time"/>
+                            <field name="hour_to" widget="float_time"/>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="half_day"/>
+                            <field name="alternate_week"/>
+                            <field name="grace_time_for_late" widget="float_time"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+        <record id="resource_calendar_form_break_from_inehrit" model="ir.ui.view">
+            <field name="name">Working Schedule - Break From options</field>
+            <field name="model">resource.calendar</field>
+            <field name="inherit_id" ref="working_schedule.resource_calendar_form_flexible_calendar_schedule_inehrit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='attendance_ids']/tree/field[@name='half_day']" position="after">
+                    <field name="time_to" widget="float_time" attrs="{'readonly':[('half_day', '!=', True)]}"/>
+                    <field name="time_end" widget="float_time" attrs="{'readonly':[('half_day', '!=', True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='attendance_ids']/tree/field[@name='grace_time_for_late']" position="after">
+                    <field name="break_from" widget="float_time"/>
+                    <field name="break_to" widget="float_time"/>
+                </xpath>
+                <xpath expr="//field[@name='attendance_ids']/tree/field[@name='date_from']" position="replace">
+                    <field name="date_from" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='attendance_ids']/tree/field[@name='date_to']" position="replace">
+                    <field name="date_to" invisible="1"/>
+                </xpath>
+                <field name="attendance_ids" position="after">
+                    <!-- <notebook colspan="2" attrs="{'invisible' : [('schedule', '!=', 'fixed_schedule')]}"> -->
+                        <!-- <page string="Working Hours"> -->
+                            <!-- <field name="attendance_ids"/> -->
+                        <!-- </page> -->
+                        <!-- <page string="Settings"> -->
+                            <group>
+                                <field name="absence" attrs="{'invisible' : [('schedule', '!=', 'fixed_schedule')]}"/>
+                                <label string="Absence Start Time" attrs="{'invisible' : ['|', ('schedule', '!=', 'fixed_schedule'), ('absence', '!=', True)]}"/>
+                                <div class="o_row">
+                                    <field name="absence_start_time" attrs="{'invisible' : ['|', ('schedule', '!=', 'fixed_schedule'), ('absence', '!=', True)]}"/>
+                                    <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow" attrs="{'invisible' : ['|', ('schedule', '!=', 'fixed_schedule'), ('absence', '!=', True)]}"/>
+                                    <field name="absence_end_time" attrs="{'invisible' : ['|', ('schedule', '!=', 'fixed_schedule'), ('absence', '!=', True)]}"/>
+                                </div>
+                                <label string="HalfDay Start Time" attrs="{'invisible' : ['|', ('schedule', '!=', 'fixed_schedule'), ('absence', '!=', True)]}"/>
+                                <div class="o_row">
+                                    <field name="halfday_start_time" attrs="{'invisible' : ['|', ('schedule', '!=', 'fixed_schedule'), ('absence', '!=', True)]}"/>
+                                    <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow" attrs="{'invisible' : ['|', ('schedule', '!=', 'fixed_schedule'), ('absence', '!=', True)]}"/>
+                                    <field name="halfday_end_time" attrs="{'invisible' : ['|', ('schedule', '!=', 'fixed_schedule'), ('absence', '!=', True)]}"/>
+                                </div>
+                            </group>        
+                        <!-- </page> -->
+                    <!-- </notebook> -->
+                </field>
+                <field name="company_id" position="after">
+                        <field name="absence_shift" attrs="{'invisible' : [('schedule', '=', 'fixed_schedule')]}"/>
+                        <label string="Absence Start Time" attrs="{'invisible' : ['|', ('schedule', '=', 'fixed_schedule'), ('absence_shift', '!=', True)]}"/>
+                        <div class="o_row">
+                            <field name="absence_start_time_shift" attrs="{'invisible' : ['|', ('schedule', '=', 'fixed_schedule'), ('absence_shift', '!=', True)]}"/>
+                            <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow" attrs="{'invisible' : ['|', ('schedule', '=', 'fixed_schedule'), ('absence_shift', '!=', True)]}"/>
+                            <field name="absence_end_time_shift" attrs="{'invisible' : ['|', ('schedule', '=', 'fixed_schedule'), ('absence_shift', '!=', True)]}"/>
+                        </div>
+                        <label string="HalfDay Start Time" attrs="{'invisible' : ['|', ('schedule', '=', 'fixed_schedule'), ('absence_shift', '!=', True)]}"/>
+                        <div class="o_row">
+                            <field name="halfday_start_time_shift" attrs="{'invisible' : ['|', ('schedule', '=', 'fixed_schedule'), ('absence_shift', '!=', True)]}"/>
+                            <i class="fa fa-long-arrow-right mx-2" aria-label="Arrow icon" title="Arrow" attrs="{'invisible' : ['|', ('schedule', '=', 'fixed_schedule'), ('absence_shift', '!=', True)]}"/>
+                            <field name="halfday_end_time_shift" attrs="{'invisible' : ['|', ('schedule', '=', 'fixed_schedule'), ('absence_shift', '!=', True)]}"/>
+                        </div>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

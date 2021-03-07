@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+     <!--Report header & footer-->
+    <template id="external_layout_header_payment_advice_report">
+        <div class="header">
+            <div class="row">
+                <div class="text-center" style="font-size:16px">
+                    <span t-field="company.name"/>
+                </div>
+            </div>
+
+            <div></div>
+
+            <div class="row">
+                <div class="col-xs-6"  style="font-size:16px" name="company_address">
+                    <span t-field="company.partner_id"
+                        t-field-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 pull-left" style="font-size:16px">
+                    Tel: <span t-field="company.phone"/>,
+                    Fax: <span t-field="company.fax"/>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!--Report layout-->
+    <template id="external_layout_payment_advice_report">
+        <!-- Multicompany -->
+        <t t-if="not o and doc">
+            <t t-set="o" t-value="doc"/>
+        </t>
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id"></t>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"></t>
+        </t>
+
+        <t t-call="sg_hr_report.external_layout_header_payment_advice_report" />
+        <t t-raw="0" />
+    </template>
+
+    <template id="payment_advice_report">
+        <t t-call="report.html_container">
+            <t t-set="o" t-value="o"/>
+            <t t-call="sg_hr_report.external_layout_payment_advice_report">
+                <div class="page">
+                    <table width="100%">
+                        <tr t-foreach="o.get_pdf_data()" t-as="p">
+                            <tr>
+                                <td style="font-size:12px; width: 20%">
+                                    MANDATORY REF NO.
+                                </td>
+                                <td style="width: 5%">:</td>
+                                <td style="font-size: 12px; width: 25%">
+                                    <span t-esc="p.get('code')" />
+                                </td>
+
+                                <td style="font-size:12px; width: 20%">
+                                    SUBMODE
+                                </td>
+                                <td style="width: 5%">:</td>
+                                <td style="font-size: 12px; width: 25%">INTERNAL</td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 12px; width: 20%">
+                                    VOLUNTARY REF NO.
+                                </td>
+                                <td style="width: 5%">:</td>
+                                <td style="width: 25%"></td>
+                                <td style="font-size: 12px; width: 20%">
+                                    DATE
+                                </td>
+                                <td style="width: 5%">:</td>
+                                <td style="font-size: 12px; width: 25%">
+                                    <span t-esc="p.get('date')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 12px">
+                                    <span t-esc="p.get('name')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 12px; padding-bottom: 2em;">6 Jalan Kilang #04-00</td>
+                            </tr>
+                        </tr>
+                    </table>
+                    <table width="100%">
+                        <tr t-foreach="o.get_pdf_data()" t-as="b">
+                            <tr>
+                                <td style="font-size: 12px; font-weight: bold; padding-bottom: 1em;">
+                                    PART 1 : Payment Details For <span t-esc="b.get('period')"/>
+                                </td>
+                            </tr>
+                        </tr>
+                    </table>
+                    <table width="100%">
+                        <t t-set="mandatory_total" t-value="0"/>
+                        <t t-set="foreign_worker_total" t-value="0"/>
+                        <t t-set="skill_development_total" t-value="0"/>
+                        <t t-set="mosque_total" t-value="0"/>
+                        <t t-set="sinda_total" t-value="0"/>
+                        <t t-set="cdac_total" t-value="0"/>
+                        <t t-set="eurasian_total" t-value="0"/>
+                        <tr t-foreach="o.get_pdf_data()" t-as="t">
+                            <tr>
+                                <td style="width: 50%"></td>
+                                <td style="width: 30%; font-size: 12px; font-weight: bold" class="text-right">AMOUNT</td>
+                                <td style="width: 20%; font-size: 12px; font-weight: bold" class="text-right">NO. OF EMPLOYEE</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%" class="text-left">
+                                    1. CPF Contribution
+                                </td>
+                                <td style="width: 30%"></td>
+                                <td style="width: 20%"></td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%">
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    Mandatory Contribution
+                                </td>
+                                <td style="width: 30%" class="text-right">
+                                    <span t-esc="'{0:,.2f}'.format(t.get('amount_t_cpf'))"/>
+                                    <t t-set="mandatory_total" t-value="mandatory_total+t.get('amount_t_cpf')"/>
+                                </td>
+                                <td style="width: 20%" class="text-right">
+                                    <span t-esc="t.get('amount_emp_cpf')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%">
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Voluntary Contribution
+                                </td>
+                                <td style="width: 30%" class="text-right">0.00</td>
+                                <td style="width: 20%" class="text-right">0</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%" class="text-left">
+                                    2. B/F CPF late Payment interest
+                                </td>
+                                <td style="width: 30%" class="text-right">0.00</td>
+                                <td style="width: 20%" class="text-right">0</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%" class="text-left">
+                                    Interest charged on last payment
+                                </td>
+                                <td style="width: 30%" class="text-right">0.00</td>
+                                <td style="width: 20%" class="text-right">0</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%" class="text-left">
+                                    3. Late payment interest on CPF Contribution
+                                </td>
+                                <td style="width: 30%" class="text-right">0.00</td>
+                                <td style="width: 20%" class="text-right">0</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%" class="text-left">
+                                    4. Late payment penalty for Foreign Worker Levy
+                                </td>
+                                <td style="width: 30%" class="text-right">0.00</td>
+                                <td style="width: 20%" class="text-right">0</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%" class="text-left">
+                                    5. Foreign Worker Levy
+                                </td>
+                                <td style="width: 30%" class="text-right">
+                                    <span t-esc="'{0:,.2f}'.format(t.get('amount_t_p_fwl'))"/>
+                                    <t t-set="foreign_worker_total" t-value="foreign_worker_total+t.get('amount_t_p_fwl')"/>
+                                </td>
+                                <td style="width: 20%" class="text-right">
+                                    <span t-esc="t.get('amount_emp_fwl')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%" class="text-left">
+                                    6. Skills Development Levy
+                                </td>
+                                <td style="width: 30%" class="text-right">
+                                    <span t-esc="'{0:,.2f}'.format(t.get('amount_t_p_cpf_sdl'))"/>
+                                    <t t-set="skill_development_total" t-value="skill_development_total+t.get('amount_t_p_cpf_sdl')"/>
+                                </td>
+                                <td style="width: 20%" class="text-right">
+                                    <span t-esc="t.get('amount_emp_sdl')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%" class="text-left">
+                                    7. Donation to Community Chest
+                                </td>
+                                <td style="width: 30%" class="text-right">0.00</td>
+                                <td style="width: 20%" class="text-right">0</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%" class="text-left">
+                                    8. Mosque Building &amp; Mendaki Fund (MBMF)
+                                </td>
+                                <td style="width: 30%" class="text-right">
+                                    <span t-esc="'{0:,.2f}'.format(t.get('amount_t_mbmf'))"/>
+                                    <t t-set="mosque_total" t-value="mosque_total+t.get('amount_t_mbmf')"/>
+                                </td>
+                                <td style="width: 20%" class="text-right">
+                                    <span t-esc="t.get('amount_emp_mbmf')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%" class="text-left">
+                                    9. SINDA Fund
+                                </td>
+                                <td style="width: 30%" class="text-right">
+                                    <span t-esc="'{0:,.2f}'.format(t.get('amount_t_sinda'))"/>
+                                    <t t-set="sinda_total" t-value="sinda_total+t.get('amount_t_sinda')"/>
+                                </td>
+                                <td style="width: 20%" class="text-right">
+                                    <span t-esc="t.get('amount_emp_sinda')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%"  class="text-left">
+                                    10. CDAC Fund
+                                </td>
+                                <td style="width: 30%" class="text-right">
+                                    <span t-esc="'{0:,.2f}'.format(t.get('amount_t_cdac'))"/>
+                                    <t t-set="cdac_total" t-value="cdac_total+t.get('amount_t_cdac')"/>
+                                </td>
+                                <td style="width: 20%" class="text-right">
+                                    <span t-esc="t.get('amount_emp_cdac')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%"  class="text-left">
+                                    11. Eurasian Community Fund (EUCF)
+                                </td>
+                                <td style="width: 30%" class="text-right">
+                                    <span t-esc="'{0:,.2f}'.format(t.get('amount_t_ecf'))"/>
+                                    <t t-set="eurasian_total" t-value="eurasian_total+t.get('amount_t_ecf')"/>
+                                </td>
+                                <td style="width: 20%; padding-bottom: 1em;" class="text-right">
+                                    <span t-esc="t.get('amount_emp_ecf')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50%; font-weight: bold; padding-bottom: 1em;">
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Total
+                                </td>
+                                <td style="width: 30%" class="text-right">
+                                    <span t-esc="'{0:,.2f}'.format(mandatory_total+foreign_worker_total+skill_development_total+mosque_total+sinda_total+cdac_total+eurasian_total)"/>
+                                </td>
+                                <td style="width: 20%"></td>
+                            </tr>
+                        </tr>
+                    </table>
+                    <table width="100%">
+                        <tr t-foreach="o.get_pdf_data()" t-as="c">
+                            <tr>
+                                <td>
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;Please fill in cheque details if you are paying by cheque
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;BANK&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;CHEQUE NO. :
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;THE EMPLOYER HEREBY GUARANTEES
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;THE ACCURACY
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;OF THE CPF RETURNS FOR <span t-esc="c.get('period')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 1em;">
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;AS SHOWN ON THE SUBMITTED DISKETTE.
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding-bottom: 5em;">
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                    &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;EMPLOYER'S AUTHORIZED SIGNATORY
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="font-size: 12px; font-weight: bold">
+                                    PART 2 : Contribution Details For <span t-esc="c.get('period')"/>
+                                </td>
+                            </tr>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered" style="border: 1px solid black;">
+                        <thead>
+                            <td style="border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                <strong>Employee Name</strong>
+                            </td>
+                            <td style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                <strong>CPF Account No.</strong>
+                            </td>
+                            <td style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                <strong>Mandatory CPF Contribution</strong>
+                            </td>
+                            <td style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                <strong>Voluntary CPF Contribution</strong>
+                            </td>
+                            <td style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                <strong>Last Contribution</strong>
+                            </td>
+                            <td style="border-bottom: 1px solid black;border-right: 1px solid black;"></td>
+                            <td style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                <strong>MBMF Fund</strong>
+                            </td>
+                            <td style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                <strong>SINDA Fund</strong>
+                            </td>
+                            <td style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                <strong>CDAC Fund</strong>
+                            </td>
+                            <td style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                <strong>ECF Fund</strong>
+                            </td>
+                            <td style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                <strong>SDL Fund</strong>
+                            </td>
+                            <td style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                <strong>Ordinary Wages</strong>
+                            </td>
+                            <td class="text-center" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                <strong>Additional Wages</strong>
+                            </td>
+                        </thead>
+                        <tbody>
+                            <t t-set="cpf_total" t-value="0"/>
+                            <t t-set="voluntary_total" t-value="0"/>
+                            <t t-set="last_total" t-value="0"/>
+                            <t t-set="mbmf_fund_total" t-value="0"/>
+                            <t t-set="sinda_fund_total" t-value="0"/>
+                            <t t-set="cdac_fund_total" t-value="0"/>
+                            <t t-set="ecf_total" t-value="0"/>
+                            <t t-set="sdl_total" t-value="0"/>
+                            <t t-set="ordinary_total" t-value="0"/>
+                            <t t-set="additional_total" t-value="0"/>
+                            <tr t-foreach="o.get_pdf_data()" t-as="d">
+                                <td class="text-left" style="border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="d.get('employee_name')"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="d.get('identification_no')"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(d.get('amount_cpf'))"/>
+                                    <t t-set="cpf_total" t-value="cpf_total+d.get('amount_cpf')"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    0.00
+                                    <t t-set="voluntary_total" t-value="voluntary_total+0.0"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(d.get('amount_t_p_cpf'))"/>
+                                    <t t-set="last_total" t-value="last_total+d.get('amount_t_p_cpf')"/>
+                                </td>
+                                <td class="text-left" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="d.get('existing')"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(d.get('amount_total_mbmf'))"/>
+                                    <t t-set="mbmf_fund_total" t-value="mbmf_fund_total+d.get('amount_total_mbmf')"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(d.get('amount_total_sinda'))"/>
+                                    <t t-set="sinda_fund_total" t-value="sinda_fund_total+d.get('amount_total_sinda')"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(d.get('amount_total_cdac'))"/>
+                                    <t t-set="cdac_fund_total" t-value="cdac_fund_total+d.get('amount_total_cdac')"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(d.get('amount_total_ecf'))"/>
+                                    <t t-set="ecf_total" t-value="ecf_total+d.get('amount_total_ecf')"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(d.get('amount_total_cpfsdl'))"/>
+                                    <t t-set="sdl_total" t-value="sdl_total+d.get('amount_total_cpfsdl')"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(d.get('amount_total_gross'))"/>
+                                    <t t-set="ordinary_total" t-value="ordinary_total+d.get('amount_total_gross')"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(d.get('amount_total_additional'))"/>
+                                    <t t-set="additional_total" t-value="additional_total+d.get('amount_total_additional')"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-left" style="border-bottom: 1px solid black;border-left: 1px solid black;border-right: 1px solid black;">
+                                    Total Employee
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;"></td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(cpf_total)"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(voluntary_total)"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(last_total)"/>
+                                </td>
+                                <td class="text-left" style="border-bottom: 1px solid black;border-right: 1px solid black;"></td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(mbmf_fund_total)"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(sinda_fund_total)"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(cdac_fund_total)"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(ecf_total)"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(sdl_total)"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(ordinary_total)"/>
+                                </td>
+                                <td class="text-right" style="border-bottom: 1px solid black;border-right: 1px solid black;">
+                                    <span t-esc="'{0:,.2f}'.format(additional_total)"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br/>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_payment_advice">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="sg_hr_report.payment_advice_report"/>
+        </t>
+    </template>
+
+</odoo>

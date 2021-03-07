@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_work_center_group,access_work_center_group,model_work_center_group,,1,1,1,1
+access_work_center_group_line,access_work_center_group_line,model_work_center_group_line,,1,1,1,1

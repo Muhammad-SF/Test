@@ -1,0 +1,128 @@
+<odoo>
+    <data>
+        <record id="view_transition_history_inherit_pivot" model="ir.ui.view">
+            <field name="name">view.transition.history.inherit.pivot</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="employee" string="Transition">
+
+                        <field name="transition_line">
+                            <tree>
+                                <field name="transition"/>
+
+                                <field name="date_to"/>
+
+                                <field name="company_to"/>
+
+                                <field name="department_to"/>
+
+                                <field name="job_position"/>
+
+                                <field name="work_location"/>
+
+                                <field name="reason"/>
+                            </tree>
+                        </field>
+
+
+                    </page>
+                </xpath>
+            </field>
+        </record>
+<!--        <record model="ir.actions.act_window" id="transition_history_pivot">-->
+<!--            <field name="name">transition history</field>-->
+<!--            <field name="res_model">transition.history</field>-->
+<!--            <field name="view_mode">pivot</field>-->
+<!--        </record>-->
+<!--        <menuitem name="Transition History" id="transition_history_pivot_menu_1"-->
+<!--                  parent="career_transition.menu_hr_career_transition"/>-->
+<!--        <menuitem name="Transition History Pivot" id="transition_history_pivot_sub_menu"-->
+<!--                  parent="transition_history_pivot_menu_1" action="transition_history_pivot"/>-->
+
+
+        <!--        <record id="view_transition_history_inherit_pivot" model="ir.ui.view">-->
+        <!--            <field name="name">view.transition.history.inherit.pivot</field>-->
+        <!--            <field name="model">hr.employee</field>-->
+        <!--            <field name="inherit_id" ref="hr.view_employee_form"/>-->
+        <!--            <field name="arch" type="xml">-->
+        <!--                <xpath expr="//notebook" position="inside">-->
+        <!--                    <page name="employee" string="Transition">-->
+        <!--                        <field name="transition_line">-->
+        <!--                            <tree>-->
+        <!--                                <field name="transition"/>-->
+        <!--                                <field name="date_to"/>-->
+        <!--                                <field name="company_to"/>-->
+        <!--                                <field name="department_to"/>-->
+        <!--                                <field name="job_position"/>-->
+        <!--                                <field name="work_location"/>-->
+        <!--                                <field name="reason"/>-->
+        <!--                            </tree>-->
+        <!--                        </field>-->
+        <!--&lt;!&ndash;                        <pivot string="Pivot Transition history">&ndash;&gt;-->
+
+        <!--&lt;!&ndash;                        </pivot>&ndash;&gt;-->
+        <!--                    </page>-->
+        <!--                </xpath>-->
+        <!--            </field>-->
+        <!--        </record>-->
+
+
+        <!-- explicit list view definition -->
+        <!--
+        <record model="ir.ui.view" id="employee_contract.list">
+          <field name="name">employee_contract list</field>
+          <field name="model">employee_contract.employee_contract</field>
+          <field name="arch" type="xml">
+            <tree>
+              <field name="name"/>
+              <field name="value"/>
+              <field name="value2"/>
+            </tree>
+          </field>
+        </record>
+        -->
+
+        <!-- actions opening views on models -->
+        <!--
+        <record model="ir.actions.act_window" id="employee_contract.action_window">
+          <field name="name">employee_contract window</field>
+          <field name="res_model">employee_contract.employee_contract</field>
+          <field name="view_mode">tree,form</field>
+        </record>
+        -->
+
+        <!-- server action to the one above -->
+        <!--
+        <record model="ir.actions.server" id="employee_contract.action_server">
+          <field name="name">employee_contract server</field>
+          <field name="model_id" ref="model_employee_contract_employee_contract"/>
+          <field name="code">
+            action = {
+              "type": "ir.actions.act_window",
+              "view_mode": "tree,form",
+              "res_model": self._name,
+            }
+          </field>
+        </record>
+        -->
+
+        <!-- Top menu item -->
+        <!--
+        <menuitem name="employee_contract" id="employee_contract.menu_root"/>
+        -->
+        <!-- menu categories -->
+        <!--
+        <menuitem name="Menu 1" id="employee_contract.menu_1" parent="employee_contract.menu_root"/>
+        <menuitem name="Menu 2" id="employee_contract.menu_2" parent="employee_contract.menu_root"/>
+        -->
+        <!-- actions -->
+        <!--
+        <menuitem name="List" id="employee_contract.menu_1_list" parent="employee_contract.menu_1"
+                  action="employee_contract.action_window"/>
+        <menuitem name="Server to list" id="employee_contract" parent="employee_contract.menu_2"
+                  action="employee_contract.action_server"/>
+        -->
+    </data>
+</odoo>

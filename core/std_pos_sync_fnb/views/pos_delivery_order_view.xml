@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- POS Delivery Order -->
+        <record model="ir.ui.view" id="pos_home_delivery_order_form_view_sync_pos_id">
+            <field name="name">pos.home.delivery.order.form.sync.pos.id</field>
+            <field name="model">pos.delivery.order</field>
+            <field name="inherit_id" ref="pos_home_delivery.pos_home_delivery_order_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group/field[@name='email']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

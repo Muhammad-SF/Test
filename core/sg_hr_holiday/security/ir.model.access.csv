@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_employee_hr_holidays_public,employee.access.hr_holidays_public,model_hr_holiday_public,base.group_user,1,0,0,0
+access_manager_hr_holidays_public,manager.access.hr_holidays_public,model_hr_holiday_public,hr.group_hr_user,1,0,0,0
+access_manager_hr_holidays_public_mgr,manager.access.hr_holidays_public.mgr,model_hr_holiday_public,hr.group_hr_manager,1,1,1,1
+access_hr_user_hr_holiday_lines,user.access.hr_holiday_lines,model_hr_holiday_lines,base.group_user,1,0,0,0
+access_hr_manager_hr_holiday_lines,manager.access.hr_holiday_lines,model_hr_holiday_lines,hr.group_hr_user,1,0,0,0
+access_hr_manager_hr_holiday_lines.mgr,manager.access.hr_holiday_lines.mgr,model_hr_holiday_lines,hr.group_hr_manager,1,1,1,1
+access_resource_calendar_leaves_sg_user,access_resource_calendar_leaves_sg_user,resource.model_resource_calendar_leaves,base.group_user,1,1,1,1
+access_hr_job_group_user,access_hr_job,hr.model_hr_job,base.group_user,1,0,0,0

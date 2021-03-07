@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="base.menu_module_updates" parent="base.menu_management" sequence="20" action="base.modules_updates_act_cl" groups="base.group_system"/>
+</odoo>

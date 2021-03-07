@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_floor_sync_log,access_floor_sync_log,model_floor_sync_log,base.group_user,1,1,1,1
+access_table_sync_log,access_table_sync_log,model_table_sync_log,base.group_user,1,1,1,1
+access_master_floor_table_sync_log,access_master_floor_table_sync_log,model_master_floor_table_sync_log,base.group_user,1,1,1,1
+

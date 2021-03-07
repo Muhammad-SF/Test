@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <data>
+
+        <record id="base_salary_structure" model="hr.payroll.structure">
+            <field name="name">Base For New Structures</field>
+            <field name="code">BASE</field>
+            <field name="rule_ids" eval="[(4,ref('hr_payroll.hr_rule_basic')), (4,ref('hr_payroll.hr_rule_taxable')),
+               (4,ref('hr_payroll.hr_rule_net')), (4,ref('l10n_sg_hr_payroll.hr_salary_rule_unpaidleave_auto')),
+               (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfemployeesprsingaporean0')), (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpftotalsprsingaporean0')),
+               (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfemployersprsingaporean0')), (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfmbmf0')),
+               (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfsinda0')), (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfcdac0')),
+               (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfecf0')), (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfsdl0')),
+               (4,ref('hr_salary_rule_cpfemployees_ow')), (4,ref('hr_salary_rule_cpfemployees_aw')),
+               (4,ref('hr_salary_rule_ow_cpf_employee')), (4,ref('hr_salary_rule_aw_cpf_employee'))]"/>
+        </record>
+
+        <record id="base_salary_structure_director" model="hr.payroll.structure">
+            <field name="name">Base For New Structures (Director)</field>
+            <field name="code">BASE (Director)</field>
+            <field name="rule_ids" eval="[(4,ref('hr_payroll.hr_rule_basic')), (4,ref('hr_payroll.hr_rule_taxable')),
+               (4,ref('hr_payroll.hr_rule_net')), (4,ref('l10n_sg_hr_payroll.hr_salary_rule_unpaidleave_auto')),
+               (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfmbmf0')), (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfsinda0')),
+               (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfcdac0')), (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfecf0')),
+               (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfsdl0')), (4,ref('hr_salary_rule_cpfemployees_ow')),
+               (4,ref('hr_salary_rule_cpfemployees_aw')), (4,ref('hr_salary_rule_ow_cpf_employee')),
+               (4,ref('hr_salary_rule_aw_cpf_employee')), (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfemployeesprdirectorsingaporean0')),
+               (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpftotalsprdirectorsingaporean0')), (4,ref('l10n_sg_hr_payroll.hr_salary_rule_cpfemployersprdirectorsingaporean0'))]"/>
+        </record>
+
+    </data>
+</odoo>

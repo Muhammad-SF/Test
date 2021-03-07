@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Reminder template For Student-->
+        <record id="student_reminder_template" model="mail.template">
+            <field name="name">Reminder for Student</field>
+            <field name="email_from">${'noreply@localhost'|safe}</field>
+            <field name="subject">${object.name}</field>
+            <field name="model_id" ref="school.model_student_reminder"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+            <div>
+                <p>Dear ${object.stu_id.name}</p>   
+
+                <p>Reminder Mail for you.</p>
+                <p>Date :- ${object.date}</p>
+                <p>Intake :- ${object.intake_id.name}</p>
+                <p>Course :- ${object.course_id.standard_id.name} ${object.course_id.division_id.name}</p>
+                <p>URL :- ${object.url_fields}</p>
+                <p>Attachment</p>
+
+                <p>Thank you</p>
+                <p>Wassalamualaikum Wr Wb</p>
+            </div>
+            ]]></field>
+        </record>
+
+        <!-- Reminder template For Teacher-->
+        <record id="teacher_reminder_template" model="mail.template">
+            <field name="name">Reminder for Teacher</field>
+            <field name="email_from">${'noreply@localhost'|safe}</field>
+            <field name="subject">${object.name}</field>
+            <field name="model_id" ref="school.model_student_reminder"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[   
+            <div>
+                <p>Dear ${object.teacher_id.name}</p>
+
+                <p>Reminder Mail for you.</p>
+                <p>Date :- ${object.date}</p>
+                <p>Intake :- ${object.intake_id.name}</p>
+                <p>Course :- ${object.course_id.standard_id.name} ${object.course_id.division_id.name}</p>
+                <p>URL :- ${object.url_fields}</p>
+                <p>Attachment</p>
+
+                <p>Thank you</p>
+                <p>Wassalamualaikum Wr Wb</p>
+            </div>
+            ]]></field>
+        </record>
+    </data>
+</odoo>

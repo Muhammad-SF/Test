@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+
+		<!-- Set Paper Format for the ir8a Report -->
+		<record id="ir8a_form_income_tax_report_paperformat" model="report.paperformat">
+			<field name="name">IR8A Form</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">3</field>
+			<field name="margin_bottom">3</field>
+			<field name="margin_left">4</field>
+			<field name="margin_right">4</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">20</field>
+			<field name="dpi">90</field>
+		</record>
+
+		<!-- Ir8a Report Menu -->
+		<report id="ir8a_form_income_tax_report" string="IR8A Form"
+			model="emp.ir8a.text.file" report_type="qweb-pdf"
+			name="sg_income_tax_report.ir8a_incometax_form_report" file="sg_income_tax_report.ir8a_incometax_form_report"
+			menu="False" header="False" />
+
+		<!-- Ir8a Report Paper Format -->
+		<record id="ir8a_form_income_tax_report" model="ir.actions.report.xml">
+			<field name="paperformat_id" ref="ir8a_form_income_tax_report_paperformat" />
+		</record>
+
+
+		<!-- Set Paper Format for the Ir8s Report -->
+		<record id="ir8s_form_income_tax_report_paperformat" model="report.paperformat">
+			<field name="name">IR8S Form</field>
+			<field name="default" eval="True" />
+			<field name="format">A4</field>
+			<field name="page_height">0</field>
+			<field name="page_width">0</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">10</field>
+			<field name="margin_bottom">10</field>
+			<field name="margin_left">4</field>
+			<field name="margin_right">4</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">20</field>
+			<field name="dpi">90</field>
+		</record>
+
+		<!-- Ir8s Report Menu -->
+		<report id="ir8s_form_income_tax_report" string="IR8S Form"
+			model="emp.ir8s.text.file" report_type="qweb-pdf"
+			name="sg_income_tax_report.ir8s_incometax_form_report" file="sg_income_tax_report.ir8s_incometax_form_report"
+			menu="False" header="False" />
+
+		<!-- Ir8s Report Paper Format -->
+		<record id="ir8s_form_income_tax_report" model="ir.actions.report.xml">
+			<field name="paperformat_id" ref="ir8s_form_income_tax_report_paperformat" />
+		</record>
+
+	</data>
+</odoo>

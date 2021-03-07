@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="sixcap_remove_unsubscribe_link.list">
+      <field name="name">sixcap_remove_unsubscribe_link list</field>
+      <field name="model">sixcap_remove_unsubscribe_link.sixcap_remove_unsubscribe_link</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="sixcap_remove_unsubscribe_link.action_window">
+      <field name="name">sixcap_remove_unsubscribe_link window</field>
+      <field name="res_model">sixcap_remove_unsubscribe_link.sixcap_remove_unsubscribe_link</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="sixcap_remove_unsubscribe_link.action_server">
+      <field name="name">sixcap_remove_unsubscribe_link server</field>
+      <field name="model_id" ref="model_sixcap_remove_unsubscribe_link_sixcap_remove_unsubscribe_link"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="sixcap_remove_unsubscribe_link" id="sixcap_remove_unsubscribe_link.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="sixcap_remove_unsubscribe_link.menu_1" parent="sixcap_remove_unsubscribe_link.menu_root"/>
+    <menuitem name="Menu 2" id="sixcap_remove_unsubscribe_link.menu_2" parent="sixcap_remove_unsubscribe_link.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="sixcap_remove_unsubscribe_link.menu_1_list" parent="sixcap_remove_unsubscribe_link.menu_1"
+              action="sixcap_remove_unsubscribe_link.action_window"/>
+    <menuitem name="Server to list" id="sixcap_remove_unsubscribe_link" parent="sixcap_remove_unsubscribe_link.menu_2"
+              action="sixcap_remove_unsubscribe_link.action_server"/>
+    -->
+  </data>
+</odoo>

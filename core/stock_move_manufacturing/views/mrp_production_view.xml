@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="mrp_production_form_view_transfer_inherit" model="ir.ui.view">
+            <field name="name">mrp.production.form.inherit.transfer</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/header" position="inside">
+                    <button name="create_internal_transfer" string="Transfer Stock" type="object" attrs="{'invisible': [('state', 'not in', ['confirmed','planned'])]}" class="oe_highlight"/>
+                </xpath>
+                <xpath expr="//field[@name='origin']" position="after">
+                    <!-- add invislbe=1 in both -->
+                    <field name="location_id" invisible="1"/>
+                    <field name="stock_location_id" invisible="1"/>
+                </xpath>
+                <xpath expr="//field[@name='move_raw_ids']/tree/field[@name='quantity_done']" position="after">
+                    <field name="location_id"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

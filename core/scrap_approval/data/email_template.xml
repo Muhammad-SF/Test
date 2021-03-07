@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!--Email template for submit request -->
+        <record id="email_template_edi_scrap_request" model="mail.template">
+            <field name="name">Scrap Request - Send by Email</field>
+            <!--field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field-->
+            <field name="email_from">${ctx['email_from']|safe}</field>
+            <field name="subject">You have a Scrap Request ${object.name or 'n/a' } need Approval</field>
+            <!--field name="partner_to">${object.partner_id.id}</field-->
+            <field name="email_to">${ctx['email_to']|safe}</field>
+            <field name="model_id" ref="scrap_approval.model_stock_scrap"/>
+            <field name="auto_delete" eval="True"/>
+            <!--field name="report_template" ref="report_sale_order"/>
+            <field name="report_name">${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}</field-->
+            <!--field name="lang">${object.partner_id.lang}</field-->
+            <field name="body_html"><![CDATA[
+<p>Dear ${ctx['approval_name']|safe},
+<p>
+You have a Scrap Request</strong> <a href="${ctx['url']|safe}" target="_blank">(${object.name})</a> waiting for your approval.
+</p>
+    <br/><br/>
+
+]]></field>
+        </record>
+    </data>
+
+    <data noupdate="1">
+
+        <!--Email template first time approve-->
+        <record id="email_template_edi_scrap_approve_first" model="mail.template">
+            <field name="name">Scrap Request Approve-first - Send by Email</field>
+            <!--field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field-->
+            <field name="email_from">${ctx['email_from']|safe}</field>
+            <field name="subject">You have a Scrap Request ${object.name or 'n/a' } need Approval</field>
+            <!--field name="partner_to">${object.partner_id.id}</field-->
+            <field name="email_to">${ctx['email_to']|safe}</field>
+            <field name="model_id" ref="scrap_approval.model_stock_scrap"/>
+            <field name="auto_delete" eval="True"/>
+            <!--field name="report_template" ref="report_sale_order"/>
+            <field name="report_name">${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}</field-->
+            <!--field name="lang">${object.partner_id.lang}</field-->
+            <field name="body_html"><![CDATA[
+<p>Dear ${ctx['approval_name']|safe},
+<p>
+You have a Scrap Request</strong> <a href="${ctx['url']|safe}" target="_blank">(${object.name})</a> waiting for your approval.
+</p>
+    <br/><br/>
+
+]]></field>
+        </record>
+    </data>
+
+    <data noupdate="1">
+
+        <!--Email template final time approve-->
+        <record id="email_template_edi_scrap_approve_final" model="mail.template">
+            <field name="name">Scrap Request Approve-first - Send by Email</field>
+            <!--field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field-->
+            <field name="email_from">${ctx['email_from']|safe}</field>
+            <field name="subject">Your Scrap Request ${object.name or 'n/a' } Approved</field>
+            <!--field name="partner_to">${object.partner_id.id}</field-->
+            <field name="email_to">${ctx['email_to']|safe}</field>
+            <field name="model_id" ref="scrap_approval.model_stock_scrap"/>
+            <field name="auto_delete" eval="True"/>
+            <!--field name="report_template" ref="report_sale_order"/>
+            <field name="report_name">${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}</field-->
+            <!--field name="lang">${object.partner_id.lang}</field-->
+            <field name="body_html"><![CDATA[
+<p>Dear ${object.user_id.name|safe},
+<p>
+Your Scrap Request</strong> <a href="${ctx['url']|safe}" target="_blank">(${object.name})</a> has been approved.
+</p>
+    <br/><br/>
+
+]]></field>
+        </record>
+    </data>
+
+<data noupdate="1">
+
+        <!--Email template for submit request -->
+        <record id="email_template_edi_scrap_request_reject" model="mail.template">
+            <field name="name">Scrap Request Reject- Send by Email</field>
+            <!--field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field-->
+            <field name="email_from">${ctx['email_from']|safe}</field>
+            <field name="subject">Your Scrap Request ${object.name or 'n/a' } Rejected</field>
+            <!--field name="partner_to">${object.partner_id.id}</field-->
+            <field name="email_to">${ctx['email_to']|safe}</field>
+            <field name="model_id" ref="scrap_approval.model_stock_scrap"/>
+            <field name="auto_delete" eval="True"/>
+            <!--field name="report_template" ref="report_sale_order"/>
+            <field name="report_name">${(object.name or '').replace('/','_')}${object.state == 'draft' and '_draft' or ''}</field-->
+            <!--field name="lang">${object.partner_id.lang}</field-->
+            <field name="body_html"><![CDATA[
+<p>Dear ${object.user_id.name|safe},
+<p>
+Your Scrap Request</strong> <a href="${ctx['url']|safe}" target="_blank">(${object.name})</a> has been rejected.
+</p>
+<p>
+Reason: ${ctx['reason']|safe}
+</p>
+
+]]></field>
+        </record>
+    </data>
+
+</odoo>

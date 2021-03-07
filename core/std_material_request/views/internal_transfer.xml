@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record model="ir.actions.act_window" id="action_internal_transfer">
+    <field name="name">Internal Transfer</field>
+    <field name="res_model">internal.transfer</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">['&amp;',('mr_id', '=', active_id),('state','!=','cancel')]</field>
+  </record>
+
+
+  <record id="internal_transfer_form_view" model="ir.ui.view">
+    <field name="name">mr.internal.transfer.form</field>
+    <field name="model">mr.internal.transfer</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <field name="is_transit" invisible="1"/>
+          <field name="is_create_internal_transfer" invisible="1"/>
+          <field name="internal_transfer_receipt">
+          		<tree create="false">
+                <field name="mr_id" readonly="1"/>
+                <field name="product_id" readonly="1"/>
+                <field name="description" readonly="1"/>
+                <field name="process_qty" readonly="1"/>
+                <field name="uom_id" readonly="1"/>
+                <field name="source_loc_id"/>
+                <field name="current_quantity" readonly="1" invisible="1"/>
+                <field name="qty_transfer"/>
+                <field name="is_split_line" invisible="1"/>
+                <field name="mr_internal_transfer" invisible="1"/>
+            </tree>
+          
+          </field>
+        </sheet>
+        <footer>
+          <button name="create_rfq" attrs="{'invisible': [('is_create_internal_transfer', '=', False)]}" type="object" string="Create Internal Transfer" class="btn btn-primary"/>
+        </footer>
+      </form>
+    </field>
+  </record>  
+
+<!-- form view one2many popup -->
+    <record id="view_internal_transfer_details_form" model="ir.ui.view">
+      <field name="name">mr.internal.transfer.details.form</field>
+      <field name="model">mr.internal.transfer.receipt</field>
+      <field name="arch" type="xml">
+        <form  create="false">
+	        <sheet>
+	              <group>
+	                  <group>
+	                      <field name="mr_id" readonly="1"/>
+	                      <field name="product_id" readonly="1"/>
+	                      <field name="description" readonly="1"/>
+	                      <field name="uom_id" readonly="1"/>
+	                  </group>
+	                  <group>
+	                      <field name="filter_location_ids" widget="many2many_tags" invisible="1"/>
+	                      <field name="source_loc_id" domain="[('id', 'in', filter_location_ids and filter_location_ids[0] and filter_location_ids[0][2])]"/>
+	                      <field name="current_quantity" readonly="1"/>
+	                      <label for="qty_transfer"/>
+	                      <div>
+	                        <field name="process_qty" readonly="1"/>
+	                        <field name="qty_transfer"/>
+	                        <button name="split_line" type="object" class='btn btn-link' string="Split" attrs="{'invisible': [('is_split_line', '=', False)]}"/>
+	                      </div>
+	                      <field name="is_split_line" invisible="1"/>
+	                      <field name="mr_internal_transfer" invisible="1"/>
+	                  </group>
+	              </group>
+	           </sheet>
+       </form>
+      </field>
+  </record>
+
+			
+
+  <!--  <record id="view_mr_details_form_save" model="ir.ui.view">
+      <field name="name">mr.details.form.save</field>
+      <field name="model">mr.internal.transfer.receipt</field>
+      <field name="mode">primary</field>
+      <field name="inherit_id" ref="std_material_request.view_internal_transfer_details_form"/>
+      <field eval="15" name="priority"/>
+      <field name="arch" type="xml">
+          <group name="qty_to" position="after">
+              <footer>
+                  <button name="save" type="object" string="Save" class="oe_highlight"/>
+                  <button string="Discard" special="cancel"/>
+              </footer>
+          </group>
+          <field name="qty_transfer" position="after">
+          <button name="mr_split_line" type="object" string="Split" class="btn btn-primary"/>-->
+          <!-- <button name="split_quantities" attrs="{'invisible': ['|', ('qty_transfer', '&lt;=', 0.0), ('process_qty', '&lt;=', 0.0)]}" class="oe_link" string="Split" type="object"/> 
+          </field>
+      </field>
+  </record>
+
+    <record id="MR_details" model="ir.actions.act_window">
+        <field name="name">MR Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mr.internal.transfer.receipt</field>
+        <field name="view_id" ref="view_mr_details_form_save"/>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{}</field>
+    </record>-->
+
+
+</odoo>

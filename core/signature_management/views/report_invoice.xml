@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_invoice_document2" inherit_id="account.report_invoice_document">
+        <xpath expr="//p[@t-if='o.fiscal_position_id.note']" position="after">
+            <p class="text-right">
+                <img t-if="o.signature" class=""  
+                    t-att-src="'data:image/png;base64,%s' % o.signature"
+                    style="max-height: 45px;"/>
+            </p>
+        </xpath>
+    </template>
+
+</odoo>

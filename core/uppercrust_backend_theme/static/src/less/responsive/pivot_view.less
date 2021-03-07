@@ -1,0 +1,21 @@
+.pivot-view-xs() {
+    .o_main {
+        .o_main_content {
+            &.ad_rightbar {
+                .o_content {
+                    .o_view_manager_content {
+                        & > .o_pivot {
+                            padding: 10px 0;
+                            margin-right: 10px;
+                            margin-left: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.o_web_client.ad_mobile {
+    .pivot-view-xs;
+}

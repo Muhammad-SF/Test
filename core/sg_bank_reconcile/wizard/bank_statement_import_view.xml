@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record id="bank_statement_import_view_form" model="ir.ui.view">
+            <field name="name">Bank Statement Import View Form</field>
+            <field name="model">bank.statement.import</field>
+            <field name="arch" type="xml">
+                <form string="Bank Statement Import">
+                    <group>
+                        <group>
+                            <field name="file" required="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_bank_statement_import" string="Import" type="object" icon="fa-upload" class="btn-primary"/>
+                        or
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

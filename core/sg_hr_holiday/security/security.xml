@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <!--
+				<record id="property_rule_holidays_users" model="ir.rule">
+        <field name="name">Holidays Users</field>
+        <field name="model_id" ref="model_hr_holidays"/>
+        <field name="domain_force">['|',('employee_id.user_id','=',user.id),('employee_id.leave_manager.user_id','=',user.id)]</field>
+        <field name="groups" eval="[(4,ref('hr.group_hr_user'))]"/>
+    </record>
+
+    <record id="hr_holidays.property_rule_holidays_employee" model="ir.rule">
+        <field name="name">Employee Holidays</field>
+        <field name="model_id" ref="model_hr_holidays"/>
+        <field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+        <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+    </record>
+
+    <record id="hr_holidays.property_rule_holidays_officer" model="ir.rule">
+        <field name="name">Holidays Officer</field>
+        <field name="model_id" ref="model_hr_holidays"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(3,ref('hr_holidays.group_hr_holidays_user')),(4,ref('hr.group_hr_manager'))]"/>
+    </record>
+
+    <record id="hr_holidays.resource_leaves_officer" model="ir.rule">
+        <field name="name">Leaves Officer</field>
+        <field name="model_id" ref="resource.model_resource_calendar_leaves"/>
+        <field name="domain_force">[(1,'=',1)]</field>
+        <field name="groups" eval="[(4,ref('hr.group_hr_user')),(4,ref('hr.group_hr_manager'))]"/>
+    </record>
+				-->
+		<record id="hr_holidays.property_rule_holidays_employee" model="ir.rule">
+			<field name="name">Employee Holidays</field>
+			<field name="model_id" ref="model_hr_holidays"/>
+			<field name="domain_force">[('employee_id.user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4,ref('base.group_user'))]"/>
+			<field name='perm_create' eval='True'/>
+	        <field name='perm_read' eval='True'/>
+	        <field name='perm_unlink' eval='True'/>
+	        <field name='perm_write' eval='True'/>
+		</record>
+
+		<record id="hr_holidays.property_rule_holidays_officer" model="ir.rule">
+			<field name="name">Holiday Officer</field>
+			<field name="model_id" ref="model_hr_holidays"/>
+			<field name="domain_force">['|', ('employee_id.user_id','=',user.id), ('employee_id.leave_manager.user_id','=',user.id)]</field>
+			<field name="groups" eval="[(4,ref('hr.group_hr_user'))]"/>
+			<field name='perm_create' eval='True'/>
+	        <field name='perm_read' eval='True'/>
+	        <field name='perm_unlink' eval='True'/>
+	        <field name='perm_write' eval='True'/>
+		</record>
+		
+		<record id="hr_holidays.property_rule_holidays_officer" model="ir.rule">
+			<field name="name">Holiday Manager</field>
+			<field name="model_id" ref="model_hr_holidays"/>
+			<field name="domain_force">[(1,'=',1)]</field>
+			<field name="groups" eval="[(4,ref('hr.group_hr_manager'))]"/>
+		</record>
+	    
+		<record id="property_rule_holidays_users" model="ir.rule">
+	        <field name="name">Holidays Partners</field>
+	        <field name="model_id" ref="base.model_res_partner"/>
+	        <field name="domain_force">[(1,'=',1)]</field>
+	        <field name="groups" eval="[(4,ref('base.group_user'))]"/>
+	        <field name='perm_create' eval='True'/>
+	        <field name='perm_read' eval='True'/>
+	        <field name='perm_unlink' eval='True'/>
+	        <field name='perm_write' eval='True'/>
+		</record>
+		
+    </data>
+</odoo>

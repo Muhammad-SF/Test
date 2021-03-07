@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_stock_signature_inherit_form" model="ir.ui.view">
+            <field name="name">stock.picking.form</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Signature">
+                        <group>
+                            <group>
+                                <field name="validate_id" readonly="1" />
+                                <field name="validate_date_time" readonly="1" />
+                            </group>
+                            <group>
+                                <label for="validate_signature" string="Signature"/>
+                                <h2>
+                                    <field name="validate_signature" widget="image" readonly="1" />
+                                </h2>
+
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

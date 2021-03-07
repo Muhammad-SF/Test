@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="rating_configuration_1" model="rating.configuration">
+            <field name="name">Delivery</field>
+            <field name="compulsory">True</field>
+            <field name="description">Dose the vendor deliver product and service on time?</field>
+        </record>
+        <record id="rating_value_1" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_1"/>
+            <field name="name">Early</field>
+            <field name="value">5</field>
+        </record>
+        <record id="rating_value_2" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_1"/>
+            <field name="name">On Time</field>
+            <field name="value">4</field>
+        </record>
+        <record id="rating_value_3" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_1"/>
+            <field name="name">Moderate</field>
+            <field name="value">3</field>
+        </record>
+        <record id="rating_value_4" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_1"/>
+            <field name="name">Late</field>
+            <field name="value">2</field>
+        </record>
+        <record id="rating_value_5" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_1"/>
+            <field name="name">Never Delivered</field>
+            <field name="value">1</field>
+        </record>
+
+        <record id="rating_configuration_2" model="rating.configuration">
+            <field name="name">Pricing</field>
+            <field name="compulsory">True</field>
+            <field name="description">The prices paid should be comparable to those of vendor providing similar product and services. Quote requests should compare favorably to other vendors. </field>
+        </record>
+        <record id="rating_value_6" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_2"/>
+            <field name="name">overprised</field>
+            <field name="value">1</field>
+        </record>
+        <record id="rating_value_7" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_2"/>
+            <field name="name">Higher then average</field>
+            <field name="value">2</field>
+        </record>
+        <record id="rating_value_8" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_2"/>
+            <field name="name">Average</field>
+            <field name="value">3</field>
+        </record>
+        <record id="rating_value_9" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_2"/>
+            <field name="name">Resonable</field>
+            <field name="value">4</field>
+        </record>
+        <record id="rating_value_10" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_2"/>
+            <field name="name">Lover then average</field>
+            <field name="value">5</field>
+        </record>
+
+        <record id="rating_configuration_3" model="rating.configuration">
+            <field name="name">Compliance with purchase order</field>
+            <field name="compulsory">True</field>
+            <field name="description">The vendor should comply with terms and condition as stated in the purchase order. Dose the vendor show and understanding of the customer firm's expectation?</field>
+        </record>
+        <record id="rating_value_11" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_3"/>
+            <field name="name">Complied for all PO</field>
+            <field name="value">5</field>
+        </record>
+        <record id="rating_value_12" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_3"/>
+            <field name="name">Complied for most of the PO</field>
+            <field name="value">4</field>
+        </record>
+        <record id="rating_value_13" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_3"/>
+            <field name="name">Complied</field>
+            <field name="value">3</field>
+        </record>
+        <record id="rating_value_14" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_3"/>
+            <field name="name">Seldom complied</field>
+            <field name="value">2</field>
+        </record>
+        <record id="rating_value_15" model="rating.value">
+            <field name="rating_config_id" ref="rating_configuration_3"/>
+            <field name="name">Never complied</field>
+            <field name="value">1</field>
+        </record>
+    </data>
+</odoo>

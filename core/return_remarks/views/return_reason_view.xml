@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="return_reason_form_view" model="ir.ui.view">
+            <field name="name">Return Reason Form View</field>
+            <field name="model">return.reasons</field>
+            <field name="arch" type="xml">
+                <form string="Return Reasons">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                            </group>
+                            <group>
+                                <field name="active"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="return_reason_tree_view" model="ir.ui.view">
+            <field name="name">Return Reason Tree View</field>
+            <field name="model">return.reasons</field>
+            <field name="arch" type="xml">
+                <tree string="Return Reasons">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_return_reason" model="ir.actions.act_window">
+            <field name="name">Return Reasons</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">return.reasons</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to create a return reason.
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+        id="menu_stock_return_reason" name="Return Reasons" action="action_return_reason"
+        parent="stock.menu_product_in_config_stock"  sequence="770"/>
+
+    </data>
+</odoo>

@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <record model="ir.module.category" id="module_category_approving_matrix">
+            <field name="name">Approving Matrix</field>
+            <field name="parent_id" ref="base.module_category_purchase_management"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="group_approving_matrix_user" model="res.groups">
+            <field name="name">Approving User</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+            <field name="category_id" ref="module_category_approving_matrix"/>
+        </record>
+
+        <record id="group_approving_matrix_manager" model="res.groups">
+            <field name="name">Approving Manager</field>
+            <field name="implied_ids" eval="[(4, ref('std_purchase_access_rights.group_approving_matrix_user'))]"/>
+            <field name="category_id" ref="module_category_approving_matrix"/>
+        </record>
+        <menuitem name="Approving Matrix"
+                  id="approving_matrix_configuration.approving_matrix_purchase_menu"
+                  parent="approving_matrix_configuration.pr_approving_matrix_configuration"
+                  action="approving_matrix_configuration.approving_matrix_configuration_action"
+                  groups="group_approving_matrix_manager"/>
+    </data>
+</odoo>

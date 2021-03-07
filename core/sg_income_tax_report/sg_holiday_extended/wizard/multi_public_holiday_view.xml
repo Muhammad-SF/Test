@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="multi_public_holiday_form_view" model="ir.ui.view">
+            <field name="name">multi.public.holiday.form</field>
+            <field name="model">multi.public.holiday</field>
+            <field name="arch" type="xml">
+                <form string="Public Holiday">
+                    <group col="4">
+                        <field name="name"/><newline/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                    <footer>
+                        <button name="cerate_public_holiday" confirm="Are You Sure ?" string="Create" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_multi_public_holiday" model="ir.actions.act_window">
+            <field name="name">Multi Publlic Holiday</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">multi.public.holiday</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="multi_public_holiday_form_view"/>
+            <field name="target">new</field>
+            <field name="groups_id" eval="[(4,ref('hr.group_hr_manager'))]"/> 
+        </record>
+
+        <record model="ir.values" id="act_action_multi_public_holiday">
+            <field name="model_id" ref="sg_hr_holiday.model_hr_holiday_public" />
+            <field name="name">Multi Publlic Holiday</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_multi_public_holiday'))" />
+            <field name="key">action</field>
+            <field name="model">hr.holiday.public</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- Partner Inherit -->
+        <record id="sale_order_line_tree_view" model="ir.ui.view">
+            <field name="name">sale.order.line</field>
+            <field name="model">sale.order.line</field>
+            <field name="arch" type="xml">
+                <tree string="Sale Order Line" create="false" delete="false" edit="false">
+                   <field name="sale_order_name"/>
+                   <field name="order_partner_id"/>
+                   <field name="user_id"/>
+                   <field name="create_date"/>
+                   <field name="product_id"/>
+                   <field name="product_uom_qty"/>
+                   <field name="product_uom"/>
+                   <field name="price_unit"/>
+                   <field name="discount"/>
+                   <field name="price_tax"/>
+                   <field name="price_subtotal"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="sale_order_line_graph_view" model="ir.ui.view">
+             <field name="name">sale.order.line.graph</field>
+             <field name="model">sale.order.line</field>
+             <field name="arch" type="xml">
+                 <graph string="Sale Order Line">
+                     <field name="order_partner_id"/>
+                     <field name="price_subtotal" type="measure"/>
+                 </graph>
+             </field>
+        </record>
+
+
+         <record id="sale_order_line_pivot_view" model="ir.ui.view">
+             <field name="name">sale.order.line.pivot</field>
+             <field name="model">sale.order.line</field>
+             <field name="arch" type="xml">
+                 <pivot string="Sale Order Line" disable_linking="True">
+                     <field name="order_partner_id" type="row"/>
+                     <field name="create_date" type="col"/>
+                     <field name="price_subtotal" type="measure"/>
+                 </pivot>
+             </field>
+        </record>
+    
+
+         <record id='sale_order_line_action' model="ir.actions.act_window">
+            <field name="name">Sale Order Line</field>
+            <field name="res_model">sale.order.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,pivot,graph</field>
+            <field name="view_id" ref="sale_order_line_tree_view"/>
+        </record>
+
+        <menuitem parent="sales_team.menu_sales" id="sale_order_line_meanu" sequence="30" name="Sale Order Line" action="sale_order_line_action"/>
+         
+    </data>
+</odoo>

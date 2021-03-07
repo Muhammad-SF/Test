@@ -1,0 +1,96 @@
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+
+<odoo>
+        <record id="view_referral_config_form" model="ir.ui.view">
+            <field name="name">referral.res.config.view</field>
+            <field name="model">referral.config.setting</field>
+            <field name="arch" type="xml">
+                <form  class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                        <group string="Referral Settings">
+                            <group>
+                                <label for="id" string="Landing Page" style="    position:relative;top: 7px;"/>
+                                <div>
+                                    <div>
+                                        <button type="object" name="open_landing_page_content" string="Configure Landing Page" class="oe_link btn-link"/>
+                                    </div>
+                                </div>                    
+
+                                <label for="id" string="Mail Template" style="    position:relative;top: 7px;"/>
+                                <div>
+                                    <div>
+                                        <button type="object" name="open_wizard_mail_template" string="Configure Mail Template" class="oe_link btn-link"/>
+                                    </div>
+                                </div>
+                                
+                                <label for="verify_commission" string="Commission Type"/>
+                                <div name="referral_points">
+                                    <label  string="Approved/Referred Commission based On"/>
+                                    <field name="verify_commission" widget="radio"/>
+                                    <div>
+                                        <b>*Note :</b> Configure How it works? accordingly to Commission Type
+                                    </div>
+                                </div>
+
+                                <label for="id" string="How it works?" style="    position:relative;top: 7px;"/>
+                                <div>
+                                    <div>
+                                        <button type="object" name="open_how_it_work_content" string="Configure How it Works?" class="oe_link btn-link"/>
+                                    </div>
+                                </div>
+
+                                <label for="referral_points" string="Referral Points"/>
+                                <div name="referral_points">
+                                    <field name="is_refferal_points_used" />
+                                    <span style="font-size: 11px;font-style: italic;">
+                                        (select to set the Referral Points)
+                                    </span>
+                                    <div attrs="{'invisible': [('is_refferal_points_used', '=', False)]}">
+                                        <label  string="Set Referral Points"/>
+                                        <field name="referral_points" class="oe_inline"/>
+                                        <span class="oe_inline" style="font-size: 11px;font-style: italic;">
+                                           (Customer who Signup with the Friend's Referral code.)
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <label for="refered_points" string="Referred Points"/>
+                                <div name="refered_points">
+                                    <label  string="Set Referrer Points"/>
+                                    <field name="refered_points" class="oe_inline"/>
+                                    <span class="oe_inline" style="font-size: 11px;font-style: italic;">
+                                      (Customer who's Referral Code is used.)
+                                    </span>
+                                </div>
+
+                                <label for="equivalent_amount" string="Equivalent Amount"/>
+                                <div name="equivalent_amount">
+                                    <label  string="Set Amount for per Point"/>
+                                    <field name="equivalent_amount" class="oe_inline"/>
+                                    <span class="oe_inline">
+                                        <field name="currency_id" readonly="1" class="oe_inline"/>
+                                    </span>
+                                </div>
+                            </group>
+                        </group>
+
+                    <div>
+                        <span>(*) This configuration is related to the company you're logged into.</span>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="referral_config_form_action" model="ir.actions.act_window">
+            <field name="name">referral Program Config Setting</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">referral.config.setting</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+</odoo>

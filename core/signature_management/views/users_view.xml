@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="inherited_res_users_form" model="ir.ui.view">
+        <field name="name">inherited.res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='signature']" position="before">
+                <field name="main_signature" widget="radio"/>
+            </xpath>
+            <xpath expr="//field[@name='signature']" position="attributes">
+                <attribute name="invisible">1</attribute>
+                <!--<attribute name="attrs">{'invisible':[('main_signature','=','upload_file')]}</attribute>-->
+            </xpath>
+            <xpath expr="//field[@name='signature']" position="after">
+                <field name="upload_datas" filename="datas_fname" attrs="{'invisible':[('main_signature','=','draw_your_signature')]}"/>
+                <field name="datas_fname" invisible="1" class="oe_inline oe_right"/>
+                <label for="signature_image" class="oe_edit_only" attrs="{'invisible':[('main_signature','=','upload_file')]}"/>
+                <h2>
+                    <field name="signature" widget="signature" attrs="{'invisible':[('main_signature','=','upload_file')]}"/>
+                </h2>
+            </xpath>
+        </field>
+    </record>
+    <record id="inherited_res_users_preferences_form" model="ir.ui.view">
+        <field name="name">inherited.res.users.preferences.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='signature']" position="after">
+                <label for="signature_image" class="oe_edit_only"/>
+                <label for="signature_image" class="oe_edit_only" />
+                <h2>
+                    <field name="signature" widget="signature"/>
+                </h2>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
+

@@ -1,0 +1,233 @@
+.tree_search_item {
+    cursor: pointer;
+}
+
+.tree_search_item .selected a:before {
+    font-family: FontAwesome;
+    position: absolute;
+    left: 6px;
+    top: 3px;
+    content: "";
+}
+.sky-search .btn-group .btn-group-sm .search-right {
+	position: absolute;
+    right: 0;
+}
+.o_web_client.ad_full_view .o_main .o_main_content.ad_rightbar > .o_control_panel .ad_bottom_controlpanel{
+	padding-left: 0px !important;
+}
+
+.search_right {
+    right: 290px !important;
+}
+.form-control {
+    padding: 6px 2px !important;
+}
+
+.sky_select_field {
+	border: 1px solid blue !important;
+    border-radius: 5px !important;
+}
+
+.sky_start_date {
+	border: 1px solid blue !important;
+    border-radius: 5px !important;
+}
+
+.sky_end_date {
+	border: 1px solid blue !important;
+    border-radius: 5px !important;
+}
+
+.sky_select_range_field {
+	border: 1px solid blue !important;
+    border-radius: 5px !important;
+}
+
+.sky_start_range {
+	border: 1px solid blue !important;
+    border-radius: 5px !important;
+}
+
+.sky_end_range {
+	border: 1px solid blue !important;
+    border-radius: 5px !important;
+}
+
+/*++++++++++++++++++++++++++++RESPONSIVE++++++++++++++++++++*/
+/* Start for Pager */
+/*@media screen and (max-width: 1024px) and (min-width: 993px){
+.o_control_panel .o_cp_right .o_cp_pager {
+    margin: auto -90px auto 50px!important;
+}
+}
+
+@media screen and (max-width: 768px) and (min-width: 561px){
+.o_control_panel .o_cp_right .o_cp_pager {
+    margin: auto -156px auto 100px!important;
+}
+}
+*/
+/* End for Pager */
+/*@media screen and (max-width: 1440px) and (min-width: 1300px){
+	.search_right {
+	    right: 300px !important;
+	}	
+}*/
+
+/*@media screen and (min-width: 1025px) and (max-width: 1175px){
+
+	.o_web_client:not(.ad_mobile) .o_main .ad_rightbar .o_content > .o_view_manager_content .table-responsive, .o_web_client:not(.ad_mobile) .o_main .ad_rightbar .o_view_manager_content .table-responsive {
+	    padding: 40px 10px !important;
+	}
+	.search_right {
+	    right: 0px !important;
+	    top: 100px !important;
+	}	
+
+}
+*/
+/*@media screen and (min-width: 993px) and (max-width: 1024px) {
+	.o_control_panel .o_cp_right .o_cp_pager{
+		margin: auto -90px auto auto !important;
+	}
+	.search_right {
+	    right: 500px !important;
+	}	
+}*/
+
+/*@media screen and (min-width: 993px) and (max-width: 1008px) {
+	.search_right {
+	    right: 470px !important;
+	}
+}*/
+
+
+
+/*@media screen and  (max-width: 992px){
+	.o_web_client:not(.ad_mobile) .o_main .ad_rightbar .o_content > .o_view_manager_content .table-responsive, .o_web_client:not(.ad_mobile) .o_main .ad_rightbar .o_view_manager_content .table-responsive {
+	    padding: 60px 10px !important;
+	}
+	.search_right {
+	    right: 370px !important;
+	    top: 110px !important;
+	}
+	.sky-search.btn-group.btn-group-sm.search-right {
+	    top: 110px !important;
+	    right: 20px !important;
+	}	
+}
+*/
+/*@media screen and  (max-width: 840px){
+	.o_web_client:not(.ad_mobile) .o_main .ad_rightbar .o_content > .o_view_manager_content .table-responsive, .o_web_client:not(.ad_mobile) .o_main .ad_rightbar .o_view_manager_content .table-responsive {
+	    padding: 60px 10px !important;
+	}
+	.search_right {
+	    right: 400px !important;
+	    top: 110px !important;
+	}
+	.sky-search.btn-group.btn-group-sm.search-right {
+	    top: 110px !important;
+	    right: 20px !important;
+	}	
+}
+
+@media screen and (min-width: 426px) and (max-width: 560px) {
+	.o_web_client:not(.ad_mobile) .o_main .ad_rightbar .o_content > .o_view_manager_content .table-responsive, .o_web_client:not(.ad_mobile) .o_main .ad_rightbar .o_view_manager_content .table-responsive {
+	    padding: 90px 10px !important;
+	}
+	.search_right {
+	    right: 30px !important;
+	    top: 119px !important;
+	}
+	.sky-search.btn-group.btn-group-sm.search-right {
+	    top: 152px !important;
+	    right: 30px !important;
+	}	
+}
+
+@media screen and (min-width: 561px) and (max-width: 768px) {
+	.o_control_panel .o_cp_right .o_cp_pager{
+		margin: auto -156px auto auto !important;
+	}	
+	.o_web_client:not(.ad_mobile) .o_main .ad_rightbar .o_content > .o_view_manager_content .table-responsive, .o_web_client:not(.ad_mobile) .o_main .ad_rightbar .o_view_manager_content .table-responsive {
+	    padding: 90px 10px !important;
+	}
+	.search_right {
+	    right: 200px !important;
+	    top: 119px !important;
+	}
+	.sky-search.btn-group.btn-group-sm.search-right {
+	    top: 152px !important;
+	    right: 200px !important;
+	}	
+}
+*/
+/*@media screen and (max-width: 425px){
+	.o_web_client:not(.ad_mobile) .o_main .ad_rightbar .o_content > .o_view_manager_content .table-responsive, .o_web_client:not(.ad_mobile) .o_main .ad_rightbar .o_view_manager_content .table-responsive{
+	    padding: 10px 10px !important;
+	}
+
+	.sky-search.btn-group.btn-group-sm.search-right {
+    	top: 130px !important;
+    	left: 86px !important;
+	}
+	.o_web_client .o_main .o_main_content.ad_rightbar > .o_control_panel .ad_bottom_controlpanel{
+		height: 110px !important;	
+	}
+	.o_web_client:not(.ad_mobile) .o_main .o_main_content.ad_rightbar > .o_control_panel .ad_bottom_controlpanel .o_cp_right .o_cp_pager {
+	    float: none;
+	    text-align: center;
+	    margin: -10px 0px 0 70px !important;
+	}
+	.search_right {
+	    right: 54px !important;
+	    top: 94px !important;
+	}
+}
+
+@media screen and (max-width: 375px) {
+	.search_right {
+	    right: 18px !important;
+	}
+	input.sky_end_range.form-control {
+	    width: 55px !important; 
+	} 
+	input.sky_start_range.form-control {
+	    width: 55px !important;
+	}	
+}
+
+@media screen and (max-width: 320px){
+	.sky-search.btn-group.btn-group-sm > div {
+	    margin-left: -123px !important;
+	    margin-top: 4px !important;
+	    right: -29px !important;
+	}
+	.o_web_client:not(.ad_mobile) .o_main .o_main_content.ad_rightbar > .o_control_panel .ad_bottom_controlpanel .o_cp_right .o_cp_pager {
+	    float: none;
+	    text-align: center;
+	    margin: -10px 0px 0 20px !important;
+	}
+	.sky-search.btn-group.btn-group-sm.search-right {
+	    top: 130px !important;
+	    left: 185px !important;
+	}
+	input.sky_end_range.form-control {
+	    width: 55px !important; 
+	} 
+	input.sky_start_range.form-control {
+	    width: 55px !important;
+	}
+}
+*/
+
+/*++++++++++++++++++++++++++++++++++++++++++++ RESPONSIVE END ++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+
+
+
+
+
+    

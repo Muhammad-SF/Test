@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="group_receipt_supplier_matrix" model="res.groups">
+            <field name="name">Receipt/Supplier Approving Matrix</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+        <record id="group_supplier_matrix" model="res.groups">
+            <field name="name">Supplier Approving Matrix</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+        </record>
+
+    </data>
+</odoo>

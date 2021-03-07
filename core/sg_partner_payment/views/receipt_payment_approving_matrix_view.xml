@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="customer_receipt_approving_matrix_form" model="ir.ui.view">
+            <field name="name">Customer Receipt Approving Matrix Form</field>
+            <field name="model">receipt.payment.approving.matrix</field>
+            <field name="arch" type="xml">
+                <form string="Customer Receipt Approving Matrix">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="company_id" required="1"/>
+                                <field name="receipt_payment_branch_ids" required="1" widget="many2many_tags" domain="[('company_id', '=', company_id)]"/>
+                                <field name="type" invisible="1"/>
+                                <field name="is_customer_supplier" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Amount">
+                                <field name="receipt_payment_approving_matrix_line_ids" string="Amount" required="1" context="{'receipt_payment_approving_matrix_line_ids':receipt_payment_approving_matrix_line_ids}">
+                                    <tree string="Customer Receipt / Supplier Payment Approving Matrix" editable="bottom">
+                                        <field name="sequence"/>
+                                        <field name="receipt_payment_user_ids" widget="many2many_tags" domain="[('company_ids', 'in', parent.company_id)]"/>
+                                        <field name="min_approver"/>
+                                        <field name="min_amount"/>
+                                        <field name="max_amount"/>
+                                    </tree>
+                                    <form string="Customer Receipt Approving Matrix">
+                                        <group>
+                                            <group>
+                                                <field name="sequence" readonly="1"/>
+                                                <field name="receipt_payment_user_ids" widget="many2many_tags" domain="[('company_ids', 'in', parent.company_id)]"/>
+                                                <field name="min_approver"/>
+                                            </group>
+                                            <group>
+                                                <field name="min_amount"/>
+                                                <field name="max_amount"/>
+                                                <field name="receipt_payment_approving_matrix_id" invisible="1"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="customer_receipt_approving_matrix_tree" model="ir.ui.view">
+            <field name="name">Customer Receipt Approving Matrix Tree</field>
+            <field name="model">receipt.payment.approving.matrix</field>
+            <field name="arch" type="xml">
+                <tree string="Customer Receipt Approving Matrix">
+                    <field name="name"/>
+                    <field name="receipt_payment_branch_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="customer_receipt_approving_matrix_search" model="ir.ui.view">
+            <field name="name">Customer Receipt Approving Matrix Search</field>
+            <field name="model">receipt.payment.approving.matrix</field>
+            <field name="arch" type="xml">
+                <search string="Customer Receipt Approving Matrix Search">
+                    <field name="name"/>
+                    <field name="receipt_payment_branch_ids"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_customer_receipt_approving_matrix" model="ir.actions.act_window">
+            <field name="name">Customer Receipt Approving Matrix</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">receipt.payment.approving.matrix</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="customer_receipt_approving_matrix_search"/>
+            <field name="view_id" ref="customer_receipt_approving_matrix_tree"/>
+            <field name="context">{'customer_supplier':True,'default_type': 'customer_receipt','default_is_customer_supplier':True, 'form_view_ref': 'customer_receipt_approving_matrix_form'}</field>
+            <field name="domain">[('is_customer_supplier','=',True),('type', '=', 'customer_receipt')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to create a customer receipt approving matrix.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="submenu_customer_receipt_approving_matrix" parent="approval_matrix_config.menu_approving_matrix" sequence="6" action="action_customer_receipt_approving_matrix" groups="sg_partner_payment.group_receipt_supplier_matrix"/>
+
+        <record id="sg_partner_payment.submenu_customer_receipt_approving_matrix" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0, [ref('sg_partner_payment.group_receipt_supplier_matrix')])]"/>
+        </record>
+
+        <!--Supplier Payment Approving Matrix-->
+        <record id="supplier_payment_approving_matrix_form" model="ir.ui.view">
+            <field name="name">Customer Receipt Approving Matrix Form</field>
+            <field name="model">receipt.payment.approving.matrix</field>
+            <field name="arch" type="xml">
+                <form string="Customer Receipt Approving Matrix">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" required="1"/>
+                                <field name="company_id" required="1"/>
+                                <field name="receipt_payment_branch_ids" required="1" widget="many2many_tags" domain="[('company_id', '=', company_id)]"/>
+                                <field name="type" invisible="1"/>
+                                <field name="is_customer_supplier" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Amount">
+                                <field name="receipt_payment_approving_matrix_line_ids" string="Amount" required="1" context="{'receipt_payment_approving_matrix_line_ids':receipt_payment_approving_matrix_line_ids}">
+                                    <tree string="Customer Receipt / Supplier Payment Approving Matrix" editable="bottom">
+                                        <field name="sequence"/>
+                                        <field name="receipt_payment_user_ids" widget="many2many_tags" domain="[('company_ids', 'in', parent.company_id)]"/>
+                                        <field name="min_approver"/>
+                                        <field name="min_amount"/>
+                                        <field name="max_amount"/>
+                                    </tree>
+                                    <form string="Supplier Payment Approving Matrix">
+                                        <group>
+                                            <group>
+                                                <field name="sequence" readonly="1"/>
+                                                <field name="receipt_payment_user_ids" widget="many2many_tags" domain="[('company_ids', 'in', parent.company_id)]"/>
+                                                <field name="min_approver"/>
+                                            </group>
+                                            <group>
+                                                <field name="min_amount"/>
+                                                <field name="max_amount"/>
+                                                <field name="receipt_payment_approving_matrix_id" invisible="1"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="supplier_payment_approving_matrix_tree" model="ir.ui.view">
+            <field name="name">Supplier Payment Approving Matrix Tree</field>
+            <field name="model">receipt.payment.approving.matrix</field>
+            <field name="arch" type="xml">
+                <tree string="Supplier Payment Approving Matrix">
+                    <field name="name"/>
+                    <field name="receipt_payment_branch_ids"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="supplier_payment_approving_matrix_search" model="ir.ui.view">
+            <field name="name">Supplier Payment Approving Matrix Search</field>
+            <field name="model">receipt.payment.approving.matrix</field>
+            <field name="arch" type="xml">
+                <search string="Supplier Payment Approving Matrix Search">
+                    <field name="name"/>
+                    <field name="receipt_payment_branch_ids"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_supplier_payment_approving_matrix" model="ir.actions.act_window">
+            <field name="name">Supplier Payment Approving Matrix</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">receipt.payment.approving.matrix</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="supplier_payment_approving_matrix_search"/>
+            <field name="view_id" ref="supplier_payment_approving_matrix_tree"/>
+            <field name="context">{'customer_supplier':True,'default_type': 'supplier_payment','default_is_customer_supplier':True, 'form_view_ref': 'supplier_payment_approving_matrix_form'}</field>
+            <field name="domain">[('is_customer_supplier','=',True),('type', '=', 'supplier_payment')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click here to create a supplier payment approving matrix.
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="submenu_supplier_payment_approving_matrix" parent="approval_matrix_config.menu_approving_matrix" sequence="7" action="action_supplier_payment_approving_matrix" groups="sg_partner_payment.group_supplier_matrix"/>
+
+        <record id="sg_partner_payment.submenu_supplier_payment_approving_matrix" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6,0, [ref('sg_partner_payment.group_supplier_matrix')])]"/>
+        </record>
+
+        <record id="approval_matrix_config.menu_approving_matrix" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('sg_partner_payment.group_receipt_supplier_matrix')), (4, ref('sg_partner_payment.group_supplier_matrix'))]"/>
+        </record>
+
+    </data>
+</odoo>

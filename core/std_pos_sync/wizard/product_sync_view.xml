@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Product Attributes Sync Wizard -->
+        <record id="view_manual_product_attrs_sync_wizard" model="ir.ui.view">
+            <field name="name">product.attrs.sync.wizard.form</field>
+            <field name="model">product.attrs.sync.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Product Attributes Sync">
+                    <group>
+                        <span>This action will sync this computer with the master server’s data. Do you want to continue ? </span>
+                    </group>
+                    <footer>
+                       <button name="action_product_attrs_sync" string="Continue" type="object" class="oe_highlight"/>
+                       <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_manual_product_attrs_sync_wizard" model="ir.actions.act_window">
+            <field name="name">Product Attributes Sync</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.attrs.sync.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_manual_product_attrs_sync_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem 
+		    id="menu_manual_product_attrs_sync_wizard" 
+		    name="Product Attributes Sync"
+			parent="menu_manual_sync" 
+			action="action_manual_product_attrs_sync_wizard" 
+			sequence="10" />
+			
+		
+		<!-- Product Attribute Values Sync Wizard -->
+        <record id="view_product_attrs_values_sync_wizard" model="ir.ui.view">
+            <field name="name">product.attrs.values.sync.wizard.form</field>
+            <field name="model">product.attrs.values.sync.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Product Attribute Values Sync">
+                    <group>
+                        <span>This action will sync this computer with the master server’s data. Do you want to continue ? </span>
+                    </group>
+                    <footer>
+                       <button name="action_product_attrs_values_sync" string="Continue" type="object" class="oe_highlight"/>
+                       <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_product_attrs_values_sync_wizard" model="ir.actions.act_window">
+            <field name="name">Product Attribute Values Sync</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.attrs.values.sync.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_product_attrs_values_sync_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem 
+		    id="menu_product_attrs_values_sync_wizard" 
+		    name="Product Attribute Values Sync"
+			parent="menu_manual_sync" 
+			action="action_product_attrs_values_sync_wizard" 
+			sequence="10" />
+		
+		
+		<!-- Product Sync Wizard -->
+        <record id="view_manual_product_sync_wizard" model="ir.ui.view">
+            <field name="name">product.sync.wizard.form</field>
+            <field name="model">product.sync.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Product Sync">
+                    <group>
+                        <span>This action will sync this computer with the master server’s data. Do you want to continue ? </span>
+                    </group>
+                    <footer>
+                       <button name="action_product_sync" string="Continue" type="object" class="oe_highlight"/>
+                       <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_manual_product_sync_wizard" model="ir.actions.act_window">
+            <field name="name">Product Sync</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.sync.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_manual_product_sync_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem 
+		    id="menu_manual_product_sync_wizard" 
+		    name="Product Sync"
+			parent="menu_manual_sync" 
+			action="action_manual_product_sync_wizard" 
+			sequence="10" />
+		
+        <!-- Product Sync Wizard -->
+        <record id="view_manual_product_sync_wizard" model="ir.ui.view">
+            <field name="name">product.sync.wizard.form</field>
+            <field name="model">product.sync.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Product Sync">
+                    <group>
+                        <span>This action will sync this computer with the master server’s data. Do you want to continue ? </span>
+                    </group>
+                    <footer>
+                       <button name="action_product_sync" string="Continue" type="object" class="oe_highlight"/>
+                       <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_manual_product_sync_wizard" model="ir.actions.act_window">
+            <field name="name">Product Sync</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.sync.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_manual_product_sync_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem 
+		    id="menu_manual_product_sync_wizard" 
+		    name="Product Sync"
+			parent="menu_manual_sync" 
+			action="action_manual_product_sync_wizard" 
+			sequence="10" />
+    </data>
+</odoo>

@@ -1,0 +1,21 @@
+<odoo>
+    <data>
+        <record id="view_account_config" model="ir.ui.view">
+            <field name="name">account settings</field>
+            <field name="model">account.config.settings</field>
+            <field name="inherit_id" ref="account.view_account_config_settings"/>
+            <field name="priority" eval="18"/>
+            <field name="arch" type="xml">
+                <group name="analytic_account_purchase" position="after">
+                    <group name="analytic_account_sale">
+                        <label for="id" string="Sale"/>
+                        <div>
+                            <field name="group_analytic_account_for_sales" class="oe_inline"/>
+                            <label for="group_analytic_account_for_sales"/>
+                        </div>
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

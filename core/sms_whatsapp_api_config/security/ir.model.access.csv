@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mail_message_settings_user,mail.message.settings.user,model_mail_message_settings,,1,1,1,0
+access_mail_message_log_user,mail.message.log.user,model_mail_message_log,,1,1,1,0
+access_mail_message_settings_manager,mail.message.settings.manager,model_mail_message_settings,base.group_system,1,1,1,1
+access_mail_message_log_manager,mail.message.log.manager,model_mail_message_log,base.group_system,1,1,1,1

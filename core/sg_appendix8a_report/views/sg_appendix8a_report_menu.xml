@@ -1,0 +1,33 @@
+<odoo>
+	<data>
+		<record id="appendix_form_income_tax_report_paperformat" model="report.paperformat">
+            <field name="name">Appendix Form</field>
+            <field name="default" eval="True" />
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">1</field>
+            <field name="margin_bottom">1</field>
+            <field name="margin_left">4</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">20</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report id="hrms_appendix8a_form"
+                string="Apppendix8A Form"
+                model="emp.appendix8a.text.file"
+                name="sg_appendix8a_report.report_appendix8a"
+                report_type="qweb-pdf"
+                menu="False"
+                file="sg_appendix8a_report.sg_appendix8a_report_view"  
+                />
+                
+        <record id="hrms_appendix8a_form" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="appendix_form_income_tax_report_paperformat" />
+        </record>
+
+	</data>
+</odoo>

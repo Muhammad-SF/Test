@@ -1,0 +1,307 @@
+<odoo>
+  <template id="std_material_modification" name="std material request assets" inherit_id="web.assets_backend">
+    <xpath expr="//script[last()]" position="after">
+        <script type="text/javascript" src="/std_material_request/static/src/js/field_invisible.js"></script>
+    </xpath>
+</template>
+  <record id="material_request_stock_config_inherit" model="ir.ui.view">
+      <field name="name">stock.config.settings.inherit.form</field>
+      <field name="model">stock.config.settings</field>
+      <field name="inherit_id" ref="inventory_approval_matrix.approval_stock_config_inherit"/>
+      <field name="arch" type="xml">
+          <group name="approval_matrix" position="inside">
+              <field name="approval_on_off_material_request" style="width:20%;"/>
+          </group>
+      </field>
+  </record>
+
+  <record id="view_picking_form_inherit_wt" model="ir.ui.view">
+        <field name="name">stock.picking.form.inherit.wt</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+<!--             <field name="location_id" position="before"> -->
+<!--                 <field name="location_usage"/> -->
+<!--             </field> -->
+            <field name='origin' position='after'>
+              <field name='mr_id' string='Sourced Doc' invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+<record id="view_purchase_request_form_inherit_wt" model="ir.ui.view">
+        <field name="name">purchase.request.form.inherit.wt</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
+        <field name="arch" type="xml">
+            <field name='picking_type_id' position='after'>
+              <field name='mr_id' invisible="1" string='Source Doc'/>
+            </field>
+        </field>
+    </record>
+
+<record id="internal_transfer_form_inherit_wt" model="ir.ui.view">
+        <field name="name">internal.transfer.form.inherit.wt</field>
+        <field name="model">internal.transfer</field>
+        <field name="inherit_id" ref="internal_transfer_receipt.view_internal_transfer_form"/>
+        <field name="arch" type="xml">
+            <field name='picking_type_incoming_id' position='after'>
+              <field name='mr_id' string='Sourced Doc' invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+
+  
+  <record id="seq_material_request" model="ir.sequence">
+      <field name="name">Material Request</field>
+      <field name="code">std.material.request</field>
+      <field name="prefix">MR</field>
+      <field name="padding">5</field>
+  </record>
+
+
+
+  <record model="ir.ui.view" id="stock_by_product_form_view">
+    <field name="name">product.product.stock.form</field>
+    <field name="model">product.product</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <field name="stock_location" nolable="1">
+            <tree>
+              <field name="stock_location_id"/>
+              <field name="on_hand_qty"/>
+              <field name="forcasted_qty"/>
+              <field name="incoming_qty"/>
+              <field name="out_qty"/>
+              <field name="custom_product_id" invisible="1"/>
+            </tree>
+          </field>
+        </sheet>
+      </form>      
+    </field>
+  </record>  
+
+  <record model="ir.ui.view" id="material_request_tree_view">
+    <field name="name">std.material.request.tree</field>
+    <field name="model">std.material.request</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="request_reference"/>
+        <field name="create_date" string="CREATED DATE"/>
+        <field name="schedule_date"/>
+        <field name="requested_by"/>
+        <field name="source_document"/>
+        <field name="pr_count" string="Purchase Request"/>
+        <field name="transfer_count" string="internal transfer"/>
+        <field name="status"/>
+      </tree>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="material_request_form_view">
+    <field name="name">std.material.request.form</field>
+    <field name="model">std.material.request</field>
+    <field name="arch" type="xml">
+       <form string="Study Material">
+         <header>
+            <button name="approve" attrs="{'invisible': ['|', '|', ('status','not in',('draft','to_approve')), ('is_approve_button', '=', False), ('approval_on_off_material_request', '=', False)]}" string="Approve" type="object" class="btn btn-primary"/>
+            <button name="reject" attrs="{'invisible': ['|', '|', ('status','not in',('draft','to_approve')), ('is_approve_button', '=', False), ('approval_on_off_material_request', '=', False)]}" string="Reject" type="object" class="btn btn-primary"/>
+            <button name="action_cancel" class="btn btn-danger" string="Cancel" type="object" attrs="{'invisible': ['|', ('status','!=','to_approve'), ('is_approve_button', '=', False)]}"/>
+            <button name="request_approval" attrs="{'invisible':['|', '|','|','|','|','|',('bool_product_line','=',False),('approving_matrix_id','=',False),('requested_by','=',False),('destination_location','=',False),('user_approver','!=',False),('status','not in',('draft')), ('approval_on_off_material_request', '=', False)]}" type="object" string="Request Approval" class="btn btn-primary"/>
+            <!-- <button name="reset" attrs="{'invisible': [('status', '=', 'draft')]}" status="approved,rejected" string="Reset" type="object" class="btn btn-primary"/> -->
+            <button name="internal_transfer_receipt" string="Create Internal Transfer" status="approved" attrs="{'invisible': [('status', '!=', 'confirm')]}" type="object" class="btn btn-primary"/>
+            <button name="action_draft" string="Reset to Draft" attrs="{'invisible': [ ('status', 'not in', ('rejected'))]}" type="object" class="btn btn-primary"/>
+            <button name="create_purchase_request" status="approved" attrs="{'invisible': [('status', '!=', 'confirm')]}" string="Create Purchase Request" type="object" class="btn btn-primary"/>
+            <button name="material_request_done" string="Done" status="approved" attrs="{'invisible': [('status', '!=', 'confirm')]}" type="object" class="btn btn-primary"/>
+            <button name="button_confirm" string="Confirm" type="object" attrs="{'invisible': ['|','|',('bool_product_line','=',False),('status', '!=', 'draft'),('approval_on_off_material_request', '=', True)]}"/>
+            <button name="button_confirm" string="Confirm" type="object" attrs="{'invisible': ['|','|',('bool_product_line','=',False),('status', '!=', 'approved'),('approval_on_off_material_request', '=', False)]}"/>
+            <field name="status" widget="statusbar" statusbar_visible="draft,confirm,done" attrs="{'invisible': ['|', ('status', 'in', ('rejected', 'cancel')), ('approval_on_off_material_request', '=', True)]}"/>
+            <field name="status_1" widget="statusbar" statusbar_visible="draft,rejected" attrs="{'invisible': [ ('status', 'not in', ('rejected'))]}"/>
+            <field name="status_2" widget="statusbar" statusbar_visible="draft,cancel" attrs="{'invisible': [('status', 'not in', ('cancel'))]}"/>
+            <field name="approval_state" widget="statusbar" statusbar_visible="draft,approved,confirm,done" attrs="{'invisible': [('approval_on_off_material_request', '=', False)]}"/>
+            <field name="user_approver" invisible="1"/>
+         </header>
+         <sheet>
+            <div class="oe_button_box" name="button_box">
+                <button name="%(std_material_request.action_internal_transfer)d"
+                    type="action"
+                    class="oe_stat_button"
+                    icon="fa-pencil-square-o"
+                    attrs="{'invisible': [('transfer_count', '=', 0)]}">
+                    <field name="transfer_count" widget="statinfo" string="Internal Transfer"/>
+                </button>
+                <button class="oe_stat_button" name="%(std_material_request.action_purchase_request)d" type="action"
+                    attrs="{'invisible': [('pr_count', '=', 0)]}" icon="fa-shopping-cart">
+                    <field string="Purchase Request" name="pr_count" widget="statinfo"/>
+                </button>
+            </div>
+            <div class="oe_title">
+              <field name="name"  invisible="1"/>
+              <label for="request_reference"></label>
+              <h1> <field name="request_reference" readonly="1"/></h1>
+            </div>
+            <group>
+              <group>
+                  <field name="is_approve_button" invisible="1"/>
+                  <field name="approval_on_off_material_request" invisible="1"/>
+                  <field name="approval_matrix_line_id" invisible="1"/>
+                  <field name="requested_by" attrs="{'readonly': [('status', 'in', ('approved', 'rejected', 'done'))]}"/>
+                  <field name="destination_location" attrs="{'readonly': [('status', 'in', ('approved', 'rejected', 'done'))]}"/>
+                  <field name="approving_matrix_id" string="Approval Matrix" context="{'default_std_mat_req_destlocid' : destination_location}" attrs="{'invisible': [('approval_on_off_material_request', '=', False)], 'required': [('approval_on_off_material_request', '=', True)]}" placeholder = "Autofill . . ." options="{'no_open':True,'no_create':True}" force_save="1" readonly="1"/>
+                  <field name="picking_type"/>
+              </group>
+                  <group>
+                  <field name="create_date" string="Created Date" readonly="True"/>
+                  <field name="schedule_date" attrs="{'readonly': [('status', 'in', ('approved', 'rejected', 'done'))]}"/>
+                  <field name="expire_date" required="0" attrs="{'readonly': [('status', 'in', ('approved', 'rejected', 'done'))], 'required': True}"/>
+                  <field name="description" attrs="{'readonly': [('status', 'in', ('approved', 'rejected', 'done'))]}"/>
+                  <field name="source_document" attrs="{'readonly': [('status', 'in', ('approved', 'rejected', 'done'))]}"/>
+            <!-- <field name="product"/> -->
+                  </group>
+             </group>
+            <notebook>
+              <page string="Product">
+              	<field name="bool_product_line" invisible="1"/>
+                <field name="product_line" context="{'default_status': status, 'default_destination_location_id': destination_location}" attrs="{'readonly': [('status', 'in', ('approved', 'rejected', 'done'))]}">
+                    <tree string="Study Material">
+                        <field name="product" required="1"/>
+                        <field name="descript"/>
+                        <!-- <field name="brand_id"/> -->
+                        <field name="quantity"/>
+                        <field name="destination_location_id"/>
+                        <field name="status"/>
+                        <field name="product_unit_measure"/>
+                        <field name="request_date"/>
+                        <!-- <button name="show_details" status="approved" attrs="{'invisible': [('status', '!=', 'approved')]}" type="object" string="Show Details"/> -->
+                        <button name="show_stock" status="approved" attrs="{'invisible': [('status', '!=', 'approved')]}" type="object" string="Show Stock"/>
+                    </tree>
+                    <form>
+                      <header invisible="1">
+                        <field name="status" widget="statusbar"/>
+                      </header>
+                      <sheet>
+                        <group>
+                          <group>
+                            <field name="product" required="1"/>
+                            <field name="descript"/>
+                            <!-- <field name="brand_id"/> -->
+                            <label for="quantity"/>
+                            <div>
+                              
+                              <field name="quantity"/>
+                              <field name="product_unit_measure" class="oe_inline"/>
+                              <!-- <field name="unit" class="oe_inline"/> -->
+                            </div>
+                            <field name="destination_location_ids" widget="many2many_tags" invisible="1"/>
+                            <field name="destination_location_id" domain="[('id', 'in', destination_location_ids and destination_location_ids[0] and destination_location_ids[0][2] or [])]"/>
+                            <field name="picking_type"/>
+                            <field name="request_date"/>
+                            <field name="procurement_order" readonly="1"/>
+                          </group>
+                        </group>
+                        <separator string="Specification"/>
+                        <notebook>
+                          <page string='Details' name="details">
+                            <field name="std_item_mr_lines" nolabel="1">
+                              <tree create="0" edit="0" delete="0">
+                                  <field name="product_id"/>
+                                  <field name="remain_product"/>
+                                  <field name="destination_location_id"/>
+                                  <field name="internal_transfer_ref"/>
+                                  <field name="state_intt"/>
+                                  <field name="cancel_reason" attrs="{'invisible': [('state_intt', 'not in', ('cancel', 'return'))]}"/>
+                                  <button name="return_mr" type="object" string='Return qty' class="btn btn-primary" attrs="{'invisible': ['|',('state_intt', '!=', 'cancel'),('is_return','=',True)]}"/>
+                                  <button name="not_return" type="object" string='Cancel qty' class="btn btn-danger" attrs="{'invisible': ['|',('state_intt', '!=', 'cancel'),('is_return','=',True)]}"/>
+                                  <field name="is_return" invisible="1"/>
+                                  <field name="purchase_request_ref"/>
+                                  <field name="internal_transfer_qty"/>
+                                  <field name="purchase_request_qty"/>
+                                  <field name="internal_transfer_date"/>
+                                  <field name="purchase_request_date"/>
+                                  <field name="std_item_mr" invisible="1"/>
+                              </tree>
+                            </field>
+                          </page>
+                        </notebook>
+                        <field name="text"/>
+                      </sheet>
+                    </form>
+                </field>
+              </page>
+              <page string="Approval Matrix Line" attrs="{'invisible': [('approval_on_off_material_request', '=', False)]}">
+                <field name="approving_matrix_line_ids" readonly="1" context="{'default_material_request_id': active_id}">
+                  <tree default_order="sequence">
+                    <field name="sequence" string='Sequence' />
+                    <field name="approver" widget="many2many_tags"/>
+                    <field name="minimal_approver"/>
+                    <field name="is_approved" invisible="1"/>
+                    <field name="approve_state"/>
+                    <field name="time_stamp"/>
+                    <field name="matrix_id" invisible="1"/>
+                    <field name="approved" invisible="1"/>
+                    <field name="approved_count" invisible="1"/>
+                    <field name="last_approved" invisible="1"/>
+                  </tree>
+                </field>
+                <field name="current_approver_ids" invisible="1"/>
+              </page>
+            </notebook>
+          </sheet>
+          <div class="oe_chatter">
+              <field name="message_follower_ids" widget="mail_followers"/>
+              <field name="message_ids" widget="mail_thread"/>
+          </div>
+       </form>
+     </field>
+  </record>
+
+  <record id="std_item_mr_details_form_view" model="ir.ui.view">
+      <field name="name">std.item.mr</field>
+      <field name="model">std.item.mr</field>
+      <field name="arch" type="xml">
+          <form>
+              <sheet>
+                <group string='Details'>
+                  <field name="std_item_mr_lines" nolabel="1">
+                    <tree create="0" edit="0" delete="0">
+                        <field name="product_id"/>
+                        <field name="remain_product"/>
+                        <field name="destination_location_id"/>
+                        <field name="internal_transfer_ref"/>
+                        <field name="purchase_request_ref"/>
+                        <field name="internal_transfer_qty"/>
+                        <field name="purchase_request_qty"/>
+                        <field name="internal_transfer_date"/>
+                        <field name="purchase_request_date"/>
+                        <field name="std_item_mr" invisible="1"/>
+                    </tree>
+                  </field>
+                </group>
+                <footer>
+                  <button string='Cancel' class='btn-default' special="cancel"/>
+                </footer>
+              </sheet>
+          </form>
+      </field>
+  </record>
+
+    <record model="ir.actions.act_window" id="std_planning_action">
+        <field name="name">Material Requests</field>
+        <field name="res_model">std.material.request</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="std_material_menu" name="Material Requests" parent="stock.menu_stock_warehouse_mgmt" action="std_planning_action" sequence="60"/>
+    <menuitem id="std_material_request_main" name="Material Requests" action="std_planning_action" web_icon="std_material_request,static/description/icon.png" sequence="60"/>
+</odoo>
+
+
+<!--                  -->

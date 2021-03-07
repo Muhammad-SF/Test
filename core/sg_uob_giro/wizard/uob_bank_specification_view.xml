@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Form View of uob Bank Specification Wizard -->
+    <record id="uob_bank_specification_form" model="ir.ui.view">
+        <field name="name">UOB Bank Specification Form</field>
+        <field name="model">uob.bank.specification</field>
+        <field name="arch" type="xml">
+            <form string="UOB Bank Specification">
+                <group col="4" colspan="4">
+                    <field name="service_type"/>
+                    <field name="payment_type"/>
+                    <field name="originating_bic_code"/>
+                    <field name="msg_seq_no" placeholder="for ex: 01 to 99"/>
+                    <field name="account_number"/>
+                    <field name="originator_name"/>
+                    <field name="value_date"/>
+                    <field name="ultimate_originating_customer"/>
+                    <field name="bulk_customer_ref"/>
+                    <field name="software_label"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </group>
+                <footer>
+                    <button name="get_text_file" string="Save" type="object" class="btn-primary fa fa-download"/>
+                    or
+                    <button special="cancel" string="Cancel" class="oe_link"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+   <!-- Action of uob Text File -->
+    <record id="action_uob_bank_specification_wizard" model="ir.actions.act_window">
+        <field name="name">UOB Text File</field>
+        <field name="res_model">uob.bank.specification</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Form view of Bianry uob Bank File Wizard -->
+    <record id="uob_bank_specification_binary_wizard_form" model="ir.ui.view">
+        <field name="name">Binary UOB Bank File Wizard File</field>
+        <field name="model">binary.uob.bank.file.wizard</field>
+        <field name="arch" type="xml">
+            <form string="View CPF txt File">
+                <group>
+                    <field name="name" invisible="1"/>
+                    <field name="cpf_txt_file" filename="name"/>
+                </group>
+                <separator string="" colspan="4"/>
+                <footer>
+                    <button name="get_back_action" string="Back" type="object" class="oe_highlight"/>
+                    or
+                    <button special="cancel" string="Close"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Menu of uob Text File -->
+    <menuitem id="menu_hr_misc_root" name="Misc" sequence="5" parent="sg_hr_employee.menu_root_hr_parent" groups="base.group_user"/>
+    <menuitem id="menu_uob_bank_specification_wizard" action="action_uob_bank_specification_wizard" parent="menu_hr_misc_root"/>
+
+</odoo>

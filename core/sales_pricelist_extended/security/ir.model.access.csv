@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_approving_matrix_pricelist,access_approving_matrix_pricelist,model_approving_matrix_pricelist,,1,1,1,1
+access_approving_matrix_pricelist_line,access_approving_matrix_pricelist_line,model_approving_matrix_pricelist_line,,1,1,1,1
+access_pricelist_approving_matrix,access_pricelist_approving_matrix,model_pricelist_approving_matrix,,1,1,1,1

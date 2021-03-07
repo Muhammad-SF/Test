@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="product.product" id="so_progress_bill_product_progress_bill">
+            <field name="name">Progress Billing</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">True</field>
+            <field name="type">service</field>
+            <field name="default_code">PROGBIL</field>
+        </record>
+
+        <record model="product.product" id="so_progress_bill_product_retention_rate">
+            <field name="name">Retention</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">True</field>
+            <field name="type">service</field>
+            <field name="default_code">RETENS</field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,54 @@
+<odoo>
+	<data>
+		<report id="employee_document_expirey_report"
+				string="Document Expirey Report"
+				model="employee.immigration"
+				report_type="qweb-pdf" 
+                name="sg_document_expiry.document_expirey_report" 
+                menu="True"
+                header="True"/>
+		 
+		<template id="document_expirey_report">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="o">
+					<div class="page">
+						<style>
+							.padding {
+							padding-top:3px;
+							padding-bottom:3px;
+							padding-left:3px;
+							padding-right:3px;
+							}
+
+							.border {
+							border:1px solid
+							black;
+							border-collapse:collapse;
+							}
+							 
+						</style>
+						<div class='row'>
+							<table width="100%">
+								<tr>
+									<td style="font-size:16px;text-align:center"><b><u>Employee Document Expiry Report</u></b></td>							
+								</tr>						
+							</table><br/><br/>
+							<table width="100%" class="border">
+								<tr class="border padding">
+									<td width="40%" style="text-align:center;border-right:1px solid black"><b>Employee</b></td>
+									<td width="30%" style="text-align:center;border-right:1px solid black"><b>Document Type</b></td>
+									<td width="30%" style="text-align:center"><b>Expiry Date</b></td>							
+								</tr>
+								<tr class="border padding">
+									<td width="40%" style="text-align:center;border-right:1px solid black"><span t-field="o.employee_id.name" /></td>
+									<td width="30%" style="text-align:center;border-right:1px solid black"><span t-field="o.doc_type_id.name" /></td>
+									<td width="30%" style="text-align:center"><span t-field="o.exp_date" /></td>
+								</tr>
+							</table>
+						</div>				
+					</div>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

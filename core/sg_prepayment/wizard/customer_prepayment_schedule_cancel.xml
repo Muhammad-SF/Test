@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_prepayement_schedule_cancel" model="ir.ui.view">
+            <field name="name">prepayment.schedule.cancel.form</field>
+            <field name="model">prepayment.schedule.cancel</field>
+            <field name="arch" type="xml">
+	            <form string="Customer Prepayment Schedule Cancel">
+                <group>
+                    <field name="refund_amount" required="1" style="width:40%%"/>
+                    <field name="payment_method" required="1" domain="[('user_type_id','in',['Bank and Cash'])]" style="width:40%%"/>
+                    <field name="revenue_account" domain="[('user_type_id','in',['Income'])]" style="width:40%%" attrs="{'invisible': [('refund_amount_check','=',False)], 'required': [('refund_amount_check','=',True)]}"/>
+                    <field name="refund_amount_check" invisible="1"/>
+                    <field name="reason_id" required="1"/>
+                </group>
+                <footer>
+                    <button string="Confirm" name="action_confirm_cancel" type="object" class="oe_highlight"/>
+                </footer>
+	            </form>
+            </field>
+        </record>
+
+         <record id="action_prepayment_schedule_cancel" model="ir.actions.act_window">
+            <field name="name">Customer Invoice</field>
+            <field name="res_model">prepayment.schedule.cancel</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>
+

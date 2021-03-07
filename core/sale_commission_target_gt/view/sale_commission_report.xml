@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <record id="view_order_commission_pivot" model="ir.ui.view">
+            <field name="name">sale.commission.pivot</field>
+            <field name="model">sale.commission.report</field>
+            <field name="arch" type="xml">
+                <pivot string="Sales Commission" disable_linking="True">
+                    <field name="team_id" type="col"/>
+                    <field name="date" interval="month" type="row"/>
+                    <field name="price_subtotal" type="measure"/>
+                    <field name="price_commission" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="action_order_commission_report" model="ir.actions.act_window">
+            <field name="name">Sales Commission</field>
+            <field name="res_model">sale.commission.report</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">pivot,graph</field>
+            <field name="view_id"></field>  <!-- force empty -->
+            <field name="context">{}</field>
+
+        </record>
+
+        <!--<menuitem name="Sales Commission" action="action_order_commission_report" id="menu_order_commission_report"
+                  parent="sales_team.menu_sale_report" sequence="20"/>-->
+    </data>
+</odoo>

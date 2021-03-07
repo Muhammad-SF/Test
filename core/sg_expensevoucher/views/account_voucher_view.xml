@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="account_voucher.action_sale_receipt" model="ir.actions.act_window">
+        <field name="name">Other Income</field>
+    </record>
+
+    <record id="account_voucher.action_purchase_receipt" model="ir.actions.act_window">
+        <field name="name">Other Expense</field>
+    </record>
+
+    <menuitem id="account_voucher.menu_action_sale_receipt" name="Other Income"
+              action="account_voucher.action_sale_receipt"
+              parent="account.menu_finance_receivables"
+              sequence="10"/>
+
+    <menuitem id="account_voucher.menu_action_purchase_receipt" name="Other Expense"
+              action="account_voucher.action_purchase_receipt" parent="account.menu_finance_payables" sequence="4"/>
+
+    <record id="view_account_voucher_inherit_list_view" model="ir.ui.view">
+        <field name="name">account.voucher.tree</field>
+        <field name="model">account.voucher</field>
+        <field name="inherit_id" ref="account_voucher.view_voucher_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="string">Vendor</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sale_receipt_form_view" model="ir.ui.view">
+        <field name="name">sale_receipt_form_view</field>
+        <field name="model">account.voucher</field>
+        <field name="inherit_id" ref="account_voucher.view_sale_receipt_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='pay_now']" position="replace">
+                <field name="pay_now" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="replace">
+                <field name="name"/>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='account_id']" position="replace">
+                <field name="account_id" string="Revenue Account"/>
+            </xpath>
+            <field name="journal_id" position="attributes">
+                <attribute name="domain">[('type', 'in', ('sale','bank','cash'))]</attribute>
+            </field>
+            <field name="branch_id" position="attributes">
+                <attribute name="domain">[('company_id', '=', company_id)]</attribute>
+                <attribute name="attrs">{'readonly': [('state', '!=', 'draft')]}</attribute>
+            </field>
+            <button name="proforma_voucher" position="after">
+                <button name="action_request_approval" states="draft" string="Request For Approval" type="object"
+                        class="btn-primary" groups="sg_expensevoucher.group_income_expense_matrix"/>
+                <button name="action_approve" string="Approve" type="object" class="btn-primary"
+                        attrs="{'invisible': ['|', ('state', '!=', 'request_for_approval'), ('is_approved_user', '=', True)]}"/>
+                <button name="action_decline" states="request_for_approval" string="Decline" type="object"
+                        class="btn-primary"/>
+            </button>
+            <button name="proforma_voucher" position="replace">
+                <button name="proforma_voucher" string="Validate" class="oe_highlight" type="object" attrs="{'invisible': ['|', ('is_income_matrix', '=', True), ('state', '!=', 'draft')]}"/>
+            </button>
+            <field name="account_id" position="after">
+                <field name="income_expense_approving_matrix_id" domain="[('is_income_expense','=',True),('type', '=', 'income')]"
+                       attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('is_income_matrix', '=', True), ('state', '=', 'draft')]}" groups="sg_expensevoucher.group_income_expense_matrix"/>
+                <field name="income_expense_approved_user_id" invisible="1"/>
+            </field>
+            <field name="paid" position="after">
+                <field name="is_approved_user" invisible="1"/>
+                <field name="is_income_matrix" invisible="1"/>
+            </field>
+            <xpath expr="//notebook[last()]" position="inside">
+                <page name="income_approving" string="Approving Matrix Lines" groups="sg_expensevoucher.group_income_expense_matrix">
+                    <group name="income_expense_approving_matrix_lines">
+                        <field name="income_expense_approving_line_ids" nolabel="1" groups="sg_expensevoucher.group_income_expense_matrix">
+                            <tree>
+                                <field name="sequence"/>
+                                <field name="user_ids" widget="many2many_tags"/>
+                                <field name="approved_user_ids" widget="many2many_tags"/>
+                                <field name="min_approver"/>
+                                <field name="min_amount"/>
+                                <field name="max_amount"/>
+                                <field name="approved"/>
+                            </tree>
+                            <form string="Approving Matrix Lines">
+                                <group>
+                                    <group>
+                                        <field name="sequence"/>
+                                        <field name="user_ids" widget="many2many_tags"/>
+                                        <field name="approved_user_ids" widget="many2many_tags"/>
+                                        <field name="min_approver"/>
+                                    </group>
+                                    <group>
+                                        <field name="min_amount"/>
+                                        <field name="max_amount"/>
+                                        <field name="income_expense_approving_id" invisible="1"/>
+                                        <field name="approved"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_receipt_form_view" model="ir.ui.view">
+        <field name="name">purchase_receipt_form_view</field>
+        <field name="model">account.voucher</field>
+        <field name="inherit_id" ref="account_voucher.view_purchase_receipt_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='pay_now']" position="replace">
+                <field name="pay_now" invisible="1"/>
+            </xpath>
+
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='account_id']" position="replace">
+                <field name="account_id" string="Expense Account"/>
+            </xpath>
+            <button name="proforma_voucher" position="after">
+                <button name="action_request_approval" states="draft" string="Request For Approval" type="object"
+                        class="btn-primary" groups="sg_expensevoucher.group_expense_matrix"/>
+                <button name="action_approve" string="Approve" type="object" class="btn-primary"
+                        attrs="{'invisible': ['|', ('state', '!=', 'request_for_approval'), ('is_approved_user', '=', True)]}"/>
+                <button name="action_decline" states="request_for_approval" string="Decline" type="object"
+                        class="btn-primary"/>
+            </button>
+            <button name="proforma_voucher" position="replace">
+                <button name="proforma_voucher" string="Validate" class="oe_highlight" type="object" attrs="{'invisible': ['|', ('is_expense_matrix', '=', True), ('state', '!=', 'draft')]}"/>
+            </button>
+            <field name="account_id" position="after">
+                <field name="income_expense_approving_matrix_id" domain="[('is_income_expense','=',True),('type', '=', 'expense')]"
+                       attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('is_expense_matrix', '=', True), ('state', '=', 'draft')]}" groups="sg_expensevoucher.group_expense_matrix"/>
+                <field name="income_expense_approved_user_id" invisible="1"/>
+            </field>
+            <xpath expr="//field[@name='name']" position="replace"/>
+            <xpath expr="//field[@name='reference']" position="replace"/>
+            <field name="paid" position="after">
+                <field name="name" colspan="2"/>
+                <field name="reference"/>
+                <field name="is_approved_user" invisible="1"/>
+                <field name="is_expense_matrix" invisible="1"/>
+            </field>
+            <xpath expr="//notebook[last()]" position="inside">
+                <page name="expense_approving" string="Approving Matrix Lines" groups="sg_expensevoucher.group_expense_matrix">
+                    <group name="income_expense_approving_matrix_lines">
+                        <field name="income_expense_approving_line_ids" nolabel="1" groups="sg_expensevoucher.group_expense_matrix">
+                            <tree>
+                                <field name="sequence"/>
+                                <field name="user_ids" widget="many2many_tags"/>
+                                <field name="approved_user_ids" widget="many2many_tags"/>
+                                <field name="min_approver"/>
+                                <field name="min_amount"/>
+                                <field name="max_amount"/>
+                                <field name="approved"/>
+                            </tree>
+                            <form string="Approving Matrix Lines">
+                                <group>
+                                    <group>
+                                        <field name="sequence"/>
+                                        <field name="user_ids" widget="many2many_tags"/>
+                                        <field name="approved_user_ids" widget="many2many_tags"/>
+                                        <field name="min_approver"/>
+                                    </group>
+                                    <group>
+                                        <field name="min_amount"/>
+                                        <field name="max_amount"/>
+                                        <field name="income_expense_approving_id" invisible="1"/>
+                                        <field name="approved"/>
+                                    </group>
+                                </group>
+                            </form>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+            <xpath expr="//field[@name='company_id']" position="replace"/>
+            <xpath expr="//field[@name='branch_id']" position="replace"/>
+            <xpath expr="//field[@name='journal_id']" position="replace"/>
+            <field name="partner_id" position="before">
+                <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                <field name="branch_id" required="1" domain="[('company_id', '=', company_id)]" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+            </field>
+            <field name="date" position="before">
+                <field name="journal_id" domain="[('type', 'in', ('purchase','bank','cash'))]" widget="selection" groups="account.group_account_user"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

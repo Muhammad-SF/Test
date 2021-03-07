@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tenant_management,Receptionist,model_tenant_management,fnp_item_type.fnp_item_type_receptionist,1,0,1,0
+access_tenant_managements,Receptionist Manager,model_tenant_management,fnp_item_type.fnp_item_type_receptionist_manager,1,1,1,1

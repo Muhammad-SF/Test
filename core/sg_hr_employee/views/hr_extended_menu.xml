@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+	<data>
+
+
+			<!-- Parent menu of Human Resources -->
+			<menuitem id="menu_root_hr_parent" name="Human Resources" web_icon="hr,static/description/icon.png" />
+
+			<!-- Parent Menu of Employee -->
+			<menuitem id="hr.menu_hr_root"
+				name="Employees" 
+				sequence="2"
+				parent="menu_root_hr_parent"
+				groups="hr.group_hr_manager,hr.group_hr_user,base.group_user"
+			/>
+
+			<!-- Parent Menu of Payroll -->
+			<menuitem id="hr_payroll.menu_hr_payroll_root"
+				name="Payroll"
+				web_icon="hr_payroll,static/description/icon.png"
+				sequence="4"
+				parent="menu_root_hr_parent"
+			/>
+
+			<!-- Parent Menu of Leaves -->
+			<menuitem id="hr_holidays.menu_hr_holidays_root"
+				name="Leaves" 
+				web_icon="hr_holidays,static/description/icon.png"
+				sequence="5"
+				parent="menu_root_hr_parent"
+				groups="base.group_user"
+			/>
+
+			<!-- Parent Menu of Expenses -->
+			<menuitem id="hr_expense.menu_hr_expense_root"
+				name="Expenses"
+				web_icon="hr_expense,static/description/icon.png"
+				parent="menu_root_hr_parent"
+				sequence="6"
+			/>
+
+			<!-- Parent Menu of Timesheet -->
+			<menuitem id="hr_attendance.timesheet_menu_root" name="Timesheets"
+				groups="base.group_user,hr.group_hr_user,hr.group_hr_manager"
+				web_icon="hr_attendance,static/description/icon_timesheet.png"
+				parent="menu_root_hr_parent"
+				sequence="7"
+			/>
+
+			<!-- Parent Menu of Attendance -->
+			<menuitem id="hr_attendance.menu_hr_attendance_root" name="Attendances" 
+				groups="hr.group_hr_attendance" 
+				web_icon="hr_attendance,static/description/icon.png"
+				parent="menu_root_hr_parent"
+				sequence="8"
+			/>
+
+<!-- 		########################################################
+								HR Reports
+			######################################################## -->
+
+		<!-- Main Reports Menu of Human Resources -->
+		<menuitem id="menu_parent_hr_report_summary" 
+			name="Reports"
+			parent="menu_root_hr_parent" 
+			sequence="6" />
+
+		<!-- Parent Reports Menu of Leaves -->
+        <menuitem id="hr_holidays.menu_hr_holidays_report"
+            name="Leaves" sequence="1"
+            parent="menu_parent_hr_report_summary"
+            groups="hr_holidays.group_hr_holidays_manager,hr_holidays.group_hr_holidays_user"/>
+
+		<!-- Parent Reports Menu of Expenses -->
+        <menuitem id="hr_expense.menu_hr_expense_reports" 
+        	name="Expenses" sequence="2" 
+        	parent="menu_parent_hr_report_summary" 
+        	groups="hr_expense.group_hr_expense_manager"/>
+
+<!-- 		########################################################
+								HR Configurations
+			######################################################## -->
+
+			<!-- Main Configuration Menu of Human Resources -->
+			<menuitem id="parent_menu_confg_hr"
+				name="Configurations" 
+				parent="menu_root_hr_parent"
+			/>
+
+			<!-- Parent Configuration Menu of Leaves -->
+			<menuitem id="sg_hr_leaves_configuration"
+				name="Leaves" 
+				parent="parent_menu_confg_hr"
+				groups="hr.group_hr_manager"
+				sequence="2"/>
+
+						<!-- Leave Types : Child Configuration Menu of Leaves-->
+						<menuitem id="hr_holidays.menu_hr_holidays_configuration"
+							name="Leave Types"
+							parent="sg_hr_leaves_configuration"
+							groups="base.group_system,hr.group_hr_manager"
+							action="hr_holidays.open_view_holiday_status"
+							sequence="1"
+						/>
+
+			<!-- Configuration of Employee : It is base configuration-->
+			<menuitem id="hr.menu_human_resources_configuration" 
+				name="Employee" 
+				parent="parent_menu_confg_hr"
+				groups="hr.group_hr_manager"
+				sequence="3"/>
+
+			<!-- Parent Configuration Menu of Payroll -->
+			<menuitem id="hr_payroll.menu_hr_payroll_configuration" 
+				name="Payroll"
+				parent="parent_menu_confg_hr"
+				groups="hr.group_hr_manager"
+				sequence="4"
+				/>
+
+			<!-- Parent Configuration Menu of Expense -->
+			<menuitem id="hr_expense.menu_hr_expense_configuration" 
+				name="Expense"
+				parent="parent_menu_confg_hr"
+				sequence="5"
+			/>
+
+	</data>
+</odoo>

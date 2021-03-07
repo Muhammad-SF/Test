@@ -1,0 +1,112 @@
+<odoo>
+    <data>
+
+        <record id="view_subscription_form_standard_prepayment" model="ir.ui.view">
+            <field name="name">View Subscription Form Standard Prepayment</field>
+            <field name="model">account.subscription</field>
+            <field name="inherit_id" ref="acc_recurring_entries.view_subscription_form"/>
+            <field name="arch" type="xml">
+                <field name="period_nbr" position="replace"/>
+                <field name="period_type" position="replace"/>
+                <field name="date_start" position="after">
+                    <field name="period_nbr"/>
+                    <field name="period_type"/>
+                </field>
+                <field name="ref" position="after">
+                    <field name="total_invoice" readonly="1"/>
+                    <field name="cumulative_paid" readonly="1"/>
+                </field>
+                <field name="period_total" position="after">
+                    <field name="remaining_amount" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_subscription_tree_standard_prepayment" model="ir.ui.view">
+            <field name="name">View Subscription Tree Standard Prepayment</field>
+            <field name="model">account.subscription</field>
+            <field name="inherit_id" ref="acc_recurring_entries.view_subscription_tree"/>
+            <field name="arch"  type="xml">
+                <field name="model_id" position="after">
+                    <field name="total_invoice"/>
+                    <field name="cumulative_paid" string="Total Paid"/>
+                    <field name="remaining_amount"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_subscription_line_form_standard_prepayment" model="ir.ui.view">
+            <field name="name">View Subscription Line Form Standard Prepayment</field>
+            <field name="model">account.subscription.line</field>
+            <field name="inherit_id" ref="acc_recurring_entries.view_subscription_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="replace">
+                    <form string="Subscription lines">
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="move_id"/>
+                                <field name="invoice_amount" readonly="1"/>
+                            </group>
+                             <group>
+                                <field name="cumulative_paid" readonly="1"/>
+                                <field name="remaining_amount" readonly="1"/>
+                            </group>
+                        </group>
+                    </form>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_subscription_line_tree_standard_prepayment" model="ir.ui.view">
+            <field name="name">View Subscription Line Tree Standard Prepayment</field>
+            <field name="model">account.subscription.line</field>
+            <field name="inherit_id" ref="acc_recurring_entries.view_subscription_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="move_id" position="after">
+                    <field name="invoice_amount"/>
+                    <field name="cumulative_paid"/>
+                    <field name="remaining_amount"/>
+                </field>
+            </field>
+        </record>
+
+        <!--Payment form view inherit-->
+        <record id="customer_payment_form_standard_prepayment_inherit_view1" model="ir.ui.view">
+            <field name="name">Customer Payment Form Standard Prepayment Inherit View1</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="customer_prepayment.customer_payment_form_inherit_view1"/>
+            <field name="arch" type="xml">
+                <field name="is_prepayment" position="attributes">
+                    <attribute name="groups">standard_prepayment.group_prepayment</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_model_line_tree_standard_prepayment" model="ir.ui.view">
+            <field name="name">View Model Line Tree Standard Prepayment</field>
+            <field name="model">account.model.line</field>
+            <field name="inherit_id" ref="acc_recurring_entries.view_model_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="debit" position="attributes">
+                    <attribute name="sum">debit</attribute>
+                </field>
+                <field name="credit" position="attributes">
+                    <attribute name="sum">credit</attribute>
+                </field>
+            </field>
+        </record>
+
+        <menuitem id="acc_recurring_entries.menu_finance_recurrent_entries" name="Recurring Entries"
+            parent="account.menu_finance" sequence="15" groups="standard_prepayment.group_prepayment"/>
+        <menuitem
+            action="acc_recurring_entries.action_model_form" name="Models" id="acc_recurring_entries.menu_action_model_form" sequence="5"
+            parent="acc_recurring_entries.menu_finance_recurrent_entries" groups="standard_prepayment.group_prepayment"/>
+
+        <menuitem
+            name="Define Recurring Entries" action="acc_recurring_entries.action_subscription_form"
+            id="acc_recurring_entries.menu_action_subscription_form" sequence="1"
+            parent="acc_recurring_entries.menu_finance_recurrent_entries" groups="standard_prepayment.group_prepayment"/>
+
+    </data>
+</odoo>

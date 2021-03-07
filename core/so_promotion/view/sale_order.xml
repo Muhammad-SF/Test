@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+
+        <record id="sale_order_inherit_form" model="ir.ui.view">
+            <field name="name">sale.order.promotion</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']//tree//field[@name='product_id']" position="after">
+                    <field name="promotion"/>
+                    <field name="account_id" attrs="{'readonly': [('promotion', '=', True)]}"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//form//field[@name='product_id']" position="after">
+                    <field name="promotion"/>
+                </xpath>
+                <notebook position='inside'>
+                	<page string="Promotions">
+                		<group>
+                			<field name="promotion_id" readonly='1'/>
+                		</group>
+                	</page>
+                </notebook>
+                <button name="action_confirm" position='after'>
+                	<button name="apply_promotion_automatically" states="draft,sent,sale" string="Apply Promotions Automatically" class="btn-primary" type="object"/>
+                	<button name="%(so_promotion.action_apply_sale_promotion)d" context="{'active_sale_id': active_id}" states="draft,sent,sale" string="Apply Promotions Manually" class="btn-primary" type="action"/>
+                </button>
+            </field>
+        </record>
+
+    </data>
+</odoo>

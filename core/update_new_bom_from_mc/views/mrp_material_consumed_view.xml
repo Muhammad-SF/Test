@@ -1,0 +1,26 @@
+<odoo>
+    <record id="mrp_material_consumed_form_update_inherit" model="ir.ui.view">
+	        <field name="name">mrp.material.consumed.form.update.inherit</field>
+	        <field name="model">mrp.material.consumed</field>
+	        <field name="inherit_id" ref="manufacturing_material_consumption.mrp_material_inherit_form_view_popup"/>
+	        <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='button_to_approve']" position="after">
+                    <button name="update_current_bom" states="approved" groups="update_new_bom_from_mc.group_multi_bom_update_from_mc" string="Update Current BoM" type="object" class="oe_highlight"/>
+                    <button name="create_new_bom" states="approved" groups="update_new_bom_from_mc.group_multi_bom_update_from_mc" string="Create New BoM" type="object" class="oe_highlight"/>
+                </xpath>
+            </field>
+    </record>
+
+
+    <record id="mrp_material_consumed_form_update_inherit1" model="ir.ui.view">
+	        <field name="name">mrp.material.consumed.form.update.inherit1</field>
+	        <field name="model">mrp.material.consumed</field>
+	        <field name="inherit_id" ref="manufacturing_material_consumption.mrp_material_consumed_form_view"/>
+	        <field name="arch" type="xml">
+                <xpath expr="//header/button[@name='button_to_approve']" position="after">
+                    <button name="update_current_bom" states="approved" groups="update_new_bom_from_mc.group_multi_bom_update_from_mc" string="Update Current BoM" type="object" class="oe_highlight"/>
+                    <button name="create_new_bom" states="approved" groups="update_new_bom_from_mc.group_multi_bom_update_from_mc" string="Create New BoM" type="object" class="oe_highlight"/>
+                </xpath>
+            </field>
+    </record>
+</odoo>

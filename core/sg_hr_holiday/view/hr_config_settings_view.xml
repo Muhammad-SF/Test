@@ -1,0 +1,35 @@
+<odoo>
+	<data>
+		<record id="view_hr_leave_configuration" model="ir.ui.view">
+            <field name="name">Configure Allocate Lave</field>
+            <field name="model">hr.leave.config.settings</field>
+            <field name="arch" type="xml">
+                <form string="Configure Leave Allocation" class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <group string="Human Resource">
+                        <label for="id" string="Leave"/>
+                        <div>
+	                        <div>
+	                            <field name="module_sg_holiday_extended" class="oe_inline"/>
+	                            <label for="module_sg_holiday_extended"/>
+	                        </div>
+                        </div>
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+		 <record id="action_hr_leave_configuration" model="ir.actions.act_window">
+            <field name="name">Configure Leave Allocate</field>
+            <field name="res_model">hr.leave.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+        
+		<menuitem id="menu_hr_leave_global_settings" name="Settings"  
+            parent="sg_hr_employee.sg_hr_leaves_configuration" sequence="0" action="action_hr_leave_configuration" groups="hr.group_hr_manager"/>
+	</data>
+</odoo>

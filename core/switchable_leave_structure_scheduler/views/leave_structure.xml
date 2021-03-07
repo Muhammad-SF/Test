@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+ 
+        <record id="view_leave_structure_switchable" model="ir.ui.view">
+        <field name="name">holiday.group.config.form</field>
+        <field name="model">holiday.group.config</field>
+        <field name="inherit_id" ref="sg_holiday_extended.view_sg_leave_contract_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="switchable"/>
+                <field name="interval_number" attrs="{'invisible':[('switchable','=',False)],'required':[('switchable','=',True)]}"/>
+                <field name="interval_unit" attrs="{'invisible':[('switchable','=',False)],'required':[('switchable','=',True)]}"/>
+                <field name="change_to" attrs="{'invisible':[('switchable','=',False)],'required':[('switchable','=',True)]}"/>
+            </xpath>
+        </field>
+        </record>   
+
+</odoo>

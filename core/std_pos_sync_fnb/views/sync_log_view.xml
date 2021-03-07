@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        
+        <!-- Restaurant Floor Sync Log -->
+        <record id="floor_sync_log_form_view" model="ir.ui.view">
+			<field name="name">floor.sync.log.form.view</field>
+			<field name="model">floor.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Restaurant Floor Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="floor_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">floor.sync.log.tree.view</field>
+			<field name="model">floor.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Restaurant Floor Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_floor_sync_log" model="ir.actions.act_window">
+			<field name="name">Restaurant Floor Sync Log</field>
+			<field name="res_model">floor.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Restaurant Floor Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_floor_sync_log" 
+		    name="Restaurant Floor Sync Log"
+			parent="std_pos_sync.menu_sync_log" 
+			action="action_floor_sync_log" 
+			sequence="140" />
+			
+		
+		<!-- Restaurant Table Sync Log -->
+        <record id="table_sync_log_form_view" model="ir.ui.view">
+			<field name="name">table.sync.log.form.view</field>
+			<field name="model">table.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Restaurant Table Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="table_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">table.sync.log.tree.view</field>
+			<field name="model">table.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Restaurant Table Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_table_sync_log" model="ir.actions.act_window">
+			<field name="name">Restaurant Table Sync Log</field>
+			<field name="res_model">table.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Restaurant Table Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_table_sync_log" 
+		    name="Restaurant Table Sync Log"
+			parent="std_pos_sync.menu_sync_log" 
+			action="action_table_sync_log" 
+			sequence="150" />
+			
+		
+		<!-- Master Floor Table Sync Log -->
+        <record id="master_floor_table_sync_log_form_view" model="ir.ui.view">
+			<field name="name">master.floor.table.sync.log.form.view</field>
+			<field name="model">master.floor.table.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Master Floor Table Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="master_floor_table_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">master.floor.table.sync.log.tree.view</field>
+			<field name="model">master.floor.table.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Master Floor Table Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_master_floor_table_sync_log" model="ir.actions.act_window">
+			<field name="name">Master Floor Table Sync Log</field>
+			<field name="res_model">master.floor.table.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Master Floor Table Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_master_floor_table_sync_log" 
+		    name="Master Floor Table Sync Log"
+			parent="std_pos_sync.menu_sync_log" 
+			action="action_master_floor_table_sync_log" 
+			sequence="160" />
+		
+			
+        
+    </data>
+</openerp>

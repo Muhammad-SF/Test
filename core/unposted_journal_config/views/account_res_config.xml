@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="view_account_config" model="ir.ui.view">
+            <field name="name">account settings</field>
+            <field name="model">account.config.settings</field>
+            <field name="inherit_id" ref="account.view_account_config_settings"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='bank_cash']" position="after">
+                    <separator string="Unposted Journal Setting" groups="account.group_account_user"/>
+                    <group name="unposted_journal">
+                        <label for="id" string="Unposted Journal"/>
+                        <div name="unposted_items_customer_invoice">
+                            <field name="group_customer_invoice_unpost" class="oe_inline"/>
+                            <label for="group_customer_invoice_unpost"/>
+                            <label for="" style="display:block"/>
+                            <field name="group_vendor_bill_unpost" class="oe_inline"/>
+                            <label for="group_vendor_bill_unpost"/>
+                        </div>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

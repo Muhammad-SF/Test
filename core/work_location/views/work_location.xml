@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<!-- Work location Form View -->
+	<record id="work_location_form_view" model="ir.ui.view">
+		<field name="name">work.location.form</field>
+		<field name="model">work.location</field>
+		<field name="arch" type="xml">
+			<form>
+				<sheet>
+					<group>
+						<field name="name" />
+						<field name="work_location_parent" />
+						<field name="company_id" />
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+
+	<!-- Work location Tree View -->
+	<record id="work_location_tree_view" model="ir.ui.view">
+		<field name="name">work.location.tree</field>
+		<field name="model">work.location</field>
+		<field name="arch" type="xml">
+			<tree string="Work Location List">
+				<field name="name" string="Work Location"/>
+				<field name="work_location_parent" string="Parent Work Location"/>
+				<field name="company_id" string="Company"/>
+			</tree>
+		</field>
+	</record>
+
+	<!-- Work location Action -->
+	<record id="work_location_action" model="ir.actions.act_window">
+		<field name="name">Work Location</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">work.location</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+	</record>
+
+	<!-- Menuitem -->
+	<!-- <menuitem name="Employee" id="work_location_employee"
+		parent="hr.menu_human_resources_configuration" /> -->
+	<menuitem name="Work Location" id="work_location_employee_submenu"
+		parent="hr.menu_human_resources_configuration" sequence="-2" action="work_location_action" />
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_commission_commission,commission.commission,model_commission_commission,,1,1,1,0
+access_force_done,force.done,model_force_done,,1,1,1,1
+access_commission_lines,commission.lines,model_commission_lines,,1,1,1,0
+access_commission_report,commission.report,model_commission_report,,1,1,1,1

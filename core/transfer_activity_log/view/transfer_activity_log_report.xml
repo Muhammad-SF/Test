@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- tree view -->
+        <record id="view_transfer_activity_log_tree" model="ir.ui.view">
+            <field name="name">Delivery Order Activity Log Tree</field>
+            <field name="model">transfer.activity.log</field>
+            <field name="arch" type="xml">
+                <tree editable='top'>
+                    <field name="reference"/>
+                    <field name="origin"/>
+                    <field name="timestamp"/>
+                    <field name="user"/>
+                    <field name="status"/>
+                    <field name="hours_minutes" string="Processed Time"/>
+                    <field name="days"/>
+                    <field name="company_id" invisible='1'/>
+                    <field name="location" invisible='1'/>
+                    <field name="location_dest" invisible='1'/>
+                    <field name="customer" invisible='1'/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- form view -->
+        <record id="view_transfer_activity_log_form" model="ir.ui.view">
+            <field name="name">Delivery Order Log Activity Form</field>
+            <field name="model">transfer.activity.log</field>
+            <field name="arch" type="xml">
+                <form >
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="reference"/>
+                                <field name="origin"/>
+                                <field name="customer" attrs="{'invisible': [('picking_name', '!=', 'Delivery Orders')]}"/>
+                                <field name="vendor" attrs="{'invisible': [('picking_name', '!=', 'Receipts')]}"/>
+                                <field name="timestamp"/>
+                                <field name="user"/>
+                                <field name="mail_track_id" invisible='1'/>
+                                <field name="mail_id" invisible='1'/>
+                                <field name="picking_name" invisible='1'/>
+                            </group>
+                            <group>
+                                <field name="location"/>
+                                <field name="location_dest"/>
+                                <field name="status"/>
+                                <field name="company_id"/>
+                                <field name="process_time"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="transfer_activity_log_filter" model="ir.ui.view">
+            <field name="name">transfer.activity.log.select</field>
+            <field name="model">transfer.activity.log</field>
+            <field name="arch" type="xml">
+                <search string="Search Delivery Order Activity Log">
+                    <field name="reference"/>
+                    <field name="origin"/>
+                    <field name="timestamp"/>
+                    <field name="user"/>
+                    <field name="status"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Reference" domain="[]" context="{'group_by':'reference'}"/>
+                        <filter string="Source Document" domain="[]" context="{'group_by':'origin'}"/>
+                        <filter string="Timestamp" domain="[]" context="{'group_by':'timestamp'}"/>
+                        <filter string="User" domain="[]" context="{'group_by':'user'}"/>
+                        <filter string="Status" domain="[]" context="{'group_by':'status'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- main menu -->
+        <menuitem id="menu_transfer_activity_log_report"
+                  parent="stock.menu_warehouse_report"
+                  name="Activity Log Report"
+                  sequence="601"/>
+
+        <!-- Delivery Order  -->
+        <record id="report_action_delivery_order_activity_log" model="ir.actions.act_window">
+            <field name="name">Delivery Order Activity Log</field>
+            <field name="res_model">transfer.activity.log</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_transfer_activity_log_tree"/>
+            <field name="domain">[('picking_name', '=', 'Delivery Orders')]</field>
+            <field name="context">{'group_by':'reference'}</field>
+            <field name="search_view_id" ref="transfer_activity_log_filter"/>
+        </record>
+
+
+        <menuitem action="report_action_delivery_order_activity_log" 
+                  id="menu_delivery_order_activity_log"
+                  parent="transfer_activity_log.menu_transfer_activity_log_report"
+                  sequence="2"/>
+
+      
+
+
+        <!-- Receiving Order -->
+        <record id="report_action_receiving_activity_log" model="ir.actions.act_window">
+            <field name="name">Receiving Notes Activity Log</field>
+            <field name="res_model">transfer.activity.log</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_transfer_activity_log_tree"/>
+            <field name="domain">[('picking_name', '=', 'Receipts')]</field>
+            <field name="context">{'group_by':'reference'}</field>
+            <field name="search_view_id" ref="transfer_activity_log_filter"/>
+        </record>
+
+        <menuitem action="report_action_receiving_activity_log" 
+                  id="menu_receiving_activity_log"
+                  parent="transfer_activity_log.menu_transfer_activity_log_report"
+                  sequence="1"/>
+
+
+        <!-- Transfer In -->
+        <record id="report_action_transfer_in_activity_log" model="ir.actions.act_window">
+            <field name="name">Transfer In Activity Log</field>
+            <field name="res_model">transfer.activity.log</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_transfer_activity_log_tree"/>
+            <field name="domain">[('picking_name', '=', 'Internal Transfer IN')]</field>
+            <field name="context">{'group_by':'reference'}</field>
+            <field name="search_view_id" ref="transfer_activity_log_filter"/>
+        </record>
+
+        <menuitem action="report_action_transfer_in_activity_log" 
+                  id="menu_transfer_in_activity_log"
+                  parent="transfer_activity_log.menu_transfer_activity_log_report"
+                  sequence="3"/>
+
+         <!-- Transfer Out -->
+        <record id="report_action_transfer_out_activity_log" model="ir.actions.act_window">
+            <field name="name">Transfer Out Activity Log</field>
+            <field name="res_model">transfer.activity.log</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_transfer_activity_log_tree"/>
+            <field name="domain">[('picking_name', '=', 'Internal Transfer Out')]</field>
+            <field name="context">{'group_by':'reference'}</field>
+            <field name="search_view_id" ref="transfer_activity_log_filter"/>
+        </record>
+
+        <menuitem action="report_action_transfer_out_activity_log" 
+                  id="menu_transfer_out_activity_log"
+                  parent="transfer_activity_log.menu_transfer_activity_log_report"
+                  sequence="4"/>
+
+
+    </data>
+</odoo>

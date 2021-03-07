@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="promotion_button">
+        <button class="control-button btn btn-default btn-fill btn-wd"><i class="pe-7s-check"/> Manual apply Promotion</button>
+    </t>
+
+    <t t-name="auto_promotion_button">
+        <button class="control-button btn btn-default btn-fill btn-wd auto-promotion"><i class="pe-7s-repeat"/>Auto start/stop Promotion</button>
+    </t>
+
+    <t t-extend="Orderline">
+        <t t-jquery=".info-list:first" t-operation="append">
+            <t t-if="line.promotion">
+                <span class="promotion"> <i class="pe-7s-gift"/> <t t-esc="line.promotion_reason"/> </span>
+            </t>
+        </t>
+    </t>
+
+    <t t-extend="OrderWidget">
+        <t t-jquery=".summary:first" t-operation="after">
+            <div class="promotion clearfix" style="float:right; margin-right:15px">
+                <div class="line">
+                    <div class='entry total'>
+                        <div class='subentry'>Promotion total :  <span class="value promotion_amount"> $ </span> </div>
+                    </div>
+                </div>
+            </div>
+
+        </t>
+    </t>
+
+    <t t-name="promotion_popup">
+        <div class="modal-dialog">
+            <div class="popup">
+                <p class="title">Choice a Promotion</p>
+                <div class="product-list-scroller touch-scrollable">
+                    <div class="product-list">
+                        <t t-if="widget.promotions">
+                            <t t-foreach="widget.promotions" t-as="promotion">
+                                <span class='product promotion-line' t-att-data-id="promotion.id">
+                                    <div class="product-img">
+                                        <img src="/pos_promotion/static/description/promotion.png" />
+                                    </div>
+                                    <div class="product-name">
+                                        <t t-esc="promotion.name"/>
+                                    </div>
+                                </span>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="button remove_promotion confirm" stype="float:left">
+                        <i class="pe-7s-trash"/> Remove
+                    </div>
+                    <div class="button cancel" stype="float:right">
+                        <i class="pe-7s-close"/> Cancel
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <t t-extend="PosTicket">
+        <t t-jquery=".receipt-total >tr:first" t-operation="before">
+            <t t-if="order.promotion_amount">
+                <tr>
+                    <td>Promotion:</td>
+                    <td class="pos-right-align">
+                        <t t-esc="widget.format_currency(order.promotion_amount)"/>
+                    </td>
+                </tr>
+            </t>
+        </t>
+        <t t-jquery=".receipt-orderlines >tr:first" t-operation="replace">
+            <tr t-foreach="orderlines" t-as="orderline">
+                <t t-if="!orderline.promotion">
+                    <td>
+                        <t t-esc="orderline.get_product().display_name"/>
+                         <t t-if="orderline.get_discount() > 0">
+                            <div class="pos-disc-font">
+                                With a <t t-esc="orderline.get_discount()"/>% discount
+                            </div>
+                        </t>
+                    </td>
+                    <td class="pos-right-align">
+                        <t t-esc="orderline.get_quantity_str_with_unit()"/>
+                    </td>
+                    <td class="pos-right-align">
+                        <t t-esc="widget.format_currency(orderline.get_display_price())"/>
+                    </td>
+                </t>
+            </tr>
+        </t>
+    </t>
+
+    <t t-extend="XmlReceipt">
+        <t t-jquery=".total" t-operation="before">
+            <line class='total' size='double-height'>
+                <left><pre>        PROMOTION</pre></left>
+                <right><value><t t-esc='receipt.promotion_amount' /></value></right>
+            </line>
+            <br/>
+            <line><right>--------</right></line>
+        </t>
+        <t t-jquery=".orderlines" t-operation="replace">
+            <div class='orderlines' line-ratio='0.6'>
+                <t t-foreach='receipt.orderlines' t-as='line'>
+                    <t t-if="!line.promotion">
+                        <t t-set='simple' t-value='line.discount === 0 and line.unit_name === "Unit(s)" and line.quantity === 1' />
+                        <t t-if='simple'>
+                            <line>
+                                <left><t t-esc='line.product_name_wrapped[0]' /></left>
+                                <right><value><t t-esc='line.price_display' /></value></right>
+                            </line>
+                            <t t-call="XmlReceiptWrappedProductNameLines"/>
+                        </t>
+                        <t t-if='!simple'>
+                            <line><left><t t-esc='line.product_name_wrapped[0]' /></left></line>
+                            <t t-call="XmlReceiptWrappedProductNameLines"/>
+                            <t t-if='line.discount !== 0'>
+                                <line indent='1'><left>Discount: <t t-esc='line.discount' />%</left></line>
+                            </t>
+                            <line indent='1'>
+                                <left>
+                                    <value value-decimals='3' value-autoint='on'>
+                                        <t t-esc='line.quantity' />
+                                    </value>
+                                    <t t-if='line.unit_name !== "Unit(s)"'>
+                                        <t t-esc='line.unit_name' />
+                                    </t>
+                                    x
+                                    <value value-decimals='2'>
+                                        <t t-esc='line.price' />
+                                    </value>
+                                </left>
+                                <right>
+                                    <value><t t-esc='line.price_display' /></value>
+                                </right>
+                            </line>
+                        </t>
+                    </t>
+                </t>
+            </div>
+        </t>
+    </t>
+
+
+</templates>

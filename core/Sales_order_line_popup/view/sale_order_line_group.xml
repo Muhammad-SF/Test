@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="group_sale_order_line_popup" model="res.groups">
+            <field name="name">Order Line Open In Popup</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+            <field name="visible">0</field>
+         </record>
+
+        <record id="view_order_form_editable_list_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.editable.list.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="groups_id" eval="[(4, ref('Sales_order_line_popup.group_sale_order_line_popup'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='order_line']/tree" position="attributes">
+                    <attribute name="editable"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_setting_config" model="ir.ui.view">
+            <field name="name">Order Line Sale Settings</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sales_team.view_sale_config_settings"/>
+            <field name="arch" type="xml">
+                <div id="main" position="inside">
+                    <group string="Sales Order Line Settings" name="sale_order_line_setting">
+                        <field name="show_popup"/>
+                    </group>
+                </div>
+            </field>
+        </record>
+    </data>
+</odoo>

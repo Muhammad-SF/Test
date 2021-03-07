@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_country_state_inherited" model="ir.ui.view">
+            <field name="name">res.country.state.inherited</field>
+            <field name="model">res.country.state</field>
+            <field name="inherit_id" ref="base.view_country_state_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="replace">
+                    <form string="State">
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                        <field name="country_id" options="{&quot;no_open&quot;: True}"/>
+                    </group>
+                </form>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="base.view_country_state_tree">
+            <field name="name">	res.country.state.tree</field>
+            <field name="model">res.country.state</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree class="fixed_column">
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="country_id" options="{&quot;no_open&quot;: True}"/>
+
+               </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

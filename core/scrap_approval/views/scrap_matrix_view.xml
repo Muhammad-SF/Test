@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        
+        <record id="view_scrap_matrix_tree" model="ir.ui.view">
+            <field name="name">scrap.matrix.tree</field>
+            <field name="model">scrap.matrix</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <tree string="Scrap Approval Matrix">
+                <field name="name"/>
+            </tree>
+            </field>
+        </record>
+
+        <record id="view_scrap_matrix_form" model="ir.ui.view">
+            <field name="name">scrap.matrix.form</field>
+            <field name="model">scrap.matrix</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Scrap Approval Matrix">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <notebook colspan="4">
+                        <page string="Employee">
+                            <field name="scrap_line_ids">
+                                <tree string="Employee Matrix" editable="bottom">
+                                    <field name="sequence"/>
+                                    <field name="employee_ids" widget="many2many_tags"/>
+                                    <field name="scrap_matrix_id" invisible="1" />
+                                </tree>
+                                <form string="Employee Matrix">
+                                    <group>
+                                        <group>
+                                            <field name="sequence"/>
+                                            <field name="scrap_matrix_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="employee_ids"/>
+                                        </group>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_scrap_matrix_search" model="ir.ui.view">
+            <field name="name">scrap.matirix.search</field>
+            <field name="model">scrap.matrix</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <search string="Scrap Approval Matrix">
+                <field name="name"/>
+            </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_scrap_matrix_view">
+            <field name="name">Scrap Approval Matrix</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">scrap.matrix</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_scrap_matrix_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_scrap_matrix_view_form">
+            <field name="act_window_id" ref="act_open_scrap_matrix_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_scrap_matrix_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_scrap_matrix_view_tree">
+            <field name="act_window_id" ref="act_open_scrap_matrix_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_scrap_matrix_tree"/>
+        </record>
+
+        <menuitem id="menu_scrap_matrix"
+            parent="approval_matrix.menu_approval_matrix"
+            sequence="800"
+            action="act_open_scrap_matrix_view"/>
+
+    </data>
+</odoo>

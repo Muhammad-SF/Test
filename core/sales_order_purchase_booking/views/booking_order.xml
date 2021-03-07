@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+
+    <record id="view_order_form_inherit_booking_purchase" model="ir.ui.view">
+      <field name="name">booking.order.form.view</field>
+      <field name="model">booking.order</field>
+      <field name="inherit_id" ref="product_booking.view_booking_order_view"/>
+      <field name="arch" type="xml">
+          <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+              <field name="purchase_ids" invisible="1"/>
+              <button type="object"
+                  name="action_view_purchase"
+                  class="oe_stat_button"
+                  icon="fa-shopping-cart">
+                  <field name="purchase_count" widget="statinfo" string="Purchases"/>
+              </button>
+          </xpath>
+          <xpath expr="//button[@name='validate_booking']" position="before">
+               <button name="action_create_purchase" string="Create Purchase" type="object" class="btn-primary"/>
+          </xpath>
+      </field>
+    </record>
+
+    <record id="view_order_form_inherit_purchase_sale" model="ir.ui.view">
+      <field name="name">purchase.order.form.sale</field>
+      <field name="model">purchase.order</field>
+      <field name="inherit_id" ref="purchase.purchase_order_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="//field[@name='date_order']" position="after">
+            <field name="order_id"/>
+          </xpath>
+      </field>
+    </record>
+</data>
+</odoo>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="sh_report_stock_picking_operation_document" inherit_id="stock.report_picking">
+		<xpath expr="//table[2]/thead/tr[1]/th[2]" position="after">
+			<th class="text-right" groups="sh_stock_secondary.group_secondary_unit_inventory">Secondary Quantity</th>
+		</xpath>
+		<xpath expr="//table[2]//tbody//tr[1]//td[2]" position="after">
+			<td class="text-right" groups="sh_stock_secondary.group_secondary_unit_inventory">
+               <span t-if="o.state != 'done'" t-field="pack_operation.sh_sec_qty"/>
+               <span t-if="o.state == 'done'" t-field="pack_operation.sh_sec_done_qty"/>
+               <span t-field="pack_operation.sh_sec_uom"/>
+            </td>
+		</xpath>
+	</template>
+	
+	<template id="sh_report_stock_delivery_document" inherit_id="stock.report_delivery_document">
+		<xpath expr="//table[2]/thead/tr[1]/th[2]" position="after">
+			<th class="text-right" groups="sh_stock_secondary.group_secondary_unit_inventory">Secondary Quantity</th>
+		</xpath>
+		<xpath expr="//table[2]//tbody//tr[1]//td[2]" position="after">
+			<td class="text-right" groups="sh_stock_secondary.group_secondary_unit_inventory">
+               <span t-field="move.sh_sec_qty"/>
+               <span t-field="move.sh_sec_uom"/>
+            </td>
+		</xpath>
+		
+		<xpath expr="//table[3]/thead/tr[1]/th[3]" position="after">
+			<th class="text-right" groups="sh_stock_secondary.group_secondary_unit_inventory">Secondary Done Quantity</th>
+		</xpath>
+		<xpath expr="//table[3]//tbody//tr[1]//td[hasclass('text-center')]" position="after">
+			<td class="text-right" groups="sh_stock_secondary.group_secondary_unit_inventory">
+               <span t-field="pack_operation.sh_sec_qty"/>
+               <span t-field="pack_operation.sh_sec_uom"/>
+            </td>
+		</xpath>
+	</template>
+</odoo>

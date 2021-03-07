@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <template id="asset_frontend" inherit_id="website.assets_frontend" name="Theme Frozen Frontend">
+      <xpath expr="//link[last()]" position="after">
+        <link href="/theme_frozen/static/src/less/forzen_theme.less" rel="stylesheet" type="text/less" />
+        <link rel="stylesheet" href="/theme_frozen/static/src/css/owl.carousel.css" />
+        <link rel="stylesheet" href="/theme_frozen/static/src/css/magnific-popup.css" />
+        <link rel="stylesheet" href="/theme_frozen/static/src/css/animate.min.css" />
+        <link rel="stylesheet" href="/theme_frozen/static/src/css/style.css" />
+      </xpath>
+      <xpath expr="//script[last()]" position="after">
+        <script src="/theme_frozen/static/src/js/plugin.js"></script>
+        <script src="/theme_frozen/static/src/js/init-round.js"></script>
+        <script src="/theme_frozen/static/src/js/main.js"></script>
+      </xpath>
+    </template>
+  </data>
+</odoo>

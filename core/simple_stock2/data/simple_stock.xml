@@ -1,0 +1,27 @@
+<odoo>
+    <data noupdate="1">
+        <record id="seq_construction_stock_in" model="ir.sequence">
+            <field name="name">Simple Stock In</field>
+            <field name="code">simple.stock.in</field>
+            <field name="prefix">WH IN\</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_simple_stock_out" model="ir.sequence">
+            <field name="name">Simple Stock Out</field>
+            <field name="code">simple.stock.out</field>
+            <field name="prefix">WH OUT\</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+        <record id="seq_simple_stock_inventory" model="ir.sequence">
+            <field name="name">Simple Stock Inventory</field>
+            <field name="code">simple.stock.inventory</field>
+            <field name="prefix">ST INV\</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!-- Contract Types Management -->
+        <record id="view_account_analytic_account_contracttype_tree" model="ir.ui.view">
+            <field name="name">Contract Types Tree</field>
+            <field name="model">account.analytic.account.contracttype</field>
+            <field name="arch" type="xml">
+                <tree string="Contract Types">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_account_analytic_account_contracttype_form" model="ir.ui.view">
+            <field name="name">Contract Types Form</field>
+            <field name="model">account.analytic.account.contracttype</field>
+            <field name="arch" type="xml">
+                <form string="Contract Types">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_account_analytic_account_contracttype_search" model="ir.ui.view">
+            <field name="name">Contract Types Search</field>
+            <field name="model">account.analytic.account.contracttype</field>
+            <field name="arch" type="xml">
+                <search string="Search Contract Types">
+                    <field name="name"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_account_analytic_account_contracttype" model="ir.actions.act_window">
+            <field name="name">Contract Types</field>
+            <field name="res_model">account.analytic.account.contracttype</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new sales contract type.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_account_analytic_account_contracttype" id="account_analytic_account_contracttype_mgmt" parent="sales_team.menu_sale_config" sequence="1"/>
+
+
+    </data>
+</openerp>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_picking_form_descrition" model="ir.ui.view">
+            <field name="name">View Picking Form Description</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='pack_operation_product_ids']/tree/field[@name='product_id']" position="after">
+                    <field name="description"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_move_picking_tree_descrition" model="ir.ui.view">
+            <field name="name">View Move Picking Tree Description</field>
+            <field name="model">stock.move</field>
+            <field name="inherit_id" ref="stock.view_move_picking_tree"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="after">
+                    <field name="description"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

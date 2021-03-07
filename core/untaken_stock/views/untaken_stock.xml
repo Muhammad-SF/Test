@@ -1,0 +1,78 @@
+<odoo>
+  <data>
+    <!-- Fiscal Year -->
+        <record id="view_untaken_stock_form" model="ir.ui.view">
+            <field name="name">untaken.stock.form</field>
+            <field name="model">untaken.stock</field>
+            <field name="arch" type="xml">
+                <form string="Untaken Stock">
+                    <header>
+                        <button name="btn_start" states="draft" string="Start" type="object"/>
+                        <button name="btn_end" states="in_progress" string="End Button" type="object"/>
+                        <!--button name="btn_validate" states="draft" string="Validate" type="object"/-->
+                        
+			
+                        <field name="state" widget="statusbar" statusbar_visible="draft,in_progress,validate"
+                               nolabel="1" readonly="1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="action_to_check" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="warehouse_id" attrs="{'readonly':[('state','in',['in_progress','validate'])]}"/>
+                                <field name="location_id" attrs="{'readonly':[('state','in',['in_progress','validate'])]}"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="untaken_stock_products" string="Untaken Stock Products">
+                                <!--field name="product_ids">
+                                    <tree string="Untaken Stock Products" editable="top" create="false" delete="false">
+                                        <field name="name" readonly='0' string="Products"/>
+                                    </tree>
+                                </field-->
+                                <field name="untaken_stock_line" attrs="{'readonly':[('state','in',['in_progress','validate'])]}">
+                                
+                                    <tree string="Untaken Stock Products" editable="top" create="false" delete="false">
+                                        <field name="product_id" readonly='0' string="Products"/>
+                                        <field name="warehouse_id" readonly='0'/>
+                                        <field name="location_id" readonly='0'/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_untaken_stock_tree" model="ir.ui.view">
+            <field name="name">untaken.stock.tree</field>
+            <field name="model">untaken.stock</field>
+            <field name="arch" type="xml">
+                <tree string="Untaken Stock">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="action_to_check"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_untaken_stock" model="ir.actions.act_window">
+            <field name="name">Untaken Stock</field>
+            <field name="res_model">untaken.stock</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem id="menu_action_untaken_stock" name="Untaken Stock" parent="stock.menu_stock_inventory_control"
+                  action="action_untaken_stock" sequence="220"/> <!-- sequence="51"-->
+    
+  </data>
+</odoo>

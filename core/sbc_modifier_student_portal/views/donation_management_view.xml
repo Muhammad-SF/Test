@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem name="Donations" id="donation_management.menu_donation_root" sequence="75" web_icon="donation_management,static/description/icon.png" groups="school.group_school_administration,school.group_school_teacher,school.group_school_parent,school.group_is_admission"/>
+
+</odoo>

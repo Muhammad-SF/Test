@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="sarangoci_modifier_split.list">
+      <field name="name">sarangoci_modifier_split list</field>
+      <field name="model">sarangoci_modifier_split.sarangoci_modifier_split</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="sarangoci_modifier_split.action_window">
+      <field name="name">sarangoci_modifier_split window</field>
+      <field name="res_model">sarangoci_modifier_split.sarangoci_modifier_split</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="sarangoci_modifier_split.action_server">
+      <field name="name">sarangoci_modifier_split server</field>
+      <field name="model_id" ref="model_sarangoci_modifier_split_sarangoci_modifier_split"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="sarangoci_modifier_split" id="sarangoci_modifier_split.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="sarangoci_modifier_split.menu_1" parent="sarangoci_modifier_split.menu_root"/>
+    <menuitem name="Menu 2" id="sarangoci_modifier_split.menu_2" parent="sarangoci_modifier_split.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="sarangoci_modifier_split.menu_1_list" parent="sarangoci_modifier_split.menu_1"
+              action="sarangoci_modifier_split.action_window"/>
+    <menuitem name="Server to list" id="sarangoci_modifier_split" parent="sarangoci_modifier_split.menu_2"
+              action="sarangoci_modifier_split.action_server"/>
+    -->
+  </data>
+</odoo>

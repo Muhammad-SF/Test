@@ -1,0 +1,65 @@
+<odoo>
+	<data>
+		<record id="whatsapp_form_view" model="ir.ui.view">
+			<field name="name">whatsapp.blast.form.view</field>
+			<field name="model">whatsapp.blast</field>
+			<field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_sent_message" type="object" states="draft" string="Sent" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,sent,fail" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name='name' required='1'/>
+                            <field name='partner_ids' widget='many2many_tags' required='1'/>
+                            <field name='content' required='1'/>
+                        </group>
+                    </sheet>
+                </form>
+			</field>
+		</record>
+
+		<record id="whatsapp_tree_view" model="ir.ui.view">
+			<field name="name">whatsapp.blast.tree</field>
+			<field name="model">whatsapp.blast</field>
+			<field name="arch" type="xml">
+                <tree>
+                    <field name='name'/>
+                    <field name='state'/>
+                </tree>
+			</field>
+		</record>
+
+		<record id="action_whatsapp_blast" model="ir.actions.act_window">
+            <field name="name">Messages</field>
+            <field name="res_model">whatsapp.blast</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="whatsapp_tree_view"/>
+        </record>
+
+        <menuitem id="main_menu_whatsapp_blast"
+            name='Whatsapp Blast'
+            />
+        <menuitem id="sub_menu_whatsapp_message"
+            name='Messages'
+            parent='main_menu_whatsapp_blast'
+            action="action_whatsapp_blast"
+            sequence='1'
+        />
+
+        <record id="view_partner_form_extend" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mobile']" position="after">
+                    <field name="whatsapp_no"/>
+                </xpath>
+            </field>
+        </record>
+
+	
+	</data>
+</odoo>

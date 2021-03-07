@@ -1,0 +1,93 @@
+refer_and_earn
+=> [version:1.01]  Date : 21-9-2017
+*[IMPROVEMENT]
+    
+*[FIX]
+    -fix in invalid transaction (bonus_type and and commission_amt)
+    -give commission state of a Refferal is "approved" means if signup customer is signup with valid refferal code is rewarded by commission directly in approved state.
+*[ADD]
+    - change summary column in website transaction detail , add state aswell
+*[change]
+    -version from 1.00 to 1.01 in manifest
+*[remove]
+
+=> [version:1.02]  Date : 22-9-2017
+*[IMPROVEMENT]
+    
+*[FIX]
+    -
+*[ADD]
+    - change the reward stat acorrding to state
+*[change]
+    - version from 1.00 to 1.02 in manifest
+*[remove]
+
+=> [version:1.03]  Date : 26-9-2017
+*[IMPROVEMENT]
+    
+*[FIX]
+    -on cancelling parent transaction then after completion of first order by child the parent transaction become error, fix now it maintain cancell state.
+*[ADD]
+    - change the reward stat acorrding to state with color 
+    - add referal amount anf referer amount reward in landing page and profile
+    - add reward point to email
+
+*[change]
+    - version from 1.02 to 1.03 in manifest
+*[remove]
+---------------------------------------------------------
+=> [version:1.03]  Date : 27-9-2017
+*[IMPROVEMENT]
+    -improve the landing page info and profile pagge of refer and earn page
+    - remove comment and spaces from transaction history model and and also from backend view
+*[FIX]
+    -
+*[ADD]
+    - 
+*[change]
+    - version from 1.03 to 1.04 in manifest
+*[remove]
+---------------------------------------------------------
+=> [version:1.05]  Date : 27-9-2017 (same day changes)
+*[IMPROVEMENT]
+    -
+*[FIX]
+    -fix issues no. (30,31,32,33)
+*[ADD]
+    -loader on payment page 
+    -
+*[change]
+    - version from 1.04 to 1.0.5 in manifest
+*[remove]
+-------------------------------------------------------
+=> [version:1.06]  Date : 23-10-2017 
+*[IMPROVEMENT]
+    -
+*[FIX]
+    -
+*[ADD]
+    -different color for stages
+    -ticker counter
+    -rename refer and earn Transaction menu
+    -boolean field for Referral points
+    -hints msg for refferer and referal points in configuartion
+    -Rename type in settings
+    -ADD how it works in landing page of refer and earn
+    -Add landing page content on wizard
+    -Add how it works on wizard in config settings
+    -etc.
+*[change]
+    - version from 1.05 to 1.0.6 in manifest
+*[remove]
+-----------------------------------------------------------------
+=> [version:1.07]  Date : 25-10-2017 
+*[IMPROVEMENT]
+    -
+*[FIX]
+    -
+*[ADD]
+    -configarable mail template in settings
+    - note on how it works 
+*[change]
+    - version from 1.06 to 1.0.7 in manifest
+*[remove]

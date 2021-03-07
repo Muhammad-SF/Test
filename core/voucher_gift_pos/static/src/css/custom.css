@@ -1,0 +1,47 @@
+/*div.manual-coupon{
+    color: blue;
+}*/
+button.validate_coupon{
+    height: 38px;
+    vertical-align: middle;
+    background-color: aliceblue;
+    border-radius: 12px;
+}
+.pos .c_label{
+	float:left;
+	color: #444;
+	display:block;
+	margin-top: 10px;
+}
+.selection_box_custom {
+	float:right;
+	text-align: left;
+	display: inline-block;
+	overflow: hidden;
+	background: white;
+	min-height: 44px;
+	font-family: "Lato";
+	font-size: 18px;
+	color: #444;
+	padding: 10px;
+	border-radius: 3px;
+	border: none;
+	box-shadow: 0px 0px 0px 1px rgb(220,220,220) inset;
+	box-sizing: border-box;
+	width: 70%;
+}
+
+.custom_coupon_code{
+	width: 61%!important;
+	margin-top:10px;
+}
+
+.pos .coupon_body .label{
+	float:left;
+	color: #444;
+	display:block;
+	margin-top: 26px;
+	font:18px;
+	color:black;
+	margin-left:15px;
+}

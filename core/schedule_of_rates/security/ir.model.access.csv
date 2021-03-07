@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+schedule_rate,schedule_rate,model_schedule_rate,,1,1,1,1
+schedule_rate_line,schedule_rate_line,model_schedule_rate_line,,1,1,1,1
+schedule_rate_item,schedule_rate_item,model_schedule_rate_item,,1,1,1,1

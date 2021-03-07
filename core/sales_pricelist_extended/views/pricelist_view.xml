@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <record id="inherit_product_pricelist_form" model="ir.ui.view">
+            <field name="name">inherit.product.pricelist.form</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="action_request_for_approval" type="object" string="Request For Approval" states="draft" class="oe_highlight" />
+                        <button name="action_approve" type="object" string="Approve"
+                                attrs="{'invisible':['|',('is_user_approver','!=', True),('state','not in', ['request_for_approval','waiting_for_approval'])]}"  class="oe_highlight"/>
+                        <button name="action_reject" type="object" string="Reject"
+                                attrs="{'invisible':['|',('is_user_approver','!=', True),('state','not in', ['request_for_approval','waiting_for_approval'])]}" class="oe_highlight"/>
+                        <button name="action_set_to_draft" type="object" string="Set To Draft" states="rejected" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft"/>
+                    </header>
+
+                </xpath>
+                <field name="company_id" position="after">
+                    <field name="branch" domain="[('company_id', '=', company_id)]"/>
+                    <field name="is_approving" string="Setting Approval" invisible="1"/>
+                    <field name="is_user_approver" string="User Approval" invisible="1"/>
+                    <!-- <field name="partner_id" required="1"/> -->
+                    <field name="approving_matrix_pricelist_id"
+                           attrs="{'invisible':[('is_approving','=', False)],'required':[('is_approving','=', True)],
+                           'readonly':[('state','not in', ['draft'])]}"/>
+                    <field name="location"/>
+                </field>
+                <field name="country_group_ids"  position="after">
+                    <field name="pricelist_approving_matrix_ids" invisible="1">
+                        <tree editable="bottom">
+                            <field name="approver_ids" widget="many2many_tags"/>
+                            <field name="mim_approver"/>
+                            <field name="approved_by_ids" widget="many2many_tags" readonly="1"/>
+                            <field name="approved" readonly="1"/>
+                            <field name="matrix_line_id"/>
+                        </tree>
+                    </field>
+                </field>
+            </field>
+        </record>
+
+         <record id="product_pricelist_view_tree_inherit_state" model="ir.ui.view">
+            <field name="name">product.pricelist.tree.inherit.pricelist.state</field>
+            <field name="model">product.pricelist</field>
+            <field name="inherit_id" ref="product.product_pricelist_view_tree"/>
+            <field name="arch" type="xml">
+                <field name="currency_id" position="after">
+                    <field name="state"/>
+                </field>
+            </field>
+        </record>
+
+
+
+         <record id="view_sales_config_inherit_approving" model="ir.ui.view">
+            <field name="name">sale.config.settings</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sale.view_sales_config" />
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='quotations_sales']"
+                    position="after">
+                    <group string="Approving Matrix Pricelist">
+                        <label for="is_approving_matrix" string="Approving Matrix Pricelist" />
+                        <div>
+                            <field name="is_approving_matrix" class="oe_inline" />
+                        </div>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="approving_matrix_pricelist_list">
+            <field name="name">approving_matrix_pricelist_list</field>
+            <field name="model">approving.matrix.pricelist</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="approving_matrix_pricelist_form">
+            <field name="name">approving_matrix_configuration_form</field>
+            <field name="model">approving.matrix.pricelist</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                        <group string="Approving Matrix Lines"/>
+                        <field name="approving_matrix_prielist_ids">
+                            <tree editable="bottom">
+                                <field name="approver_ids" widget="many2many_tags"/>
+                                <field name="mim_approver"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+         <record model="ir.ui.view" id="view_partner_form2">
+                <field name="name">res.partner.form.inherit2</field>
+                <field name="model">res.partner</field>
+                <field name="inherit_id" ref="product.view_partner_property_form"/>
+                <field name="arch" type="xml">
+                    <field name="property_product_pricelist" position="replace"/>
+                </field>
+        </record>
+
+        <record id="view_partner_property_form_view" model="ir.ui.view">
+            <field name="name">res.partner.product.property.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="groups_id" eval="[(4, ref('product.group_sale_pricelist'))]"/>
+            <field name="arch" type="xml"> 
+                <group name="sale">
+                    <field name="property_product_pricelist" groups="product.group_sale_pricelist" attrs="{'invisible': [('is_company','=',False),('parent_id','!=',False)]}" domain="[('state','in',('confirmed','approved'))]"/>
+                    <div name="parent_pricelists" groups="product.group_sale_pricelist" colspan="2" attrs="{'invisible': ['|',('is_company','=',True),('parent_id','=',False)]}">
+                        <p>Pricelists are managed on <button name="open_commercial_entity" type="object" string="the parent company" class="oe_link"/></p>
+                    </div>
+                </group>
+            </field>
+        </record>
+        
+        <record id="view_sale_order_property_form_view_1" model="ir.ui.view">
+            <field name="name">sale.order.product.property.form.inherit1</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <!-- <field name="groups_id" eval="[(4, ref('product.group_sale_pricelist'))]"/> -->
+            <field name="arch" type="xml"> 
+                <xpath expr="//field[@name='pricelist_id']" position="attributes">
+                    <attribute name="domain">[('state','in',('confirmed','approved'))]</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <record model="ir.actions.act_window" id="approving_matrix_pricelist_action">
+            <field name="name">Approving Matrix Pricelist</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">approving.matrix.pricelist</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="sale.menu_product_pricelist_main" model="ir.ui.menu">
+            <field name="groups_id" eval="[(3,ref('product.group_sale_pricelist'))]"/>
+        </record>
+
+        <record id="sale.menu_product_pricelist_action2" model="ir.ui.menu">
+            <field name="groups_id" eval="[(3,ref('product.group_sale_pricelist'))]"/>
+        </record>
+
+
+        <menuitem name="Approving Matrix Pricelist" id="approving_matrix_pricelist_menu"
+                parent="sale.menu_product_pricelist_main"  sequence="101" action="approving_matrix_pricelist_action"/>
+    </data>
+</odoo>

@@ -1,0 +1,12 @@
+
+import customer_sync_wizard
+import product_sync_wizard
+import pos_sync_config
+import product_categ_sync_wizard
+import posproduct_categ_sync_wizard
+import payment_method_sync_wizard
+import promotion_sync_wizard
+import loyalty_sync_wizard
+import voucher_sync_wizard
+import coupon_sync_wizard
+import product_brand_sync_wizard

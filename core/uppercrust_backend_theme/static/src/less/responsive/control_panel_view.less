@@ -1,0 +1,546 @@
+.button-primary() {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    visibility: visible;
+    vertical-align: middle;
+    background-color: @brand-secondary;
+    border: 1px solid @brand-secondary;
+    text-align: center;
+    margin: auto;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    color: @white;
+    font-size: large;
+    padding: 0;
+    font-family: 'fontawesome';
+    border-radius: 50%;
+}
+
+.button-secondary() {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    visibility: visible;
+    vertical-align: middle;
+    color: @brand-secondary;
+    background-color: @white;
+    border: 1px solid @brand-secondary;
+    text-align: center;
+    margin: auto;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    color: @brand-secondary;
+    font-size: 14px;
+    padding: 0;
+    font-family: 'fontawesome';
+    border-radius: 50%;
+}
+
+.control-panel-xs() {
+    .o_main {
+        .o_main_content.ad_rightbar {
+            & > .o_control_panel {
+                .ad_bottom_controlpanel {
+                    padding-left: 0px;
+                    left: 0;
+                    .slide-animation;
+                    .o_cp_left {
+                        padding: 0px;
+                        position: relative;
+                        right: 0;
+                        width: 60%;
+                        display: flex;
+                        flex-wrap: wrap-reverse;
+                        .slide-animation;
+                        .o_cp_buttons {
+                            text-align: center;
+                            visibility: hidden;
+                            padding: 0;
+                            &:after {
+                                content: "";
+                                background-color: transparent;
+                                height: 59px;
+                                bottom: 0;
+                                position: absolute;
+                                left: 22px;
+                                right: 0;
+                                margin-right: 21px;
+                                top: auto;
+                                visibility: visible;
+                            }
+                            ul.dropdown-menu {
+                                visibility: visible;
+                            }
+                            button.btn.btn-default, button.btn.btn-primary {
+                                padding: 2px 10px;
+                            }
+                            button {
+                                &:first-child:before {
+                                    visibility: visible;
+                                    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
+                                }
+                                &:not(:first-child) {
+                                    display: none;
+                                    &:before {
+                                        visibility: hidden;
+                                        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.2);
+                                    }
+                                }
+                            }
+                            .o_form_buttons_view[style="display: block;"], .o_form_buttons_edit[style="display: block;"] {
+                                display: flex !important;
+                            }
+                            & > div:not(.o_calendar_buttons), .o_form_buttons_view, .o_list_buttons, .o_form_buttons_edit {
+                                display: flex;
+                                flex-wrap: wrap-reverse;
+                                width: 100px;
+                                justify-content: center;
+                            }
+                            .o_calendar_buttons {
+                                visibility: visible;
+                                padding: 0px;
+                                position: fixed;
+                                z-index: 999;
+                                left: 0;
+                                right: 0;
+                                bottom: 8px;
+                                .slide-animation;
+                                button.btn.btn-primary, button.btn.btn-default {
+                                    padding: 6px 10px;
+                                    display: initial;
+                                }
+                            }
+                            .o-kanban-button-new, .o_list_button_add {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                z-index: 9999;
+                                &:before {
+                                    content: "\f067";
+                                    .button-primary;
+                                }
+                            }
+                            .o_form_button_create {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                &:before {
+                                    content: "\f067";
+                                    .button-secondary;
+                                }
+                            }
+                            .o_button_import {
+                                display: none;
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                &:before {
+                                    content: "\f019";
+                                    .button-secondary;
+                                }
+                            }
+                            .o_form_button_edit {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                margin-right: 0;
+                                &:before {
+                                    content: "\f040";
+                                    .button-primary;
+                                }
+                            }
+                            .o_form_button_save {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                &:before {
+                                    content: "\f0c7";
+                                    .button-primary;
+                                }
+                            }
+                            .o_form_button_cancel {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                &:before {
+                                    content: "\f00d";
+                                    .button-secondary;
+                                }
+                            }
+                            // Import view
+                            .o_import_validate {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                &:before {
+                                    content: "\f00d";
+                                    .button-primary;
+                                }
+                            }
+                            .o_import_import {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                &:before {
+                                    content: "\f00d";
+                                    .button-secondary;
+                                }
+                            }
+                            .o_import_cancel {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                &:before {
+                                    content: "\f00d";
+                                    .button-secondary;
+                                }
+                            }
+                            // Mail view button
+                            .o_mail_chat_button_mark_read {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                z-index: 9999;
+                                &:before {
+                                    content: "\f046";
+                                    visibility: visible !important;
+                                    .button-secondary;
+                                }
+                            }
+                            .o_mail_toggle_channels {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                z-index: 9999;
+                                &:before {
+                                    content: "\f0c0";
+                                    visibility: visible !important;
+                                    .button-primary;
+                                }
+                                &[style="display: inline-block;"] {
+                                    display: inline-block !important;
+                                }
+                            }
+                            .o_mail_chat_button_settings {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                z-index: 9999;
+                                &:before {
+                                    content: "\f013";
+                                    visibility: visible !important;
+                                    .button-primary;
+                                }
+                            }
+                            .o_mail_chat_button_dm, .o_mail_chat_button_public {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                z-index: 9999;
+                                &:before {
+                                    content: "\f067";
+                                    visibility: visible !important;
+                                    .button-primary;
+                                }
+                            }
+                            .o_mail_chat_button_unstar_all {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                z-index: 9999;
+                                &:before {
+                                    content: "\f006";
+                                    visibility: visible !important;
+                                    .button-primary;
+                                }
+                            }
+                            .o_mail_chat_button_invite {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                z-index: 9999;
+                                &:before {
+                                    content: "\f234";
+                                    visibility: visible !important;
+                                    .button-primary;
+                                }
+                            }
+                            .o_mail_chat_button_unsubscribe {
+                                visibility: hidden;
+                                font-size: @font-size-n;
+                                z-index: 9999;
+                                &:before {
+                                    content: "\f235";
+                                    visibility: visible !important;
+                                    .button-secondary;
+                                }
+                            }
+
+                            // Pivot view and Graph view
+                            & > div.btn-group.btn-group-sm:first-child {
+                                position: fixed;
+                                left: auto;
+                                right: 15px;
+                                bottom: 10px;
+                                width: auto;
+                                .slide-animation;
+                                ul.dropdown-menu {
+                                    left: auto;
+                                    right: 0;
+                                }
+                                button {
+                                    visibility: visible;
+                                    padding: 6px 10px;
+                                    display: block;
+                                    &:before {
+                                        box-shadow: none;
+                                    }
+                                }
+                            }
+                            & > div.btn-group.btn-group-sm:last-child {
+                                position: fixed;
+                                right: auto;
+                                left: 15px;
+                                bottom: 10px;
+                                width: auto;
+                                .slide-animation;
+                                button {
+                                    visibility: visible;
+                                    padding: 6px 10px;
+                                    display: block;
+                                    &:before {
+                                        visibility: visible;
+                                        box-shadow: none;
+                                    }
+                                }
+                            }
+                            &.cp_open {
+                                &:after {
+                                    display: none;
+                                }
+                                button:not(.o_button_import) {
+                                    display: block;
+                                    &:before {
+                                        visibility: visible;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                .o_search_options {
+                    .o_filters_menu {
+                        .o_filter_condition {
+                            max-width: 100%;
+                        }
+                    }
+                    .o_favorites_menu {
+                        .o_save_name, .o_add_to_dashboard {
+                            max-width: 100%;
+                        }
+                    }
+                }
+                &.o_breadcrumb_full {
+                    ol.breadcrumb {
+                        li.active {
+                            max-width: 80%;
+                        }
+                    }
+                }
+                ol.breadcrumb {
+                    position: relative;
+                    padding: 15px 0px 15px 35px;
+                    li:not(:nth-last-child(2)):not(.active) {
+                        display: none;
+                    }
+                    li + li:before {
+                        content: "/\00a0";
+                        padding: 0 5px;
+                    }
+                    li:nth-last-child(2) {
+                        display: block;
+                        margin: 0;
+                        color: @brand-secondary;
+                    }
+                    li.active {
+                        padding-left: 0px;
+                        position: absolute;
+                        overflow: hidden;
+                        display: block;
+                    }
+                }
+                &:not(.ad_search_full) {
+                    .o_cp_searchview {
+                        background-color: @white;
+                        z-index: 9999;
+                        padding: 0;
+                        position: relative;
+                        right: 0;
+                        /*width: calc(100% - 90px);*/
+                        -webkit-transition: width 400ms, margin 0.3s;
+                        -webkit-transition-timing-function: ease-out;
+                        transition: width 400ms, margin 0.3s;
+                        transition-timing-function: ease-out;
+                        animation-name: overflow-search;
+                        animation-duration: 400ms;
+                    }
+                }
+                .o_cp_searchview {
+                    .o_searchview_autocomplete {
+                        width: 100%;
+                        left: 0px;
+                        right: 0px;
+                        top: 50px;
+                        bottom: 0px;
+                        position: fixed;
+                        z-index: 999;
+                        overflow: auto;
+                    }
+                }
+                &.ad_search_full {
+                    & > .o_cp_searchview {
+                        width: 0px;
+                        overflow: hidden;
+                        position: absolute;
+                        padding: 0;
+                        right: 0;
+                        margin-right: 65px;
+                        -webkit-transition: width 400ms;
+                        -webkit-transition-timing-function: ease-out;
+                        transition: width 400ms;
+                        transition-timing-function: ease-out;
+                    }
+                }
+                & > .ad_mobile_searchview {
+                    float: right;
+                    width: 65px;
+                    padding-right: 40px;
+                    margin-right: -36px;
+                    background-color: transparent;
+                    color: @brand-secondary;
+                    box-shadow: none;
+                    font-size: @font-size-8;
+                }
+                .ad_mobile_searchview {
+                    border: none;
+                }
+                & > .oe_cp_view_btn {
+                    &.dropdown {
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        font-size: 16px;
+                        #all_views_button {
+                            margin-left: 2px;
+                        }
+                    }
+                }
+                .o_cp_sidebar {
+                    .o_drw_in {
+                        right: 0;
+                        left: 20px;
+                        width: auto;
+                        .slide-animation;
+                    }
+                }
+            }
+            &.ad_open_search {
+                .o_view_manager_content {
+                    right: 100%;
+                    left: -100%;
+                }
+                .o_control_panel {
+                    .o_search_options {
+                        left: 0px;
+                        .hidden-xs {
+                            display: unset !important;
+                        }
+                    }
+                }
+                .o_search_options {
+                    display: flex !important;
+                }
+            }
+            &.o_open_sidebar {
+                .o_view_manager_content {
+                    right: 100%;
+                    left: -100%;
+                }
+            }
+        }
+    }
+    &:not(.ad_full_view) {
+        .o_main {
+            .o_main_content.ad_rightbar {
+                & > .o_control_panel {
+                    .o_search_options {
+                        display: inline-grid;
+                        left: 0px;
+                        right: 0;
+                        .hidden-xs {
+                            display: unset !important;
+                        }
+                    }
+                    .o_cp_sidebar {
+                        .o_drw_in {
+                            right: -65px;
+                            left: 85px;
+                            width: 100%;
+                            .slide-animation;
+                        }
+                    }
+                    .o_cp_pager {
+                        margin: unset !important;
+                        padding-left: unset !important;
+                    }
+                }
+                .o_control_panel {
+                    & > .o_cp_searchview {
+                        margin: 0px 0px 0px 0px;
+                        -webkit-transition: margin 0.3s;
+                        transition: margin 0.3s;
+                    }
+                    .ad_bottom_controlpanel {
+                        left: 65px;
+                        .slide-animation;
+                        .o_cp_left {
+                            .slide-animation;
+                            .o_cp_buttons {
+                                .o_calendar_buttons {
+                                    left: 65px;
+                                    right: -65px;
+                                    .slide-animation;
+                                }
+                                & > div.btn-group.btn-group-sm:first-child {
+                                    right: -50px;
+                                    .slide-animation;
+                                }
+                                & > div.btn-group.btn-group-sm:last-child {
+                                    left: 80px;
+                                    .slide-animation;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.o_web_client.ad_mobile {
+    .control-panel-xs;
+    -webkit-overflow-scrolling: touch;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes overflow-search {
+    from {
+        overflow: hidden;
+    }
+    to {
+        overflow: hidden;
+    }
+}
+
+/* Standard syntax */
+@keyframes overflow-search {
+    from {
+        overflow: hidden;
+    }
+    to {
+        overflow: hidden;
+    }
+}

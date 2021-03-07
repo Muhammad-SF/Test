@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+     <t t-name="AppDrawerMainMenuSearchResults">
+        <div class="menu_section_search">
+            <t t-foreach="menus" t-as="menu_children_data">
+                <t t-if="menu_children_data.length > 1">
+                  <div class="display_menu">
+                      <t t-foreach="menu_children_data" t-as="menu">
+                          <ul class="nav side-menu">
+                              <li>
+                                  <a t-att-href="menu['href']"
+                                    t-att-data-menu="menu['id']"
+                                    class="oe_menu_toggler"
+                                    t-att-data-menu-xmlid="menu['xmlid']">
+                                      <img t-if="menu['web_icon_data']"
+                                           t-att-src="menu['src']"/>
+                                       <img t-else=""
+                                           src="/uppercrust_backend_theme/static/src/img/no_modul_ioc.png"/>
+                                      <span class="oe_menu_text" style="font-weight: 500">
+                                          <t t-esc="menu['name']"/>
+                                      </span>
+                                  </a>
+                              </li>
+                          </ul>
+                      </t>
+                    </div>
+                  </t>
+                  <t t-elif="menu_children_data.length == 1">
+                    <div class="display_menu">
+                        <t t-foreach="menu_children_data" t-as="menu">
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a t-att-href="menu['href']"
+                                      t-att-data-menu="menu['id']"
+                                      class="oe_menu_toggler"
+                                      t-att-data-menu-xmlid="menu['xmlid']">
+                                        <img t-if="menu['web_icon_data']"
+                                           t-att-src="menu['src']"/>
+                                        <img t-else=""
+                                            src="/uppercrust_backend_theme/static/src/img/no_modul_ioc.png"/>
+                                        <span class="oe_menu_text" style="font-weight: 500">
+                                            <t t-esc="menu['name']"/>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </t>
+                      </div>
+                  </t>
+            </t>
+        </div>
+    </t>
+    <t t-name="AppDrawerMenuSearchResults">
+        <li class="menu-search-element" t-foreach="menus" t-as="menu">
+            <a t-att-id="menu.id"
+               t-attf-href="#action={{ menu.action and menu.action.split(',')[1] or ''}}&amp;menu_id={{ menu.id }}">
+                <span style="font-size: 15px;">
+                    <t t-esc="menu.display_name" />
+                </span>
+            </a>
+        </li>
+    </t>
+
+</templates>

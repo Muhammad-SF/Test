@@ -1,0 +1,75 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_simple_stock_inventory_form">
+            <field name="name">simple.stock.inventory.form</field>
+            <field name="model">simple.stock.inventory</field>
+            <field name="arch" type="xml">
+                <form string="Inventory Adjustments" create="false">
+                    <header>
+                        <button string="Confirm" type="object" name="action_confirm"
+                                states="draft" class="oe_highlight" />
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Name" />
+                            <h1><field name="name" /></h1>
+                            <field name="_barcode_scanned" widget="barcode_handler"/>
+                        </div>
+                        <separator string="General" colspan="2" />
+                        <group colspan="4" col="4">
+                            <group colspan="2" col="2">
+                                <field name="scan_location_id"/>
+                            </group>
+                            <group colspan="2" col="2">
+                                <field name="date"/>
+                            </group>
+                        </group>
+                        <separator string="Inventory Details" colspan="4"/>
+                        <group colspan="4">
+                            <group colspan="4">
+                                <field name="line_ids" widget="one2many_widget" colspan="4" nolabel="1">
+                                    <tree string="Inventory Details">
+                                        <field name="product_id"/>
+                                        <field name="product_qty"/>
+                                        <field name="product_uom_id"/>
+                                        <field name="barcode"/>
+                                        <field name="default_code"/>
+                                    </tree>
+                                    <form string="Inventory Details">
+                                        <group>
+                                            <field name="product_id"/>
+                                            <field name="product_qty"/>
+                                            <field name="product_uom_id"/>
+                                            <field name="barcode"/>
+                                            <field name="default_code"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="stock_inventory_list_action">
+            <field name="name">Inventory Adjustments</field>
+            <field name="res_model">simple.stock.inventory</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="form_view_id" ref="view_simple_stock_inventory_form"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first Stock Inventory
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_stock_menu" name="Stock In &amp; Out"/>
+        <menuitem id="operation_menu" name="Operations"
+                  parent="main_stock_menu"/>
+        <menuitem id="stock_inventory_menu" name="Inventory Adjustments" parent="operation_menu"
+                  action="stock_inventory_list_action" sequence="50"/>
+    </data>
+</odoo>

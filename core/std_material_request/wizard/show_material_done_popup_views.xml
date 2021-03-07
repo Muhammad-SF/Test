@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_show_material_done_popup" model="ir.ui.view">
+        <field name="name">show.material.done.popup.form</field>
+        <field name="model">show.material.done.popup</field>
+        <field name="arch" type="xml">
+            <form string='Show Material Popup'>
+                <span>
+                    Lines still have Qty to Process !
+                </span>
+                <footer>
+                    <button string='Force Done' name="force_done_material_request" type='object' class='btn-primary'/>
+                    <button string='Cancel' class='btn-default' special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

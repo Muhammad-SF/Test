@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_employee_form_view_modifier" model="ir.ui.view">
+            <field name="name">hr.employee.form.modifier</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/div[2]/h1" position="after">
+                    <label for="employee_id" class="oe_edit_only"/>
+                    <h1>
+                        <field name="employee_id"/>
+                    </h1>
+                </xpath>
+               <field name="parent_id" position="attributes">
+                   <attribute name="invisible">1</attribute>
+               </field>
+                <field name="coach_id" position="attributes">
+                   <attribute name="invisible">1</attribute>
+               </field>
+            </field>
+        </record>
+
+        <record id="view_employee_form_parent2_hiden_loan_defaulter" model="ir.ui.view">
+            <field name="name">hr.employee.form.modifier</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_employee_loan.loan_employee_extd_form"/>
+            <field name="arch" type="xml">
+                <field name="loan_defaulter" position="attributes">
+                   <attribute name="invisible">1</attribute>
+               </field>
+            </field>
+        </record>
+
+        <record id="view_employee_form_parent2_hiden_tab" model="ir.ui.view">
+            <field name="name">hr.employee.form.hiden.tab</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="sg_hr_employee.view_employee_form_parent2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[11]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+                <field name="emp_country_id" position="attributes">
+                    <attribute name="required">False</attribute>
+                </field>
+                <field name="emp_state_id" position="attributes">
+                    <attribute name="required">False</attribute>
+                </field>
+                <xpath expr="//page[@name='hr_settings']/group/group[@name='active_group']/field[@name='user_id']" position="attributes">
+                    <attribute name="required">0</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <menuitem
+            id="hr_menu_job_type"
+            action="hr.action_hr_job"
+            parent="hr.menu_human_resources_configuration"
+            sequence="4"
+          />
+
+    </data>
+</odoo>

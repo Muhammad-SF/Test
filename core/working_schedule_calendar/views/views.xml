@@ -1,0 +1,28 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+  <record id="view_calendar_working_schedule" model="ir.ui.view"> 
+       <field name="name">Working Schedule</field>
+      <field name="model">working_schedule.calendar</field> 
+      <field name="arch" type="xml"> 
+        <calendar string="Working Schedule" date_start="date_starting"  date_stop="date_ending" color="employee_id" mode="month"  avatar_model="hr.employee">
+      
+          
+           
+        </calendar> 
+      </field> 
+</record> 
+    <!-- actions opening views on models -->
+    
+    <record model="ir.actions.act_window" id="working_schedule_calendar.action_window">
+      <field name="name">Working Schedule</field>
+      <field name="res_model">working_schedule.calendar</field>
+      <field name="view_mode">calendar</field>
+    </record>
+    
+
+    
+    <menuitem name="Working Schedule Summary" id="working_schedule_calendar" parent="hr_holidays.menu_hr_holidays_root"
+              action="working_schedule_calendar.action_window"/>
+  </data>
+</odoo>

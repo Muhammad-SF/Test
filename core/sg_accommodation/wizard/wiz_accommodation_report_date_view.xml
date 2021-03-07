@@ -1,0 +1,55 @@
+<odoo>
+	<data>
+
+		<!-- Accommodation Report Wizard -->
+		<record id="view_acc_report_form_dt" model="ir.ui.view">
+			<field name="name">view.acc.report.date.form</field>
+			<field name="model">acc.report.date</field>
+			<field name="arch" type="xml">
+				<form string="Accommodation Report Date">
+					<separator string="Location and Country Wise Vacancy on a Particular Date" />
+					<group col="2">
+						<field name="date" required="True"/>
+					</group>
+					<footer>
+						<button name="print_report" string="Print" type="object" class="oe_highlight"/>
+						or
+						<button special="cancel" string="Cancel" class="oe_link" />
+					</footer>
+				</form>
+			</field>
+		</record>
+		
+	 	<record id="wiz_dwnld_acc_report_form_dt" model="ir.ui.view">
+            <field name="name">wiz.dwnld.acc.report.form.dt</field>
+            <field name="model">accom.dwnld.datewise.report</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Download File">
+                    <group>
+                        <h4>Click On Link To Download File :&#160;<field name="file" readonly="1" filename="file_name" string="File Name" nolabel="1"/></h4>
+                        <field name="file_name" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button name="action_back" string="Back" 
+                                type="object" class="oe_highlight"/>
+                        or
+                        <button string="Close" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </form>
+           </field>
+        </record> 
+
+		<!-- Action for the wizard -->
+		<record id="action_acc_report_dt" model="ir.actions.act_window">
+			<field name="name">Vacancy Details</field>
+			<field name="res_model">acc.report.date</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<!-- Menu fo the Accommodation Location/Country/Company wise report -->
+		<menuitem id="menu_wiz_acc_report_dt" action="action_acc_report_dt" parent="menu_report_setting"/>		
+	</data>
+</odoo>

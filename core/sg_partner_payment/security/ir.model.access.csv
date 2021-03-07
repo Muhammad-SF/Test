@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_receipt_payment_user,access.receipt.payment.user,sg_partner_payment.model_receipt_payment,,1,1,1,1
+access_receipt_payment_credit_user,access.receipt.payment.credit.user,sg_partner_payment.model_receipt_payment_credit,,1,1,1,1
+access_receipt_payment_debit_user,access.receipt.payment.debit.user,sg_partner_payment.model_receipt_payment_debit,,1,1,1,1
+access_receipt_payment_approving_matrix_user,access.receipt.payment.approving.matrix.user,sg_partner_payment.model_receipt_payment_approving_matrix,,1,1,1,1
+access_receipt_payment_approving_matrix_lines_user,access.receipt.payment.approving.matrix.lines.user,sg_partner_payment.model_receipt_payment_approving_matrix_lines,,1,1,1,1
+access_receipt_payment_approving_matrix_line_user,access.receipt.payment.approving.matrix.line.user,sg_partner_payment.model_receipt_payment_approving_matrix_line,,1,1,1,1

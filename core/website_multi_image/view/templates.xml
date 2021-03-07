@@ -1,0 +1,56 @@
+<odoo>
+  <data>
+      <template id="assets_frontend" inherit_id="website.assets_frontend" name="Website Product Multi Image">
+        <xpath expr="." position="inside">
+
+        <script type="text/javascript" src="/website_multi_image/static/src/js/owl-carousel/owl.carousel.min.js"></script>
+        <script type="text/javascript" src="/website_multi_image/static/src/js/website_multi_image.js"></script>
+        <script type="text/javascript" src="/website_multi_image/static/src/js/swiper.min.js"></script>
+        <script type="text/javascript" src="/website_multi_image/static/src/js/mobile_slider.js"></script>
+        <link rel='stylesheet' href='/website_multi_image/static/src/js/owl-carousel/owl.carousel.css'/>
+        <link rel='stylesheet' href='/website_multi_image/static/src/js/owl-carousel/owl.theme.css'/>
+        <link rel='stylesheet' href='/website_multi_image/static/src/css/website_multi_image.css'/>
+        <link rel='stylesheet' href='/website_multi_image/static/src/css/swiper.min.css'/>
+        <link rel='stylesheet' href='/website_multi_image/static/src/css/mobile_slider.css'/>
+        
+    </xpath>
+  </template>
+
+
+
+  <template id="website_multi_image_website_sale" inherit_id="website_sale.product" name="multi_image">
+    <xpath expr="//div/div[@class='col-sm-7']/span" position="replace"> 
+
+      <div class="swiper-container hidden-md hidden-lg">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img style="max-width:80%" t-att-src="website.image_url(product, 'image')"/></div>
+            <t t-foreach="product.template_extra_images" t-as="image_obj">
+              <div class="swiper-slide"><img style="max-width:100%" t-att-src="website.image_url(image_obj, 'image')" t-att-alt="image_obj.image_alt"/></div>
+            </t>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+          <div id="sync1" class="owl-carousel hidden-xs hidden-sm">
+          <div class="item">
+            <img style="max-width:100%" t-att-src="website.image_url(product, 'image')" class="product_detail_img"/>
+          </div>
+            <div t-foreach="product.template_extra_images" t-as="image_obj">
+              <div class="item">
+                <img style="max-width:100%" t-att-src="website.image_url(image_obj, 'image')" t-att-alt="image_obj.image_alt"/></div>
+            </div>
+          </div>
+         
+          <div id="sync2" class="owl-carousel hidden-xs hidden-sm">
+            <div class="item">
+              <img style="max-width:100% ;max-height:100% !important" t-att-src="website.image_url(product, 'image_small')" class="product_detail_img"/>
+            </div>
+            <div t-foreach="product.template_extra_images" t-as="image_obj" >
+            <div class="item">
+              <img style="max-width:100%" t-att-src="website.image_url(image_obj, 'image_small')" t-att-alt="image_obj.image_alt"/></div>
+            </div>
+          </div>
+
+    </xpath>
+  </template>
+  </data>
+</odoo>

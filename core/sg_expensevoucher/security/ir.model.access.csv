@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_income_expense_approving_matrix_user,access.income.expense.approving.matrix.user,sg_expensevoucher.model_income_expense_approving_matrix,,1,1,1,1
+access_income_expense_approving_matrix_lines_user,access.income.expense.approving.matrix.lines.user,sg_expensevoucher.model_income_expense_approving_matrix_lines,,1,1,1,1
+access_income_expense_approving_matrix_line_user,access.income.expense.approving.matrix.line.user,sg_expensevoucher.model_income_expense_approving_matrix_line,,1,1,1,1

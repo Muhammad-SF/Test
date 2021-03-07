@@ -1,0 +1,1 @@
+import inventory_log_report_wiz

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="gift_coupon_pos_form_inherit" model="ir.ui.view">
+            <field name="name">Gift Coupon</field>
+            <field name="model">gift.coupon.pos</field>
+            <field name="inherit_id" ref="vouchers_pos.gift_coupon_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='total_avail']" position="after">
+                    <field name="min_order_value"/>
+                </xpath>
+                <xpath expr="//field[@name='start_date']" position="after">
+                    <field name="is_stackable"/>
+                    <field name="sequence" attrs="{'invisible': [('is_stackable', '!=', True)]}"/>
+                    <field name="customer_required"/>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="widget">many2many_tags</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='end_date']" position="after">
+                    <field name="check_coupon"/>
+                    <field name="coupon_branch"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_pos_custom_order_form" model="ir.ui.view">
+            <field name="name">pos.order.form.inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='extra']" position="inside">
+                    <group name="coupon" string="Gift Coupons">
+                        <field name="coupon_availed"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="gift_voucher_pos_form_inherit" model="ir.ui.view">
+            <field name="name">Gift Voucher</field>
+            <field name="model">gift.voucher.pos</field>
+            <field name="inherit_id" ref="vouchers_pos.gift_voucher_pos_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='max_value']" position="after">
+                    <field name="total_number_coupons" string="Coupon Generating Limit"/>
+                    <field name="check_voucher" invisible="1"/>
+                    <field name="total_generated_coupons" string="Generated Coupons"/>
+                    <field name="customer_required"/>
+                </xpath>
+                <xpath expr="//sheet" position="before">
+                    <header>
+                        <button name="create_coupon_from_voucher" string="Generate Coupon"
+                                type="object" class="oe_highlight oe_read_only" states='inprogress,complated'/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,inprogress,complated"/>
+                        <button name="approved_voucher_for_create_coupon" string="Approve"
+                                type="object" class="oe_highlight oe_read_only" states='draft'
+                                groups="voucher_gift_pos.group_gift_voucher_manager_manager"
+                        />
+                    </header>
+                </xpath>
+                <xpath expr="//sheet/group/group/field[@name='min_value']" position="replace">
+                </xpath>
+                <xpath expr="//sheet/group/group/field[@name='max_value']" position="replace">
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <group string="Pricing">
+                        <group>
+                            <field name="min_order_value"/>
+                            <field name="voucher_val"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="min_value" attrs="{'invisible': [('type', '!=', 'percentage')],'required':[('type', '=', 'percentage')]}"/>
+                            <field name="max_value" attrs="{'invisible': [('type', '!=', 'percentage')],'required':[('type', '=', 'percentage')]}"/>
+                        </group>
+                        
+                    </group>
+                </xpath>
+                <xpath expr="//sheet/group/group" position="replace">
+                    <group>
+                        <field name="voucher_type" widget="radio"/>
+                        <field name="product_id" widget="many2many_tags"
+                               attrs="{'invisible': [('voucher_type', '!=', ('product'))],
+                                                        'required':[('voucher_type', '=', 'product')]}"/>
+                        <field name="product_categ" widget="many2many_tags"
+                               attrs="{'invisible': [('voucher_type', '!=', ('category'))],
+                                                        'required':[('voucher_type', '=', 'category')]}"/>
+                        <field name="brand_ids" widget="many2many_tags"
+                               attrs="{'invisible': [('voucher_type', '!=', ('Brand'))],
+                                                        'required':[('voucher_type', '=', 'Brand')]}"/>
+                        <field name="start_date" required='1'/>
+                        <field name="end_date" required='1'/>
+                        <field name="s_date" required='1' string="Applicable Start Date"/>
+                        <field name="e_date" required='1' string="Applicable End Date"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <!--        "Generate Coupon" button for Manager-->
+<!--        <record id="gift_voucher_pos_form_inherit_inherit" model="ir.ui.view">-->
+<!--            <field name="name">gift voucher pos form inherit inherit</field>-->
+<!--            <field name="model">gift.voucher.pos</field>-->
+<!--            <field name="inherit_id" ref="gift_voucher_pos_form_inherit"/>-->
+<!--            <field name="groups_id" eval="[(4, ref('voucher_gift_pos.group_gift_voucher_manager_manager'))]"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <xpath expr="//button[@name='create_coupon_from_voucher']" position="replace">-->
+<!--                    <button name="create_coupon_from_voucher" string="Generate Coupon"-->
+<!--                            type="object" class="oe_highlight oe_read_only" states='inprogress,complated'/>-->
+<!--                </xpath>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <record id="gift_coupon_history_pos_tree_inherit" model="ir.ui.view">
+            <field name="name">Gift Coupon History</field>
+            <field name="model">partner.coupon.pos</field>
+            <field name="inherit_id" ref="vouchers_pos.gift_coupon_history_pos_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='coupon_pos']" position="after">
+                    <field name="voucher"/>
+                    <field name="date_used"/>
+                    <field name="coupon_amount"/>
+                    <field name="order_amount"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

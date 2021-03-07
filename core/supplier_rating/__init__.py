@@ -1,0 +1,4 @@
+import supplier_rating
+import rating_configuration
+import supplier_rating_report
+import res_partner

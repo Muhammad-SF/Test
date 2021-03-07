@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_holiday_lines_form_inherit" model="ir.ui.view">
+        <field name='name'>hr.holiday.lines.form</field>
+        <field name='model'>hr.holiday.lines</field>
+        <field name="inherit_id" ref="sg_hr_holiday.hr_holiday_lines_form"/>
+        <field name='arch' type='xml'>
+            <field name="holiday_date" position="after">
+                <field name="state" invisible="0"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_hr_timesheet_sheet_form_inherits" model="ir.ui.view">
+        <field name="name">hr.timesheet.sheet.form</field>
+        <field name="model">hr_timesheet_sheet.sheet</field>
+        <field name="inherit_id" ref="hr_timesheet_sheet.hr_timesheet_sheet_form"/>
+        <field name="arch" type="xml">
+            <!--<xpath expr="//page[@class='o_hr_timesheet_sheet_details']" position="after">-->
+            <xpath expr="//page[3]" position="after">
+                <page string="Leave History">
+                    <field name="employee_leave_ids">
+                        <tree string="Leave History" colors="red:type == 'remove';green:type == 'add';">
+                            <field name="date_from" widget="date" />
+                            <field name="date_to" widget="date" />
+                            <field name="type" />
+                            <field name="holiday_status_id" />
+                            <field name="number_of_days_temp" />
+                            <field name="state" />
+                        </tree>
+                        <form string="Leave Request">
+                            <header>
+                                <field name="state" widget="statusbar" statusbar_visible="draft,confirm,validate"
+                                    statusbar_colors='{"confirm":"blue","validate1":"blue","refuse":"red"}'
+                                    colspan="2" />
+                            </header>
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="name" attrs="{'readonly':[('state','!=','draft'),('state','!=','confirm')]}" />
+                                        <field name="employee_id" attrs="{'required':[('holiday_type','=','employee')],
+                                                   'invisible':[('holiday_type','=','category')]}" />
+                                        <field name="holiday_status_id" />
+                                        <field name="date_from" widget="date" required="1" />
+                                        <field name="date_to" widget="date" required="1" />
+                                        <field name="number_of_days_temp" />
+                                    </group>
+                                    <group>
+                                        <field name="category_id" attrs="{'required':[('holiday_type','=','category')],
+                                                   'readonly':[('state','!=','draft')],
+                                                   'invisible':[('holiday_type','=','employee')]}" />
+                                        <field name="holiday_type" attrs="{'readonly':[('state','!=','draft')]}" string="Mode" groups="hr.group_hr_manager" />
+                                        <field name="department_id" attrs="{'readonly':[('holiday_type','=','category')]}" />
+                                        <field name="double_validation" invisible="1" />
+                                        <newline />
+                                        <field name="manager_id" />
+                                        <field name="manager_id2" attrs="{'invisible':[('double_validation', '!=', True)]}" />
+                                    </group>
+                                </group>
+                                <separator string="Reasons" colspan="4" />
+                                <field name="notes" nolabel="1" colspan="4" />
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                <page string="Public Holidays">
+                    <field name="holiday_line_ids">
+                        <tree string="Holidays">
+                            <field name="holiday_date"/>
+                            <field name="day"/>
+                            <field name="name"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

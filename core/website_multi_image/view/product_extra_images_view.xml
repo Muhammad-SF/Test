@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+        <record id="product_extra_images_view_form" model="ir.ui.view">
+            <field name="name">product_extra_images.form</field>
+            <field name="model">product.extra.images</field>
+            <field name="arch" type="xml">
+                <form string="Product Extra Images"> 
+                    <field name="image" widget="image" class="oe_avatar oe_left"/>
+                    <div class="oe_title" style="width: 350px;">
+                        <label class="oe_edit_only" for="name" string="Image Label"/>
+                        <h1><field name="name" class="oe_inline"/></h1>
+                    </div>
+                    <div class="oe_title" style="width: 200px;">
+                        <label class="oe_edit_only" for="name" string="Sequence"/>
+                        <field name="sequence"/>
+                    </div>
+                    <field name="image_alt" placeholder="Give Alt text to your Image.&#10;It will shows if the image doesn't appear on a page. Search engines may also use alt text to index your site."/>
+                </form>
+            </field>
+        </record>
+
+        <record id="product_extra_images_view_tree" model="ir.ui.view">
+            <field name="name">product_extra_images.tree</field>
+            <field name="model">product.extra.images</field>
+            <field name="arch" type="xml">
+                <tree string="Product Extra Images">
+                    <field name="image" widget="image"/>
+                    <field name="name"/>
+                    <field name="sequence"/>
+                </tree>
+            </field>
+        </record>
+
+		
+		<record id="product_template_view_form_inherit_product_extra_images" model="ir.ui.view">
+            <field name="name">Website Extra Image</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view" />
+            <field name="arch" type="xml">  
+				<xpath expr="//page[@name='variants']" position="after"> 
+	            	<page string="Extra Images">
+	            		<field name="template_extra_images" mode="kanban">
+    	            		<kanban>
+                                <field name="name"/>
+    	            			<field name="image"/>
+                                <field name="sequence"/>
+                        		<templates>
+
+                                    <t t-name="kanban-box">
+                                        <div class="oe_kanban_global_click">
+                                        <a t-if="!read_only_mode" type="delete" class="fa fa-times pull-right"/>
+                                            <div class="o_kanban_image">
+                                                <img t-if="record.image.raw_value" t-att-src="'data:image/png;base64,'+record.image.raw_value"/>
+                                                </div>
+                                            <div class="oe_kanban_details">
+                                                <strong>Label:</strong><field name="name"/><br/>
+                                                <strong>Sequence:</strong><field name="sequence"/> 
+                                            </div>
+                                        </div>
+                                        </t>
+                                </templates>
+                            </kanban> 
+                        </field>
+                    </page>
+				</xpath>
+			</field>
+		</record>
+        
+	</data>	
+</odoo>

@@ -1,0 +1,13 @@
+<odoo>
+ 	<record id="purchsae_view_extedn" model="ir.ui.view">
+        <field name="name">purchase.order.form</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[1]/group[@class='oe_subtotal_footer oe_right']/field[@name='amount_tax']" position="after">
+                <field name="ppn"/>
+                <field name="pph"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

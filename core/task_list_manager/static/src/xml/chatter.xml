@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <!--
+        Chatter main div
+    -->
+    <t t-name="mail.Chatter">
+        <div class="o_chatter">
+            <div class="o_chatter_topbar">
+                <button type="button" class="btn btn-sm btn-primary o_chatter_button_new_message" title="Send a message">
+                    New message
+                </button>
+                <button t-if="widget.options.display_log_button" class="btn btn-sm btn-link o_chatter_button_log_note" title="Log a note. Followers will not be notified.">
+                    Log an internal note
+                </button>
+                <button class="btn btn-sm btn-link o_chatter_button_schedule_activity" title="Log or schedule an activity">
+                    <i class="fa fa-clock-o"/> <t t-if="isMobile">Activity</t><t t-else="">Schedule activity</t>
+                </button>
+            </div>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>    
+<odoo>
+    <record id="account_aged_balance_view_inherit" model="ir.ui.view">
+        <field name="name">Aged Partner Balance</field>
+        <field name="model">account.aged.trial.balance</field>
+        <field ref="account.account_aged_balance_view" name="inherit_id"/>
+        <field name="arch" type="xml">
+            <field name="journal_ids" position="after">
+                <separator string="Partners"/>                
+                <field name="partner_ids"/>
+            </field>
+        </field>
+    </record>
+</odoo>

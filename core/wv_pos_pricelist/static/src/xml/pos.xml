@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend='ClientLine'>
+        <t t-jquery='.client-line' t-operation='append'>
+            <td><t t-esc='partner.pos_pricelist_id[1] or ""' /></td>
+        </t>
+    </t>
+    <t t-extend='ClientListScreenWidget'>
+        <t t-jquery='.client-list thead tr' t-operation='append'>
+            <th>Pricelist</th>
+        </t>
+    </t>
+    <t t-name="SetPriceListButton">
+        <div class='control-button'>
+            <i class="fa fa-money"></i><span class="o_pricelist_button"><t t-esc='widget.get_current_pricelist_name()'/></span>
+        </div>
+    </t>
+</templates>

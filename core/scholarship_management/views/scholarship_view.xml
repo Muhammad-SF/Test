@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="scholarship_form_view" model="ir.ui.view">
+        <field name="name">Scholarship Form View</field>
+        <field name="model">scholarship</field>
+        <field name="arch" type="xml">
+            <form string="Scholarship Form">
+                <header>
+                    <button name="button_progress" string="Set In Progress" type="object" states="draft" class="btn btn-primary"/>
+                    <button name="button_cancel" string="Suspend" type="object" states="draft,progress"/>
+                    <button name="button_resume" string="Resume" type="object" states="cancel" class="btn btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,progress"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_applications" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('state','=','draft')]}" context="{'default_scholarship_id': active_id}">
+                            <field name="application_qty" widget="statinfo" string="Applications" help="Applications created"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="provider" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="amount" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="quantity" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                        <group>
+                            <label for="duration"/>
+                            <div>
+                                <field name="duration" nolabel="1" style="width: 30%%" attrs="{'readonly': [('state','!=','draft')]}"/>
+                                <field name="duration_type" nolabel="1" style="width: 50%%" attrs="{'readonly': [('state','!=','draft')]}" class="oe_inline"/>
+                            </div>
+                            <field name="currency_id" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="available_qty" readonly="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Required Documents">
+                            <separator string="Required Documents"/>
+                            <field name="document_ids" attrs="{'readonly': [('state','!=','draft')]}">
+                                <tree editable="bottom">
+                                    <field name="name" string="Document"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Students">
+                            <separator string="Students"/>
+                            <field name="student_ids" attrs="{'readonly': [('state','!=','draft')]}">
+                                <tree editable="bottom">
+                                    <field name="student_id" required="1"/>
+                                    <field name="pid"/>
+                                    <field name="standard_id"/>
+                                    <field name="year_id"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Requirements">
+                            <separator string="Requirements"/>
+                            <field name="requirement_ids" attrs="{'readonly': [('state','!=','draft')]}">
+                                <tree editable="bottom">
+                                    <field name="type" required="1"/>
+                                    <field name="requirement" required="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="scholarship_tree_view" model="ir.ui.view">
+        <field name="name">Scholarship Tree View</field>
+        <field name="model">scholarship</field>
+        <field name="arch" type="xml">
+            <tree string="Scholarship Tree">
+                <field name="name"/>
+                <field name="provider"/>
+                <field name="amount" sum="Total Amount"/>
+                <field name="available_qty"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="scholarship_search_view" model="ir.ui.view">
+        <field name="name">Scholarship Search View</field>
+        <field name="model">scholarship</field>
+        <field name="arch" type="xml">
+            <search string="Search Scholarship">
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="In Progress" name="progress" domain="[('state','=','progress')]"/>
+                <filter string="Approved" name="done" domain="[('state','=','done')]"/>
+                <filter string="Suspended" name="cancel" domain="[('state','=','cancel')]"/>
+                <group expand="0" string="Group By...">
+                    <filter name="group_by_state" string="Status" domain="[]" context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_scholarship" model="ir.actions.act_window">
+        <field name="name">Scholarships</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">scholarship</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new scholarship.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_students_scholarships" name="Scholarships" parent="school.menu_ems" sequence="3"/>
+    <menuitem id="menu_scholarship" action="action_scholarship" parent="menu_students_scholarships" sequence="5"/>
+
+    <record id="scholarship_application_form_view" model="ir.ui.view">
+        <field name="name">Scholarship Application Form View</field>
+        <field name="model">scholarship.application</field>
+        <field name="arch" type="xml">
+            <form string="Scholarship Application Form">
+                <header>
+                    <button name="button_submit" string="Submit" type="object" states="draft" class="btn btn-primary"/>
+                    <button name="button_approve" string="Approve" type="object" states="submit" class="btn btn-primary"/>
+                    <button name="button_reject" string="Reject" type="object" states="submit"/>
+                    <button name="button_cancel" string="Cancel" type="object" states="draft"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,submit,approve"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="student_id" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="pid"/>
+                            <field name="standard_id"/>
+                            <field name="year_id"/>
+                        </group>
+                        <group>
+                            <field name="scholarship_id" domain="[('state','=','progress')]" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="amount" readonly="1"/>
+                            <field name="currency_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Required Documents">
+                            <separator string="Required Documents"/>
+                            <field name="document_ids" attrs="{'readonly': [('state','!=','draft')]}">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="name" readonly="1" string="Name"/>
+                                    <field name="file" required="1" filename="filename" string="Document"/>
+                                    <field name="filename" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="scholarship_application_tree_view" model="ir.ui.view">
+        <field name="name">Scholarship Application Tree View</field>
+        <field name="model">scholarship.application</field>
+        <field name="arch" type="xml">
+            <tree string="Scholarship Application Tree">
+                <field name="student_id"/>
+                <field name="pid"/>
+                <field name="standard_id"/>
+                <field name="year_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="scholarship_application_search_view" model="ir.ui.view">
+        <field name="name">Scholarship Search View</field>
+        <field name="model">scholarship.application</field>
+        <field name="arch" type="xml">
+            <search string="Search Scholarship Application">
+                <field name="student_id"/>
+                <field name="scholarship_id"/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Submitted" name="submit" domain="[('state','=','submit')]"/>
+                <filter string="Approved" name="approve" domain="[('state','=','approve')]"/>
+                <filter string="Rejected" name="reject" domain="[('state','=','reject')]"/>
+                <filter string="Cancelled" name="cancel" domain="[('state','=','cancel')]"/>
+                <group expand="0" string="Group By...">
+                    <filter name="group_by_state" string="Status" domain="[]" context="{'group_by':'state'}"/>
+                    <filter name="group_by_scholarship" string="Scholarships" domain="[]" context="{'group_by':'scholarship_id'}"/>
+                    <filter name="group_by_student" string="Students" domain="[]" context="{'group_by':'student_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_scholarship_application" model="ir.actions.act_window">
+        <field name="name">Scholarship Applications</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">scholarship.application</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to create a new scholarship application.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_scholarship_application" action="action_scholarship_application" parent="menu_students_scholarships" sequence="10"/>
+
+</odoo>

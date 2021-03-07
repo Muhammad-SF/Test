@@ -1,0 +1,15 @@
+<odoo>
+    <data>
+        <record id="ir_cron_cessation_date__checker" model="ir.cron">
+            <field name="name">Cessation Date Checker</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="nextcall" eval="(DateTime.now() + timedelta(days=1)).strftime('%Y-%m-%d 12:00:00')" />
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'hr.employee'" name="model"/>
+            <field eval="'cessation_date_checker'" name="function"/>
+        </record>
+    </data>
+</odoo>

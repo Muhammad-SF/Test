@@ -1,0 +1,117 @@
+<odoo>
+	<data>
+        <record id="view_hr_leave_configuration_inherit" model="ir.ui.view">
+        	<field name="name">view.hr.leave.configuration.inherit</field>
+        	<field name="model">hr.leave.config.settings</field>
+        	<field name="inherit_id" ref="sg_hr_holiday.view_hr_leave_configuration"/>
+        	<field name="arch" type="xml">
+        		<xpath expr="//form/group/div" position="inside">
+        			<div>
+                        <field name="module_sg_allocate_leave" class="oe_inline"/>
+                        <label for="module_sg_allocate_leave"/>
+                    </div>
+                    <div>
+                        <field name="module_sg_leave_constraints" class="oe_inline"/>
+                        <label for="module_sg_leave_constraints"/>
+                    </div>
+                    <div>
+                        <field name="module_sg_leave_extended" class="oe_inline"/>
+                        <label for="module_sg_leave_extended"/>
+                    </div>
+                    <div>
+                        <field name="module_sg_expire_leave" class="oe_inline"/>
+                        <label for="module_sg_expire_leave"/>
+                    </div>
+        		</xpath>
+        	</field>
+        </record>
+        
+		<record id="view_hr_expense_configuration_inherited_view" model="ir.ui.view">
+            <field name="name">view.hr.expense.configuration.inherited.view</field>
+            <field name="model">hr.expense.config.settings</field>
+            <field name="inherit_id" ref="hr_expense.view_hr_expense_configuration"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//form/group[@name='config_alias']" position="after">
+            	 	<group string="Expense Reimbursement">
+                        <label for="id" string="Reimbursement"/>
+	                    <div>
+	                        <div>
+	                            <field name="module_sg_expense_maxcap" class="oe_inline"/>
+	                            <label for="module_sg_expense_maxcap"/>
+	                        </div>
+	                        <div>
+	                            <field name="module_sg_expense_payroll" class="oe_inline"/>
+	                            <label for="module_sg_expense_payroll"/>
+	                        </div>
+	                    </div>
+	               </group>
+                </xpath>
+            </field>
+        </record>
+        
+		<record id="view_hr_payroll_configuration_inherit_report" model="ir.ui.view">
+			<field name="name">view.hr.payroll.configuration.inherit.report</field>
+			<field name="model">hr.payroll.config.settings</field>
+			<field name="inherit_id" ref="hr_payroll.view_hr_payroll_configuration"/>
+			<field name="arch" type="xml">
+				<xpath expr="//form/group[1]/div[1]" position="inside">
+					<div>
+						<div>
+							<field name="module_sg_nric_verification" class="oe_inline"/>
+							<label for="module_sg_nric_verification"/>
+						</div>
+						<div>
+							<field name="module_sg_cimb_report" class="oe_inline"/>
+							<label for="module_sg_cimb_report"/>
+						</div>
+						<div>
+							<field name="module_sg_ocbc_report" class="oe_inline"/>
+							<label for="module_sg_ocbc_report"/>
+						</div>
+						<div>
+							<field name="module_sg_bank_reconcile" class="oe_inline"/>
+							<label for="module_sg_bank_reconcile"/>
+						</div>
+						<div>
+							<field name="module_sg_dbs_giro" class="oe_inline"/>
+							<label for="module_sg_dbs_giro"/>
+						</div>
+						<div>
+							<field name="module_sg_appendix8a_report" class="oe_inline"/>
+							<label for="module_sg_appendix8a_report"/>
+						</div>
+					</div>				
+				</xpath>
+			</field>
+		</record>
+		
+		<record id="view_hr_employee_configuration" model="ir.ui.view">
+			<field name="name">view.hr.employee.configuration</field>
+			<field name="model">hr.employee.config.settings</field>
+			<field name="arch" type="xml">
+				<form string="Configure Employee" class="oe_form_configuration">
+					<header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        <button string="Cancel" type="object" name="cancel" class="oe_link"/>
+                    </header>
+                    <group string="Employee">
+                    	<label for="id" string="Settings"/>
+                    	<div>
+                    		<field name="module_sg_document_expiry" class="oe_inline"/>
+                    		<label for="module_sg_document_expiry"/>
+                    	</div>
+                    </group>
+				</form>
+			</field>
+		</record>
+		
+		<record id="view_hr_employee_configuration_action" model="ir.actions.act_window">
+			<field name="name">Configure Employee</field>
+			<field name="res_model">hr.employee.config.settings</field>
+			<field name="view_mode">form</field>
+            <field name="target">inline</field>
+		</record>
+        
+		<menuitem id="menu_hr_employee_configuration" name="Settings" parent="hr.menu_human_resources_configuration" sequence="0" action="view_hr_employee_configuration_action"/>
+	</data>
+</odoo>

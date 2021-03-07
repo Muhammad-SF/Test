@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<template id="sh_report_account_invoice" inherit_id="account.report_invoice_document">
+			<xpath expr="//table[1]//thead//tr[1]//th[3]" position="after">
+				<th class="text-right" groups="sh_secondary_unit.group_secondary_unit_invoice"><span>Secondary Quantity</span></th>
+			</xpath>
+			<xpath expr="//table[1]//tbody//tr[1]//td[3]" position="after">
+				<t t-if="o.type == 'out_invoice' or o.type=='out_refund'">
+					<td class="text-right" groups="sh_secondary_unit.group_secondary_unit_invoice">
+	               		<span t-field="l.sh_sec_qty"/>
+		                <span t-field="l.sh_sec_uom"/>
+	               	</td>
+               	</t>
+               	<t t-if="o.type == 'in_invoice' or o.type=='in_refund'">
+					<td class="text-right" groups="sh_secondary_unit.group_secondary_unit_invoice">
+	               		<span t-field="l.sh_sec_qty"/>
+		                <span t-field="l.sh_sec_uom"/>
+	               	</td>
+               	</t>
+			</xpath>
+		</template>
+	</data>
+</odoo>

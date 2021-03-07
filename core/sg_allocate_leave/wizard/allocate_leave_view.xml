@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+
+        <!-- Allocate Leaves Wizard -->
+        <record id="view_allocate_leaves_form" model="ir.ui.view">
+            <field name="name">view.allocate.leave.form</field>
+            <field name="model">allocate.leaves</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="holiday_status_id" required="1"/>
+                        <field name="type" invisible="1"/>
+                        <field name="fiscal_year_id" widget="selection"/>
+                        <field name="no_of_days"/>
+                        <field name="employee_ids"/>
+                   	</group>
+                    <footer>
+                        <button special="cancel" string="Cancel"/>
+                        <button name="allocate_leaves" string="Allocate" type="object"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_allocate_leaves" model="ir.actions.act_window">
+            <field name="name">Allocate Leaves</field>
+            <field name="res_model">allocate.leaves</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_allocate_leaves" action="action_allocate_leaves" parent="hr_holidays.menu_hr_holidays_my_leaves" groups="hr.group_hr_manager" sequence="44"/>
+    </data>
+</odoo>

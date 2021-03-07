@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- SG Tax Accounts  -->
+        
+        <record id="sg_sales_tax_srca_c" model="account.account">
+            <field name="code">204007</field>
+            <field name="name">Sales Tax Account 7% SRCA-C</field>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+        </record>
+        
+
+        <record id="sg_purcahse_tax_txca" model="account.account">
+            <field name="code">105013</field>
+            <field name="name">Purchase Tax Account 7% TXCA</field>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+        </record>
+
+        <record id="sg_sales_tax_igds" model="account.account">
+            <field name="code">105014</field>
+            <field name="name">Purchase Tax Account 7% IGDS-C</field>
+            <field name="user_type_id" ref="account.data_account_type_current_liabilities"/>
+        </record>
+
+        <!-- SG Taxes for sale and purchase -->
+
+        <record id="sg_sale_tax_na_srca_template" model="account.tax">
+            <field name="name">Sales Tax N/A SRCA-S</field>
+            <field name="amount">0</field>
+            <field name="description">0% SRCA-S</field>
+            <field name="type_tax_use">sale</field>
+        </record>
+
+        <record id="sg_sale_tax_7_srca_template" model="account.tax">
+            <field name="name">Sales Tax 7% SRCA-C</field>
+            <field name="amount">7</field>
+            <field name="description">7% SRCA-C</field>
+            <field name="type_tax_use">sale</field>
+            <field name="account_id" ref="sg_sales_tax_srca_c"/>
+            <field name="refund_account_id" ref="sg_sales_tax_srca_c"/>
+        </record>
+
+        <record id="sg_purchase_tax_7_txca_template" model="account.tax">
+            <field name="name">Purchase Tax 7% TXCA</field>
+            <field name="amount">7</field>
+            <field name="description">7% TXCA</field>
+            <field name="type_tax_use">purchase</field>
+            <field name="account_id" ref="sg_purcahse_tax_txca"/>
+            <field name="refund_account_id" ref="sg_purcahse_tax_txca"/>
+        </record>
+
+        <record id="sg_purchase_tax_7_igds_template" model="account.tax">
+            <field name="name">Purchase Tax 7% IGDS</field>
+            <field name="amount">7</field>
+            <field name="description">7% IGDS</field>
+            <field name="type_tax_use">purchase</field>
+            <field name="account_id" ref="sg_sales_tax_igds"/>
+            <field name="refund_account_id" ref="sg_sales_tax_igds"/>
+        </record>
+
+    </data>
+</odoo>

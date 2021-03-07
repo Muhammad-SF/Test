@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- Sales Contract Approval Matrix Management -->
+        <record id="view_sales_contract_approval_matrix_tree" model="ir.ui.view">
+            <field name="name">Sales Contract Approval Matrix Tree</field>
+            <field name="model">sales.contract.approval.matrix</field>
+            <field name="arch" type="xml">
+                <tree string="Contract Approval">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_sales_contract_approval_matrix_form" model="ir.ui.view">
+            <field name="name">Sales Contract Approval Matrix Form</field>
+            <field name="model">sales.contract.approval.matrix</field>
+            <field name="arch" type="xml">
+                <form string="Contract Approval">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="contract_type_id"/>
+                        </group>
+                        <notebook>
+                            <page string="Approval Level">
+                                <field name="approval_lines" nolabel="1">
+                                    <tree string="Approval Level" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="user_ids" widget="many2many_tags"/>
+                                    </tree>
+                                    <form string="Approval Level">
+                                        <sheet>
+                                            <group>
+                                                <field name="name"/>
+                                            </group>
+                                            <group>
+                                                <field name="user_ids" widget="many2many_tags"/>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_sales_contract_approval_matrix_search" model="ir.ui.view">
+            <field name="name">Sales Contract Approval Matrix Search</field>
+            <field name="model">sales.contract.approval.matrix</field>
+            <field name="arch" type="xml">
+                <search string="Contract Approval">
+                    <field name="name"/>
+                    <field name="contract_type_id"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Contract Types" domain="[]" context="{'group_by':'contract_type_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="action_sales_contract_approval_matrix" model="ir.actions.act_window">
+            <field name="name">Contract Approval Matrix</field>
+            <field name="res_model">sales.contract.approval.matrix</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="view_id" eval="False"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new contract approval matrix.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_sales_contract_approval_matrix" id="sales_contract_approval_mgmt" parent="sales_team.menu_sale_config" sequence="1"/>
+
+        <!-- Inherited Analytic Account form to add below fields
+
+         - updated "state" field
+         - "Accept" button
+         - "Reject" button
+
+         -->
+        <record id="account_analytic_account_form_form_contract_approval" model="ir.ui.view">
+            <field name="name">account.analytic.account.invoice.form.inherit.contract.approval</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="stable_account_analytic_analysis.account_analytic_account_form_form"/>
+            <field eval="40" name="priority"/>
+            <field name="arch" type="xml">
+                <xpath expr='//button[@name="set_cancel"]' position='after'>
+                    <button name="set_accept" string="Accept" type="object" states="waiting_approval"/>
+                </xpath>
+                <xpath expr='//field[@name="state"]' position='replace'>
+                    <field name="state" readonly="1" widget="statusbar"
+                            statusbar_visible="open,waiting_approval,rejected,pending,close" statusbar_colors='{"pending":"red","waiting_approval":"green","rejected":"red", "template":"blue"}'/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

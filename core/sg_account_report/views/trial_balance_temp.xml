@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <template id="account_trial_balance_temp">
+            <!-- <t t-call="report.external_layout"> -->
+		            <t t-call="report.html_container">
+		                <t t-foreach="docs" t-as="o">
+		                    <div class="page">
+		                        <style>
+		                            .padding {
+		                            padding-top:3px;
+		                            padding-bottom:3px;
+		                            padding-left:3px;
+		                            padding-right:3px;
+		                            }
+		                    </style>
+		                    <div>
+		                        <div style="font-size:12px;" class="text-center">
+		                              <div>
+		                                  <h2 > Trial Balance Report </h2>
+		                              </div>
+		                              <div>
+		                                  <b>
+			                                  <t t-if="data['form'].get('date_from', False)">
+				                                  From Date <t t-esc="data['form'].get('date_from', False)" />
+				                               </t>
+				                               <t t-if="data['form'].get('date_to', False)">
+		                                          To <t t-esc="data['form'].get('date_to', False)" />
+	                                          </t>
+                                          </b>
+		                              </div>
+		                        </div>
+		                        <table class="table table-condensed">
+		                            <thead>
+		                                <tr>
+		                                    <th>
+		                                        <strong>Account</strong>
+		                                    </th>
+		                                    <th class="text-right">
+		                                        <strong>DEBIT</strong>
+		                                    </th>
+		                                    <th class="text-right">
+		                                        <strong>CREDIT</strong>
+		                                    </th>
+		                                    <th class="text-right">
+	                                            <strong>YTD DEBIT</strong>
+	                                        </th>
+	                                        <th class="text-right">
+	                                            <strong>YTD CREDIT</strong>
+	                                        </th>
+		                                </tr>
+		                            </thead>
+		                            <tbody>
+		                           		<t t-set="debit_amt" t-value="0"/>
+		                           		<t t-set="credit_amt" t-value="0"/>
+		                           		<t t-set="ytd_debit_amt" t-value="0"/>
+		                           		<t t-set="ytd_credit_amt" t-value="0"/>
+		                                <tr t-foreach="lines" t-as="account_rec" class="padding">
+                                            <t t-if="not account_rec.get('type')"><t t-set="style" t-value="'font-weight: bold;'"/></t>
+                                            <td>
+                                                <span t-esc="account_rec.get('name', '')" />
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="account_rec.get('debit',0.0)"/>
+                                                <t t-set="debit_amt" t-value="debit_amt + account_rec.get('debit',0.0)"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="account_rec.get('credit')" />
+                                                <t t-set="credit_amt" t-value="credit_amt + account_rec.get('credit',0.0)"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="account_rec.get('ytd_debit',0.0)" />
+                                                <t t-set="ytd_debit_amt" t-value="ytd_debit_amt + account_rec.get('ytd_debit',0.0)"/>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-esc="account_rec.get('ytd_credit',0.0)" />
+                                                <t t-set="ytd_credit_amt" t-value="ytd_credit_amt + account_rec.get('ytd_credit',0.0)"/>
+                                            </td>
+                                        </tr>
+		                                <tr>
+		                                    <td class="text-right">
+		                                        <span><b>Total</b></span>
+		                                    </td>
+		                                    <td class="text-right">
+		                                        <b><span t-esc="debit_amt" /></b>
+		                                    </td>
+		                                    <td class="text-right">
+		                                        <b><span t-esc="credit_amt" /></b>
+		                                    </td>
+		                                    <td class="text-right">
+		                                        <b><span t-esc="ytd_debit_amt" /></b>
+                                            </td>
+                                            <td class="text-right">
+		                                        <b><span t-esc="ytd_credit_amt" /></b>
+                                            </td>
+		                                </tr>
+		                            </tbody>
+		                        </table>
+		                    </div>
+	                    </div>
+	                </t>
+	            </t>
+            <!-- </t> -->
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record model="ir.ui.view" id="mrp_production_workcenter_form_view_inherit1">
+        <field name="name">mrp.production.work.order.form</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workcenter_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='workcenter_id']" position="after">
+                <field name="wc_group_id" invisible="1"/>
+                <field name="wc_list_lines_ids" widget="many2many_tags" invisible="1"/>
+        	</xpath>
+            <xpath expr="//field[@name='workcenter_id']" position="attributes">
+        		<attribute name="readonly">0</attribute>
+                <attribute name="attrs">{'required':[('state', '=', 'ready')], 'readonly': [('state', 'not in', ['ready'])]}</attribute>
+        	    <attribute name="domain">[('id','in', wc_list_lines_ids and wc_list_lines_ids[0] and wc_list_lines_ids[0][2] or False)]</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

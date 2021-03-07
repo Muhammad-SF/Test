@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+
+<odoo>
+	<!-- inherit admission register view -->
+	<record id="view_student_reminder_form_2_modifier" model="ir.ui.view">
+        <field name="name">student.reminder.form</field>
+        <field name="model">student.reminder</field>
+        <field name="inherit_id" ref="school.view_student_reminder_form_2"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='stu_id']" position="replace">
+                    <field name="stu_id"/>
+                </xpath>
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="intake_id"/>
+                    <field name="course_id"/>
+                    <field name="teacher_id"/>
+                    <field name="url_fields" widget="url"/>
+                    <field name="attachment" filename="file_name"/>
+                    <field name="file_name" invisible="1"/>
+                </xpath>
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">false</attribute>
+                    <attribute name="edit">false</attribute>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="student_reminder_kanban_view_modifier_create" model="ir.ui.view">
+        <field name="name">student.reminder.kanban</field>
+        <field name="model">student.reminder</field>
+        <field name="inherit_id" ref="school.student_reminder_kanban_view"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath>
+            </data>
+        </field>
+    </record>
+    
+    <record id="student_reminder_tree_modifier" model="ir.ui.view">
+        <field name="name">student.reminder.tree</field>
+        <field name="model">student.reminder</field>
+        <field name="arch" type="xml">
+            <tree string="Reminder" create="false">
+                <field name="name"/>
+                <field name="stu_id"/>
+                <field name="teacher_id"/>
+                <field name="date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="school.action_student_reminder" model="ir.actions.act_window">
+        <field name="name">Reminder</field>
+        <field name="res_model">student.reminder</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to add a new Reminder.
+            </p>
+            <p>
+             This structure is used to create and manage all Remainders
+            related to students regarding exams, events etc.
+          </p>
+        </field>
+    </record>
+</odoo>

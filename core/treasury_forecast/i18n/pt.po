@@ -1,0 +1,809 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* treasury_forecast
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-22 11:58+0000\n"
+"PO-Revision-Date: 2018-10-22 14:15+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: pt\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_account_account
+msgid "Account"
+msgstr "Conta"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_account_move
+msgid "Account Entry"
+msgstr "Movimento da Conta"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_management_config_settings_fc_account_ids
+msgid "Accounts for treasury planning"
+msgstr "Conta Para Planeamento Tesouraria"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_active
+msgid "Active"
+msgstr "Ativo"
+
+#. module: treasury_forecast
+#: model:ir.ui.menu,name:treasury_forecast.menu_treasury_management_other
+msgid "Adviser"
+msgstr "Consultor"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:132
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_statement_line_mass_edit_amount
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template_amount
+#, python-format
+msgid "Amount"
+msgstr "Montante"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_bank_statement_line_amount_main_currency
+msgid "Amount Currency"
+msgstr "Valor da Moeda"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_management_config_settings
+msgid "Apply"
+msgstr "Aplicar"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_account_bank_statement
+msgid "Bank Statement"
+msgstr "Extrato Bancário"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Linha do Extrato Bancário"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_bank_balance_chart
+msgid "Bank balance chart"
+msgstr "Gráfico Banco"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_bank_balances
+msgid "Bank balances"
+msgstr "Saldos bancários"
+
+#. module: treasury_forecast
+#: model:ir.actions.act_window,name:treasury_forecast.action_forecast_bank_lines
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_forecast_form
+msgid "Bank lines"
+msgstr "Linhas Banco"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_template_bank_statement_id
+msgid "Bank statement"
+msgstr "Linhas Banco"
+
+#. module: treasury_forecast
+#: model:ir.actions.act_window,name:treasury_forecast.action_treasury_bank_statement_lines
+#: model:ir.ui.menu,name:treasury_forecast.menu_treasury_bank_statement_lines
+msgid "Bank statement Lines"
+msgstr "Extrato Bancário\t"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_move_line_bank_statement_line_id
+msgid "Bank statement line"
+msgstr "Linhas Extracto Bancário"
+
+#. module: treasury_forecast
+#: model:ir.actions.act_window,name:treasury_forecast.action_treasury_bank_statements
+#: model:ir.ui.menu,name:treasury_forecast.menu_treasury_bank_statements
+msgid "Bank statements"
+msgstr "Extratos bancários"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_bank_balance_computation
+msgid "Bar Chart"
+msgstr "Gráfico de barras"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,help:treasury_forecast.field_bank_balance_computation_bar_char_height
+msgid "Bar chart height is given by the max amountvolume (in + out) multiplied by this parameter"
+msgstr "A altura do gráfico de barras é dada pelo valor maxquantidadevolume (in + out) multiplicado por esse parâmetro"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_bar_size
+msgid "Bar size"
+msgstr "Tamanho da barra"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_line_y_bottom
+msgid "Bottom"
+msgstr "Inferior"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_forecast_options
+msgid "CF options"
+msgstr "CF opções"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_management_config_settings
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:125
+#, python-format
+msgid "Cash In"
+msgstr "Cash In"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:125
+#, python-format
+msgid "Cash Out"
+msgstr "Cash Out"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_chart_height
+msgid "Chart Height"
+msgstr "Altura do Gráfico"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_chart_width
+msgid "Chart Width"
+msgstr "Largura do Gráfico"
+
+#. module: treasury_forecast
+#: selection:treasury.forecast,state:0
+msgid "Closed"
+msgstr "Fechado"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_company_id
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_template_company_id
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_management_config_settings_company_id
+msgid "Company"
+msgstr "Empresa"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_bank_balance_computation
+msgid "Compute Balances"
+msgstr "Calcular Saldos"
+
+#. module: treasury_forecast
+#: model:ir.actions.act_window,name:treasury_forecast.action_compute_bank_balances
+msgid "Compute Bank Balances"
+msgstr "Calcular saldos bancários"
+
+#. module: treasury_forecast
+#: model:ir.ui.menu,name:treasury_forecast.menu_compute_bank_balances
+#: model:ir.ui.view,arch_db:treasury_forecast.view_bank_balance_computation
+msgid "Compute bank balances"
+msgstr "Calcular saldos bancários"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_forecast_form
+msgid "Compute forecast lines"
+msgstr "Calcular linhas de forecast"
+
+#. module: treasury_forecast
+#: model:ir.ui.menu,name:treasury_forecast.menu_financ_manag_settings
+msgid "Configuration"
+msgstr "Configuração"
+
+#. module: treasury_forecast
+#: model:ir.actions.act_window,name:treasury_forecast.action_treasury_management_config_settings
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_management_config_settings
+msgid "Configure Treasury Management"
+msgstr "Configurar Gestão Tesouraria"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.mass_edit_treasury_data_wizard_form
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_recurrent_cost_ids
+msgid "Cost/revenues"
+msgstr "Gastos/Ganhos"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_forecast_form
+msgid "Costs/revenues"
+msgstr "Gastos/Ganhos"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_create_uid
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_statement_line_mass_edit_create_uid
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_create_uid
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template_create_uid
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_template_create_uid
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_management_config_settings_create_uid
+msgid "Created by"
+msgstr "Criada por"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_create_date
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_statement_line_mass_edit_create_date
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_create_date
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template_create_date
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_template_create_date
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_management_config_settings_create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_detailed_balance
+msgid "Daily detail"
+msgstr "Detalhe diário"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:125
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:132
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:165
+#, python-format
+msgid "Date"
+msgstr "Data"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_date_end
+msgid "Date end"
+msgstr "Data final"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_date_start
+msgid "Date start"
+msgstr "Data inicial"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template_day
+msgid "Day"
+msgstr "Dia"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_management_config_settings_fc_css_dict
+msgid "Dictionary with colours"
+msgstr "Dicionário de cores"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_display_name
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_statement_line_mass_edit_display_name
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_display_name
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template_display_name
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_template_display_name
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_management_config_settings_display_name
+msgid "Display Name"
+msgstr "Nome a Exibir"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_forecast_form
+msgid "Do you really want to compute the forecast lines?"
+msgstr "Tem a certeza que quer calcular as linhas de forecast?"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_forecast_template.py:52
+#, python-format
+msgid "Each line's amount can not be equal to 0"
+msgstr "O valor de cada linha não pode ser igual a 0"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.mass_edit_treasury_data_wizard_form
+msgid "Edit fields"
+msgstr "Editar campos"
+
+#. module: treasury_forecast
+#: model:ir.actions.act_window,name:treasury_forecast.action_mass_edit_treasury_data
+msgid "Edit treasury lines"
+msgstr "Editar linhas de tesouraria"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_date_end
+msgid "End Date"
+msgstr "Data final"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_bank_balance_computation
+msgid "Export Table"
+msgstr "Exportar Tabela"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_bank_statement_line_cf_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.account_bank_statement_line_tree_treasury_planning_2
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_forecast_form
+msgid "FC"
+msgstr "FC"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_move_line_treasury_planning
+msgid "FP"
+msgstr "FP"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_bank_statement_final_date
+msgid "Final Date"
+msgstr "Data final"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_final_query
+msgid "Final Query"
+msgstr "Consulta final"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_final_balance
+msgid "Final balance"
+msgstr "Saldo final"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_force_initial_balance
+msgid "Force initial balance"
+msgstr "Forçar saldo inicial"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_move_line_forecast_id
+msgid "Forecast"
+msgstr "Forecast"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_forecast_template_id
+msgid "Forecast Template"
+msgstr "Forecast Template"
+
+#. module: treasury_forecast
+#: model:ir.actions.act_window,name:treasury_forecast.action_treasury_forecast_template
+#: model:ir.ui.menu,name:treasury_forecast.menu_treasury_forecast_template
+msgid "Forecast templates"
+msgstr "Forecast templates"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_bank_balance_computation
+msgid "Graph"
+msgstr "Gráfico"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_bar_char_height
+msgid "Height"
+msgstr "Altura"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_hide_analysis
+msgid "Hide analysis"
+msgstr "Esconder análise"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_id
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_statement_line_mass_edit_id
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_id
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template_id
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_template_id
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_management_config_settings_id
+msgid "ID"
+msgstr "Id."
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_include_account_moves
+msgid "Incl. accout moves"
+msgstr "Incl. mov. cont. rascunho"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_include_draft_invoices
+msgid "Incl. draft invoices"
+msgstr "Incl. faturas em rascunho"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_include_bank_fc_line
+msgid "Incl. forecasted lines"
+msgstr "Incl. linhas de forecast"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_include_sale_orders
+msgid "Incl. sale orders"
+msgstr "Incl. ordens de compra"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_bank_statement_initial_date
+msgid "Initial Date"
+msgstr "Data inicial"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_initial_balance
+msgid "Initial balance"
+msgstr "Saldo inicial"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_account_invoice
+msgid "Invoice"
+msgstr "Fatura"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_account_journal
+msgid "Journal"
+msgstr "Diário"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_account_move_line
+msgid "Journal Item"
+msgstr "Item do Diário"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_journal_ids
+msgid "Journals"
+msgstr "Diários"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template_name
+msgid "Label"
+msgstr "Rótulo"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation___last_update
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_statement_line_mass_edit___last_update
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast___last_update
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template___last_update
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_template___last_update
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_management_config_settings___last_update
+msgid "Last Modified on"
+msgstr "Última Modificação em"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_write_uid
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_statement_line_mass_edit_write_uid
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template_write_uid
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_template_write_uid
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_write_uid
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_management_config_settings_write_uid
+msgid "Last Updated by"
+msgstr "Última Atualização por"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_write_date
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_statement_line_mass_edit_write_date
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template_write_date
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_template_write_date
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_write_date
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_management_config_settings_write_date
+msgid "Last Updated on"
+msgstr "Última Atualização em"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_bank_balance_computation
+msgid "Line Chart"
+msgstr "Gráfico linhas"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_bank_balance_computation
+msgid "Main"
+msgstr "Principal"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_management_config_settings
+msgid "Main settings"
+msgstr "Configurações principais"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:132
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_name
+#, python-format
+msgid "Name"
+msgstr "Nome"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_forecast.py:149
+#: selection:treasury.forecast,state:0
+#, python-format
+msgid "Open"
+msgstr "Aberto"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_forecast.py:146
+#, python-format
+msgid "Other"
+msgstr "Outro"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_bank_balance_computation
+msgid "Output"
+msgstr "Output"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template_partner_id
+msgid "Partner"
+msgstr "Parceiro"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_forecast.py:146
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_payable_ids
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_forecast_form
+#, python-format
+msgid "Payables"
+msgstr "Pagável"
+
+#. module: treasury_forecast
+#: model:ir.actions.act_window,name:treasury_forecast.action_list_payables_receivables
+#: model:ir.ui.menu,name:treasury_forecast.menu_list_payables_receivables
+msgid "Payables and Receivables"
+msgstr "Pagavel e Recebivel"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_periodic_saldo
+msgid "Periodic saldo"
+msgstr "Saldo períodico"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_forecast.py:103
+#, python-format
+msgid "Please select a forecast template."
+msgstr "Por favor selecione um template forecas."
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:115
+#, python-format
+msgid "Please select at least one bank journal!"
+msgstr "Por favor, selecione pelo menos um diário do banco!"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:67
+#, python-format
+msgid "Please select at least one treasury planning journal."
+msgstr "Por favor, selecione pelo menos um diário de planeamento de tesouraria."
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_previous_forecast_id
+msgid "Previous forecast"
+msgstr "Forecast anterior"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_bank_balance_computation
+msgid "Query"
+msgstr "Consulta"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_raw_table
+msgid "Raw table"
+msgstr "Tabela não tratada"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_forecast.py:146
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_receivable_ids
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_forecast_form
+#, python-format
+msgid "Receivables"
+msgstr "Recebível"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_treasury_forecast_line_template
+msgid "Recurring Costs"
+msgstr "Gastos Recorrentes"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_template_recurring_line_ids
+msgid "Recurring Line"
+msgstr "Linha Recorrente"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_forecast_template_form
+msgid "Recurring costs and revenues"
+msgstr "Gastos e ganhos recorrentes"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template_ref
+msgid "Reference"
+msgstr "Referência"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_forecast_form
+msgid "Reload"
+msgstr "Recarregar"
+
+#. module: treasury_forecast
+#: model:ir.ui.menu,name:treasury_forecast.menu_treasury_management_reporting
+msgid "Reports"
+msgstr "Relatórios"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,help:treasury_forecast.field_account_move_journal_type
+msgid ""
+"Select 'Sale' for customer invoices journals.\n"
+"Select 'Purchase' for vendor bills journals.\n"
+"Select 'Cash' or 'Bank' for journals that are used in customer or vendor payments.\n"
+"Select 'General' for miscellaneous operations journals."
+msgstr ""
+"Selecione 'Venda' para os diários de faturas dos clientes.\n"
+"Selecione 'Compra' para os diários de faturas de fornecedores.\n"
+"Selecione 'Dinheiro' ou 'Banco' para os diários que são utilizados nos recebimentos/pagamentos dos clientes ou fornecedores.\n"
+"Selecione 'Geral' para os diários de operações diversas."
+
+#. module: treasury_forecast
+#: model:ir.model.fields,help:treasury_forecast.field_bank_balance_computation_journal_ids
+msgid ""
+"Select all journal about which you want to know the balance.\n"
+"                By default, all journals will be selected"
+msgstr ""
+"Selecione todos os diário sobre os quais deseja saber o saldo.\n"
+"                 Por padrão, todos os diários serão selecionados"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,help:treasury_forecast.field_treasury_forecast_template_bank_statement_id
+msgid "Select the virtual bank statement to be used for treasury             planning operations"
+msgstr "Selecione o extrato bancário virtual a ser usado para operações de               planeamento de tesouraria operations."
+
+#. module: treasury_forecast
+#: model:ir.ui.menu,name:treasury_forecast.menu_financ_manag_config
+#: model:ir.ui.view,arch_db:treasury_forecast.view_bank_balance_computation
+msgid "Settings"
+msgstr "Configurações"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_show_chart
+msgid "Show chart"
+msgstr "Mostrar gráfico"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_show_table
+msgid "Show table"
+msgstr "Mostrar tabela"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_date_start
+msgid "Start Date"
+msgstr "Data de Início"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_state
+msgid "State"
+msgstr "Estado"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_statement_id
+msgid "Statement"
+msgstr "Extrato"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_statement_line_mass_edit_statement_id
+msgid "Statement id"
+msgstr "Extrato id"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_template_name
+msgid "Template name"
+msgstr "Nome template"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,help:treasury_forecast.field_treasury_management_config_settings_fc_account_ids
+msgid "The accounts selected here are those on which the treasury planning will be based"
+msgstr "As contas aqui selecionadas serão aquelas nas quais o planeamento de tesouraria será baseado"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:393
+#, python-format
+msgid "There is no table to export"
+msgstr "Não há tabela para exportar"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,help:treasury_forecast.field_account_bank_statement_line_amount_main_currency
+msgid "This field computes the statement line in the Company currency"
+msgstr "Este campo calcula a linha do extrato na moeda da Empresa"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,help:treasury_forecast.field_account_bank_statement_line_cf_forecast
+msgid "This field is flagged if the line is a forecasted transaction"
+msgstr "Este campo é sinalizado se a linha for uma transação prevista"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_bank_balance_computation_line_y_top
+msgid "Top"
+msgstr "Top"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:125
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:132
+#: code:addons/treasury_forecast/models/treasury_forecast.py:148
+#, python-format
+msgid "Total"
+msgstr "Total"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.treasury_account_moves_without_bank_line_tree
+msgid "Total Amount"
+msgstr "Montante Total"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_move_line_treasury_date
+msgid "Treas. Date"
+msgstr "Data Tesouraria"
+
+#. module: treasury_forecast
+#: model:ir.ui.menu,name:treasury_forecast.menu_treasury_forecast_group
+#: model:ir.ui.menu,name:treasury_forecast.treasury_management_menu
+msgid "Treasury"
+msgstr "Tesouraria"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_forecast_analysis
+msgid "Treasury Analysis"
+msgstr "Análise Tesouraria"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_invoice_date_treasury
+msgid "Treasury Date"
+msgstr "Data Tesouraria"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_bank_statement_line_treasury_forecast_id
+msgid "Treasury Forecast"
+msgstr "Previsão Tesouraria"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_management_config_settings
+msgid "Treasury Management"
+msgstr "Gestão Tesouraria"
+
+#. module: treasury_forecast
+#: model:ir.actions.act_window,name:treasury_forecast.action_treasury_treasury_forecasts
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_account_treasury_planning
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_bank_statement_line_statement_fp
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_bank_statement_treasury_planning
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_journal_treasury_planning
+#: model:ir.ui.menu,name:treasury_forecast.menu_treasury_forecasts
+msgid "Treasury Planning"
+msgstr "Planeamento Tesouraria"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_treasury_forecast_template
+msgid "Treasury Planning Template"
+msgstr "Template Planeamento Tesouraria"
+
+#. module: treasury_forecast
+#: model:ir.model.fields,field_description:treasury_forecast.field_treasury_forecast_line_template_treasury_forecast_template_id
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_forecast_template_form
+msgid "Treasury Template"
+msgstr "Template Tesouraria"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_forecast_tree
+msgid "Treasury planning"
+msgstr "Template Tesouraria"
+
+#. module: treasury_forecast
+#: code:addons/treasury_forecast/models/treasury_bank_forecast.py:132
+#: model:ir.model.fields,field_description:treasury_forecast.field_account_move_journal_type
+#, python-format
+msgid "Type"
+msgstr "Tipo"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.view_treasury_forecast_form
+msgid "Update forecast data"
+msgstr "Atualizar data forecast"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.mass_edit_treasury_data_wizard_form
+msgid "_Cancel"
+msgstr "_Cancelar"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_bank_balance_computation
+msgid "bank.balance.computation"
+msgstr "bank.balance.computation"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_bank_statement_line_mass_edit
+msgid "bank.statement.line.mass.edit"
+msgstr "bank.statement.line.mass.edit"
+
+#. module: treasury_forecast
+#: model:ir.ui.view,arch_db:treasury_forecast.mass_edit_treasury_data_wizard_form
+msgid "or"
+msgstr "ou"
+
+#. module: treasury_forecast
+#: model:ir.model,name:treasury_forecast.model_treasury_management_config_settings
+msgid "treasury.management.config.settings"
+msgstr "treasury.management.config.settings"

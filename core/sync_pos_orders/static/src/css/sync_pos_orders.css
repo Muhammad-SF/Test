@@ -1,0 +1,16 @@
+.pos .order-button .sync_info{
+	font-size: 60%;
+	position:absolute;
+	text-align:center;
+	width:100%;
+	left:0;
+	line-height:0;
+	bottom:-5px;
+}
+.pos .order .orderline .sync_info {
+	text-align: right;
+	width: 100%;
+	font-size: 80%;
+}
+.pos .order-button .order-sequence{position:relative;}
+.pos .order-button.selected .sync_info{color:gray;}

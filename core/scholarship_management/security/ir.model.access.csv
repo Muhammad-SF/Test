@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_scholarship_user,access.scholarship.user,model_scholarship,base.group_user,1,1,1,0
+access_scholarship_document_user,access.scholarship.document.user,model_scholarship_document,base.group_user,1,1,1,0
+access_scholarship_student_user,access.scholarship.student.user,model_scholarship_student,base.group_user,1,1,1,0
+access_scholarship_requirement_user,access.scholarship.requirement.user,model_scholarship_requirement,base.group_user,1,1,1,0
+access_scholarship_application_user,access.scholarship.application.user,model_scholarship_application,base.group_user,1,1,1,0

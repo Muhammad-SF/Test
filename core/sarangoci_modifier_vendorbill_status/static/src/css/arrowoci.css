@@ -1,0 +1,11 @@
+.o_form_view ul.oe_form_status li:nth-child(3) > .arrow span {
+    display: none !important;
+}
+
+.o_form_view ul.oe_form_status li:nth-child(4)  > .label{
+    border-left: 1px solid #cacaca !important;
+}
+
+.o_form_view ul.oe_form_status li:nth-child(4) {
+    padding-left: initial !important;
+}

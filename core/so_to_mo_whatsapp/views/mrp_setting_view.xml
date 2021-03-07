@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_mrp_feature_config_whatsapp_notification" model="ir.ui.view">
+            <field name="name">mrp.config.settings.whatsapp.noti</field>
+            <field name="model">mrp.config.settings</field>
+            <field name="inherit_id" ref="mrp_configuration.view_mrp_feature_config"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='generate_wip_setting']" position="after">
+                    <field class="ml16" name="send_whatsapp_notification" attrs="{'invisible': [('sales_to_manufacturing_config','!=',True)]}" style="margin-left:20px !important;"/>
+                    <field class="ml16" name="user_ids" attrs="{'invisible': [('sales_to_manufacturing_config','!=',True)]}" style="margin-left:20px !important;" widget="many2many_tags"/>
+                    
+                    <field class="ml16" name="send_email_notification" attrs="{'invisible': [('sales_to_manufacturing_config','!=',True)]}" style="margin-left:20px !important;"/>
+                    <field class="ml16" name="send_email_user_ids" attrs="{'invisible': [('sales_to_manufacturing_config','!=',True)]}" style="margin-left:20px !important;" widget="many2many_tags"/>
+                    
+                    <field class="ml16" name="send_dashboard_notification" attrs="{'invisible': [('sales_to_manufacturing_config','!=',True)]}" style="margin-left:20px !important;"/>
+                    <field class="ml16" name="send_dashboard_user_ids" attrs="{'invisible': [('sales_to_manufacturing_config','!=',True)]}" style="margin-left:20px !important;" widget="many2many_tags"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

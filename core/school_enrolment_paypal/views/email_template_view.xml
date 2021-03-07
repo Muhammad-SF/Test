@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="student_payment_confirmation_template_id" model="mail.template">
+            <field name="name">Student Payment Confirmation Email</field>
+            <field name="email_from">${'noreply@localhost'|safe}</field>
+            <field name="subject">Payment Confirmation</field>
+            <field name="model_id" ref="school.model_student_student"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+            <div>
+                <p>Dear ${object.name}</p>
+                
+                <p>We are pleased to inform that your application of the programme Payment has been confirm</p><br/>
+                
+                <p>Thank you</p>
+                <p>Wassalamualaikum Wr Wb </p>
+            </div>
+            ]]></field>
+        </record>
+    </data>
+</odoo>

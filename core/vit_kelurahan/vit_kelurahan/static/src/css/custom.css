@@ -1,0 +1,13 @@
+.o_list_view{
+    display: table;
+    table-layout: fixed;
+}
+
+.o_list_view th, .o_list_view td{
+    display: table-cell;
+
+}
+
+.o_list_view .o_list_record_selector{
+    width : 25px !important;
+}

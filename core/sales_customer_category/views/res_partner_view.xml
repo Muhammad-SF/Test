@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="res_partner_form_view_category" model="ir.ui.view">
+            <field name="name">res.partner.form.view.category</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type']" position="after">
+                    <field name="customer_category_id" required="1"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="customer_category_form_view">
+			<field name="name">customer.category.form.view</field>
+			<field name="model">customer.category</field>
+			<field name="arch" type="xml">
+				<form string="Customer Category">
+					<sheet>
+						<group>
+							<field name="name"/>
+							<field name="parent_id" />
+							<field name="sequence" />
+							<field name="pricelist_id" />
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="customer_category_tree_view">
+			<field name="name">customer.category.tree.view</field>
+			<field name="model">customer.category</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="sequence" />
+					<field name="name"/>
+					<field name="pricelist_id" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_customer_category" model="ir.actions.act_window">
+			<field name="name">Customer Category</field>
+			<field name="res_model">customer.category</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Create Customer Category.
+				</p>
+			</field>
+		</record>
+
+		<menuitem action="action_customer_category" id="menu_customer_category"
+			parent="sales_team.menu_sale_config"
+			sequence="10" />
+    </data>
+</openerp>

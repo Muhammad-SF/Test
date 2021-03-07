@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!--# ______________Umar Aziz__________________________-->
+        <record id="Project_timesheets_work" model="ir.ui.view">
+            <field name="name">Project Timesheets Work</field>
+            <field name="model">project.timesheets.work</field>
+            <field name="arch" type="xml">
+                <form string="Project Timesheets Work">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="work_start"/>
+                                <field name="work_end"/>
+                                <field name="description"/>
+                            </group>
+                            <group>
+                                <field name="total_work_hour" widget="float_time"/>
+                            </group>
+
+                        </group>
+                        <footer>
+                            <button name="stop_work" string="Save" type="object" class="oe_highlight"/>
+                            or
+                            <button string="Cancel" class="oe_link" special="cancel"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</openerp>

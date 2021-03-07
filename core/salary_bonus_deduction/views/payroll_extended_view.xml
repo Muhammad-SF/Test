@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="hr_payslip_extended_form_view_inherit" model="ir.ui.view">
+            <field name="name">Hr Payslip Extended Form View Inherit</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="l10n_sg_hr_payroll.hr_payslip_extended_form_view"/>
+            <field name="arch" type="xml">
+                <field name="pub_holiday_hours" position="after">
+                    <field name="bonus_amount"/>
+                    <field name="deduction_amount"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

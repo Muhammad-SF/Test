@@ -1,0 +1,38 @@
+<odoo>
+  <data>
+    <record id="inherit_replace_order_line_01" model="ir.ui.view">
+        <field name="name">purchase.order.line</field>
+        <field name="model">purchase.order.line</field>
+        <field name="inherit_id" ref="purchase.purchase_order_line_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="replace">
+                <tree string="Purchase Order Lines" create="false">
+                    <field name="order_id"/>
+                    <field name="purchase_request"/>
+                    <field name="product_id"/>
+                    <field name="name"/>
+                    <field name="supplier"/>
+                    <field name="purchased_qty"/>
+                    <field name="product_uom" groups="product.group_uom"/>
+                    <!--RFQ/PO-->
+                    <field name="price_unit"/>
+                    <field name="price_subtotal" widget="monetary"/>
+                    <!--RFQ/PO-->
+                    <field name="qty_received"/>
+                    <field name="qty_invoiced"/>
+                    <field name="unit_price_billed"/>
+                    <field name="sub_total_billed"/>
+                    <!--<field name="name"/>-->
+                    <!--<field name="partner_id" string="Vendor"/>-->
+                    <!--<field name="product_id"/>-->
+                    <!--<field name="price_unit"/>-->
+                    <field name="product_qty"/>
+                    <!--<field name="product_uom" groups="product.group_uom"/>-->
+                    <!--<field name="price_subtotal" widget="monetary"/>-->
+                    <field name="date_planned" invisible="True" widget="date"/>
+                </tree>
+            </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

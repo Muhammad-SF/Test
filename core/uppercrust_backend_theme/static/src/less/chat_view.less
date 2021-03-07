@@ -1,0 +1,179 @@
+.o_web_client {
+    .o_chat_window {
+        z-index: 1050;
+        background-color: @white;
+        border-radius: 0;
+        border: 1px solid @border;
+        .o_chat_header {
+            background-color: @brand-primary;
+            border-radius: 0;
+            .o_chat_title {
+                .o_user_online {
+                    color: @brand-success;
+                }
+                .o_user_idle {
+                    color: @brand-warning;
+                }
+            }
+            .o_chat_window_close {
+                &:hover {
+                    background-color: transparent;
+                }
+            }
+        }
+        .o_chat_search_input {
+            background-color: @white;
+            .ui-autocomplete-input {
+                border: none;
+                border-bottom: 1px solid @border;
+                &:focus {
+                    .border-animation;
+                }
+            }
+        }
+        .o_mail_thread {
+            background-color: @white;
+            padding: 0px 10px;
+            .o_thread_date_separator {
+                .o_thread_date {
+                    background-color: @white;
+                    color: @heading;
+                }
+            }
+            .o_thread_message {
+                padding: 5px 0px;
+                .o_thread_message_sidebar {
+                    & > .o_thread_message_avatar {
+                        border-radius: 50%;
+                    }
+                }
+                .o_thread_message_core {
+                    .o_mail_info {
+                        & > strong {
+                            color: @heading;
+                        }
+                        a {
+                            color: @heading;
+                        }
+                        .o_mail_timestamp {
+                            float: right;
+                        }
+                        span {
+                            i {
+                                opacity: 0.6;
+                                color: gold;
+                            }
+                        }
+                    }
+                }
+                &:hover {
+                    .o_thread_message_core {
+                        span {
+                            i {
+                                opacity: 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .o_chat_composer {
+            .o_composer_container {
+                .o_composer {
+                    .o_composer_input {
+                        .o_composer_text_field {
+                            .ui-autocomplete-input {
+                                border-bottom: 1px solid @border;
+                                &:focus {
+                                    .border-animation;
+                                }
+                            }
+                        }
+                        .o_chatter_composer_tools {
+                            & > button.btn {
+                                background-color: transparent;
+                                color: @icon;
+                                &:hover, &:active, &:focus {
+                                    background-color: transparent;
+                                    box-shadow: none;
+                                }
+                            }
+                        }
+                    }
+                    .o_composer_buttons {
+                        .o_composer_button_send {
+                            color: #fff;
+                            background-color: #2559ad;
+                            border-color: #2559ad !important;
+                            border: 1px solid transparent;
+                            border-radius: 5px;
+                        }
+                    }
+                    .o_mail_emoji_container {
+                        background: @white;
+                        & > button {
+                            margin: 0 0 8px 0;
+                            padding: 0;
+                            height: 25px;
+                            width: 25px;
+                            padding: 5px;
+                            img {
+                                width: 20px;
+                                height: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.ad-chat-window:not(.o_no_chat_window) {
+        .o_main {
+            .ad_rightbar {
+                background: @white;
+                .o_control_panel {
+                    .ad_bottom_controlpanel {
+                        bottom: 42px;
+                        border-bottom: 1px solid @border;
+                    }
+                }
+                .o_content {
+                    margin-bottom: 94px;
+                    & > .o_view_manager_content {
+                        .o_form_view.oe_form_configuration.o_base_settings {
+                            & > .o_control_panel {
+                                .o_form_statusbar {
+                                    bottom: 50px;
+                                    border-bottom: 1px solid @border;
+                                    border-radius: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .top_nav {
+            .nav_menu {
+                #oe_main_menu_navbar {
+                    .navbar-collapse {
+                        ul#av_full_view {
+                            bottom: 50px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.o_composer_buttons {
+    .o_composer_button_send {
+        color: #fff;
+        background-color: #2559ad;
+        border-color: #2559ad !important;
+        border: 1px solid transparent !important;
+        border-radius: 5px !important;
+        z-index: 2;
+    }
+}

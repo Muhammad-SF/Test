@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- First company information when creating a database -->
+        <record id="base.main_company" model="res.company">
+            <field name="website">http://www.yourcompany.com</field>
+            <field name="logo"></field>
+        </record>
+    </data>
+</odoo>

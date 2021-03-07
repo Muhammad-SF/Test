@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sixcap_remove_unsubscribe_link_sixcap_remove_unsubscribe_link,sixcap_remove_unsubscribe_link.sixcap_remove_unsubscribe_link,model_sixcap_remove_unsubscribe_link_sixcap_remove_unsubscribe_link,,1,0,0,0

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates >
+    <t t-extend="accountReports.searchView">
+        <t t-jquery=".btn-group.o_dropdown.o_account_reports_date-filter" t-operation="after">
+            <div class="btn-group o_dropdown o_account_reports_change_currency-filter">
+                <a type="button" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="fa fa-money"/><span>Change Currency</span>
+                    <span class="caret"/>
+                </a>
+                <ul class="dropdown-menu o_filters_menu" role="menu">
+                    <t t-foreach="context.available_currency" t-as="currency_data">
+                        <li t-if="currency_data['id'] != 0" t-att-id="currency_data['id']" t-att-data-value="currency_data['id']" t-att-class="'o_search_change_currency o_filters_menu li ' + ((context.change_currency_id == currency_data['id']) and 'selected' or '')">
+                            <a><t t-esc="currency_data['name']"/></a>
+                        </li>
+                    </t>
+                </ul>
+            </div>
+        </t>
+    </t>
+</templates>

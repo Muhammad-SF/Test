@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE html>
+
+<odoo>
+	<!-- inherit admission register view -->
+	<record id="view_student_student_form_1_reset_draft" model="ir.ui.view">
+        <field name="name">student.student.form.reset.draft</field>
+        <field name="model">student.student</field>
+        <field name="inherit_id" ref="school.view_student_student_form_1"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//button[@name='set_alumni']" position="after">
+                    <button class="oe_stat_button" name="reset_to_draft" string="Reset To Draft" type="object" icon="fa-archive" states="done" groups="school.group_school_administration"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <!-- inherit Payslip view -->
+    <record id="view_student_payslip_form_reset_draft" model="ir.ui.view">
+        <field name="name">student.payslip.form.reset.draft</field>
+        <field name="model">student.payslip</field>
+        <field name="inherit_id" ref="school_fees.view_student_payslip_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//button[@name='payslip_confirm']" position="after">
+                    <button class="oe_stat_button" name="cancel_state" string="Cancel" type="object" icon="fa-archive" states="draft"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

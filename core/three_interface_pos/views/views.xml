@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_custom" inherit_id="point_of_sale.assets" name="three_interface_pos assets">
+        
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/three_interface_pos/static/src/css/centerpane.css" />
+        </xpath>
+    </template>
+</odoo>

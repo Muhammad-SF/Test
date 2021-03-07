@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+       <!-- <template id="survey_finsihed" inherit_id="survey.sfinished">
+
+        <xpath expr="//div[@class='jumbotron']" position="inside">
+            <h1>FOO 2</h1>
+        </xpath>
+        </template> -->    
+    </data>
+</odoo>

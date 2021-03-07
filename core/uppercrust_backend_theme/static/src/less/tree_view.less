@@ -1,0 +1,177 @@
+.tree_view() {
+    div.o_list_editable.o-editing {
+        .o_list_editable_form {
+            .o_checkbox {
+                & > span {
+                    border: 0;
+                }
+            }
+        }
+    }
+    .table-responsive {
+        padding: 10px;
+        border: none;
+        background-color: #f6f6f6;
+        .o_list_view.table {
+            border: 1px solid lightgrey !important;
+            border-bottom: none;
+            thead {
+                background: @white;
+                color: @Label-value;
+                border-bottom: 1px solid lightgrey !important;
+                & > tr {
+                    background-color: #fff !important;
+                    color: #000 !important;
+                    height: 38px;
+                    & > th {
+                        position: sticky;
+                        top:0;
+                        padding: 10px;
+                        border: none;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+            tbody {
+                tr:hover{background-color: #caf4ff !important;}
+                tr.o_group_header {
+                    background-image: none;
+                    background-color: @brand-optinal !important;
+                }
+                > tr:nth-of-type(even) {
+                    background-color: @white !important;
+                }
+                tr:hover {
+                    background: @tr-hover !important;
+                }
+                & > tr {
+                    height: 38px;
+                    border-bottom: 1px solid lightgrey !important;
+                    & > td {
+                        border-top: unset !important;
+                        padding: 10px;
+                        &.o_data_cell {
+                            & > .o_labelcell {
+                                border-radius: 0;
+                                font-size: @font-size-12;
+                                font-weight: @font-weight-4;
+                                width: 90px;
+                                display: inherit;
+                                padding: 5px;
+                            }
+                        }
+                        &.o_form_field_x2many_list_row_add {
+                            & > a {
+                                float: left;
+                                width: 100%;
+                                padding-top: 5px;
+                                padding-bottom: 5px;
+                                vertical-align: middle;
+                                text-align: center;
+                                height: 100%;
+                                text-transform: uppercase;
+                                font-weight: @font-weight-5;
+                                &:before {
+                                    content: "\f067";
+                                    font-family: FontAwesome;
+                                    margin-right: 5px;
+                                }
+                            }
+                        }
+                    }
+                    &.text-info {
+                        color: @text-info;
+                    }
+                    &.text-danger {
+                        color: @text-danger;
+                    }
+                    &.text-success {
+                        color: @text-success;
+                    }
+                    &.text-warning {
+                        color: @text-warning;
+                    }
+                    &.text-primary {
+                        color: @text-primary;
+                    }
+                    &.text-muted {
+                        color: @text-muted;
+                    }
+                    &.o_selected_row {
+                        & > td {
+                            & > *:first-child {
+                                width: 90%;
+                                margin: auto;
+                            }
+                            & * {
+                                height: 100%;
+                                padding: 0px;
+                            }
+                            & *:not(.badge) {
+                                background-color: transparent;
+                            }
+                            .o_input {
+                                height: 100%;
+                                padding: 0px;
+                            }
+                            .textarea {
+                                resize: vertical;
+                            }
+                            .o_checkbox > span {
+                                height: 20px;
+                            }
+                            .o_date_calender, .o_phone_phone, .o_email_envelope, .o_url_globe {
+                                display: none;
+                            }
+                        }
+                        .o_data_cell {
+                            padding: 0px;
+                            height: inherit;
+                        }
+                        .o_external_button {
+                            padding: 2px;
+                            margin: 0;
+                            color: @brand-secondary;
+                            background-color: transparent;
+                            box-shadow: none;
+                            &:hover {
+                                color: darken(@brand-secondary, 7%);
+                                background-color: transparent;
+                            }
+                        }
+                    }
+
+                }
+            }
+            tfoot {
+                background-color: @white;
+                border-top: none;
+                & > tr {
+                    height: 38px;
+                    border-bottom: 1px solid @border;
+                }
+            }
+            &.o_list_view_grouped {
+                & > tbody {
+                    & > tr {
+                        &.o_group_header {
+                            background-color: @tr-hover !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.o_web_client {
+    .o_main {
+        .o_main_content.ad_rightbar {
+            & > .o_content {
+                .o_view_manager_content {
+                    .tree_view;
+                }
+            }
+        }
+    }
+}

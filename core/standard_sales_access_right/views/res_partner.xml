@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <!-- Removed Default Customer Filter -->
+        <!-- <record id="replace_default_filter" model="ir.ui.view">
+            <field name="name">res.partner.inherit.select</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_res_partner_filter"/>
+            <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman'))]"/>
+            <field name="arch" type="xml">
+                <filter name="customer" position="replace"/>
+            </field>
+        </record> -->
+
+        <!-- <record id="inherit_view_users_formm" model="ir.ui.view">
+            <field name="name">default.sales.team.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <group name="preferences" position="after">
+                    <group string="Sales Teams">
+                        <field name="default_team_ids" widget="many2many_tags"/>
+                    </group>
+                </group>
+            </field>
+        </record> -->
+
+        <record id="res_partner_form_inherit_1" model="ir.ui.view">
+            <field name="name">res.partner.inherit.1</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_form_inherit_11" model="ir.ui.view">
+            <field name="name">res.partner.inherit.1</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="res_partner_form_inherit_1"/>
+            <field name="groups_id" eval="[(4, ref('standard_sales_access_right.group_allow_customer'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="edit">true</attribute>
+                    <attribute name="create">true</attribute>
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_form_inherit_2" model="ir.ui.view">
+            <field name="name">res.partner.inherit.2</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_form_inherit_22" model="ir.ui.view">
+            <field name="name">res.partner.inherit.2</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="res_partner_form_inherit_2"/>
+            <field name="groups_id" eval="[(4, ref('standard_sales_access_right.group_allow_customer'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="edit">true</attribute>
+                    <attribute name="create">true</attribute>
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_form_inherit_3" model="ir.ui.view">
+            <field name="name">res.partner.inherit.3</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_form_inherit_33" model="ir.ui.view">
+            <field name="name">res.partner.inherit.3</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="res_partner_form_inherit_3"/>
+            <field name="groups_id" eval="[(4, ref('standard_sales_access_right.group_allow_customer'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="edit">true</attribute>
+                    <attribute name="create">true</attribute>
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="crm_team_dashboard_extend" model="ir.ui.view">
+            <field name="name">crm.team.dashboard.extend</field>
+            <field name="model">crm.team</field>
+            <field name="inherit_id" ref="sales_team.crm_team_salesteams_view_kanban"/>
+            <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman')),
+                                            (4, ref('standard_sales_access_right.group_sales_team_docs')),
+                                            (4, ref('sales_team.group_sale_salesman_all_leads')),
+                                            (4, ref('standard_sales_access_right.group_sales_team_mngr')),
+                                            (4, ref('sales_team.group_sale_manager'))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='o_kanban_manage_button_section']" position="replace">
+                    <div class="o_kanban_manage_button_section">
+                        <a class="o_kanban_manage_toggle_button" href="#">More <i class="fa fa-caret-down"/></a>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_order_form_extend" model="ir.ui.view">
+            <field name="name">sale.order.form.extend</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="groups_id" eval="[(4, ref('sales_team.group_sale_salesman')),
+                                            (4, ref('standard_sales_access_right.group_sales_team_docs')),
+                                            (4, ref('sales_team.group_sale_salesman_all_leads'))]"/>
+            <field name="arch" type="xml">
+                <field name="user_id" position="replace">
+                    <field name="user_id" readonly="1"/>
+                </field>
+                <field name="team_id" position="replace">
+                    <field name="team_id" readonly="1"/>
+                </field>
+                
+            </field>
+        </record>
+        <record id="sale_order_form_extend_inherit" model="ir.ui.view">
+            <field name="name">sale.order.form.extend.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="groups_id" eval="[
+                                            (4, ref('standard_sales_access_right.group_sales_team_mngr')),
+                                            (4, ref('sales_team.group_sale_manager'))]"/>
+            <field name="arch" type="xml">
+                <field name="user_id" position="replace">
+                    <field name="user_id" readonly="0"/>
+                </field>
+                <field name="team_id" position="replace">
+                    <field name="team_id" readonly="0"/>
+                </field>
+                
+            </field>
+        </record>
+
+
+        <record id="sale_order_form_extend_teams" model="ir.ui.view">
+            <field name="name">sale.order.form.extend</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="groups_id" eval="[(4, ref('standard_sales_access_right.group_sales_team_docs')),
+                                            ]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">true</attribute>
+                </xpath>
+                
+            </field>
+        </record>
+
+        <record id="view_stock_quant_tree_condition_inv_value" model="ir.ui.view">
+            <field name="name">stock.quant.form.extend</field>
+            <field name="model">stock.quant</field>
+            <field name="inherit_id" ref="stock.view_stock_quant_tree"/>
+            <field name="arch" type="xml">
+                <field name="inventory_value" position="attributes">
+                    <attribute name="groups">standard_sales_access_right.group_inventory_value</attribute>
+                </field>
+
+            </field>
+        </record>
+	</data>
+</odoo>

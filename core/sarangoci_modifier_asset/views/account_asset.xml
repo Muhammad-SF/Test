@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_account_asset_asset_form_add_branch">
+            <field name="name">account.asset.asset.form.inherit.add.branch</field>
+            <field name="model">account.asset.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_asset_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="date" position="after">
+                    <field name="branch_id"/>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="res_users_form_view_hide_pos">
+            <field name="name">res.users.form.inherit.hide.pos</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="point_of_sale.res_users_form_view"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/notebook/page[3]" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

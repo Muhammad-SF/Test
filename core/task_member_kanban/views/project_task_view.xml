@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_task_kanban_inherit_task_member" model="ir.ui.view">
+        <field name="name">project.task.inherit.kanban</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban/field[@name='legend_done']" position="after">
+                <field name="employee_ids"/>
+            </xpath>
+            <xpath expr="//div[@class='oe_kanban_bottom_right']/img" position="replace">
+                <t t-foreach="record.employee_ids.raw_value" t-as="emp">
+                    <img t-att-src="kanban_image('hr.employee', 'image_small', emp)" width="24" height="24" class="oe_kanban_avatar pull-right"/>
+                </t>
+            </xpath>
+        </field>
+    </record>
+</odoo>

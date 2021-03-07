@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_order_form_user_so" model="ir.ui.view">
+        <field name="name">View Order Form User SO</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position='after'>
+                <field name="check_currency" invisible='1'/>
+                <field name="rate_type" widget='radio' attrs="{'invisible': [('check_currency','=', True)], 'readonly': [('state','=', 'sale')]}"/>
+                <field name="c1_rate" attrs="{'invisible': ['|', ('rate_type','=','u1'), ('check_currency','=', True)], 'readonly': [('state','=', 'sale')]}"/>
+                <field name="u1_rate" attrs="{'invisible': ['|', ('rate_type','=','c1'), ('check_currency','=', True)], 'required':[('rate_type','=','u1')], 'readonly': [('state','=', 'sale')]}"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

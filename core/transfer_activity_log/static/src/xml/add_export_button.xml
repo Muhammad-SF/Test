@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  	<template xml:space="preserve">
+	    <t t-extend="ListView.buttons">
+	      	<t t-jquery="button.o_list_button_add" t-operation="replace">
+	        	<button  t-if="widget.model == 'transfer.activity.log'" class="btn btn-primary oe_add_export_button" type="button"  accesskey="f">Export</button>
+	         	<button t-if="widget.model != 'transfer.activity.log'" type="button" class="btn btn-primary btn-sm o_list_button_add" accesskey="c">
+	            	<t t-esc="widget.options.addable"/>
+	        	</button>
+	      	</t>
+	      	<t t-jquery="button.o_button_import" t-operation="replace">
+		        <button t-if="widget.options.import_enabled and widget.model != 'transfer.activity.log'" type="button" class="btn btn-sm btn-default o_button_import">
+		            Import
+		        </button>
+	    	</t>
+	    </t>
+  	</template>

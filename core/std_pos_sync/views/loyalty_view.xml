@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- POS LOYALTY -->
+        <record model="ir.ui.view" id="view_loyalty_program_form_sync_pos_id">
+            <field name="name">loyalty.program.form.sync.pos.id</field>
+            <field name="model">loyalty.program</field>
+            <field name="inherit_id" ref="pos_loyalty.view_loyalty_program_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/field[@name='rounding']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

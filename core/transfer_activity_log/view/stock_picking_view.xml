@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="button_render_js" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script src="transfer_activity_log/static/src/js/add_export_button.js"
+                    type="text/javascript"/>
+        </xpath>
+    </template>
+    <record id="view_picking_form_inherit_log" model="ir.ui.view">
+        <field name="name">stock.picking.inherit..log.form</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Transfer Activity Log" groups="base.group_no_one">
+                    <field name="transfer_log_activity_ids" editable="bottom" readonly="1">
+                        <tree>
+                            <field name="status"/>
+                            <field name="timestamp"/>
+                            <field name="process_time"/>
+                            <field name="user"/>
+                            <field name="reference" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+            <field name="po_request_id" position="after">
+                <field name="process_time" />
+            </field>
+            <xpath expr="//field[@name='pack_operation_product_ids']/tree/field[@name='product_qty']" position="after">
+                <field name="process_time" invisible="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_move_picking_tree_inherit_log" model="ir.ui.view">
+ 		<field name="name">stock.picking.inherit..log.tree</field>
+ 		<field name="model">stock.move</field>
+ 		<field name="inherit_id" ref="stock.view_move_picking_tree"/>
+ 		<field name="arch" type="xml">
+ 			<xpath expr="//tree/field[@name='state']" position="before">
+                <field name="process_time" invisible="1"/>
+            </xpath>
+ 		</field>
+    </record>
+
+</odoo>

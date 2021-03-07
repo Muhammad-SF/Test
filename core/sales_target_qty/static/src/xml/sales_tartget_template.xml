@@ -1,0 +1,14 @@
+<templates>
+    <t t-name="WidgetSalesTarget">
+        <div class="col-xs-12">
+            <div class="col-xs-12">
+                <div class="o_progressbar">
+                    <div class="o_progressbar_title">Invoicing</div>
+                    <div class="o_progress">
+                        <div class="o_progressbar_complete" style="width: 10%;"></div>
+                    </div><div class="o_progressbar_value">100 / 1k</div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

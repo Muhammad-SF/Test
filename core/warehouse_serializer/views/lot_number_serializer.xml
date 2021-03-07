@@ -1,0 +1,50 @@
+<odoo>
+    <record model="ir.ui.view" id="lot_number_serializer_form_view_id">
+        <field name="name">view.lot.number.serializer</field>
+        <field name="model">lot.number.serializer</field>
+        <field name="arch" type="xml">
+            <form string="Batch/Lot Number Serializer">
+                <group>
+                    <group>
+                        <field name="name" required="1"/>
+                        <field name="prefix_lot" required="1"/>
+                        <field name="suffix_lot" required="1"/>
+                        <field name="product_categ_id" required="1"/>
+                        <field name="digits" required="1"/>
+                        <field name="start_with_sku" required="1"/>
+                        <field name="current_number" required="1"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="lot_number_serializer_tree_view_id">
+        <field name="name">view.lot.number.serializer</field>
+        <field name="model">lot.number.serializer</field>
+        <field name="arch" type="xml">
+            <tree string="Batch/Lot Number Serializer">
+                <field name="name" required="1"/>
+                <field name="prefix_lot" required="1"/>
+                <field name="suffix_lot" required="1"/>
+                <field name="product_categ_id" required="1"/>
+                <field name="digits" required="1"/>
+                <field name="start_with_sku" required="1"/>
+                <field name="current_number" required="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model ="ir.actions.act_window" id="lot_number_serializer_action">
+        <field name="name">Batch/Lot Number Serializer</field>
+        <field name="res_model">lot.number.serializer</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="lot_number_serializer_list" name="Batch/Lot Number Serializer" parent="stock.menu_product_in_config_stock" sequence="750" action="lot_number_serializer_action"/>
+</odoo>

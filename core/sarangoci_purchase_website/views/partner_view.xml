@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+    	<record id="view_partner_form_inherit_centralkitchen" model="ir.ui.view">
+            <field name="name">res.partner.form.centralkitchen</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <group name="purchase" position="inside">
+                    <field name="is_central_kitchen"/>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

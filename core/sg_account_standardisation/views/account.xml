@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="account assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">                
+            <script type="text/javascript" src="/sg_account_standardisation/static/src/js/move_line_quickadd.js"></script>
+            <script type="text/javascript" src="/sg_account_standardisation/static/src/js/partner_name_widget.js"></script>
+            <link rel="stylesheet" href="/sg_account_standardisation/static/src/css/move_line_quickadd.css"/>
+            <script type="text/javascript" src="/sg_account_standardisation/static/src/js/easy_autocomplete.js"></script>
+            <link rel="stylesheet" href="/sg_account_standardisation/static/src/css/easy_autocomplete.css"/>
+        </xpath>
+    </template>        
+</odoo>

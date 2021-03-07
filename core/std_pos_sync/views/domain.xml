@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_pos_loyalty_rule_form_inherit" model="ir.ui.view">
+            <field name="name">loyalty.rule.form.inherit</field>
+            <field name="model">loyalty.rule</field>
+            <field name="inherit_id" ref="pos_loyalty.view_loyalty_rule_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="attributes">
+                    <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_voucher_pos_form_inherit" model="ir.ui.view">
+            <field name="name">gift.voucher.pos.form.inherit</field>
+            <field name="model">gift.voucher.pos</field>
+            <field name="inherit_id" ref="vouchers_pos.gift_voucher_pos_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                </xpath>
+                <xpath expr="//field[@name='product_categ']" position="attributes">
+                    <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_coupon_pos_form_inherit" model="ir.ui.view">
+            <field name="name">gift.coupon.pos.form.inherit</field>
+            <field name="model">gift.coupon.pos</field>
+            <field name="inherit_id" ref="vouchers_pos.gift_coupon_pos_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group[1]/group/field[@name='voucher']" position="attributes">
+                    <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                </xpath>
+                <xpath expr="//sheet/group[2]/group/field[@name='partner_id']" position="attributes">
+                    <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_pos_promotion_form_inherit" model="ir.ui.view">
+                <field name="name">pos.promotion.form.inherit</field>
+                <field name="model">pos.promotion</field>
+                <field name="inherit_id" ref="pos_promotion.pos_promotion_form" />
+                <field name="arch" type="xml">
+                    <xpath expr="//form/sheet/group/field/tree/field[@name='category_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/field[@name='discount_quantity_ids']/tree/field[@name='product_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/field[@name='discount_condition_ids']/tree/field[@name='product_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/field[@name='discount_apply_ids']/tree/field[@name='product_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/field[@name='gift_condition_ids']/tree/field[@name='product_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/field[@name='gift_free_ids']/tree/field[@name='product_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/field[@name='price_ids']/tree/field[@name='product_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                </field>
+            </record>
+            <record id="view_pos_promotion_form_inherit_for_full_pos_promotion_ext" model="ir.ui.view">
+                <field name="name">POS Full Promotion Ext</field>
+                <field name="model">pos.promotion</field>
+                <field name="inherit_id" ref="full_pos_promotion.view_pos_promotion_form_inherit_for_full_pos_promotion" />
+                <field name="arch" type="xml">
+                    <xpath expr="//form/sheet/group/field[@name='brand_discount_ids']/tree/field[@name='brand_ids']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/field[@name='product_product_ids']/tree/field[@name='product_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/field[@name='product_free_ids']/tree/field[@name='product_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                    <xpath expr="//form/sheet/group/field[@name='group_of_products_ids']/tree/field[@name='product_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                </field>
+            </record>
+            <record id="view_loyalty_reward_form_ext" model="ir.ui.view">
+                <field name="name">loyalty.reward.form.ext</field>
+                <field name="model">loyalty.reward</field>
+                <field name="inherit_id" ref="pos_loyalty.view_loyalty_reward_form" />
+                <field name="arch" type="xml">
+                    <xpath expr="//form/group/field[@name='gift_product_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                    <xpath expr="//form/group/field[@name='discount_product_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                    <xpath expr="//form/group/field[@name='point_product_id']" position="attributes">
+                        <attribute name="domain">[('pos_sync_id','!=',None)]</attribute>
+                    </xpath>
+                </field>
+            </record>
+
+</odoo>

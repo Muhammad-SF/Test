@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<template id="account_invoice_report_sign" inherit_id="account.report_invoice_document">
+    	<xpath expr="//p[3]" position="after">
+    		<div class="row mt32 mb32" style="page-break-inside:avoid;">
+				<div name="customer_signature" class="col-xs-6">
+					<p><strong>Customer</strong></p>
+					<p><strong>Signature:</strong>
+						<img t-att-src="'data:image/png;base64,%s' % o.customer_signature"/>
+					</p>
+				</div>
+				<div name="customer_signature_date" class="col-xs-6">
+					<p><br></br></p>
+					<p><strong>Date: <span t-field="o.customer_signature_date"/></strong></p>
+				</div>
+			</div>
+			<div class="row mt32 mb32" style="page-break-inside:avoid;">
+				<div name="consultant_signature" class="col-xs-6">
+					<p><strong>Consultant</strong></p>
+					<p><strong>Signature:</strong>
+						<img t-att-src="'data:image/png;base64,%s' % o.consultant_signature"/>
+					</p>
+				</div>
+				<div name="consultant_signature_date" class="col-xs-6">
+					<p><br></br></p>
+					<p><strong>Date: <span t-field="o.consultant_signature_date"/></strong></p>
+				</div>
+			</div>
+    	</xpath>
+    </template>
+</odoo>

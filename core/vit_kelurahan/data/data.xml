@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <function model="kelurahan.data.import" name="set_provinsi_values"/>
+        <function model="kelurahan.data.import" name="set_kota_values"/>
+        <function model="kelurahan.data.import" name="set_kecamatan_values"/>
+        <function model="kelurahan.data.import" name="set_kelurahan_values"/>
+    </data>
+</odoo>

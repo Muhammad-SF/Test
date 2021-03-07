@@ -1,0 +1,32 @@
+<odoo>
+	<data>
+		<record id="view_account_config_settings_inherited_view" model="ir.ui.view">
+			<field name="name">view.account.config.settings.inherited.view</field>
+			<field name="model">account.config.settings</field>
+			<field name="inherit_id" ref="account.view_account_config_settings"/>
+			<field name="arch" type="xml"> 
+				<xpath expr="//form/group[@name='bank_cash']" position="after"> 
+					<group name="sg_reconcile_group">
+						<label for="id" string="Bank Reconcile"/>
+						<div>
+							<div>
+								<field name="module_sg_bank_reconcile" class="oe_inline"/>
+								<label for="module_sg_bank_reconcile"/>
+							</div>
+						</div>
+					</group>
+					<group name="sg_dbs_group">
+						<label for="id" string="DBS GIRO"/>
+						<div>
+							<div>
+								<field name="module_sg_dbs_giro" class="oe_inline"/>
+								<label for="module_sg_dbs_giro"/>
+							</div>
+						</div>
+					</group>
+				</xpath>
+			</field>
+		</record>
+
+	</data>
+</odoo>

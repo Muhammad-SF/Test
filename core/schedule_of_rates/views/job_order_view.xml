@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="schedule_rate_view_tree" model="ir.ui.view">
+            <field name="name">schedule.rate.tree</field>
+            <field name="model">schedule.rate</field>
+            <field name="arch" type="xml">
+                <tree string="Schedule Of Rates">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="schedule_rate_view_form" model="ir.ui.view">
+            <field name="name">schedule.rate.form</field>
+            <field name="model">schedule.rate</field>
+            <field name="arch" type="xml">
+                <form string="Schedule Of Rates">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only" string="Schedule Of Rates"/>
+                            <h1>
+                                <field name="name" placeholder="Schedule Of Rates"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="active"/>
+                            <field name="currency_id" groups="base.group_multi_currency"
+                           options="{'no_create': True}"/>
+                        </group>
+                        <separator string="Schedule of Rates" />
+                        <field name="line_ids">
+                            <tree editable="bottom">
+                                <field name="name"/>
+                                <field name="qty"/>
+                                <field name="unit_price"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_schedule_rate" model="ir.actions.act_window">
+            <field name="name">Schedule Of Rates</field>
+            <field name="res_model">schedule.rate</field>
+            <field name='view_type'>form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="schedule_rate_view_tree"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+            </field>
+        </record>
+        
+        <menuitem
+                id="menu_schedule_rate"
+                name="Schedule of Rates"
+                parent="maintenance.menu_maintenance_configuration"
+                action="action_schedule_rate"
+                groups="maintenance.group_equipment_manager"
+                sequence="1"/>
+
+        <!--Schedule of Rates Item-->
+
+        <record id="schedule_rate_Stages_view_tree" model="ir.ui.view">
+            <field name="name">Schedule of Rates Item</field>
+            <field name="model">schedule.rate.item</field>
+            <field name="arch" type="xml">
+                <tree string="Schedule of Rates Item" editable="top">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_schedule_rate_item" model="ir.actions.act_window">
+            <field name="name">Schedule of Rates Item</field>
+            <field name="res_model">schedule.rate.item</field>
+            <field name="view_mode">tree</field>
+            <field name="view_type">form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                </p>
+            </field>
+        </record>
+
+        <menuitem
+                id="menu_schedule_rate_item"
+                name="Schedule of Rates Item"
+                parent="maintenance.menu_maintenance_configuration"
+                action="action_schedule_rate_item"
+                groups="maintenance.group_equipment_manager"
+                sequence="1"/>
+
+    </data>
+</odoo>

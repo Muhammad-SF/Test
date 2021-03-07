@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.cron" id="update_overtime">
+            <field name="name">Update Overtime </field>
+            <field name="interval_number">24</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <!-- <field name="doall" eval="False"/> -->
+            <field name="nextcall" eval="datetime.now().replace(hour=4, minute=50)"/>
+            <field name="model" eval="'actual.timesheet.line'"/>
+            <field name="function" eval="'update_overtime'"/>
+            <field name="args" eval="'()'" />
+        </record>
+
+        <record model="ir.ui.view" id="actual_timesheet_form">
+            <field name="name">actual.timesheet.form</field>
+            <field name="model">actual.timesheet</field>
+            <field name="arch" type="xml">
+                <form string="Timesheet">
+                <header>
+                    <!--<button name="action_cancel" states="new,draft" string="Cancel" type="object" class="o_form_button_cancel"/>-->
+                    <!--<button name="action_approve" states="new,draft" string="Approve" type="object" class="oe_highlight"/>-->
+
+                    <button name="compute_overtime" states="new,draft" string="Compute Overtime" type="object" class="oe_highlight"/>
+                    <button name="action_timesheet_confirm" states="draft" string="Submit to Manager" type="object" class="oe_highlight"/>
+                    <button name="action_timesheet_done" states="confirm" string="Approve" type="object" groups="hr_timesheet.group_hr_timesheet_user" class="oe_highlight"/>
+                    <button name="action_timesheet_draft" states="done" string="Set to Draft" type="object" groups="hr_timesheet.group_hr_timesheet_user"/>
+                    <button name="action_timesheet_draft" states="confirm" string="Refuse" type="object" groups="hr_timesheet.group_hr_timesheet_user"/>
+                    <field name="state" widget="statusbar" statusbar_visible="new,confirm,done" invisible="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="branch_id" class="oe_edit_only"/>
+                        <h1><field name="branch_id" class="oe_inline" placeholder="Branch's Name"/></h1>
+                        <field name="canBeApproved" invisible="1"/>
+                    </div>
+                    <group>
+                        <group>
+                            <label for="date_from" string="Timesheet Period"/>
+                            <div><field name="date_from" class="oe_inline"/> to <field name="date_to" class="oe_inline"/></div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Summary">
+                            <widget type="actual_timesheet" attrs="{'readonly': [['state', 'not in', ['new', 'draft']]]}">
+                            </widget>
+                        </page>
+                        <page string="Details" class="o_hr_timesheet_sheet_details" invisible="1">
+                            <field name="timesheet_ids" nolabel="1">
+                                <tree string="Timesheet Activities">
+                                    <field name="date"/>
+                                    <field name="name"/>
+                                    <field name="employee_id" required="1"/>
+                                    <field name="overtime_hours" widget="float_time" string="Hours" sum="Hours"/>
+                                     <field name="from_hours" widget="float_time" string="Hours" sum="Hours"/>
+                                    <field name="to_hours" widget="float_time" string="Hours" sum="Hours"/>
+                                    <field name="option"/>
+                                    <field name="ot_edited"/>
+                                    <field name="user_id" invisible="1"/>
+                                </tree>
+                                <form string="Timesheet Activities">
+                                    <group>
+                                        <field name="date"/>
+                                        <field name="name"/>
+                                        <field name="employee_id"/>
+                                        <field name="overtime_hours" widget="float_time" string="Hours"/>
+                                        <field name="user_id" invisible="1"/>
+                                        <field name="from_hours" widget="float_time" string="Hours" sum="Hours"/>
+                                      <field name="to_hours" widget="float_time" string="Hours" sum="Hours"/>
+                                       <field name="option"/>
+                                       <field name="attendance_ids"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="actual_timesheet_tree">
+            <field name="name">actual.timesheet.tree</field>
+            <field name="model">actual.timesheet</field>
+            <field name="arch" type="xml">
+                <tree string="Timesheet">
+                    <field name="branch_id"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="state" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_actual_timesheet" model="ir.actions.act_window">
+            <field name="name">Actual Timesheets</field>
+            <field name="res_model">actual.timesheet</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <!--<field name="domain"></field>-->
+            <!--<field name="search_view_id" ref="view_hr_timesheet_sheet_filter"/>-->
+        </record>
+
+        <record id="view_hr_leave_configuration_inherit" model="ir.ui.view">
+        	<field name="name">view.hr.leave.configuration.inherit</field>
+        	<field name="model">hr.leave.config.settings</field>
+        	<field name="inherit_id" ref="sg_hr_holiday.view_hr_leave_configuration"/>
+        	<field name="arch" type="xml">
+        		<xpath expr="//form/group" position="after">
+                    <group name="timsheet">
+                        <group string="Timesheet" name="col1">
+                              <field name="overtime"/>
+                        </group>
+                    </group>
+        		</xpath>
+        	</field>
+        </record>
+
+        <menuitem name="Actual Timesheet" action="action_actual_timesheet" id="menu_acutal_timesheet" parent="hr_timesheet.menu_hr_time_tracking" sequence="10" groups="sarangoci_access_right.supervisor_group"/>
+    </data>
+
+    <template id="assets_backend" name="hr_timesheet_sheet assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/sarangoci_actual_timesheet/static/src/js/timesheet.js"></script>
+            <link rel="stylesheet" href="/sarangoci_actual_timesheet/static/src/css/style.css"/>
+        </xpath>
+    </template>
+
+</odoo>

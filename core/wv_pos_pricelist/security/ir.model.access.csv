@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+pos_pricelist_id,pos_pricelist,model_pos_pricelist,,1,1,1,1
+pos_pricelist_items_id,pos_pricelist_items,model_pos_pricelist_items,,1,1,1,1
+wv_default_code_id,wv_default_code,model_wv_default_code,,1,1,1,1
+

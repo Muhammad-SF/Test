@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mrp_routing_workcenter_form_view_inherite" model="ir.ui.view">
+        <field name="name">mrp.routing.workcenter.form.1</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_form_view"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='name']" position="after">
+        		<field name="wc_group_id" string="Center Group"/>
+        	</xpath>
+        	<xpath expr="//field[@name='workcenter_id']" position="attributes">
+        		<attribute name="required">0</attribute>
+        	</xpath> 
+        </field>
+    </record>
+
+    <record id="mrp_routing_workcenter_tree_view_inherite" model="ir.ui.view">
+        <field name="name">mrp.routing.workcenter.tree.1</field>
+        <field name="model">mrp.routing.workcenter</field>
+        <field name="inherit_id" ref="mrp.mrp_routing_workcenter_tree_view"/>
+        <field name="arch" type="xml">
+        	<xpath expr="//field[@name='workcenter_id']" position="replace">
+        		<field name="wc_group_id" string="Center Group"/>
+        	</xpath>
+        </field>
+    </record>
+</odoo>

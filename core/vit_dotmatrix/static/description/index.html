@@ -1,0 +1,170 @@
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#875A7B;">Introduction</h2>
+
+        <h3 style="width:80%">
+            <ul>
+                <li>this is modul is used to print PO, SO, Picking, Invoice directly to dot matrix printer</li>
+                <li>no special hardware needed</li>
+                <li>using printer proxy script (example apache/ngnix+php) or any webserver</li>
+                <li>add printer_data field on account.invoice, sale.order, purchase.order, stock.picking</li>
+                <li>printer template data from email.template named "Dot Matrix *"</li>
+                <li>you can easily modify the template to adjust your printed documents</li>
+            </ul>
+        </h3>
+
+        <div class="oe_span10 text-justify">
+
+            <div class="oe_screenshot" style="margin:8px">
+                <img class="img img-responsive" src="images/po.png"/>
+            </div>
+
+            <p class="oe_mb32" style="margin:8px;">
+                One of the biggest challange in implementing Odoo in some companies especially Indonesia which already
+                have so many daily transactions (like thousands of invoices per day), is printing to Dot Matrix Printer!
+            </p>
+
+            <p class="oe_mb32" style="margin:8px;">
+                Yes, it is common in Indonesia's big trading companies to use Dot Matrix printer to print
+                PO, SO, Invoices, Picking List to efficiently print using continuous and carbonized forms
+                so they can print 3-4 document at once. Printing PDF file to dot matrix printers
+                that can take the whole day just to print :(
+            </p>
+
+
+            <div class="oe_screenshot" style="margin:8px">
+                <img class="img img-responsive" src="images/template-inv.png"/>
+            </div>
+
+            <p class="oe_mb32" style="margin:8px;">
+                This can be a big issue in Odoo standard, because it uses PDF for every document printing.
+                The print result is good when printed at deskjet/ laserjet printers, but when it comes to dotmatrix,
+                the font is broken and almost unreadable. This is because the dot per inch is too small.
+                We can set it up bigger, but it will take some more time to print to dot matrix printer.
+                It is impractical when it comes to print like 5000 invoices daily!
+            </p>
+
+
+            <div class="oe_screenshot" style="margin:8px">
+                <img class="img img-responsive" src="images/inv.png"/>
+            </div>
+
+            <p class="oe_mb32" style="margin:8px;">
+                The solution is to use a proxy printing techniques. We make a small web server application at
+                the client computer that is connected to the printer. That small application listen at a specific
+                HTTP port and ready to receive request from Odoo's web browser client.
+
+                At server side, we add an add-on that will send the raw data to print to that local application via HTTP post.
+                The raw data is automatically composed based on the document to print using template.
+            </p>
+            <p class="oe_mb32" style="margin:8px;">
+                The result is: AMAZING! printing is now direct to dot matrix printer with it's super fast speed
+                and perfect printing result!
+            </p>
+
+
+            <div class="oe_screenshot" style="margin:8px">
+                <img class="img img-responsive" src="images/template-po.png"/>
+            </div>
+
+            <div class="oe_screenshot" style="margin:8px">
+                <img class="img img-responsive" src="images/picking.png"/>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#875A7B;">Installation on Linux/Mac/Raspberry Pi</h2>
+
+        <div class="text-justify">
+            <p class="oe_mb32" style="margin:8px;">
+                <ul>
+
+                    <li>Install this addon on the database</li>
+            <li>download the proxy python script from this <a href="/vit_dotmatrix/static/py-printer-linux.zip">LINK</a></li> from the <b>local Odoo server</b> that you installed this addon on.
+                    <li>Unzip into a folder</li>
+                    <li>Install the required Python modules: <b>flask</b> and <b>flask-cors</b>, you can use <b>pip install -r requirements.txt</b> command</li>
+                    <li>follow the INSTALL.TXT instruction on how to install and run the script</li>
+                    <li>Print Invoice, SO, PO directly to local dotmatrix printer</li>
+                    <li>Visit <a href="http://vitraining.com/odoo-direct-print-to-dot-matrix-printer/">vitraining.com/odoo-direct-print-to-dot-matrix-printer</a> for more detailed information</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="oe_container oe_dark">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#875A7B;">Installation on Windows with XAMPP</h2>
+
+        <div class="text-justify">
+            <p class="oe_mb32" style="margin:8px;">
+                <ul>
+
+                    <li>install this addon on the database</li>
+            <li>download the proxy script from this <a href="/vit_dotmatrix/static/dotmatrix.zip">LINK</a></li> from the <b>local Odoo server</b> that you installed this addon on.
+                    <li>install apache+php or nginx+php on the local computer and extract to above file info the htdocs folder</li>
+                    <li>follow the INSTALL.TXT instruction on how to install and run the script</li>
+                    <li>print Invoice, SO, PO directly to local dotmatrix printer</li>
+                    <li>visit <a href="http://vitraining.com/odoo-direct-print-to-dot-matrix-printer/">vitraining.com/odoo-direct-print-to-dot-matrix-printer</a> for more detailed information</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <h2 class="oe_slogan" style="color:#875A7B;">Installation on Windows with Python</h2>
+
+        <div class="text-justify">
+            <p class="oe_mb32" style="margin:8px;">
+                <ul>
+
+                    <li>install this addon on the database</li>
+            <li>download the proxy script from this <a href="/vit_dotmatrix/static/py-printer-win.zip">LINK</a></li> from the <b>local Odoo server</b> that you installed this addon on.
+                    <li>Install the required Python modules: <b>flask</b> and <b>flask-cors</b>, you can use <b>pip install -r requirements.txt</b> command</li>
+                    <li>or follow the INSTALL.TXT instruction on how to install and run the script</li>
+                    <li>print Invoice, SO, PO directly to local dotmatrix printer</li>
+                    <li>visit <a href="http://vitraining.com/odoo-direct-print-to-dot-matrix-printer/">vitraining.com/odoo-direct-print-to-dot-matrix-printer</a> for more detailed information</li>
+                </ul>
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+        <div class="oe_span10 text-justify">
+            Find our other interesting modules that can make your life easier:
+            https://www.odoo.com/apps/modules/browse?search=vitraining
+        </div>
+    </div>
+</section>
+
+
+<section class="oe_container">
+    <div class="oe_row oe_spaced">
+
+        <h2  class="oe_slogan" style="width:70%;color:#875A7B;">Contact and Support</h2>
+        <h3 class="oe_span10 oe_slogan">
+            Contact Us: info[at]vitraining.com<br/>
+            Facebook : <a href="https://www.facebook.com/trainingOdoo/">www.facebook.com/trainingOdoo</a><br/>
+            YouTube: <a href="https://www.youtube.com/channel/UCfLiSpb5nKcurnRIZse8zgA">www.youtube.com/channel/UCfLiSpb5nKcurnRIZse8zgA</a><br/>
+            Web: <a href="http://shop.vitraining.com">shop.vitraining.com</a>
+        </h3>
+
+    </div>
+</section>
+
+<section class="oe_container oe_separator">
+</section>

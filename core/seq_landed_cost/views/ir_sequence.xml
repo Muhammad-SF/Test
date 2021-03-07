@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="stock_adj_sequence" model="ir.sequence">
+        <field name="name">Inventory Sequence</field>
+        <field name="code">landed.cost.sequence</field>
+        <field name="active">True</field>
+        <field name="prefix">LC/%(year)s/</field>
+        <field name="padding">5</field>
+        <field name="number_next">1</field>
+        <field name="number_increment">1</field>
+        
+    
+    </record>
+
+    <record id="view_stock_landed_cost_inherit_seq" model="ir.ui.view">
+           <field name="name">stock.landed.cost.inherit</field>
+           <field name="model">stock.landed.cost</field>
+           <field name="inherit_id" ref="stock_landed_costs.view_stock_landed_cost_form"/>
+           <field name="arch" type="xml">
+           <xpath expr="//sheet/div" position="replace">
+           <div class="oe_title">
+                <label for="name" class="oe_edit_only"/>
+                <h1>
+                    <field name="Seq_num" placeholder="Landed Cost Name" readonly="1"/>
+                </h1>
+           </div>
+           </xpath>
+           </field>
+       </record>
+
+        <record id="view_stock_landed_cost_inherit_tree" model="ir.ui.view">
+            <field name="name">stock.landed.inherit_tree</field>
+            <field name="model">stock.landed.cost</field>
+            <field name="inherit_id" ref="stock_landed_costs.view_stock_landed_cost_tree"/>
+            <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='name']" position="replace">
+                <field name="Seq_num"/>
+            </xpath>
+            </field>
+        </record>
+</odoo>

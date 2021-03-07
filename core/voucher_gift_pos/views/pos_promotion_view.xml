@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="pos_promotion_form" model="ir.ui.view">
+        <field name="name">pos.promotion.form</field>
+        <field name="model">pos.promotion</field>
+        <field name="inherit_id" ref="pos_promotion.pos_promotion_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group[1]" position="after">
+                <group string="Coupon Generation">
+                    <group>
+                        <field name="is_generate_coupon"/>
+                        <field name="voucher" attrs="{'invisible': [('is_generate_coupon', '=', False)]}"/>
+                        <field name="no_of_coupon" attrs="{'invisible': [('is_generate_coupon', '=', False)]}"/>
+                        <field name="is_stackable" attrs="{'invisible': [('is_generate_coupon', '=', False)]}"/>
+                    </group>
+                    <group attrs="{'invisible': [('is_generate_coupon', '=', False)]}">
+                        <field name="limit_to_partner"/>
+                        <field name="voucher_amount"/>
+                        <field name="amount_type"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

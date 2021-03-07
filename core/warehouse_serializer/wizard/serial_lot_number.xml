@@ -1,0 +1,39 @@
+<odoo>
+    <!--form view of Serial Lot number wizard-->
+    <record id="view_form_serial_lot" model="ir.ui.view">
+        <field name="name">view.form.serial.lot.number</field>
+        <field name="model">serial.lot.number</field>
+        <field name="arch" type="xml">
+            <form string="Full names" version="8.0">
+                <group string="Product To Serializer">
+                    <field name="serial_name" readonly="True"/>
+                </group>
+                <group>
+                    <field name="stock_lot_line_ids">
+                        <tree editable="bottom">
+                            <field name="product_id"/>
+                            <field name="quantity"/>
+                            <button name="split_quantities" string="Split" type="object" icon="fa-globe" attrs="{'invisible':[('quantity','=',1)]}"/>
+                            <!--<button name="generate_lot_number" string="generate" type="object" icon="fa-arrow-right" attrs="{'invisible':[('check_lot_number','=',False)]}"/>-->
+                            <field name="check_lot_number" invisible="1"/>
+                            <field name="main_product" invisible="1"/>
+                            <field name="lot_serial_number" readonly="1"/>
+                            <field name="source_location_id" invisible="1"/>
+                            <field name="location_dest_id" invisible="1"/>
+                        </tree>
+                    </field>
+                </group>
+            </form>
+        </field>
+    </record>
+
+
+    <!--action view of Serial Lot number days-->
+    <record id="action_view_form_serial_lot_number" model="ir.actions.act_window">
+        <field name="name">Serial Lot number</field>
+        <field name="res_model">serial.lot.number</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

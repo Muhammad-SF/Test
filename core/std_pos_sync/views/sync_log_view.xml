@@ -1,0 +1,781 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+        <menuitem 
+            id="menu_pos_sync" 
+            name="POS Sync"
+			sequence="22"/>
+        
+        <menuitem 
+            id="menu_sync_log" 
+            name="Sync Log"
+            parent="menu_pos_sync" 
+			sequence="10"/>
+			
+		<menuitem 
+            id="menu_manual_sync" 
+            name="Manual Sync"
+            parent="menu_pos_sync" 
+			sequence="20"/>
+			
+		<!-- Product Attributes Sync Log -->
+        <record id="product_attributes_sync_log_form_view" model="ir.ui.view">
+			<field name="name">product.attribute.sync.log.form.view</field>
+			<field name="model">product.attribute.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Product Attribute Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="product_attributes_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">product.attribute.sync.log.tree.view</field>
+			<field name="model">product.attribute.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Product Attribute Sync Log">
+				    <field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_product_attributes_sync_log" model="ir.actions.act_window">
+			<field name="name">Product Attribute Sync Log</field>
+			<field name="res_model">product.attribute.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Product Attribute Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_product_attributes_sync_log" 
+		    name="Product Attribute Sync Log"
+			parent="menu_sync_log" 
+			action="action_product_attributes_sync_log" 
+			sequence="10" />
+			
+		
+		<!-- Product Attributes Values Sync Log -->
+        <record id="product_attrs_value_sync_log_form_view" model="ir.ui.view">
+			<field name="name">product.attrs.value.sync.log.form.view</field>
+			<field name="model">product.attrs.value.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Product Attribute Values Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="product_attrs_value_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">product.attrs.value.sync.log.tree.view</field>
+			<field name="model">product.attrs.value.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Product Attribute Values Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_product_attrs_value_sync_log" model="ir.actions.act_window">
+			<field name="name">Product Attribute Values Sync Log</field>
+			<field name="res_model">product.attrs.value.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Product Attribute Values Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_product_attrs_value_sync_log" 
+		    name="Product Attribute Values Sync Log"
+			parent="menu_sync_log" 
+			action="action_product_attrs_value_sync_log" 
+			sequence="10" />
+        
+        <!-- Product Sync Log -->
+        <record id="product_sync_log_form_view" model="ir.ui.view">
+			<field name="name">product.sync.log.form.view</field>
+			<field name="model">product.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Product Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="product_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">product.sync.log.tree.view</field>
+			<field name="model">product.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Product Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_product_sync_log" model="ir.actions.act_window">
+			<field name="name">Product Sync Log</field>
+			<field name="res_model">product.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Product Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_product_sync_log" 
+		    name="Product Sync Log"
+			parent="menu_sync_log" 
+			action="action_product_sync_log" 
+			sequence="10" />
+			
+		<!-- Customer Sync Log -->
+        <record id="customer_sync_log_form_view" model="ir.ui.view">
+			<field name="name">customer.sync.log.form.view</field>
+			<field name="model">customer.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Customer Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="customer_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">customer.sync.log.tree.view</field>
+			<field name="model">customer.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Customer Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_customer_sync_log" model="ir.actions.act_window">
+			<field name="name">Customer Sync Log</field>
+			<field name="res_model">customer.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Customer Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_customer_sync_log" 
+		    name="Customer Sync Log"
+			parent="menu_sync_log" 
+			action="action_customer_sync_log" 
+			sequence="20" />
+			
+			
+		<!-- Product Category Sync Log -->
+        <record id="product_categ_sync_log_form_view" model="ir.ui.view">
+			<field name="name">product.categ.sync.log.form.view</field>
+			<field name="model">product.categ.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Product Category Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="product_categ_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">product.categ.sync.log.tree.view</field>
+			<field name="model">product.categ.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Product Category Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_product_categ_sync_log" model="ir.actions.act_window">
+			<field name="name">Product Category Sync Log</field>
+			<field name="res_model">product.categ.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Product Category Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_product_categ_sync_log" 
+		    name="Product Category Sync Log"
+			parent="menu_sync_log" 
+			action="action_product_categ_sync_log" 
+			sequence="30" />
+			
+		
+		<!-- POS Product Category Sync Log -->
+        <record id="posproduct_categ_sync_log_form_view" model="ir.ui.view">
+			<field name="name">posproduct.categ.sync.log.form.view</field>
+			<field name="model">posproduct.categ.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="POS Product Category Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="posproduct_categ_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">posproduct.categ.sync.log.tree.view</field>
+			<field name="model">posproduct.categ.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="POS Product Category Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_posproduct_categ_sync_log" model="ir.actions.act_window">
+			<field name="name">POS Product Category Sync Log</field>
+			<field name="res_model">posproduct.categ.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					POS Product Category Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_posproduct_categ_sync_log" 
+		    name="POS Product Category Sync Log"
+			parent="menu_sync_log" 
+			action="action_posproduct_categ_sync_log" 
+			sequence="40" />
+			
+			
+		<!-- Payment Method Sync Log -->
+        <record id="account_payment_sync_log_form_view" model="ir.ui.view">
+			<field name="name">account.journal.sync.log.form.view</field>
+			<field name="model">account.journal.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Payment Method Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="account_payment_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">account.journal.sync.log.tree.view</field>
+			<field name="model">account.journal.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Payment Method Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_account_payment_sync_log" model="ir.actions.act_window">
+			<field name="name">Payment Method Sync Log</field>
+			<field name="res_model">account.journal.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Payment Method Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_account_payment_sync_log" 
+		    name="Payment Method Sync Log"
+			parent="menu_sync_log" 
+			action="action_account_payment_sync_log" 
+			sequence="40" />
+			
+		
+		<!-- POS Promotion Method Sync Log -->
+        <record id="pos_promotion_sync_log_form_view" model="ir.ui.view">
+			<field name="name">pos.promotion.sync.log.form.view</field>
+			<field name="model">pos.promotion.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="POS Promotion Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="pos_promotion_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">pos.promotion.sync.log.tree.view</field>
+			<field name="model">pos.promotion.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="POS Promotion Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_pos_promotion_sync_log" model="ir.actions.act_window">
+			<field name="name">POS Promotion Sync Log</field>
+			<field name="res_model">pos.promotion.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					POS Promotion Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_pos_promotion_sync_log" 
+		    name="POS Promotion Sync Log"
+			parent="menu_sync_log" 
+			action="action_pos_promotion_sync_log" 
+			sequence="70" />
+			
+		<!-- Loyalty Program Method Sync Log -->
+        <record id="loyalty_program_sync_log_form_view" model="ir.ui.view">
+			<field name="name">loyalty.program.sync.log.form.view</field>
+			<field name="model">loyalty.program.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Loyalty Program Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="loyalty_program_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">loyalty.program.sync.log.tree.view</field>
+			<field name="model">loyalty.program.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Loyalty Program Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_loyalty_program_sync_log" model="ir.actions.act_window">
+			<field name="name">Loyalty Program Sync Log</field>
+			<field name="res_model">loyalty.program.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Loyalty Program Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_loyalty_program_sync_log" 
+		    name="Loyalty Program Sync Log"
+			parent="menu_sync_log" 
+			action="action_loyalty_program_sync_log" 
+			sequence="80" />
+			
+		
+		<!-- Gift Voucher Method Sync Log -->
+        <record id="gift_voucher_sync_log_form_view" model="ir.ui.view">
+			<field name="name">gift.voucher.pos.sync.log.form.view</field>
+			<field name="model">gift.voucher.pos.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Gift Voucher Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="gift_voucher_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">gift.voucher.pos.sync.log.tree.view</field>
+			<field name="model">gift.voucher.pos.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Gift Voucher Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_gift_voucher_sync_log" model="ir.actions.act_window">
+			<field name="name">Gift Voucher Sync Log</field>
+			<field name="res_model">gift.voucher.pos.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Gift Voucher Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_gift_voucher_sync_log" 
+		    name="Gift Voucher Sync Log"
+			parent="menu_sync_log" 
+			action="action_gift_voucher_sync_log" 
+			sequence="90" />
+			
+		<!-- Gift Coupon Method Sync Log -->
+        <record id="gift_coupon_sync_log_form_view" model="ir.ui.view">
+			<field name="name">gift.coupon.pos.sync.log.form.view</field>
+			<field name="model">gift.coupon.pos.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Gift Coupon Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="gift_coupon_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">gift.coupon.pos.sync.log.tree.view</field>
+			<field name="model">gift.coupon.pos.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Gift Coupon Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_gift_coupon_sync_log" model="ir.actions.act_window">
+			<field name="name">Gift Coupon Sync Log</field>
+			<field name="res_model">gift.coupon.pos.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Gift Coupon Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_gift_coupon_sync_log" 
+		    name="Gift Coupon Sync Log"
+			parent="menu_sync_log" 
+			action="action_gift_coupon_sync_log" 
+			sequence="100" />
+			
+			
+		<!-- Master Gift Coupon Method Sync Log -->
+        <record id="master_gift_coupon_sync_log_form_view" model="ir.ui.view">
+			<field name="name">master.gift.coupon.pos.sync.log.form.view</field>
+			<field name="model">master.gift.coupon.pos.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Master Gift Coupon Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="master_gift_coupon_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">master.gift.coupon.pos.sync.log.tree.view</field>
+			<field name="model">master.gift.coupon.pos.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Master Gift Coupon Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_master_gift_coupon_sync_log" model="ir.actions.act_window">
+			<field name="name">Master Gift Coupon Sync Log</field>
+			<field name="res_model">master.gift.coupon.pos.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Gift Coupon Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_master_gift_coupon_sync_log" 
+		    name="Master Gift Coupon Sync Log"
+			parent="menu_sync_log" 
+			action="action_master_gift_coupon_sync_log" 
+			sequence="110" />
+			
+		
+		<!-- Master Customer Sync Log -->
+        <record id="master_customer_sync_log_form_view" model="ir.ui.view">
+			<field name="name">master.customer.sync.log.form.view</field>
+			<field name="model">master.customer.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Master Customer Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="master_customer_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">master.customer.sync.log.tree.view</field>
+			<field name="model">master.customer.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Master Customer Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_master_customer_sync_log" model="ir.actions.act_window">
+			<field name="name">Master Customer Sync Log</field>
+			<field name="res_model">master.customer.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Master Customer Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_master_customer_sync_log" 
+		    name="Master Customer Sync Log"
+			parent="menu_sync_log" 
+			action="action_master_customer_sync_log" 
+			sequence="120" />
+			
+		<!-- Product Brand Sync Log -->
+        <record id="product_brand_sync_log_form_view" model="ir.ui.view">
+			<field name="name">product.brand.sync.log.form.view</field>
+			<field name="model">product.brand.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="Product Brand Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="product_brand_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">product.brand.sync.log.tree.view</field>
+			<field name="model">product.brand.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="Product Brand Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_product_brand_sync_log" model="ir.actions.act_window">
+			<field name="name">Product Brand Sync Log</field>
+			<field name="res_model">product.brand.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					Product Brand Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_product_brand_sync_log" 
+		    name="Product Brand Sync Log"
+			parent="menu_sync_log" 
+			action="action_product_brand_sync_log" 
+			sequence="130" />
+			
+		
+		<!-- POS Config Sync Log -->
+        <record id="pos_config_sync_log_form_view" model="ir.ui.view">
+			<field name="name">pos.config.sync.log.form.view</field>
+			<field name="model">pos.config.sync.log</field>
+			<field name="arch" type="xml">
+				<form string="POS Config Sync Log">
+					<sheet>
+						<group>
+						    <group>
+						        <field name="create_date" />
+						    </group>
+						    <group>
+						        <field name="status" />
+						    </group>
+						</group>
+					</sheet>
+			    </form>
+			</field>
+		</record>
+		
+		<record id="pos_config_sync_log_tree_view" model="ir.ui.view">
+			<field name="name">pos.config.sync.log.tree.view</field>
+			<field name="model">pos.config.sync.log</field>
+			<field name="arch" type="xml">
+				<tree string="POS Config Sync Log">
+					<field name="create_date" />
+					<field name="status" />
+				</tree>
+			</field>
+		</record>
+
+		<record id="action_pos_config_sync_log" model="ir.actions.act_window">
+			<field name="name">POS Config Sync Log</field>
+			<field name="res_model">pos.config.sync.log</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="help" type="html">
+				<p>
+					POS Config Sync Log.
+				</p>
+			</field>
+		</record>
+		
+		<menuitem 
+		    id="menu_pos_config_sync_log" 
+		    name="POS Config Sync Log"
+			parent="menu_sync_log" 
+			action="action_pos_config_sync_log" 
+			sequence="140" />
+        
+    </data>
+</openerp>

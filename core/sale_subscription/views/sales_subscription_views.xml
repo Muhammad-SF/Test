@@ -1,0 +1,164 @@
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_order_form">
+            <field name="name">sale.order.form</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <notebook position="inside">
+                    <page string="Subscription Options"
+                          attrs="{'invisible': ['|',('subscription','!=', True),'&amp;',('state','not in',['sale','done']),('subscription','=', True)]}">
+                        <group>
+                            <group>
+                                <field name="start_date" string="Start date"
+                                          attrs="{'required': [('state','not in',['draft','sent','cancel']),('subscription','=', True)],'readonly':[('state','=', 'done')]}"/>
+                                <field name="auto_renew_policy" string="Renew policy" attrs="{'readonly':[('state','=','done'),('subscription_terminated','=', True)]}"/>
+                                <field name="auto_end_subscription_date" string="End Subscription Date"/>
+                                <field name="subscription_terminated" string="Terminated Subscription"  class="oe_inline" attrs="{'readonly':[('state','=','done'),('subscription_terminated','=', True)]}"/>
+                                <field name="send_fact" string="Mail invoice"
+                                       attrs="{'invisible': [('subscription','!=', True)]}"/>
+                                <field name="mail_to_client" string="To" attrs="{'invisible': [('send_fact','!=', True)]}" class="oe_inline"
+                                       context="{'force_email': True ,'show_email': True}"
+                                       widget="many2many_tags_email"/>
+                                <field name="mail_cc_client" string="Cc" attrs="{'invisible': [('send_fact','!=', True)]}" class="oe_inline"
+                                       context="{'force_email': True ,'show_email': True}"
+                                       widget="many2many_tags_email"/>
+                                <field name="invoice_report" string="Invoices report" class="oe_inline"/>
+                            </group>
+                            <group>
+                                <field name="end_subscription_date" string="Subscription end date" class="oe_inline" attrs="{'invisible': ['|', ('subscription_terminated','!=', True),('subscription','!=', True)], 'required': [('subscription','=',True),('subscription_terminated','=', True)] ,'readonly':[('state','=', 'done')]}"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="subscription" string="Is a Subscription" attrs="{'readonly':[('state','not in', 'draft')]}" invisible="1"/>
+                    <field name="periodicity" string="Periodicity" attrs="{'invisible': [('subscription','!=', True)] ,'readonly':[('state','=', 'done')]}"/>
+                    <field name="subscription_duration" string="Subscription duration"
+                           attrs="{'invisible': [('subscription','!=', True)],'readonly':[('state','=', 'done')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_sales_order_filter" model="ir.ui.view">
+            <field name="name">sale.order.list.select</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//separator[last()]" position="after">
+                    <separator/>
+                    <filter string="Contracts" name="contracts" domain="[('subscription','=',True)]"
+                            help="Recurrent Contracts Only"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_order_tree">
+            <field name="name">sale.order.tree</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="model">sale.order</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='invoice_status']" position="after">
+                    <field name="subscription" string="Is subscribed" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_contract_form">
+            <field name="inherit_id" ref="sale.action_orders"/>
+            <field name="name">invoice_subscription_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">form</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'show_sale': True}</field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel')), ('subscription' , '=' , True)]</field>
+        </record>
+
+        <record model="ir.cron" id="invoice_subscription_cron">
+            <field name="name">Generate Subscription's Invoices</field>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="True"/>
+            <field name="model" eval="'planif.invoice.sale.order'"/>
+            <field name="function" eval="'action_planif'"/>
+            <field name="args" eval="'()'"/>
+        </record>
+
+        <record id="invoice_settings" model="ir.ui.view">
+            <field name="name">sale settings</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sales_team.view_sale_config_settings"/>
+            <field name="arch" type="xml">
+                <div id="main" position="after">
+                    <group string="Subscription" >
+                        <field name="default_auto_renew_policy" string="Auto renew policy" class="oe_inline"/>
+                        <field name="invoice_report_setting" string="Invoice template" class="oe_inline"/>
+                        <field name="dft_mail_cci_client" context="{'force_email': True ,'show_email': True}" widget="many2many_tags_email" string="Cci mail" class="oe_inline"/>
+                    </group>
+                </div>
+            </field>
+        </record>
+
+        <record id="action_sale_subscription" model="ir.actions.act_window">
+            <field name="name">Contracts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+            <field name="context">{'default_subscription': True}</field>
+            <field name="domain">[('subscription' , '=' , True)]</field>
+        </record>
+
+        <menuitem action="action_sale_subscription"
+            id="menu_sale_subscription" parent="sales_team.menu_sales"
+            sequence="12" groups="sales_team.group_sale_salesman,sales_team.group_sale_manager"/>
+
+        <record id="sale.action_orders" model="ir.actions.act_window">
+            <field name="inherit_id" ref="sale.action_orders"/>
+            <field name="name">Sales Orders</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+            <field name="search_view_id" ref="sale.sale_order_view_search_inherit_sale"/>
+            <field name="context">{}</field>
+            <field name="domain">[('state', 'not in', ('draft', 'sent', 'cancel')), ('subscription' , '=' , False)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a Quotation, the first step of a new sale.
+                </p><p>
+                    Once the quotation is confirmed, it becomes a sales order.
+                    You'll be able to invoice it and collect payments.
+                    From the <i>Sales Orders</i> menu, you can track delivery
+                    orders or services.
+                </p>
+            </field>
+        </record>
+
+        <record id="sale.action_quotations" model="ir.actions.act_window">
+            <field name="inherit_id" ref="sale.action_quotations"/>
+            <field name="name">Quotations</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="sale.view_quotation_tree"/>
+            <field name="view_mode">tree,kanban,form,calendar,pivot,graph</field>
+            <field name="search_view_id" ref="sale.sale_order_view_search_inherit_quotation"/>
+            <field name="context">{'hide_sale': True}</field>
+            <field name="domain">[('subscription' , '=' , False)]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a Quotation, the first step of a new sale.
+                </p><p>
+                    Your next actions should flow efficiently: confirm the Quotation
+                    to a Sale Order, then create the Invoice and collect the Payment.
+                </p><p>
+                    Note that once a Quotation becomes a Sale Order, it will be moved
+                    from the Quotations list to the Sales Order list.
+                </p>
+            </field>
+        </record>
+    </data>
+</openerp>

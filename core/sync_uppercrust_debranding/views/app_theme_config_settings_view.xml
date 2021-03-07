@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--Customize Setting View and menu-->
+        <record id="debrand_settings_view_form" model="ir.ui.view">
+            <field name="name">Debrand Customize Settings</field>
+            <field name="model">debrand.config.settings</field>
+            <field name="priority" eval="40"/>
+            <!--<field name="inherit_id" ref="base_setup.view_general_configuration"/>-->
+            <field name="arch" type="xml">
+                <form string="Debrand Customize Settings" class="oe_form_configuration">
+                    <header>
+                        <button string="Apply" type="object" name="execute" class="oe_highlight"/>
+                        <button string="Cancel" type="object" name="cancel" class="oe_link" special="cancel"/>
+                    </header>
+                    <group name="google" position="before">
+                        <group string="System Icon">
+                            <label for="sync_app_company_fevicon"/>
+                            <div>
+                                <field name="sync_app_company_fevicon"
+                                       widget="image"
+                                       class="oe_avatar"
+                                       options="{'preview_image': 'image_small', 'size': [30, 30]}"/>
+                            </div>
+                        </group>
+                        <group string="System Name">
+                            <label class="o_form_label" for="sync_app_system_name"/>
+                            <div>
+                                <field name="sync_app_system_name"/>
+                            </div>
+                        </group>
+                        <group string="System Title">
+                            <label class="o_form_label" for="sync_app_system_title"/>
+                            <!--<div class="text-muted">Apply in Warning messages and No Record Layout</div>-->
+                            <div>
+                                <field name="sync_app_system_title"/>
+                            </div>
+                        </group>
+                        <group string="System Url">
+                            <label class="o_form_label" for="sync_app_system_url"/>
+                            <div>
+                                <field name="sync_app_system_url"/>
+                            </div>
+                        </group>
+                        <group string="Check Error Dialogue">
+                            <label for="check_error" string="Check Error Dialogue"/>
+                            <div id="check_error" class="oe_inline">
+                                <button name="error" id="error" type="object" string="error" class="btn-danger"/>
+                            </div>
+                        </group>
+                        <group string="Check Warning Dialogue">
+                            <label for="checkwarning" string="Check Warning Dialogue"/>
+                            <div id="check_error" class="oe_inline">
+                                <button name="warning" id="warning" type="object" string="warning" class="btn-warning"/>
+                            </div>
+                        </group>
+                        <group string="Item to Show">
+                            <div name="user_menu_show_hide">
+                                <div>
+                                    <field name="sync_app_show_documentation"/>
+                                    <label for="sync_app_show_documentation"/>
+                                </div>
+                                <!--<div>-->
+                                    <!--<field name="sync_app_show_documentation_dev"/>-->
+                                    <!--<label for="sync_app_show_documentation_dev"/>-->
+                                <!--</div>-->
+                                <div>
+                                    <field name="sync_app_show_support"/>
+                                    <label for="sync_app_show_support"/>
+                                </div>
+                                <div>
+                                    <field name="sync_app_show_account"/>
+                                    <label for="sync_app_show_account"/>
+                                </div>
+                                <div>
+                                    <field name="sync_app_show_poweredby"/>
+                                    <label for="sync_app_show_poweredby"/>
+                                </div>
+                                <div>
+                                    <field name="group_show_author_in_apps"/>
+                                    <label for="group_show_author_in_apps"/>
+                                </div>
+                            </div>
+                        </group>
+                        <group string="User Menu Content">
+                            <div name="user_menu_show_hide">
+                                <div style="width:40%">
+                                    <label class="o_form_label" for="sync_app_documentation_url"/>
+                                </div>
+                                <div style="width:60%">
+                                    <field name="sync_app_documentation_url"/>
+                                </div>
+                                <label class="o_form_label" for="sync_app_documentation_dev_url"/>
+                                <div style="width:60%">
+                                    <field name="sync_app_documentation_dev_url"/>
+                                </div>
+                                <label class="o_form_label" for="sync_app_support_url"/>
+                                <div style="width:60%">
+                                    <field name="sync_app_support_url"/>
+                                </div>
+                                <label class="o_form_label" for="sync_app_account_title"/>
+                                <div style="width:60%">
+                                    <field name="sync_app_account_title"/>
+                                </div>
+                                <label class="o_form_label" for="sync_app_account_url"/>
+                                <div style="width:60%">
+                                    <field name="sync_app_account_url"/>
+                                </div>
+                            </div>
+                        </group>
+                        <group string="Powered By">
+                            <div name="powered_by_show_hide">
+                                <div style="width:40%">
+                                    <label class="o_form_label" for="sync_app_powered_first_title"/>
+                                </div>
+                                <div style="width:60%">
+                                    <field name="sync_app_powered_first_title"/>
+                                </div>
+                                <label class="o_form_label" for="sync_app_powered_first_url"/>
+                                <div style="width:60%">
+                                    <field name="sync_app_powered_first_url"/>
+                                </div>
+                                <label class="o_form_label" for="sync_app_powered_second_title"/>
+                                <div style="width:60%">
+                                    <field name="sync_app_powered_second_title"/>
+                                </div>
+                                <label class="o_form_label" for="sync_app_powered_second_url"/>
+                                <div style="width:60%">
+                                    <field name="sync_app_powered_second_url"/>
+                                </div>
+                                <!-- <label class="o_form_label" for="sync_app_account_url"/>
+                                <div style="width:60%">
+                                    <field name="sync_app_account_url"/>
+                                </div> -->
+                            </div>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="sync_uppercrust_debranding_theme_config" model="ir.actions.act_window">
+            <field name="name">Debranding Customize</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">debrand.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'sync_uppercrust_debranding'}</field>
+        </record>
+
+        <menuitem
+                id="menu_app_group"
+                name="Debranding Customize"
+                parent="base.menu_administration"
+                sequence="1"
+                action="sync_uppercrust_debranding_theme_config"
+                groups="base.group_no_one"/>
+    </data>
+</odoo>

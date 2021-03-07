@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="commission_wizard">
+        <field name="name">commission.wizard.form</field>
+        <field name="model">commission.wizard</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="sales_team_id" requied="1"/>
+                        <field name="start_period"/>
+                        <field name="end_period"/>
+                    </group>
+                    <footer>
+                        <div class="text-left">
+                            <button name="print_commission_pdf_report" string="PDF" type="object" class="oe_highlight" /> or
+                            <button name="print_commission_xls_report" string="XLS" type="object" class="oe_highlight" /> or
+                            <button string="Cancel" special="cancel" />
+                        </div>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_open_print_commission_report">
+        <field name="name">Commission Report</field>
+        <field name="res_model">commission.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="commission_wizard"/>
+        <field name="target">new</field>
+    </record>
+
+<!--     <menuitem name="Print Commission Report" id="menu_print_commission_report" parent="sales_commission_calculation.menu_commission_and_rewards" action="action_open_print_commission_report" sequence="16"/> -->
+
+</odoo>

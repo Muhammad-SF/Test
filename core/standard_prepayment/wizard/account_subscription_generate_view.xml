@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem sequence="3" action="acc_recurring_entries.action_account_subscription_generate" id="acc_recurring_entries.menu_generate_subscription" parent="acc_recurring_entries.menu_finance_recurrent_entries" groups="standard_prepayment.group_prepayment"/>
+
+    </data>
+</odoo>

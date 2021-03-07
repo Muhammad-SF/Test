@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_company_form_inherit_for_attendance" model="ir.ui.view">
+        <field name="name">Company Form Inherit for Attendance</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]/group/group" position="inside">
+                <field name="allow_multiple_attendance"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

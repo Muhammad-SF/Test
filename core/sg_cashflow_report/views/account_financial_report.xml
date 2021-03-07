@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+        <record id="action_account_report_cfs" model="ir.actions.act_window">
+            <field name="name">Cash Flow Statement</field>
+            <field name="res_model">accounting.report</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account.accounting_report_view"/>
+            <field name="target">new</field>
+            <field name="context" eval="{'default_account_report_id':ref('account_financial_report_cash_flow_statement')}"/>
+        </record>
+
+        <menuitem id="menu_account_report_cfs" name="Cash Flow Statement" action="action_account_report_cfs" parent="account.menu_finance_legal_statement" groups="account.group_account_manager"/>
+
+	</data>
+</odoo>

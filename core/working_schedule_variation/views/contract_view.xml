@@ -1,0 +1,16 @@
+<odoo>
+	<data>
+		<record id="hr_contract_form_working_calendar_inherit" model="ir.ui.view">
+			<field name="name">hr.contract.view.form.inherit</field>
+			<field name="model">hr.contract</field>
+			<field name="inherit_id"
+				ref="hr_contract.hr_contract_view_form" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='working_hours']" position="replace">
+				    <field name="working_hours"/>
+					<field name="shift_pattern_line_id" context="{'working_hours':working_hours}"/>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>

@@ -1,0 +1,111 @@
+body.o_web_client {
+  .o_main .o_main_content.ad_rightbar, &.modal-open .modal-dialog .modal-content{
+    // o_checkbox - start
+    .o_checkbox:not(.o_boolean_toggle){
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+      font-size: 13px;
+      vertical-align: middle;
+      text-align: center;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      margin: 1px 0px;
+      &:after {
+        content: "";
+        position: absolute;
+        display: none;
+      }
+      // Create the checkmark/indicator (hidden when not checked) - stop
+      // When the checkbox is checked, add a blue background - start
+      & > input:checked ~ span {
+        background-color: transparent;
+        // Show the checkmark when checked - start
+        &:after {
+          content: "\f00c";
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font: normal normal normal 14px/1 FontAwesome;
+          text-rendering: auto;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          color: @Label-value;
+        }
+        // Show the checkmark when checked - stop
+      }
+      // When the checkbox is checked, add a blue background - stop
+      // Hide the browser's default checkbox -start
+      & > input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        margin: 0;
+        height: 20px;
+        width: 20px;
+        z-index: 1;
+      }
+      & > input[type="checkbox"][disabled]{
+        cursor: not-allowed;
+      }
+      & > input[type="checkbox"][disabled] + span{
+        opacity: 0.4;
+      }
+      // Hide the browser's default checkbox -stop
+
+      // Create a custom checkbox - start
+      & > span {
+        position: relative;
+        top: 0;
+        left: 0;
+        height: 20px;
+        width: 20px;
+        border: 2px solid @Label;
+        display: block;
+      }
+      // Create a custom checkbox - stop
+    }
+    // o_checkbox - stop
+
+    // o_checkbox with toggle - [start]
+    .o_checkbox.o_boolean_toggle{
+      & > input:checked + .slider{
+        background-color: @brand-primary;
+      }
+    }
+    // o_checkbox with toggle - [stop]
+  }
+  input[type="checkbox"]:before {
+    content: '';
+    background: @white;
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid @Label;
+  }
+
+  input[type="checkbox"]:checked:before {
+    content: "\f00c";
+    font: normal normal normal 14px/1 FontAwesome;
+    color: @Label;
+    padding: 1px;
+    outline: none;
+  }
+  input[type="checkbox"][disabled]:before{
+    opacity: 0.4;
+  }
+  input[type="checkbox"]{
+    width: 20px;
+    height: 15px;
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+  }
+  .openerp .oe_form input[readonly], .openerp .oe_form select[readonly], .openerp .oe_form textarea[readonly], .openerp .oe_form input[disabled], .openerp .oe_form select[disabled]{
+    background: @white !important;
+  }
+}

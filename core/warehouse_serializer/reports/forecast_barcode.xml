@@ -1,0 +1,68 @@
+<odoo>
+    <template id="warehouse_serializer.report_forecast_barcode_document">
+        <t t-call="report.html_container">
+            <t t-call="warehouse_serializer.report_existing_barcode_layout">
+                <t t-set="o" t-value="o.with_context({'lang':o.partner_id.lang})"/>
+                <div class="page">
+                    <div class="row">
+                    <t t-set="label_size" t-value="o.env['label.size'].search([])"/>
+                    <t t-set="height_d" t-value="label_size.height"/>
+                    <t t-set="width_d" t-value="label_size.width"/>
+                        <t t-foreach="o.move_lines" t-as="line">
+                            <t t-if="(line.product_id.type  != 'service')">
+                                <t t-set="qty" t-value="line.product_uom_qty"/>
+                                <t t-foreach="range(0,int(qty))" t-as="lot_serial">
+                                    <div class="col-xs-12">
+                                        <div class="col-xs-12" style="margin-bottom:10px;">
+                                            <table style="font-size:12px;">
+                                                <tr style="width: 1in;">
+                                                    <td style="text-align: center; vertical-align: middle;"
+                                                        class="col-xs-5" colspan="2">
+                                                        <!--<img t-if="line.product_id.barcode"-->
+                                                             <!--t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13', line.product_id.barcode, 600, 150)"-->
+                                                             <!--t-att-style='"height: " + "height_d" + "%;width: "+"width_d" +"%;" '-->
+                                                             <!--/>-->
+                                                         <img t-if="line.product_id.barcode"
+                                                             t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', line.product_id.barcode, 600, 150)"
+                                                             style="width:100%;height:20%;"
+                                                             />
+                                                        <span t-field="line.product_id.barcode"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td style="float:right !important;">:
+                                                        <span t-field="line.product_id.name"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>SKU</td>
+                                                    <td style="float:right !important;">:
+                                                        <span t-field="line.product_id.default_code"/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Date Received</td>
+                                                    <td style="float:right !important;">:
+                                                        <span t-field="o.min_date"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+
+    <template id="report_forecast_barcode">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="warehouse_serializer.report_forecast_barcode_document" t-lang="o.partner_id.lang"/>
+        </t>
+    </template>
+</odoo>

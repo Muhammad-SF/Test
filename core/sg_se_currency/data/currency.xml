@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="base.SGD" model="res.currency">
+            <field name="name">SGD</field>
+            <field name="symbol">SGD</field>
+            <field name="rounding">0.01</field>
+            <field name="active" eval="True"/>
+            <field name="position">before</field>
+            <field name="decimal_places">4</field>
+        </record>
+
+        <record forcecreate="0" id="base.rateSGD" model="res.currency.rate">
+            <field name="rate">1.0</field>
+            <field name="currency_id" ref="base.SGD"/>
+            <field name="name">2017-03-06</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_sale_receipt_form_inherited">
+        <field name="name">account.voucher.sale.form</field>
+        <field name="model">account.voucher</field>
+        <field name="inherit_id" ref="account_voucher.view_sale_receipt_form"/>
+        <field name="arch" type="xml">
+            <field name="date_due" position="after">
+                <field name="fiscal_position_id" attrs="{'readonly': [('state','not in',['draft'])]}"/>
+                <field name="permit_number" attrs="{'readonly': [('state','not in',['draft'])]}"/>
+            </field>
+            <field name="currency_id" position="replace"/>
+            <field name="account_id" position="after">
+                <field name="currency_id" attrs="{'readonly': [('state','not in',['draft'])]}"/>
+                <field name="attention" attrs="{'readonly': [('state','not in',['draft'])]}"/>
+            </field>
+            <field name="journal_id" position="after">
+                <field name="cheque_no" attrs="{'readonly': [('state','not in',['draft'])]}"/>
+            </field>
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='price_unit']" position="after">
+                <field name="discount" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

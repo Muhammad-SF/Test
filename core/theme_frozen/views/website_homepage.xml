@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+<!--     <record id="homepage" model="ir.ui.view">
+      <field name="name">Home</field>
+      <field name="type">qweb</field>
+      <field name="key">website.homepage</field>
+      <field name="arch" type="xml"> -->
+        <template name="Home" priority="29" id="homepage">
+          <t t-call="website.layout">
+            <t t-set="pageName" t-value="'homepage'" />
+            <!-- Page Preloder -->
+            <div id="preloder">
+              <div class="loader"></div>
+            </div>
+            <div class="oe_structure" />
+            <!-- ==== Intro Section Start ==== -->
+            <section class="intro-section fix" id="home">
+              <div class="intro-bg bg-cms"></div>
+              <div class="intro-inner">
+                <div class="intro-content">
+                  <div id="round"></div>
+                  <div class="profile-img">
+                    <img src="/theme_frozen/static/src/img/avatar.jpg" alt="" />
+                  </div>
+                  <h2>
+                    <span class="element"></span>
+                  </h2>
+                </div>
+              </div>
+            </section>
+            <div class="oe_structure" />
+            <!-- ==== Intro Section End ==== -->
+            <main class="main-warp">
+              <div class="oe_structure" />
+              <!-- ==== About Section Start ==== -->
+              <section class="about-section fix" id="about">
+                <div class="container pt100 pb100">
+                  <div class="row">
+                    <div class="col-md-7 about-text">
+                      <h2>A short story about me.</h2>
+                      <p>I am Michael Owen. Impossible considered invitation him men instrument saw celebrated unpleasant. Put rest and must set kind next many near nay. He exquisite continued explained middleton am. Impossible considered invitation him men instrument saw celebrated unpleasant. Put rest and must set kind next many near nay. He exquisite continued explained middleton am. Voice hours young woody.</p>
+                      <a href="index-bubble.html#" class="site-btn mt10">Download CV</a>
+                    </div>
+                    <div class="col-md-5 skill">
+                     
+                    </div>
+                  </div>
+                </div>
+              </section>
+             
+              <!-- ==== Contact Section End ==== -->
+            </main>
+            <div class="oe_structure" />
+          </t>
+        </template>
+        <!-- </t>
+      </field>
+    </record> -->
+
+<!--<record id="homepage_page" model="website.page">
+      <field name="website_published">True</field>
+      <field name="url">/profile</field>
+      <field name="view_id" ref="theme_frozen.homepage" />
+    </record> -->
+
+    <record id="menu_homepage" model="website.menu">
+      <field name="name">Profile</field>
+      <field name="url">/profile</field>
+      <!-- <field name="page_id" ref="theme_frozen.homepage_page" /> -->
+      <field name="parent_id" ref="website.main_menu" />
+      <field name="sequence" type="int">1</field>
+      <field name="website_id" ref="website.default_website" />
+    </record>
+  </data>
+</odoo>

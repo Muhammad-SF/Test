@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_bank_balance_computation" model="ir.ui.view">
+            <field name="name">bank_balance_computation</field>
+            <field name="model">bank.balance.computation</field>
+            <field name="arch" type="xml">
+                <form string="Compute bank balances" class="oe_form_configuration">
+                  <header>
+                    <button string="Compute" type="object" name="compute_bank_balances" class="oe_highlight"/>
+                  </header>
+                  <group string="Compute bank balances" name="compute_bank_balances">
+                      <group>
+                        <field name="date_start"/>
+                        <field name="journal_ids" widget="many2many_tags"/>
+                      </group>
+                      <group>
+                        <field name="date_end"/>
+                        <field name="daily_balances"/>
+                        <field name="forecast_options"/>
+                      </group>
+                  </group>
+                  <group attrs="{'invisible':[('forecast_options', '!=', True)]}">
+                      <group col="8">
+                          <field name="include_bank_fc_line" colspan="2"/>
+                          <field name="include_account_moves" colspan="2"/>
+                          <field name="include_draft_invoices" colspan="2"/>
+                      </group>
+                  </group>
+                  <notebook>
+                    <page string="Output">
+                      <field name="bank_balances"
+                             widget="html"
+                             readonly="True"
+                             nolabel="True"/>
+                    </page>
+                    <page string="Query" groups="base.group_no_one">
+                      <field name="final_query"
+                             readonly="True"
+                             nolabel="True"/>
+                    </page>
+
+                  </notebook>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_compute_bank_balances" model="ir.actions.act_window">
+            <field name="name">Compute Bank Balances</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bank.balance.computation</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+        </record>
+
+        <menuitem id="menu_compute_bank_balances" name="Compute bank balances"
+            parent="treasury_forecast.menu_treasury_forecast_group" sequence="30"
+            action="action_compute_bank_balances"/>
+    </data>
+</odoo>

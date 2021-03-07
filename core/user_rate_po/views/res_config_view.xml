@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!--Purchase Configuration-->
+        <record id="view_purchase_config_user_rate_po" model="ir.ui.view">
+            <field name="name">View Purchase Config User Rate PO</field>
+            <field name="model">purchase.config.settings</field>
+            <field name="inherit_id" ref="purchase.view_purchase_configuration"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/group[2]" position="after">
+                    <group string="Activate User Rate PO">
+                        <label string="Activate User Rate PO"/>
+                        <div>
+                            <field name="is_user_rate_po" class="oe_inline"/>
+                        </div>
+                    </group>
+              </xpath>
+            </field>
+        </record>
+
+        <!--Sales Configuration-->
+        <record id="view_sale_config_settings_user_rate_so" model="ir.ui.view">
+            <field name="name">View Sale Config Settings User Rate SO</field>
+            <field name="model">sale.config.settings</field>
+            <field name="inherit_id" ref="sales_team.view_sale_config_settings"/>
+            <field name="arch" type="xml">
+                <div id="main" position="after">
+                    <group string="Activate User Rate SO">
+                        <label string="Activate User Rate SO"/>
+                        <div>
+                            <field name="is_user_rate_so" class="oe_inline"/>
+                        </div>
+                    </group>
+                </div>
+            </field>
+        </record>
+
+    </data>
+  </odoo>

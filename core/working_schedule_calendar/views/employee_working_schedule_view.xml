@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <template id="assets_backend" name="calendar inherit assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/working_schedule_calendar/static/src/js/calendar.js"></script>
+            <script type="text/javascript" src="/working_schedule_calendar/static/src/js/working_presence_widgets.js"></script>
+            <link rel="stylesheet" href="/working_schedule_calendar/static/src/less/hr_attendance.less"/>
+        </xpath>
+    </template>
+
+        <!-- Working Schedule Summary List View -->
+        <record id="view_employee_working_schedule_summary_tree" model="ir.ui.view">
+            <field name="name">Employee Working Schedule Calendar Tree</field>
+            <field name="model">employee.working.schedule.calendar</field>
+            <field name="arch" type="xml">
+                <tree string="Working Schedule Calendar">
+                    <field name="employee_id"/>
+                    <field name="contract_id"/>
+                    <field name="department_id"/>
+                    <field name="dayofweek"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="working_hours"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_employee_working_schedule_summary_form" model="ir.ui.view">
+            <field name="name">Employee Working Schedule Calendar Tree</field>
+            <field name="model">employee.working.schedule.calendar</field>
+            <field name="arch" type="xml">
+                <form string="Working Schedule Calendar">
+                    <sheet>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="date_start"/>
+                            <field name="date_end"/>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="checkin"/>
+                                <field name="checkout"/>
+                                <field name="total_working_time"/>
+                            </group>
+                            <group>
+                                <field name="break_from" widget="float_time"/>
+                                <field name="break_to" widget="float_time"/>
+                                <field name="state" widget="working_schedule_calendar_form_presence_indicator"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_employee_working_schedule_search" model="ir.ui.view">
+            <field name="name">Employee Working Schedule Calendar Search</field>
+            <field name="model">employee.working.schedule.calendar</field>
+            <field name="arch" type="xml">
+                <search string="Search Working Schedule Calendar">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="contract_id"/>
+                    <field name="department_id"/>
+                    <field name="working_hours"/>
+                    <separator/>
+                    <filter string="Current Year" name="year" domain="[('date_start','&gt;=',time.strftime('%%Y-01-01')),('date_start','&lt;=',time.strftime('%%Y-12-31'))]"/>
+                    <separator/>
+                    <filter name="department" string="Department" domain="[]" context="{'group_by':'department_id'}"/>
+                    <separator/>
+                    <group expand="0" string="Group By">
+                        <filter name="employee" string="Employees" domain="[]" context="{'group_by':'employee_id'}"/>
+                        <filter name="contracts" string="Contracts" domain="[]" context="{'group_by':'contract_id'}"/>
+                        <filter name="schedules" string="Working Schedules" domain="[]" context="{'group_by':'working_hours'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_employee_working_schedule_summary_calendar" model="ir.ui.view">
+            <field name="name">Employee Working Schedule Calendar</field>
+            <field name="model">employee.working.schedule.calendar</field>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <calendar string="Working Schedule Calendar" date_start="date_start"
+                          display="[name]"  all_day="allday" color="employee_id" avatar_model="hr.employee">
+                    <field name="name"/>
+                    <field name="state" widget="working_schedule_calendar_form_presence_indicator"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="action_employee_working_schedule_summary" model="ir.actions.act_window">
+            <field name="name">Employee Working Calendar</field>
+            <field name="res_model">employee.working.schedule.calendar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">calendar,tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{'search_default_year': 0, 'search_default_department': 1, 'search_default_employee': 1}</field>
+            <field name="view_id" eval="False"/>
+            <field name="search_view_id" ref="view_employee_working_schedule_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a new Employee Working Calendar.
+              </p>
+            </field>
+        </record>
+
+        <menuitem action="action_employee_working_schedule_summary" id="employee_working_schedule_summary_mgmt" parent="hr_attendance.menu_hr_attendance_manage_attendances" sequence="1"/>
+
+
+        <record id="hr_employee_view_shift_pattern_history" model="ir.ui.view">
+            <field name="name">hr.employee.view.shift.pattern.history</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page name="shift_pattern_history" string="Shift Pattern History">
+                        <field name="shift_pattern_history_line_ids" readonly="1">
+                            <tree editable="bottom">
+                                <field name="employee_id" invisible="1" />
+                                <field name="variation_name" readonly="1" />
+                                <field name="start_time" readonly="1" />
+                                <field name="end_time" readonly="1" />
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="employee_id" invisible="1" />
+                                    <field name="variation_name" readonly="1" />
+                                    <field name="start_time" readonly="1" />
+                                    <field name="end_time" readonly="1" />
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+
+                    <page name="working_time_history" string="Working Time History">
+                        <field name="working_time_history_line_ids" readonly="1">
+                            <tree editable="bottom">
+                                <field name="employee_id" invisible="1" />
+                                <field name="calendar_id" readonly="1" />
+                                <field name="start_date" readonly="1" />
+                                <field name="end_date" readonly="1" />
+                                <field name="contract_id" readonly="1" />
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="employee_id" invisible="1" />
+                                    <field name="calendar_id" readonly="1" />
+                                    <field name="start_date" readonly="1" />
+                                    <field name="end_date" readonly="1" />
+                                    <field name="contract_id" readonly="1" />
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

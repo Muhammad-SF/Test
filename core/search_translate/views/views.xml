@@ -1,0 +1,15 @@
+<odoo>
+  <data>
+    <record model="ir.ui.view" id="res_partner_opt_out_search_en">
+        <field name="name">res.partner.opt_out.search.en</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+                <xpath expr='//field[@name="name"]' position='attributes'>
+                    <attribute name="filter_domain">['|','|','|',('display_name','ilike',self),('ref','=',self),('email','ilike',self),('en_name','ilike',self)]</attribute>
+
+                </xpath>
+        </field>
+    </record>
+  </data>
+</odoo>

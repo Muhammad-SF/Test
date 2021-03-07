@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <!-- Restaurant Floor -->
+        <record model="ir.ui.view" id="view_restaurant_floor_form_sync_pos_id">
+            <field name="name">restaurant.floor.form.sync.pos.id</field>
+            <field name="model">restaurant.floor</field>
+            <field name="inherit_id" ref="pos_restaurant.view_restaurant_floor_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/field[@name='background_color']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- Restaurant Table -->
+        <record model="ir.ui.view" id="view_restaurant_table_form_sync_pos_id">
+            <field name="name">restaurant.table.form.sync.pos.id</field>
+            <field name="model">restaurant.table</field>
+            <field name="inherit_id" ref="pos_restaurant.view_restaurant_table_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[2]/field[@name='height']" position="after">
+                    <field name="pos_sync_id" invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

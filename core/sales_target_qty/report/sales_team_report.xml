@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <!-- Driver Login Form -->
+    <record id="view_sales_team_qty_excel_wizard" model="ir.ui.view">
+            <field name="name">view.sales.team.qty.excel.wizard</field>
+            <field name="model">sales.team.qty.report</field>
+            <field name="arch" type="xml">
+                <form string="Sales Team Qty Report" create="false" delete="false">
+                    <sheet>
+                        <br/>
+                        <br/>
+                        <group>
+                            <field name="year" string="Year" required="1"/>
+                            <field name="product_ids" required="1" widget="many2many_tags"/>
+                            <!-- <field name="product_id" required="1"/> -->
+                            <field name="crm_team_id" required="1"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_generate_report" string="Gererate Excel" class="oe_highlight" type="object"/>
+                        <button name="cancel" string="Cancel" special="cancel" class="btn btn-default"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_sales_qty_standardization_wizard" model="ir.actions.act_window">
+            <field name="name">Sales Team Qty Report</field>
+            <field name="res_model">sales.team.qty.report</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="view_sales_team_qty_excel_wizard"/>
+            <field name="target">new</field>
+            <field name="view_mode">form</field>
+        </record>
+
+
+        <menuitem name="Sales Team Qty Report" action="action_sales_qty_standardization_wizard" id="sales_team_qty_report_view"
+               parent="sales_team.menu_sale_report" sequence="18" groups=""/>
+    </data>
+</odoo>

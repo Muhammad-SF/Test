@@ -1,0 +1,21 @@
+{
+    'name': "SO Promotions",
+    'version': '1.1.1',
+    'category': 'Sale',
+    'author': 'Hashmicro/Mustufa Kanntawala',
+    'sequence': 0,
+    'summary': 'SO Promotions',
+    'description': 'SO Promotions',
+    'depends': ['sale'],
+    'data': [
+        'security/ir.model.access.csv',
+        'data/product_data.xml',
+        'wizard/apply_promotion_on_so.xml',
+        'view/sale_promotion.xml',
+        'view/sale_order.xml',
+    ],
+    'website': 'http://hashmicro.com',
+    'application': True,
+    'images': ['static/description/icon.png'],
+    'license': 'LGPL-3',
+}

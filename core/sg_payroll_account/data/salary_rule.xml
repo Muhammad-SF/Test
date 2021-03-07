@@ -1,0 +1,43 @@
+<odoo>
+	<data>
+		<record id="l10n_sg_hr_payroll.hr_salary_rule_cpfemployeesprsingaporean0" model="hr.salary.rule">
+            <field name="account_debit" search="[('name', '=', 'Payroll liabilities')]" />
+            <field name="account_credit" search="[('name', '=', 'Payroll expenses')]" />
+        </record>
+
+        <record id="l10n_sg_hr_payroll.hr_salary_rule_cpftotalsprsingaporean0" model="hr.salary.rule">
+            <field name="account_debit" search="[('name', '=', 'Payroll liabilities')]" /> 
+            <field name="account_credit" search="[('name', '=', 'Payroll expenses')]" /> 
+        </record>
+
+        <record id="l10n_sg_hr_payroll.hr_salary_rule_cpfemployersprsingaporean0" model="hr.salary.rule">
+            <field name="account_debit" search="[('name', '=', 'Payroll liabilities')]" />
+            <field name="account_credit" search="[('name', '=', 'Payroll expenses')]" /> 
+        </record>
+        
+        <record id="l10n_sg_hr_payroll.hr_salary_rule_cpfmbmf0" model="hr.salary.rule">
+            <field name="account_debit" search="[('name', '=', 'Payroll liabilities')]" />
+            <field name="account_credit" search="[('name', '=', 'Payroll expenses')]" /> 
+        </record>
+        
+        <record id="l10n_sg_hr_payroll.hr_salary_rule_cpfsinda0" model="hr.salary.rule">
+            <field name="account_debit" search="[('name', '=', 'Payroll liabilities')]" />
+            <field name="account_credit" search="[('name', '=', 'Payroll expenses')]" /> 
+        </record>
+        
+        <record id="l10n_sg_hr_payroll.hr_salary_rule_cpfcdac0" model="hr.salary.rule">
+            <field name="account_debit" search="[('name', '=', 'Payroll liabilities')]" />
+            <field name="account_credit" search="[('name', '=', 'Payroll expenses')]" /> 
+        </record>
+        
+        <record id="l10n_sg_hr_payroll.hr_salary_rule_cpfecf0" model="hr.salary.rule">
+            <field name="account_debit" search="[('name', '=', 'Payroll liabilities')]" />
+            <field name="account_credit" search="[('name', '=', 'Payroll expenses')]" /> 
+        </record>
+
+        <record id="l10n_sg_hr_payroll.hr_salary_rule_cpfsdl0" model="hr.salary.rule">
+            <field name="account_debit" search="[('name', '=', 'Payroll liabilities')]" />
+            <field name="account_credit" search="[('name', '=', 'Payroll expenses')]" />
+        </record>
+	</data>
+</odoo>

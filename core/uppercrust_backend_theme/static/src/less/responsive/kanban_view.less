@@ -1,0 +1,77 @@
+@o-kanban-mobile-tabs-height: 40px;
+.kanban-xs() {
+    .o_main {
+        .ad_rightbar {
+            .o_content > .o_view_manager_content, .o_view_manager_content {
+                .o_kanban_view {
+                    &:not(.o_kanban_dashboard) {
+                        padding: 0px 10px !important;
+                    }
+                    &.o_kanban_dashboard {
+                        overflow: hidden;
+                        .o_kanban_record {
+                            width: 100%;
+                            flex: 1 1 100%;
+                        }
+                    }
+                    .o_kanban_record {
+                        margin: 5px 0;
+                    }
+                }
+                .o_kanban_view {
+                    .o_account_dashboard_header {
+                        margin: 0px;
+                    }
+                }
+            }
+        }
+    }
+    .o_dashboard {
+        .oe_dashboard {
+            position: relative;
+            .oe_dashboard_column {
+                .oe_action {
+                    .oe_content {
+                        .o_kanban_view {
+                            position: relative;
+                            flex-wrap: wrap-reverse;
+                            .o_kanban_group {
+                                position: relative;
+                                top: 0;
+                            }
+                            .o_kanban_mobile_tabs {
+                                width: 100%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .o_account_dashboard_header {
+        margin: 0px;
+        .o_form_statusbar {
+            .o_statusbar_status {
+                text-align: left;
+                & > h4 {
+                    margin-bottom: 25px;
+                    float: left;
+                    text-align: left;
+                    width: 100%;
+                    padding-left: 5px;
+                }
+                .o_arrow_button {
+                    margin-bottom: 5px;
+                }
+            }
+            & > .pull-right {
+                position: absolute;
+                right: 0;
+            }
+        }
+    }
+}
+
+.o_web_client.ad_mobile {
+    .kanban-xs();
+}

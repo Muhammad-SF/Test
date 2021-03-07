@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_student_reminder_form_2_group_school_student_inherit" model="ir.ui.view">
+        <field name="name">View Student Reminder Form2 Group School Student Inherit</field>
+        <field name="model">student.reminder</field>
+        <field name="inherit_id" ref="school.view_student_reminder_form_2"/>
+        <field name="groups_id" eval="[(6,0, [ref('school.group_school_student')])]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="student_reminder_kanban_view_group_school_student_inherit" model="ir.ui.view">
+        <field name="name">Student Reminder Kanban View Group School Student Inherit</field>
+        <field name="model">student.reminder</field>
+        <field name="inherit_id" ref="school.student_reminder_kanban_view"/>
+        <field name="groups_id" eval="[(6,0, [ref('school.group_school_student')])]"/>
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,41 @@
+# -*- coding: utf-8 -*-
+{
+    'name': 'Standard Accounting Package',
+    'version': '1.1.1',
+    'category': 'Accounting',
+    'sequence': 1,
+    'summary': '',
+    'description': "",
+    'website': 'http://www.hashmicro.com/',
+    'author': 'Hashmicro/Jaydeep',
+    'depends': [
+                'account_accountant',
+                'account_check_printing',
+                'sg_partner_payment',
+                'account_asset',
+                'asset_fix',
+                'po_asset',
+                'collection_date_invoice',
+                'partner_credit_limit',
+                'credit_limit_request',
+                'tax_extension',
+                'internal_cash_bank_transfer',
+                'multiple_payment_difference',
+                'efaktur_management_std',
+                'efaktur_gabungan_config',
+                'vit_efaktur',
+                'vit_kelurahan',
+                'vendor_prepayment',
+                'customer_prepayment',
+                'deposit_appear_on_invoice',
+                'clickable_chartofaccount',
+                'generate_pph_invoice',
+                'giro_std'
+            ],
+    'data': [
+    
+    ],
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+}

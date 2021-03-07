@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Customer Deposit -->
+        <record model="ir.ui.view" id="form_view_account_payment_deposit">
+            <field name="name">account.payment</field>
+            <field name="model">account.payment</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+               <form string='Account Deposit'>
+                    <header>
+                        <button string="Receive Deposit" type="object" name="post" states="draft" context="{'deposit_active_id' : active_id, 'receive_deposit': True}"/>
+                        <button string="Return Deposit" type="action" name="%(sarangoci_account_deposit.action_account_deposit_return)d" states="posted" context="{'deposit_active_id' : active_id}"/>
+                       
+                        <button string="Convert to Revenue" type="object" name="convert_revenue" states="posted"/>
+                        <button string="Reconcile with Invoice" type="action" name="%(sarangoci_account_deposit.action_account_deposit_reconcile)d" states="posted"/>
+                        <field name="state" widget="statusbar"/> 
+                    </header>
+                    <sheet string="Deposit">
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="button_journal_entries" string="Journal Items" type="object" groups="account.group_account_manager" attrs="{'invisible':[('move_line_ids','=',[])]}" icon="fa-bars"/>
+                            <field name="move_line_ids" invisible="1"/>
+                            
+                            <button class="oe_stat_button" name="button_invoices" string="Invoices" type="object" attrs="{'invisible':[('has_invoices','=',False)]}" icon="fa-bars"/>
+                            <field name="has_invoices" invisible="1"/>
+                        </div>
+                        <div class="oe_title" attrs="{'invisible': [('state', '=', 'draft')]}">
+                            <h1><field name="name"/></h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="partner_id" required="1" domain="[('customer', '=', True)]" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}"/>
+                                <field name="amount" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}" required="1"/>
+                                <field name="remaining_amount" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}" readonly="1"/>
+                                <field name="communication" string="Reference" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}"/>
+                                <field name="is_deposit" invisible="1"/>
+                                <field name="move_name" readonly="1"/>
+                                <field name="return_payment_reference" widget="many2many_tags" attrs="{'invisible': [('return_payment_reference', '=', False)]}" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="payment_date"  attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}"/>
+                                <field name="payment_type" invisible='1'/>
+                                <field name="partner_type" invisible='1'/>
+                                <field name="journal_id"  string="Payment Method" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}"/>
+                                <field name="payment_method_id" invisible='1'/>
+                                <field name="writeoff_account_id" required='1' domain="[('reconcile', '=', True)]" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}" string="Deposit Account"/>
+                            </group>
+                        </group>
+                    </sheet>
+               </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_tree_account_payment_deposit">
+            <field name="name">account.payment</field>
+            <field name="model">account.payment</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string='Customer Deposit'>
+                    <field name="communication" string="Reference"/>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="payment_date"/>
+                     <field name="amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="account_payment_deposit_action">
+            <field name="name">Customer Deposit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_tree_account_payment_deposit"/>
+            <field name="domain">[('is_deposit', '=', True), ('payment_type', '=', 'inbound'),('partner_type', '=', 'customer')]</field>
+            <field name="context">{'default_is_deposit': True,'default_payment_type': 'inbound', 'default_partner_type': 'customer'}</field>
+        </record>
+
+        <record id="action_account_payments_deposit_form_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="form_view_account_payment_deposit"/>
+            <field name="act_window_id" ref="account_payment_deposit_action"/>
+        </record>
+
+         <record id="action_account_payments_deposit_tree_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_tree_account_payment_deposit"/>
+            <field name="act_window_id" ref="account_payment_deposit_action"/>
+        </record>
+
+        <!-- Manage base views of payments -->
+        <record id="action_account_payments_form_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account.view_account_payment_form"/>
+            <field name="act_window_id" ref="account.action_account_payments"/>
+        </record>
+
+        <record id="action_account_payments_tree_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="account.view_account_payment_tree"/>
+            <field name="act_window_id" ref="account.action_account_payments"/>
+        </record>
+
+        <menuitem name="Customer Deposit" id="account_deposit_menu" parent="account.menu_finance_receivables"
+                  action="account_payment_deposit_action"/>
+
+
+        <!-- Supplier Deposit -->
+
+        <record model="ir.ui.view" id="form_view_account_supplier_payment_deposit">
+            <field name="name">account.payment</field>
+            <field name="model">account.payment</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+               <form string='Account Deposit'>
+                    <header>
+                        <button string="Pay Deposit" type="object" name="post" states="draft"  context="{'deposit_active_id' : active_id, 'receive_deposit': True}"/>
+                        <button string="Receive Deposit" type="action" name="%(sarangoci_account_deposit.action_account_deposit_return)d" states="posted"  context="{'deposit_active_id' : active_id}"/>
+                        <button string="Convert to Expenses" type="object" name="convert_revenue" states="posted"/>
+                        <button string="Reconcile with Invoice" type="action" name="%(sarangoci_account_deposit.action_account_deposit_reconcile)d" states="posted"/>
+                        <field name="state" widget="statusbar"/> 
+                    </header>
+                    <sheet string="Deposit">
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" name="button_journal_entries" string="Journal Items" type="object" groups="account.group_account_manager" attrs="{'invisible':[('move_line_ids','=',[])]}" icon="fa-bars"/>
+                            <field name="move_line_ids" invisible="1"/>
+                            <button class="oe_stat_button" name="button_invoices" string="Invoices" type="object" attrs="{'invisible':[('has_invoices','=',False)]}" icon="fa-bars"/>
+                            <field name="has_invoices" invisible="1"/>
+                        </div>
+                        <div class="oe_title" attrs="{'invisible': [('state', '=', 'draft')]}">
+                            <h1><field name="name" /></h1>
+                        </div>
+                        <group>
+                            <group>                                
+                                <field name="partner_id" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}" required="1" domain="[('supplier', '=', True)]"/>
+                                <field name="amount" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}" required="1"/>
+                                <field name="remaining_amount" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}" readonly="1"/>
+                                <field name="communication" string="Reference" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}"/>
+                                <field name="is_deposit" invisible="1"/>
+                                <field name="move_name" readonly="1"/>
+                                <field name="return_payment_reference" widget="many2many_tags" attrs="{'invisible': [('return_payment_reference', '=', False)]}"  readonly="1"/>
+                              <!--   <field name="return_payment_reference" attrs="{'invisible': [('state', 'in', ['draft', 'posted', 'sent', 'revenue', 'reconciled'])], 'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}"/> -->
+                            </group>
+                            <group>
+                                <field name="payment_date" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}"/>
+                                <field name="payment_type" invisible='1'/>
+                                <field name="partner_type" invisible='1'/>
+                                <field name="journal_id"  string="Payment Method" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}"/>
+                                <field name="payment_method_id" invisible='1'/>
+                                <field name="writeoff_account_id" required='1'  domain="[('reconcile', '=', True)]" attrs="{'readonly' : [('state', 'in', ['posted', 'returned', 'revenue', 'reconciled'])]}"  string="Deposit Account"/>
+                            </group>
+                        </group>
+                    </sheet>
+               </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_tree_account_supplier_payment_deposit">
+            <field name="name">account.payment</field>
+            <field name="model">account.payment</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string='Supplier Deposit'>
+                    <field name="communication" string="Reference"/>
+                    <field name="name"/>
+                    <field name="partner_id"/>
+                    <field name="payment_date"/>
+                     <field name="amount"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="account_supplier_payment_deposit_action">
+            <field name="name">Supplier Deposit</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">account.payment</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_id" ref="view_tree_account_supplier_payment_deposit"/>
+            <field name="domain">[('is_deposit', '=', True), ('payment_type', '=', 'outbound'), ('partner_type', '=', 'supplier')]</field>
+            <field name="context">{'default_is_deposit': True,'default_payment_type': 'outbound', 'default_partner_type': 'supplier'}</field>
+        </record>
+
+        <record id="action_account_supplier_payments_deposit_form_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="form_view_account_supplier_payment_deposit"/>
+            <field name="act_window_id" ref="account_supplier_payment_deposit_action"/>
+        </record>
+
+         <record id="action_account_supplier_payments_deposit_tree_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_tree_account_supplier_payment_deposit"/>
+            <field name="act_window_id" ref="account_supplier_payment_deposit_action"/>
+        </record>
+
+         <!-- Manage base views of payments -->
+        <record id="action_account_supplier_payments_form_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="account.view_account_payment_form"/>
+            <field name="act_window_id" ref="account.action_account_payments_payable"/>
+        </record>
+
+        <record id="action_account_supplier_payments_tree_view" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="account.view_account_payment_tree"/>
+            <field name="act_window_id" ref="account.action_account_payments_payable"/>
+        </record>
+
+        <menuitem name="Supplier Deposit" id="account_supplier_deposit_menu" parent="account.menu_finance_payables" action="account_supplier_payment_deposit_action"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<odoo>
+	<data>
+
+		<!-- Scheduler for Expire Remove Leave from Allocation Leave -->
+        <record id="assign_expire_leave_remove_allocation" model="ir.cron">
+            <field name="name">Leave : Expire Carry Forward Leaves</field>
+            <field name="interval_number">12</field>
+            <field name="interval_type">months</field>
+            <field name="nextcall" eval="time.strftime('%Y-01-02 00:00:00')"/>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'hr.holidays'" name="model"/>
+            <field eval="'expire_annual_leave_allocation'" name="function"/>
+            <field eval="'()'" name="args"/>
+        </record>
+	</data>
+</odoo>

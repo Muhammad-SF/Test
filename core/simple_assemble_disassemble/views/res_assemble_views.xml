@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="res_assemble_tree" model="ir.ui.view">
+        <field name="name">Assemble Tree</field>
+        <field name="model">res.assemble</field>
+        <field name="arch" type="xml">
+            <tree string="Assemble">
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="stock_production_prod"/>
+                <field name="quantity_pro"/>
+                <field name="date_assemble"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="res_assemble_form_view" model="ir.ui.view">
+        <field name="name">Assemble Form</field>
+        <field name="model">res.assemble</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <header>
+                    <button name="action_assemble" type="object" states="draft" string="Assemble" class="oe_highlight"/>
+                    <button name="action_cancel" type="object" states="draft" string="Cancel"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_journal_entry" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('move_count', '=', 0)]}">
+                            <field name="move_count" widget="statinfo" string="Journal Entry"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="product_id" required="1"/>
+                            <field name="product_product_id" invisible="1"/>
+                            <field name="location_src_id" domain="[('usage','=','internal')]" required="1"/>
+                            <field name="tracking" invisible="1"/>
+                            <!--<field name="lot_ids" invisible="1"/>-->
+                            <field name="stock_production_prod" attrs="{'invisible':['|',('tracking','=','none'),('product_id','=',False)]}" groups="stock.group_production_lot"/>
+                        </group>
+                        <group>
+                            <field name="quantity_pro" required="1"/>
+                            <field name="date_assemble"/>
+                        </group>
+                    </group>
+                    <separator string="Materials"/>
+                    <field name="material_id">
+                        <tree string="Materials" editable="bottom">
+                            <field name="product_id" required="1"/>
+                            <field name="qty_pro" required="1"/>
+                            <field name="stock_lot" domain="[('product_id','=',product_id)]" groups="stock.group_production_lot"/>
+                        </tree>
+                    </field>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_assemble_action" model="ir.actions.act_window">
+        <field name="name">Assemble</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.assemble</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to define a new Assemble.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_res_assemble" action="res_assemble_action" parent="stock.menu_stock_warehouse_mgmt" sequence="4"/>
+
+    <record id="product_template_form_view_inherit2" model="ir.ui.view">
+        <field name="name">Product Template Form Inherit</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <header position="inside">
+                <button string="Assemble" type="object" name="assemble_form_view"/>
+            </header>
+        </field>
+    </record>
+
+</odoo>

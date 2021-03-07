@@ -1,0 +1,19 @@
+<odoo>
+    <data>
+
+        <record id="sequence_view_inh" model="ir.ui.view">
+            <field name="model">ir.sequence</field>
+            <field name="inherit_id" ref="base.sequence_view"/>
+            <field name="arch" type="xml">
+                <field name="implementation" position="after">
+                    <label for="auto_reset"/>
+                    <div>
+                        <field name="auto_reset"/>
+                        <field name="auto_reset_value" class="oe_inline" attrs="{'required': [('auto_reset', '=', True)], 'invisible': [('auto_reset', '=', False)]}"/>
+                    </div>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

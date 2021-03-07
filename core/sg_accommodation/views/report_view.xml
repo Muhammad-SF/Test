@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+    <data>
+        
+
+		 <record id="tenancy_agreement_paperformat" model="report.paperformat">
+            <field name="name">Tenancy Agreement</field>
+            <field name="default" eval="True" />
+            <field name="format">B4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">15</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+		<report 
+            id="report_tenancy_agreement"
+            string="Tenancy Agreement"
+            model="accommodation.accommodation"
+            name="sg_accommodation.tenancy_agreement_report"
+            report_type="qweb-pdf"
+            />
+
+          <report
+		        id="report_nationality_accommodation"
+		        string="Nationality wise Accommodation"
+		        model="accommodation.accommodation"
+		        name="sg_accommodation.view_nationality_report"
+		        file="sg_accommodation.view_nationality_report"
+		        report_type="qweb-pdf"
+		        menu="False"
+	        />
+		<record id="report_tenancy_agreement" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="tenancy_agreement_paperformat"/>
+        </record>
+        
+         <report 
+            id="qweb_accommodation_report"
+            string="Location wise Accommodation"
+            model="accommodation.accommodation"
+            name="sg_accommodation.view_location_report"
+            file="sg_accommodation.view_location_report"
+            report_type="qweb-pdf"
+         	menu="False" 
+            />
+         
+    </data>
+</odoo>

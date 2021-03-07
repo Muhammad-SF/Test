@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="view_contract_reject_reason_wizard" model="ir.ui.view">
+            <field name="name">Enter Reject Reason</field>
+            <field name="model">account.analytic.account.contract.reject.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Enter Reason">
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <footer>
+                        <button name="wizard_contract_reject_reason" string="Save" type="object"
+                            class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_contract_reject_reason_wizard"
+                multi="True"
+                key2="client_action_multi" name="Reject Reason"
+                res_model="account.analytic.account.contract.reject.wizard"
+                view_mode="form" target="new" view_type="form" />
+
+        <!-- Customizing Sales Contract screen to add Reject button -->
+
+        <record id="account_analytic_account_form_form_contract_reject_reason" model="ir.ui.view">
+            <field name="name">account.analytic.account.invoice.form.inherit.contract.reject.reason</field>
+            <field name="model">account.analytic.account</field>
+            <field name="inherit_id" ref="sales_contract_approval_matrix.account_analytic_account_form_form_contract_approval"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='set_accept']" position="after">
+                    <button name="%(action_contract_reject_reason_wizard)d" string="Reject" type="action" states="waiting_approval"/>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

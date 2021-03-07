@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="timesheet_line_view_form" model="ir.ui.view">
+            <field name="name">timesheet.form.view</field>
+            <field name="model">account.analytic.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group col="4">
+                        <field name="account_id"/>
+                        <field name="amount"/>
+                        <field name="amount_currency"/>
+                        <field name="department_id"/>
+                        <field name="date"/>
+                        <field name="name"/>
+                        <field name="product_id"/>
+                        <field name="project_id"/>
+                        <field name="sheet_id"/>
+                        <field name="so_line"/>
+                        <field name="task_id"/>
+                        <field name="unit_amount"/>
+                        <field name="user_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="timesheet_line_form_view" model="ir.ui.view">
+            <field name="name">timesheet.calendar.view</field>
+            <field name="model">account.analytic.line</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group col="4">
+                        <field name="account_id"/>
+                        <field name="amount"/>
+                        <field name="amount_currency"/>
+                        <field name="department_id"/>
+                        <field name="date"/>
+                        <field name="name"/>
+                        <field name="product_id"/>
+                        <field name="project_id"/>
+                        <field name="sheet_id"/>
+                        <field name="so_line"/>
+                        <field name="task_id"/>
+                        <field name="unit_amount"/>
+                        <field name="user_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="timesheet_calendar_view" model="ir.ui.view">
+            <field name="name">timesheet.calendar.view</field>
+            <field name="model">account.analytic.line</field>
+            <field name="arch" type="xml">
+                <calendar date_start="date" color="user_id" avatar_model="res.users" event_open_popup="%(sarangoci_modifier_timesheet.timesheet_line_form_view)s">
+                    <field name="project_id"/>
+                    <field name="unit_amount"/>
+                    <field name="user_id"/>
+                </calendar>
+            </field>
+        </record>
+
+        <record id="calendar_timesheet_action" model="ir.actions.act_window">
+            <field name="name">Calendar</field>
+            <field name="res_model">account.analytic.line</field>
+            <field name="view_mode">calendar,form,tree</field>
+            <field name="view_type">form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <menuitem name="Calendar" action="calendar_timesheet_action" id="calendar_timesheet" parent="hr_timesheet.menu_hr_time_tracking" sequence="10"/>
+
+        <record id="view_export_import_timesheet_form" model="ir.ui.view">
+            <field name="name">export.import.account.analytic.line.form</field>
+            <field name="model">export.import.account.analytic.line</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Export Import Timesshet">
+                <field name="state" invisible="1" />
+                <field name="name" invisible="1" />
+                <group>
+                    <group>
+                        <field name="import_or_export" required="1" states="choose"/>
+                    </group>
+                    <group>
+                        <field name="import_data" attrs="{'required': [('import_or_export','=', 'import')], 'invisible': ['|', ('import_or_export', '=', 'export'),('state', '=', 'result')]}" />
+                        <field name="project_id" required="1"/>
+                        <field name="date_from" attrs="{'invisible': ['|',('import_or_export', '=', 'import'),('state', '!=', 'choose')],'required': [('import_or_export', '=', 'export')]}"/>
+                        <field name="date_to" attrs="{'invisible': ['|',('import_or_export', '=', 'import'),('state', '!=', 'choose')],'required': [('import_or_export', '=', 'export')]}"/>
+                        <field name="employee_ids" widget="many2many_tags" attrs="{'invisible': ['|',('import_or_export', '=', 'import'),('state', '!=', 'choose')],'required': [('import_or_export', '=', 'export')]}"/>
+                    </group>
+                </group>
+                <group states="result">
+                    <field name="error_log" readonly="1" />
+                    <field name="line_create" readonly="1" />
+                    <field name="line_update" readonly="1" />
+                </group>
+                <div states="get">
+                    <h2>Export Complete</h2>
+                    <p>Here is the exported Pricelist file: <field name="export_data" readonly="1" filename="name"/></p>
+                    <field name="export_error_log" readonly="1" />
+                </div>
+                <footer states="choose">
+                    <button string="Export"
+                        type="object" name="import_export_timesheet"
+                        attrs="{'invisible': [('import_or_export','=', 'import')]}" class="oe_highlight"/>
+                    <button string="Import" type="object"
+                        name="import_export_timesheet"
+                        attrs="{'invisible': [('import_or_export','=', 'export')]}" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" special="cancel" class="oe_link" />
+                </footer>
+                <footer states="get,result">
+                    <button string="Ok" type="object" name="action_done"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_export_import_time_sheet">
+            <field name="name">Export Import Timesheet</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">export.import.account.analytic.line</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.values" id="export_import_time_sheet">
+            <field name="model_id" ref="account.model_account_analytic_line"/>
+            <field name="name">Export Import Timesheet</field>
+            <field name="key2">client_action_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('act_open_export_import_time_sheet'))" />
+            <field name="key">action</field>
+            <field name="model">account.analytic.line</field>
+        </record>
+    </data>
+</odoo>

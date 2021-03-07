@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- Form View Of Partner -->
+        <record id="view_parent_form" model="ir.ui.view">
+            <field name="name">res.partner.parent.form</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form string="Partners" col="1">
+                    <sheet>
+                        <form string="Partner Contacts">
+                            <newline/>
+                            <group>
+                                <field name="parent_school" readonly="1"/>
+                            </group>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="name" placeholder="Name" required="1"/>
+                                </h1>
+                            </div>
+                            <group cols="4">
+                                <group string="Postal Address">
+                                    <field name="type" string="Type" colspan="2" placeholder="Address Type"/>
+                                    <label for="street" string="Address"/>
+                                    <div class="o_address_format">
+                                        <field name="street" placeholder="Street..." class="o_address_street"/>
+                                        <field name="street2" placeholder="Street2..." class="o_address_street"/>
+                                        <field name="city" placeholder="City" required="1" class="o_address_city"/>
+                                        <field name="state_id" domain="[('country_id','=',country_id)]"
+                                               class="o_address_state" required="1" placeholder="State"
+                                               options="{&quot;no_open&quot;: true}"/>
+                                        <field name="zip" placeholder="Zip" class="o_address_zip"/><br/>
+                                        <field name="country_id" placeholder="Country" class="oe_no_button"
+                                               options="{&quot;no_open&quot;: true}" required="1"/>
+                                    </div>
+                                </group>
+                                <group string="Communication">
+                                    <field name="phone" placeholder="Phone Number"/>
+                                    <field name="mobile" placeholder="Mobile Number"/>
+                                    <field name="fax" placeholder="Fax"/>
+                                    <field name="email" widget="email" required="1" placeholder="Email"/>
+                                </group>
+                            </group>
+                            <notebook>
+                                <page string="Childs">
+                                    <field name="student_ids"/>
+                                </page>
+                                <page string="Notes">
+                                    <field name="comment" nolabel="1"/>
+                                </page>
+                            </notebook>
+                        </form>
+                        <group groups="base.group_extended">
+                            <separator colspan="4" string="Categories"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Search View Of Partner -->
+        <record id="view_res_partner_parent_filter" model="ir.ui.view">
+            <field name="name">res.partner.parent.select</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <search string="Search Partner">
+                    <group col="10" colspan="4">
+                        <field name="name" select="1"/>
+                        <field name="country_id" select="1"/>
+                    </group>
+                    <separator/>
+                    <filter string="Parents" name="parent_school" domain="[('parent_school','=',True)]"/>
+                </search>
+            </field>
+        </record>
+        <!-- Tree View Of Partner -->
+        <record id="view_parent_tree" model="ir.ui.view">
+            <field name="name">res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field eval="8" name="priority"/>
+            <field name="arch" type="xml">
+                <tree string="Partners">
+                    <field name="name"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                    <field name="city"/>
+                    <field name="country_id"/>
+                    <field name="parent_school"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Action Of Form, Tree & Kanban Views Of Parent Information -->
+        <record id="action_parent_form" model="ir.actions.act_window">
+            <field name="name">Parents</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_res_partner_parent_filter"/>
+            <field name="domain">[('parent_school','=',True)]</field>
+            <field name="context">{'search_default_parent_school': 1,'default_customer': 0,'default_supplier': 0,
+                'default_parent_school': 1}
+            </field>
+            <field name="filter" eval="True"/>
+        </record>
+        <!-- Action Of Tree View Of Parent -->
+        <record id="action_partner_form_view1" model="ir.actions.act_window.view">
+            <field eval="10" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_parent_tree"/>
+            <field name="act_window_id" ref="action_parent_form"/>
+        </record>
+        <!-- Action Of Form View Of Parent -->
+        <record id="action_parent_form_view2" model="ir.actions.act_window.view">
+            <field eval="20" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_parent_form"/>
+            <field name="act_window_id" ref="action_parent_form"/>
+        </record>
+
+        <menuitem id="menu_res_partner_form" name="Parents Profiles" parent="school.menu_students_parents"
+                  action="action_parent_form"
+                  groups="school.group_school_administration,school.group_school_teacher,school.group_school_parent"/>
+    </data>
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_work_center_based_asset_work_center_based_asset,work_center_based_asset.work_center_based_asset,model_work_center_based_asset_work_center_based_asset,,1,0,0,0

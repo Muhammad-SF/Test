@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="std_material_request.group_material_request_approving_menu" model="res.groups">
+        <field name="name">Material Request Approval Matrix Menu</field>
+    </record>
+</odoo>

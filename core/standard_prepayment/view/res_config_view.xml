@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_config_settings_standard_prepayment_inherit" model="ir.ui.view">
+            <field name="name">View Account Config Settings Standard Prepayment Inherit</field>
+            <field name="model">account.config.settings</field>
+            <field name="inherit_id" ref="recurring_invoice.view_account_config_settings_recurring_invoice_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/group[@name='recurring_invoice']" position="inside">
+                    <label string=""/>
+                    <div>
+                        <field name="group_prepayment"/>
+                        <label for="group_prepayment"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+  </odoo>

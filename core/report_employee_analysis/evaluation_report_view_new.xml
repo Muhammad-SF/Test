@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<odoo>
+    <data>
+
+        <record id="excel_sg_leave_summary_report_wiz_new" model="ir.ui.view">
+            <field name="name">excel.sg.leave.summary.report.wizard.new</field>
+            <field name="model">excel.sg.leave.summary.report.new</field>
+            <field name="arch" type="xml">
+                <form string="Excel Export">
+                    <group>
+                        <field name="name" invisible="1"/>    
+                        <field name="file" filename="name"/>
+                    </group>
+                    <footer>
+                        <button special="cancel" string="Cancel" colspan="2"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="eval_report_tree_new_view" model="ir.ui.view">
+            <field name="name">eval.report.tree.view</field>
+            <field name="model">evaluation.report.new</field>
+            <field name="arch" type="xml">
+                <tree>
+<!--                     <field name="emp_name"/>
+ -->                    <!-- <field name="emp_id"/>
+                    <field name="year"/>
+                    <field name="quarter"/>
+                    <field name="joining_date"/>
+                    <field name="department_id"/> -->
+                </tree>
+            </field>
+        </record>
+
+        <record id="eval_report_form_view_new" model="ir.ui.view">
+            <field name="name">eval.report.form.view</field>
+            <field name="model">evaluation.report.new</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name='start_date'/>
+                                <field name='department'/>
+<!--                                 <field name='note'/>
+ -->                            </group>
+                            <group>
+                                <field name='end_date'/>
+                                
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="eval_reporttt" string="Print" class="oe_highlight" type="object"/>
+                            or
+                            <button string="Discard" class="oe_link" special="cancel"/>
+                        </footer>
+
+                       
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="eval_report_action_new" model="ir.actions.act_window">
+            <field name="name">Employee Analysis</field>
+            <field name="res_model">evaluation.report.new</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="report_employee_evaluation_new" string="Employee Analysis" parent="hr.menu_hr_root" sequence="3" action="eval_report_action_new"/>
+
+    </data>
+</odoo>
+
+

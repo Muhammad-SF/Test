@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_res_partner_kelurahan_form" model="ir.ui.view">
+            <field name="name">res.partner.kelurahan.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <field name="street2" position="after">
+                    <div>
+                        <field name="kota_id" class="o_address_state"/>
+                        <field name="kecamatan_id" class="o_address_state"/>
+                        <field name="kelurahan_id" class="o_address_state"/>
+                    </div>
+                </field>
+            </field>
+        </record>
+    
+    </data>
+</openerp>

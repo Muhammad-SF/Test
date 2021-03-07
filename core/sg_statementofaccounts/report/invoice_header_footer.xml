@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+
+        <!-- Header and Footers for Request for Quote report -->
+        <template id="external_layout_invoice_tax">
+            <!-- Multicompany -->
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+
+            <t t-call="sg_statementofaccounts.external_layout_header_invoice_tax"/>
+            <t t-raw="0"/>
+            <t t-call="sg_statementofaccounts.external_layout_footer_invoice_tax"/>
+        </template>
+
+        <template id="external_layout_header_invoice_tax">
+            <div class="header" style="line-height:80%;margin-top:15px;height:200px">
+                <div class="row">
+                    <div class="col-xs-5 col-xs-offset-7" style="page-break-inside:avoid;">
+                        <img class="pull-left" t-if="company.logo" t-att-src="'data:image/png;base64,%s' % company.logo"
+                             style="height: 50px;width: 240px;"/>
+                    </div>
+                    <div class="col-xs-5 col-xs-offset-7" style="line-height:14px;padding-left:63px">
+                        <span style="font-size:14px;font-weight:bold;">Co. Regn. No:</span>
+                        <span style="font-size:10px;" t-esc="company.name and company.name or ''"/>
+                        <br/>
+                        <span style="font-size:14px;font-weight:bold;">GST Reg No.</span>
+                        <span style="font-size:10px;"
+                              t-esc="company.company_registry and company.company_registry or ''"/>
+                        <br/>
+                        <span style="font-weight:bold;font-size:14px;" t-esc="company.partner_id.name"/>
+                        <br/>
+                        <span style="font-size:13px;font-weight:1px" t-esc="company.partner_id.street"/>
+                        <br/>
+                        <span style="font-size:13px;font-weight:1px" t-esc="company.partner_id.street2"/>
+                        <br/>
+                        <span style="font-size:13px;font-weight:1px" t-esc="company.partner_id.city"/>
+                        <span style="font-size:13px;font-weight:1px" t-esc="company.partner_id.country_id.name"/>
+                        <span style="font-size:13px;font-weight:1px" t-esc="company.partner_id.zip"/>
+
+                        <br/>
+                        <span style="font-size:13px;font-weight:1px">T.</span>
+                        <span style="font-size:13px;font-weight:1px"
+                              t-esc="company.partner_id.phone and company.partner_id.phone or ''"/>
+                        <span style="font-size:13px;font-weight:1px">/ F.</span>
+                        <span style="font-size:13px;font-weight:1px"
+                              t-esc="company.partner_id.fax and company.partner_id.fax or ''"/>
+                        <br/>
+                        <span style="font-size:11px;font-weight:1px"></span>
+                        <span style="font-size:11px;font-weight:1px"
+                              t-esc="company.partner_id.email and company.partner_id.email or ''"/>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="external_layout_footer_invoice_tax">
+            <div class="footer text-center">
+                <ul class="list-inline">
+                    <li></li>
+                    <li>
+                        <span class="page"/>
+                    </li>
+                    <li>of</li>
+                    <li>
+                        <span class="topage"/>
+                    </li>
+                </ul>
+            </div>
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    	 <record id="view_move_search_inht" model="ir.ui.view">
+            <field name="name">stock.move.search.inherit</field>
+            <field name="model">stock.move</field>
+	        <field name="inherit_id" ref="stock.view_move_search"/>
+            <field name="arch" type="xml">
+            	<xpath expr="//search" position="inside">
+                    <field name="category_id" filter_domain="[('category_id', 'ilike', self)]" string="Product Category"/>
+               </xpath>
+               <xpath expr="//search/group" position="inside">
+               	<filter string="Product Category" name="category_id" domain="[]"  context="{'group_by':'category_id'}"/>
+               </xpath>
+            </field>
+	    </record>
+    </data>
+</odoo>

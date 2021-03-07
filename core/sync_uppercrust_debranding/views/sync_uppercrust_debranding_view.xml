@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- fontend Registry-->
+        <template id="hide_website_planner" inherit_id="website.assets_frontend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/sync_uppercrust_debranding/static/src/less/website_planner.less"/>
+            </xpath>
+        </template>
+        <!--Backend Registry -->
+        <template id="switch_language" name="switch language assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/sync_uppercrust_debranding/static/src/less/layout.less"/>
+                <script type="text/javascript"
+                        src="/sync_uppercrust_debranding/static/src/js/app_window_title.js"/>
+                <script type="text/javascript"
+                        src="/sync_uppercrust_debranding/static/src/js/customize_user_menu.js"/>
+                <script type="text/javascript"
+                        src="/sync_uppercrust_debranding/static/src/js/title.js"/>
+                <script type="text/javascript"
+                        src="/sync_uppercrust_debranding/static/src/js/native_notifications.js"/>
+                <script type="text/javascript"
+                        src="/sync_uppercrust_debranding/static/src/js/dashboard.js"/>
+                <script type="text/javascript"
+                        src="/sync_uppercrust_debranding/static/src/js/chat_action.js"/>
+                <script type="text/javascript"
+                        src="/sync_uppercrust_debranding/static/src/js/bot.js"/>
+                <!-- ================add me==================== -->
+                <script type="text/javascript"
+                        src="/sync_uppercrust_debranding/static/src/js/calender_view_extend.js"/>
+                <!-- =====================end================================= -->
+            </xpath>
+            <xpath expr="//script[@src='/web/static/src/js/views/form_upgrade_widgets.js']" position="replace">
+                <script type="text/javascript"
+                        src="/sync_uppercrust_debranding/static/src/js/field_upgrade.js"/>
+            </xpath>
+        </template>
+
+        <!-- Chnage Powered by left menu view-->
+        <template id="sync_uppercrust_debranding_menu_secondary" name="secondary menu" inherit_id="web.menu_secondary">
+            <xpath expr="//div[hasclass('o_sub_menu_footer')]" position="replace">
+                <!-- <t t-set="ad_sync_app_system_name"
+                   t-value="request.env['ir.config_parameter'].sudo().get_param('sync_app_system_name')"/> -->
+                <!-- <t t-set="sync_app_system_url"
+                   t-value="request.env['ir.config_parameter'].sudo().get_param('sync_app_system_url')"/> -->
+                <t t-set="sync_app_powered_second_title"
+                   t-value="request.env['ir.config_parameter'].sudo().get_param('sync_app_powered_second_title')"/>
+
+                <t t-set="sync_app_powered_second_url"
+                t-value="request.env['ir.config_parameter'].sudo().get_param('sync_app_powered_second_url')"/>
+
+                <t t-set="sync_app_powered_first_title"
+                   t-value="request.env['ir.config_parameter'].sudo().get_param('sync_app_powered_first_title')"/>
+
+                <t t-set="sync_app_powered_first_url"
+                t-value="request.env['ir.config_parameter'].sudo().get_param('sync_app_powered_first_url')"/>
+                
+                <div class="o_sub_menu_footer">
+                    <t t-if="sync_app_powered_first_title">
+                        <t t-if="sync_app_powered_first_url">
+                            <a t-att-href="sync_app_powered_first_url" target="_blank">
+                                <span>
+                                    <t t-esc="sync_app_powered_first_title"/>
+                                </span>
+                            </a>
+                        </t>
+                        <t t-else="">
+                            <a t-href="#" target="_blank">
+                                <span>
+                                    <t t-esc="sync_app_powered_first_title"/>
+                                </span>
+                            </a>
+                        </t>
+                    </t>
+                    By
+                    <t t-if="sync_app_powered_second_title">
+                        <t t-if="sync_app_powered_second_url">
+                            <a t-att-href="sync_app_powered_second_url" target="_blank">
+                                <span>
+                                    <t t-esc="sync_app_powered_second_title"/>
+                                </span>
+                            </a>
+                        </t>
+                        <t t-else="">
+                            <a t-href="#" target="_blank">
+                                <span>
+                                    <t t-esc="sync_app_powered_second_title"/>
+                                </span>
+                            </a>
+                        </t>
+                    </t>
+                </div>
+            </xpath>
+        </template>
+
+        <!--put teh company logo or the fav icons path here in href-->
+        <template id="web_layout_extend" inherit_id="web.layout">
+            <xpath expr="//title" position="replace">
+                <t t-set="ad_sync_app_system_name"
+                   t-value="request.env['ir.config_parameter'].sudo().get_param('sync_app_system_name')"/>
+                <title>
+                    <t t-esc="ad_sync_app_system_name or ''"/>
+                </title>
+            </xpath>
+            <xpath position="replace" expr="//link[@rel='shortcut icon']">
+                <t>
+                    <link type="image/x-icon" rel="shortcut icon"
+                          t-att-href="'data:image/png;base64,%s' % request.env['ir.config_parameter'].sudo().get_param('sync_app_company_fevicon') or ''"/>
+                </t>
+            </xpath>
+        </template>
+       
+    </data>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <template id="assets_backend" name="web_dashboard assets" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/web_dynamic_dashboard/static/lib/chartist/chartist.css"/>
+                <link rel="stylesheet" href="/web_dynamic_dashboard/static/src/less/chartist.custom.css"/>
+                <link rel="stylesheet" href="/web_dynamic_dashboard/static/src/less/web_dashboard.css"/>
+                <link rel="stylesheet" href="/web_dynamic_dashboard/static/src/less/fontawesome-iconpicker.min.css"/>
+                
+                <script type="text/javascript" src="/web_dynamic_dashboard/static/lib/chartist/chartist.min.js"></script>
+                <script type="text/javascript" src="/web_dynamic_dashboard/static/lib/chartist/chartist-plugin-legend.js"></script>
+                <script type="text/javascript" src="/web_dynamic_dashboard/static/lib/chartist/chartist-plugin-threshold.min.js"></script>
+                <!-- <script type="text/javascript" src="https://online.tableau.com/javascripts/api/tableau-2.min.js"></script> -->
+
+                <script type="text/javascript" src="/web_dynamic_dashboard/static/src/js/web_dashboard.js"></script>
+                <script type="text/javascript" src="/web_dynamic_dashboard/static/src/js/fontawesome-iconpicker.min.js"></script>
+                <script type="text/javascript" src="/web_dynamic_dashboard/static/src/js/icon_picker.js"></script>
+            </xpath>
+        </template>
+</odoo>

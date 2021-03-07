@@ -1,0 +1,632 @@
+body{background-color: #1d2939}
+.pos .centerpane {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+            box-sizing: border-box;
+    position:absolute;
+    left:25%;
+    width:25%;
+    top:0px;
+    bottom:0;
+    border-right: solid 1px #CECBCB;
+    border-right: solid 3px #787878;
+    background: #e2e2e2;
+    padding:15px;
+}
+
+.pos .centerpane .pads {
+    border-top: solid 3px rgb(110, 200, 155);
+}
+ .numpad{
+    width:calc(100% - 32px) !important;
+}
+.pos .centerpane .input-button {
+    font-size: 18px !important;
+}
+.numpad button{
+    width: 39px !important;
+    height: 50px !important;
+}
+.pos .numpad{
+    border: 0px;
+    margin: 3px 0 0;
+}
+.pos .centerpane .mode-button {
+    font-size: 11px!important;
+}
+.pos .actionpad  {
+    margin: 3px 0px 0px;
+    border: 0px;
+    display: flex;
+}
+.pos .centerpane .actionpad .pay {
+    background-color: #63c059;
+    color: #fff;
+    border: 1px solid #97191f ;
+}
+.pos .centerpane .actionpad .pay:hover {
+    background-color: #97191f;
+    color: #fff;
+}
+.pos .rightpane{
+    left:50% !important;
+}
+.pos .sub-categories{
+    border-bottom: 0px !important;
+}
+.pos .leftpane{
+     width:25% !important;
+
+}
+.pos .categories{
+    border-bottom:  0px !important;
+}
+.pos .centerpane .pads{
+    border-top: 0px;
+}
+
+.btn.btn-fill{
+    color:white;
+    background-color:#929292;
+
+}
+.pos .control-button{
+    line-height:68px;
+    margin: 0 3px 5px !important;
+}
+.pos .product {
+    height: 90px;
+    width: 90px;
+}
+
+.pos .pos-branding .username{
+
+    margin-right: 98px !important;
+}
+
+
+
+@media only screen and (max-width: 1900px){
+    .pos  .numpad button{ 
+        width:65px !important;
+    }
+}
+
+@media only screen and (max-width: 1920px){
+    .pos .numpad button{ 
+        width:65px !important;
+    }
+}
+.pos{background-color: #1d2939;}
+.pos .oe_status  .username{
+    float:right;
+    color:#DDD;
+    font-size:16px;
+    margin-left:32px;
+    line-height: 48px;
+    font-style:italic;
+    cursor: pointer;
+}
+.pos .pos-rightheader .header-button span{
+    border: 1px solid #fff;
+    padding: 6px 15px;
+    border-radius: 8px;
+}
+.pos .oe_status .username{line-height: initial !important;}
+
+.pos .order-button{
+    padding:0 14px !important;
+    margin: 0 3px !important;
+}
+.pos .order-button.square{background: transparent !important;}
+.pos .order-button{
+    background: transparent ;
+    border: 1px solid #fff;
+    border-radius: 10px;
+}
+.pos .pos-topheader {
+    background: #1d2939;
+    margin:0 0 10px 0;
+}
+.pos .pos-rightheader{
+    left:190px !important;
+}
+.pos .pos-content{
+    background-color: #1d2939 !important;
+    margin-top: 8px;
+}
+/* box pane */
+.pos .pos-content .leftpane,.pos .pos-content .centerpane,.pos .pos-content .rightpane{
+    border-radius:15px;
+    overflow: hidden;
+    background-color: white;
+    bottom: 15px !important;
+}
+.pos .pos-content .leftpane{
+    left: unset;
+    right: 0;
+}
+.pos .pos-content .centerpane{
+    left: unset;
+    right: calc(25% + 15px);
+}
+.pos .pos-content .rightpane{
+    left: 0 !important;
+    right: calc(50% + 30px);
+}
+.pos .pos-branding{
+    width:190px;
+}
+.pos .searchbox input{
+    width: calc(100% - 100px);
+}
+.pos .rightpane-header .searchbox{
+    position: unset !important;
+}
+
+.pos .rightpane-header{
+    background: #fff;
+}
+.pos .product .qty-tag,.pos .product .price-tag{
+    background-color: #97191f;
+}
+
+.rightpane .breadcrumbs .breadcrumb .breadcrumb-button{
+    color:#97191f;
+}
+.centerpane .control-button, .centerpane div.coupon, .centerpane .button.salesman, .centerpane .button{
+    background-color: white !important;
+    color:#97191f !important;
+    box-sizing: border-box;
+    border:1px solid #97191f !important;
+    width: 100%;
+}
+.subwindow-container-fix.pads{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.subwindow-container-fix.pads > *{
+    flex: 1 1 100%;
+}
+.pos .control-button{
+    line-height: 20px !important;
+    padding: 6px 8px;
+    margin: 0 2px;
+}
+.pos .order .orderline .session_info{
+    color:#97191f;
+}
+.pos .centerpane .control-button{
+    font-size: 15px !important;
+    width: calc(50% - 6px) !important;
+}
+.pos .centerpane .control-buttons{
+    padding:0px !important;
+    margin: 3px 0 0;
+}
+
+.centerpane .control-button:hover{
+    background-color: #feab1f !important;
+    color:#fff !important;
+}
+.numpad button{
+    color:#97191f;
+    border:1px solid #97191f;
+    background-color: #fff;
+    flex: 1 0 21%;
+}
+.numpad {
+    margin-top: 10px;
+    display: flex !important;
+    flex-wrap: wrap;
+  }
+.button.pay{
+    background-color: #63c059;
+    color: #fff !important;
+    border:1px solid #63c059;
+}
+.pos .numpad button{
+    border: 1px solid #aaa;
+    margin: 3px;
+}
+.pos  .numpad button:hover{
+    background-color: #97191f;
+    color: #fff;
+}
+.pos .category-list.simple{
+    background-color: white;
+    max-height: 150px;
+    overflow-y:scroll;
+}
+.pos .clientlist-screen .client-list tbody > tr  button{
+    background-color: #fff;
+    color: #97191f;
+    border: 2px solid #97191f;
+    border-radius: 7px;
+}
+.pos .clientlist-screen .client-list thead > tr {
+    background-color: #fff !important;
+    color: #333 !important;
+}
+.subwindow-container-fix.touch-scrollable.scrollable-y {
+    background-color: transparent !important;
+}
+.pos .order .summary{
+    margin-bottom: 0px;
+}
+.pos .order .summary .line{
+    float: none;
+    border-top: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.pos .order .summary .entry.total{
+    background-color: #feab1f;
+    padding: 7px 10px ;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.pos .order .summary .entry.total .label{
+    float: left;
+}
+.pos .order .summary .entry.total .value{
+    float: right;
+}
+.pos .order .summary .entry.total .label,
+.pos .order .summary .entry.total .value{
+    color:#fff;
+    font-size: 16px;
+}
+.pos .order .summary .line .subentry{
+    margin-top: 15px;
+    text-align: left;
+    width: 60%;
+    float: right;
+}
+.pos .order .summary .line .subentry .value{
+    float: right;
+}
+.pos .order .promotion{
+    width: 100%;
+    margin-right: 0px !important;
+    margin-top: 10px;
+}
+.pos .order .promotion .line .subentry{
+    text-align: left;
+    width: 60%;
+    float: right;
+}
+.pos .order .promotion .line .subentry .value{
+    float: right;
+    margin-right: 6px !important;
+}
+.pos .category-simple-button:hover{
+    background-color: #97191f;
+    color: #fff;
+}
+.pos .category-simple-button{
+    max-width: 200px;
+    border-radius: 10px;
+    background: #ddd;
+    margin: 3px;
+    text-align: center;
+    transition: ease all 0.3s;
+}
+.pos .numpad button{
+    border-radius: 10px !important;
+}
+.pos .mode-button.selected-mode{
+    background-color: white;
+    border-radius: 10px !important;
+    color: #555555;
+    border: 1px solid #aaa;
+}
+.pos .mode-button.selected-mode:hover{
+    background-color: #97191f;
+}
+/* .pos .mode-button.selected-mode:hover,.pos .mode-button{
+
+/* payment page */
+.pos .paymentlines-container,.screen .top-content,.screen .left-content,.screen .screen-content
+{border:0px }
+.screen .right-content.pc60{
+    background-color: white;
+    border-radius: 15px;
+}
+/* .screen .top-content .button.next{background-color:#63c059;color: white;border: 0px;} */
+/* .screen .top-content {width: 140px;} */
+.screen .top-content .button.back{background-color:#feab1f;color: white;border: 0px;}
+.payment-screen h3{text-align: center; font-weight: bolder; margin-bottom: 20px;}
+.payment-screen .paymentline{background-color: #f3f3f3;}
+.payment-screen .paymentline.selected{background-color: #63c059;}
+.paymentlines-container .total{background:#f3f3f3;color: #97191f !important; font-weight: bolder; font-size: 54px !important;}
+
+.payment-screen .right-content{
+    padding:10px 40px
+}
+.payment-screen .payment-buttons .button:hover,.payment-screen .payment-buttons .button:active{background-color:#feab1f ;color: #fff;}
+.payment-screen .payment-buttons .button{
+    transition: ease all 0.3s;
+    background-color: white;
+    color: #555555;
+    line-height: 60px;
+    box-sizing: border-box;
+    margin-bottom:10px;
+    border-radius: 10px;
+    border: 1px solid #555555;
+}
+.payment-screen .paymentmethods {
+    display: flex;
+    flex-wrap: wrap;
+}
+.screen .top-content .button.next{
+    background-color: #63c059;
+    color: #fff;
+    border: 0px;
+}
+.payment-screen .paymentmethods .button{
+    flex: 1 1 25%;
+    margin: 1%;
+    transition: ease all 0.3s;
+    background-color: #fff;
+    line-height: 0px;
+    padding:40px 15px;
+    border-radius: 10px;
+    border: 0px;
+}
+.payment-screen .paymentmethods .button:hover{
+    background-color: #feab1f;
+    color: #fff;
+}
+.pos .paymentline .col-change.highlight{
+    background-color: #feab1f;
+    color: #fff;
+}
+.pos .paymentline.selected .edit{
+    box-shadow:0px 0px 0px 3px #63c059;
+    color: #97191f;
+}
+.pos .control-button.highlight, .pos .button.highlight{
+    background-color: #63c059 !important;
+    color: #fff;
+}
+.pos .client-detail .label{
+    color: #97191f;
+}
+.payment-screen .paymentline td:first-child{
+    border-radius: 10px 0 0 10px;
+}
+.payment-screen .paymentline td:last-child{
+    border-radius: 0 10px 10px 0;
+}
+
+/* Print Payment */
+/* .pos .pos-receipt-container{
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 500px;
+} */
+
+.screen .screen-content .screen-print{
+    position: unset !important;
+    width: 40%;
+    margin-left: 10%;
+    color: #fff;
+    margin-top: 70px;
+    text-align: left !important;
+}
+.screen-print .button{
+    position: unset !important;
+}
+.screen .centered-content{
+    position: unset;
+    border: 0px !important;
+}
+.screen-print .button.next{
+    background-color: #63c059;
+    border-color: #63c059; 
+    padding: 4px 8px;
+    display: inline-block;
+}
+.screen .screen-content{
+    position: unset;
+    border: 0px;
+    width: 800px;
+    margin: 75px auto 20px;
+    display: flex;
+    height: 80%;
+}
+.screen-print  h1{
+    font-size: 30px;
+    margin-left: 15px;
+}
+.screen-print h1 .change-value{
+    display: block;
+    font-size: 50px;
+    margin: 10px 0;
+    font-weight: bolder;
+}
+.pos .screen-print  .button{
+    border-radius: 10px;
+}
+.pos .screen-print  .button.back{
+    background-color: #feab1f;
+    border-color: #feab1f; 
+    padding: 4px 8px;
+    display: inline-block;
+}
+.screen-print .button.print {
+    background-color: #1fa5fe;
+    border-color: #1fa5fe;
+    margin-bottom: 10px;
+    padding: 10px 13px;
+    color: #fff;
+}
+.screen-print .button.print:hover{
+    color: #1fa5fe;
+}
+/* end payment page */
+
+/* customers */
+.pos .clientlist-screen .client-details{
+    background: #fff;
+    margin-bottom:20px;
+    border-radius: 15px;
+    border-bottom: 0px;
+}
+
+.pos .clientlist-screen .button.new-customer{
+    left: unset;
+    right: 0px;
+}
+.pos .clientlist-screen .top-content .new-customer{
+    background-color: #63c059;
+    color: #fff;
+    margin-left: 0px !important;
+    border: 0px;
+}
+.pos .clientlist-screen .client-list tr.highlight{
+    background-color: #63c059 !important;
+}
+.pos .clientlist-screen .searchbox{
+    
+    right: 200px;
+    margin-left: unset !important;
+    margin-top: unset !important;
+    left: 200px;
+    z-index: 999;
+}
+.pos .clientlist-screen .searchbox input {
+    width: 100%;
+    margin: 13px auto 6px;
+}
+.pos .searchbox input:focus{
+    box-shadow:0px 0px 0px 2px #97191f;
+    color: #97191f;
+}
+
+.client-list tr th{
+    padding-top: 10px;
+}
+.client-list tr th:first-child{
+    border-radius: 10px 0 0 0;
+}
+.client-list tr th:last-child{
+    border-radius: 0 10px 0 0;
+}
+.client-list tr{
+    transition: ease all 0.3s;
+}
+.client-list tbody tr:hover{
+    background-color: #97191f !important;
+    color:#fff
+}
+.client-list tbody tr .view_all_order{
+    background-color: #fff;
+    color: #97191f;
+    border: 2px solid #97191f;
+    font-size: 15px;
+}
+
+.client-details-box .button.save{
+    float: left;
+    margin: 20px 0 0 350px;
+    background-color: #63c059;
+    color: #fff;
+    padding: 7px 20px;
+}
+.pos .clientlist-screen .edit-buttons .button.undo{
+    margin-right: 15px;
+    color: #97191f;
+}
+.pos .clientlist-screen .client-detail > .label{
+    float: left;
+}
+.pos .clientlist-screen input.detail.reward_applicable {
+    width: 20px;
+    margin-top: 15px;
+    float: left;
+}
+/* Popup */
+.pos .popup.popup-number{
+    width: 410px;
+}
+.pos .popup-numpad{
+    width: 375px;
+}
+.pos .popup .title span{
+    margin-right: 0px !important;
+}
+.pos .popup .title .searchbox{
+    width: 100%;
+    display: block;
+    width: 100% !important;
+}
+.pos .searchbox > .promo_search{
+    width: 100% !important;
+}
+.pos .modal-dialog .popup{background-color: #fff;border-radius: 15px;}
+.pos .popup .title{
+    font-weight: bolder;
+    color: #97191f;
+}
+.pos textarea:focus{
+    box-shadow: 0px 0px 0px 3px #ccc;
+}
+.pos .popup.popup-selection .selection{border-top: 0px;}
+.pos .popup .button {
+    float: none;
+    margin: 10px 10px;
+    display: inline-block;
+    background-color: #fff;
+    border: 2px solid #97191f;
+    color: #97191f;;
+    border-radius: 10px;
+}
+.pos .popup.popup-selection .selection-item{
+    border-radius: 10px;
+    transition: ease all 0.3s;
+    margin: 0 15px;
+}
+.pos .popup.popup-selection .selection-item:hover{
+    background: #feab1f;
+    color: #fff;
+}
+.pos .popup .button:hover{
+    background-color: #97191f;
+    color: #fff;
+}
+.pos .modal-dialog .popup-password{
+    width: 360px;
+}
+.pos .popup .footer{
+    border-radius: 0 0 15px 15px;
+    padding: 10px 0;
+}
+.pos .popup-password .popup-numpad{
+    width: 273px;
+}
+.pos .popup-numpad .input-button, .pos .popup-numpad .mode-button{
+    border-radius: 10px !important;
+}
+.pos .popup-numpad .input-button:hover,.pos .popup-numpad .mode-button:hover{
+    background-color: #97191f;
+    color: #fff;
+}
+.pos .popup input:focus, .pos .popup-input.active{
+    box-shadow: 0 0 0 0 #ddd;
+    background-color: #ddd;
+}
+.pos .popup .custom_coupon_code{
+    width: 66% !important;
+    margin-top: 10px;
+    margin-left: 21px;
+}
+.pos .c_label{
+    margin-top: 17px !important;
+}
+.pos .popup .selection_box_custom{
+    margin-top: 10px;
+}

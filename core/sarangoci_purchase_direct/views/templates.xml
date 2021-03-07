@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_frontend_ext" inherit_id="website.assets_frontend" name="Purchase purchase">
+        <xpath expr="." position="inside">
+            <script type="text/javascript"
+                    src="/sarangoci_purchase_direct/static/src/js/sarangoci_purchase_direct.js"></script>
+        </xpath>
+    </template>
+
+    <template id="cart_ext" inherit_id="purchase_direct_website.cart">
+        <xpath expr="//div[@id='wrap']/div[@class='container oe_website_purchase']/div[2]" position="after">
+            <div class="row">
+                <div class="col-md-11 col-sm-11 oe_cart ">
+                    <h5>Branch</h5>
+                    <select type="text" name="branch" class="branch form-control col-md-4" required="required">
+                        <option>Please Select Branch</option>
+                        <t t-foreach="branches" t-as="branch">
+                            <option t-att-value="branch.branch_id.id" t-esc="branch.name"></option>
+                        </t>
+                    </select>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>

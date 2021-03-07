@@ -1,0 +1,86 @@
+<odoo>
+    <data>
+
+        <record id="sale_order_promotion_inherit_form" model="ir.ui.view">
+            <field name="name">sale.order.promotion.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+				<field name="promotion_id" position="replace">
+					<field name="promotion_ids" readonly='1' widget="many2many_tags"/>				
+				</field>
+				<xpath expr="//field[@name='order_line']/form/group/group[2]" position="inside">
+	            	<field name='last_sales_price' readonly="1"/>
+	            	<field name='last_sales_price_customer' readonly="1"/>
+	            </xpath>
+	            <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="after">
+	                <field name='last_sales_price' readonly="1"/>
+	                <field name='last_sales_price_customer' readonly="1"/>
+	            </xpath>
+            </field>
+        </record>
+        
+        <record id="apply_promotion_inherit_form" model="ir.ui.view">
+            <field name="name">apply.sale.promotion.form.inherits</field>
+            <field name="model">apply.sale.promotion</field>
+            <field name="inherit_id" ref="so_promotion.apply_sale_promotion_form"/>
+            <field name="arch" type="xml">
+				<field name="sale_promotion_id" position="replace">
+				    <!--field name="sale_promotion_ids" nolabel="1"/-->
+				    <field name="sale_promotion_ids" nolabel="1">
+				        <tree>
+				            <field name="name"/>
+				            <field name="type"/>
+				            <field name="number_of_product"/>
+				            <field name="start_date"/>
+				            <field name="end_date"/>
+				        </tree>
+				    </field>
+				</field>
+				<xpath expr="//form/group" position="after">
+				    <field name="visible" invisible="1"/>
+				    <field name="number_of_product" invisible="1"/>
+		            <!-- -->
+		            <field name="promotion_gift_line" string="Gifts Conditions" attrs="{'invisible': [('visible', '!=', True)]}">
+		                <tree string="Gifts Conditions" editable="1" create="0">
+		                    <field name="product_id"/>
+		                    <field name="account_id" invisible="1"/>
+		                    <field name="quantity_free"/>
+		                </tree>
+		            </field>
+				</xpath>	
+            </field>
+        </record>
+        
+        <record id="sale_promotion_inherit_form" model="ir.ui.view">
+            <field name="name">sale.promotion.inherit</field>
+            <field name="model">sale.promotion</field>
+            <field name="inherit_id" ref="so_promotion.sale_promotion_form"/>
+            <field name="arch" type="xml">
+				<field name="active" position="after">
+					<field name="stackable"/>				
+				</field>
+				<xpath expr="//group[7]" position="after">
+				    <group>
+				        <!--label for="number_of_product"/>
+				        <div-->
+				            <group>
+				            <field name="number_of_product" attrs="{'invisible': [('type','!=','8_by_pack_product_free_flexible_product')], 'required': [('type','=','8_by_pack_product_free_flexible_product')]}"/> <!--  class="oe_inline"-->
+				            </group>
+				            <group>
+				            <field name="number_of_product_description" attrs="{'invisible': [('type','!=','8_by_pack_product_free_flexible_product')]}" />
+				            </group>
+				        <!--/div-->
+				    </group>
+				</xpath>
+				<xpath expr="//group[7]" position="attributes">
+				    <attribute name="attrs">{'invisible':[('type','not in',('5_pack_free_gift','8_by_pack_product_free_flexible_product'))]}</attribute>
+				</xpath>
+				<xpath expr="//group[9]" position="attributes">
+				    <attribute name="attrs">{'invisible':[('type','not in',('5_pack_free_gift','8_by_pack_product_free_flexible_product'))], 'required':[('type','in',('5_pack_free_gift','8_by_pack_product_free_flexible_product'))]}</attribute>
+				</xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

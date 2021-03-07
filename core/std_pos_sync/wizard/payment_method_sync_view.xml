@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_manual_payment_term_sync_wizard" model="ir.ui.view">
+            <field name="name">payment.term.sync.wizard.form</field>
+            <field name="model">payment.term.sync.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Payment Method Sync">
+                    <group>
+                        <span>This action will sync this computer with the master server’s data. Do you want to continue ? </span>
+                    </group>
+                    <footer>
+                       <button name="action_payment_term_sync" string="Continue" type="object" class="oe_highlight"/>
+                       <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="action_manual_payment_term_sync_wizard" model="ir.actions.act_window">
+            <field name="name">Payment Method Sync</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">payment.term.sync.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_manual_payment_term_sync_wizard"/>
+            <field name="target">new</field>
+        </record>
+        
+        <menuitem 
+		    id="menu_manual_payment_term_sync_wizard" 
+		    name="Payment Method Sync"
+			parent="menu_manual_sync" 
+			action="action_manual_payment_term_sync_wizard" 
+			sequence="50" />
+			
+    </data>
+</odoo>

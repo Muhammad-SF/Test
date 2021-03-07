@@ -1,0 +1,326 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* to_accounting_bi
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-19 13:38+0000\n"
+"PO-Revision-Date: 2016-05-19 13:38+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_nbr
+msgid "# of Items"
+msgstr "SL phát sinh KT"
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Acc.Type"
+msgstr "Kiểu Tài khoản"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_account_id
+msgid "Account"
+msgstr "Tài khoản"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_user_type_id
+msgid "Account Type"
+msgstr "Kiểu tài khoản"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_amount_currency
+msgid "Amount Currency"
+msgstr "Giá trị Nguyên tệ"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_analytic_account_id
+msgid "Analytic Account"
+msgstr "Tài khoản quản trị"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_balance
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_treasury_report_balance
+msgid "Balance"
+msgstr "Số Dư"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_treasury_report_date
+msgid "Beginning of Period Date"
+msgstr "Ngày bắt đầu kỳ kế toán"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_company_id
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_treasury_report_company_id
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Company"
+msgstr "Công ty"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_credit
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_treasury_report_credit
+msgid "Credit"
+msgstr "Có"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_currency_id
+msgid "Currency"
+msgstr "Tiền tệ"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_create_date
+msgid "Date Created"
+msgstr "Ngày tạo"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_date_maturity
+msgid "Date Maturity"
+msgstr "Đến kỳ hạn"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_debit
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_treasury_report_debit
+msgid "Debit"
+msgstr "Nợ"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_display_name
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_treasury_report_display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_date
+msgid "Effective Date"
+msgstr "Ngày hiệu lực"
+
+#. module: to_accounting_bi
+#: model:ir.ui.menu,name:to_accounting_bi.account_entries_analysis_menu
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_graph
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_pivot
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Entries Analysis"
+msgstr "Phân tích Bút toán"
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Entries Date by Month"
+msgstr "Ngày Bút toán theo Tháng"
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Entries Month"
+msgstr "Bút toán theo tháng"
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Extended Filters..."
+msgstr "Bộ lọc mở rộng..."
+
+#. module: to_accounting_bi
+#: model:ir.actions.act_window,help:to_accounting_bi.account_entries_analysis_action_window
+msgid "From this view, have an analysis of your different\n"
+"				financial accounts. The document shows your debit and credit taking\n"
+"				in consideration some criteria you can choose by using the search\n"
+"				tool."
+msgstr "Từ giao diện này cung cấp cho bạn một bản phân tích đa chiều, đa cấp độ về các\n"
+"				bút toán kế toán, các phát sinh kế toán đối với các tài khoản kế toán\n"
+"				tài chính của bạn. Hiển thị nợ và có với các tiêu chí lọc & tìm kiếm khác\n"
+"				nhau cho phép bạn có thể tạo vô số các loại báo cáo tuỳ biến theo nhu cầu."
+
+#. module: to_accounting_bi
+#: model:ir.actions.act_window,help:to_accounting_bi.action_account_treasury_report_all
+msgid "From this view, have an analysis of your treasury.\n"
+"				It sums the balance of every accounting entries made on liquidity\n"
+"				accounts per period."
+msgstr "Từ giao diện này, bạn sẽ được cung cấp một phân tích đa chiều về ngân khố\n"
+"				của bạn. Phân tích này cộng tổng tất cả các bút toán ghi vào tài khoản\n"
+"				kiểu Ngân hàng & Tiền mặt cho từng chu kỳ."
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+#: model:ir.ui.view,arch_db:to_accounting_bi.view_account_treasury_report_search
+msgid "Group By"
+msgstr "Nhóm theo"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_id
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_treasury_report_id
+msgid "ID"
+msgstr "ID"
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Int.Type"
+msgstr "Kiểu Nội bộ"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_journal_id
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_treasury_report_journal_id
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Journal"
+msgstr "Sổ nhật ký"
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Journal Entries with period in current year"
+msgstr "Các bút toán sổ nhật ký với kỳ trong năm hiện hành"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_account_move_id
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_treasury_report_move_id
+msgid "Journal Entry"
+msgstr "Bút toán sổ nhật ký"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_treasury_report_account_move_line_id
+msgid "Journal Item"
+msgstr "Phát sinh KT"
+
+#. module: to_accounting_bi
+#: model:ir.model,name:to_accounting_bi.model_account_entries_analysis
+msgid "Journal Items Analysis"
+msgstr "Phân tích các bút toán và phát sinh kế toán"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis___last_update
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_treasury_report___last_update
+msgid "Last Modified on"
+msgstr "Sửa lần cuối"
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.view_account_treasury_report_search
+msgid "Month"
+msgstr "Tháng"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_partner_id
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_treasury_report_partner_id
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Partner"
+msgstr "Đối tác"
+
+#. module: to_accounting_bi
+#: selection:account.entries.analysis,move_state:0
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Posted"
+msgstr "Đã vào sổ"
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Posted entries"
+msgstr "Bút toán đã vào sổ"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_product_id
+msgid "Product"
+msgstr "Sản phẩm"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_product_uom_id
+msgid "Product Unit of Measure"
+msgstr "Đơn vị đo lường sản phẩm"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_quantity
+msgid "Products Quantity"
+msgstr "Số lượng sản phẩm"
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Reconciled"
+msgstr "Đã đối soát"
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Reconciled entries"
+msgstr "Bút toán đã đối soát"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_full_reconcile_id
+msgid "Reconciliation number"
+msgstr "Số Đối soát"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_ref
+msgid "Reference"
+msgstr "Tham chiếu"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_move_line_state
+msgid "State of Move Line"
+msgstr "Trạng thái của Phát sinh KT"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_move_state
+msgid "Status"
+msgstr "Tình trạng"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,help:to_accounting_bi.field_account_entries_analysis_internal_type
+msgid "The 'Internal Type' is used for features available on different types of accounts: liquidity type is for cash or bank accounts, payable/receivable is for vendor/customer accounts."
+msgstr ""
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "This F.Year"
+msgstr "Năm TC hiện hành"
+
+#. module: to_accounting_bi
+#: model:ir.actions.act_window,name:to_accounting_bi.action_account_treasury_report_all
+#: model:ir.model,name:to_accounting_bi.model_account_treasury_report
+#: model:ir.ui.menu,name:to_accounting_bi.menu_action_account_treasury_report_all
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_treasury_report_pivot
+#: model:ir.ui.view,arch_db:to_accounting_bi.view_account_treasury_report_graph
+#: model:ir.ui.view,arch_db:to_accounting_bi.view_account_treasury_report_search
+msgid "Treasury Analysis"
+msgstr "Phân tích Ngân khố"
+
+#. module: to_accounting_bi
+#: model:ir.model.fields,field_description:to_accounting_bi.field_account_entries_analysis_internal_type
+msgid "Type"
+msgstr "Kiểu"
+
+#. module: to_accounting_bi
+#: selection:account.entries.analysis,move_line_state:0
+msgid "Unbalanced"
+msgstr "Không cân đối"
+
+#. module: to_accounting_bi
+#: selection:account.entries.analysis,move_state:0
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Unposted"
+msgstr "Chưa vào sổ"
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Unreconciled"
+msgstr "Không đối soát"
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "Unreconciled entries"
+msgstr "Bút toán không đối soát"
+
+#. module: to_accounting_bi
+#: selection:account.entries.analysis,move_line_state:0
+msgid "Valid"
+msgstr "Hợp lệ"
+
+#. module: to_accounting_bi
+#: model:ir.actions.act_window,name:to_accounting_bi.account_entries_analysis_action_window
+msgid "account_entries_analysis window"
+msgstr ""
+
+#. module: to_accounting_bi
+#: model:ir.ui.view,arch_db:to_accounting_bi.account_entries_analysis_search
+msgid "entries"
+msgstr "bút toán"
+

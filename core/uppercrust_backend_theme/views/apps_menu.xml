@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<menuitem id="base.menu_management" name="Apps" web_icon="uppercrust_backend_theme,static/description/icon_apps.png" />
+
+</odoo>

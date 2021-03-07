@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_prepayement_schedule" model="ir.ui.view">
+            <field name="name">prepayment.schedule.form</field>
+            <field name="model">prepayment.schedule</field>
+            <field name="arch" type="xml">
+	            <form string="Customer Prepayment Schedule">
+	            <group>
+                    <group>
+                        <field name="payment_id" domain="[('user_type_id','in',['Bank and Cash'])]" required="1"/>
+                        <field name="frequency_method" required="1"/>
+                        <field name="prepaid_account" required="1" domain="[('user_type_id','in',['Current Liabilities'])]"/>
+                    </group>
+                    <group>
+                        <field name="frequency" required="1"/>
+                        <field name="date" required="1"/>
+                        <field name="revenue_account" required="1" domain="[('user_type_id','in',['Income'])]"/>
+	                </group>
+                </group>
+	                <footer>
+	                    <button string="Confirm" name="action_confirm" type="object" class="oe_highlight"/>
+                    </footer>
+	            </form>
+            </field>
+        </record>
+
+         <record id="action_prepayment_schedule" model="ir.actions.act_window">
+            <field name="name">Customer Invoice</field>
+            <field name="res_model">prepayment.schedule</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>
+

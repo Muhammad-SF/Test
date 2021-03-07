@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<odoo>
+    <template id="wk_video_assets_frontend" inherit_id="website.assets_frontend" name="Shop">
+        <xpath expr="." position="inside">
+            <script src="/website_product_videos/static/src/js/wk_video.js" type="text/javascript"></script>
+            <link rel="stylesheet" href="/website_product_videos/static/src/less/wk_video.less"/>
+        </xpath>
+    </template>
+    <template id="assets_frontend_wkvideo" inherit_id="website_sale.product" name="Product Video">
+        <xpath expr="//ol[@class='carousel-indicators']" position="inside">
+            <t groups="website_product_videos.group_website_multi_video">
+                <t t-set="video_ids"  t-value="product.product_video_ids"/>
+                <t t-if="len(video_ids)" t-foreach="video_ids" t-as="pvid">
+                    <t t-if="not pvid.exclude">
+                        <li class="wkthumbnail" data-target="#o-carousel-product" t-att-data-slide-to="pvid_index + len(image_ids) + 1">
+                            <img class="img img-responsive" t-attf-src="/website/image/product.video/{{pvid.id}}/image/90x90" t-att-alt="pvid.name"/>
+                        </li>
+                        <a class="fa fa-youtube-play wkplay"></a>
+                    </t>
+                </t>
+            </t>
+        </xpath>
+        <xpath expr="//div[@class='carousel-outer']" position="inside">
+            <t t-if="len(image_ids) == 0">
+                <ol class="carousel-indicators" t-if="len(video_ids) or variant_img">
+                <li data-target="#o-carousel-product" data-slide-to="0" class="active">
+                    <img class="img img-responsive js_variant_img_small" t-attf-src="/website/image/product.product/{{product.product_variant_ids[0].id}}/image/90x90" t-att-alt="product.name"/>
+                </li>
+                <li t-if="variant_img" data-target="#o-carousel-product" data-slide-to="1" class="">
+                    <img class="img img-responsive" t-attf-src="/website/image/product.template/{{product.id}}/image/90x90" t-att-alt="product.name"/>
+                </li>
+                <t groups="website_product_videos.group_website_multi_video">
+                    <t t-set="video_ids"  t-value="product.product_video_ids"/>
+                    <t t-if="len(video_ids)" t-foreach="video_ids" t-as="pvid">
+                        <t t-if="not pvid.exclude">
+                            <li class="wkthumbnail" data-target="#o-carousel-product" t-att-data-slide-to="pvid_index + (variant_img and 2 or 1)">
+                                <img class="img img-responsive" t-attf-src="/website/image/product.video/{{pvid.id}}/image/90x90" t-att-alt="pvid.name"/>
+                            </li>
+                            <a class="fa fa-youtube-play wkplay"></a>
+                        </t>
+                    </t>
+                </t>
+                </ol>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[@id='product_full_description']" position="before">
+            <t t-set='popup_video' t-value="request.env['ir.values'].sudo().get_default('website.product.video.settings', 'popup_video', True)"/>
+            <t t-set="video_ids"  t-value="product.product_video_ids"/>
+            <t t-set="inc" t-value="0"/>
+            <t t-set='autoplay_hover' t-value="request.env['ir.values'].sudo().get_default('website.product.video.settings', 'autoplay_hover', True)"/>
+            <t t-if="len(video_ids)" t-foreach="video_ids" t-as="pvid">
+                <t t-if="pvid.use_description">
+                    <input type="hidden" class="wk_hover" name="wk_hover" t-att-value="autoplay_hover"/>
+                    <div class="container">
+                        <div class="row">
+                            <t t-if="inc % 2 == 0">
+                                <div class="col-md-6 col-md-offset-1 mt64">
+                                    <h3><span t-att-title="pvid.name" t-field="pvid.name"/></h3>
+                                    <span t-att-title="pvid.video_description" t-field="pvid.video_description" style="display: block;" />
+                                </div>
+                                <div class="col-md-5 col-md-offset-0 mt64">
+                                    <t t-if="not popup_video">
+                                        <div class="wk_descvideo">
+                                           <iframe class="img product_detail_img wkmultivideo" t-att-width="450" t-att-height="200" t-att-src="pvid.getEmbedUrl()" t-att-frameborder="frameborder" allowfullscreen="allowfullscreen" />
+                                        </div>
+                                    </t>
+                                    <t t-if="popup_video">
+                                        <div class="wk_provideo">
+                                            <input type="hidden" class="wk_video_url" name="wk_video_url" t-att-value="pvid.getEmbedUrl()"/>
+                                            <img href="#popupvideo" class="img img-responsive wk_image" t-attf-src="/website/image/product.video/{{pvid.id}}/image_large" t-att-alt="pvid.name" data-toggle="modal"/>
+                                        </div>
+                                    </t>
+                                </div>
+                            </t>
+                            <t t-if="inc % 2 != 0">
+                                <div class="col-md-5 col-md-offset-1 mt64">
+                                    <t t-if="not popup_video">
+                                        <div class="wk_descvideo">
+                                            <iframe class="img product_detail_img wkmultivideo" t-att-width="450" t-att-height="200" t-att-src="pvid.getEmbedUrl()" t-att-frameborder="frameborder" allowfullscreen="allowfullscreen" />
+                                        </div>
+                                    </t>
+                                    <t t-if="popup_video">
+                                        <div class="wk_provideo">
+                                            <input type="hidden" class="wk_video_url" name="wk_video_url" t-att-value="pvid.getEmbedUrl()"/>
+                                            <img href="#popupvideo" class="img img-responsive wk_image" t-attf-src="/website/image/product.video/{{pvid.id}}/image_large" t-att-alt="pvid.name" data-toggle="modal"/>
+                                        </div>
+                                    </t>
+                                </div>
+                                <div class="col-md-5 col-md-offset-0 mt64">
+                                    <h3><span t-att-title="pvid.name" t-field="pvid.name"/></h3>
+                                    <span t-att-title="pvid.video_description" t-field="pvid.video_description" style="display: block;" />
+                                </div>
+                            </t>
+                        </div>
+                    
+                    </div>
+                    <t t-set="inc" t-value="inc+1"/>
+                </t>
+                <div id="popupvideo" class="modal fade">
+                    <div class="modal-dialog wk_descvideo">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                            <iframe class="descriptionVideo wkmultivideo" t-att-width="640" t-att-height="360" t-att-src="pvid.getEmbedUrl()" t-att-frameborder="frameborder" allowfullscreen="allowfullscreen" />
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </xpath>
+
+        <xpath expr="//div[@class='carousel-inner']" position="inside">
+            <t groups="website_product_videos.group_website_multi_video">
+                <t t-set="video_ids"  t-value="product.product_video_ids"/>
+                <t t-set='popup_video' t-value="request.env['ir.values'].sudo().get_default('website.product.video.settings', 'popup_video', True)"/>
+                <t t-set='allowfullscreen' t-value="request.env['ir.values'].sudo().get_default('website.product.video.settings', 'fullscreen_video', True)"/>
+                <t t-set='frameborder' t-value="request.env['ir.values'].sudo().get_default('website.product.video.settings', 'video_frameborder', True)"/>
+                <t t-set='videoheight' t-value="request.env['ir.values'].sudo().get_default('website.product.video.settings', 'video_height', True)"/>
+                <t t-set='videowidth' t-value="request.env['ir.values'].sudo().get_default('website.product.video.settings', 'video_width', True)"/>
+                <t t-set='autoplay_hover' t-value="request.env['ir.values'].sudo().get_default('website.product.video.settings', 'autoplay_hover', True)"/>
+                <t t-if="len(video_ids)" t-foreach="video_ids" t-as="pvid">
+                    <t t-if="not pvid.exclude">
+                        <div class="item">
+                            <input type="hidden" class="wk_hover" name="wk_hover" t-att-value="autoplay_hover"/>
+                            <t t-if="not popup_video">
+                                <t t-if="allowfullscreen">
+                                    <iframe class="img product_detail_img wkmultivideo" t-att-width="videowidth" t-att-height="videoheight" t-att-src="pvid.getEmbedUrl()" t-att-frameborder="frameborder" allowfullscreen="allowfullscreen" />
+                                </t>
+                                <t t-if="not allowfullscreen">
+                                    <iframe class="img product_detail_img wkmultivideo" t-att-width="videowidth" t-att-height="videoheight" t-att-src="pvid.getEmbedUrl()" t-att-frameborder="frameborder"/>
+                                </t>
+                            </t>
+                            <t t-if="popup_video">
+                                <div class="wk_provideo">
+                                    <input type="hidden" class="wk_video_url" name="wk_video_url" t-att-value="pvid.getEmbedUrl()"/>
+                                    <img href="#popupvideo" class="img img-responsive" t-attf-src="/website/image/product.video/{{pvid.id}}/image_large" t-att-alt="pvid.name" data-toggle="modal"/>
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                    <div id="popupvideo" class="modal fade">
+                        <div class="modal-dialog wk_descvideo">
+                            <div class="modal-body">
+                                <button type="button" class="close wkclose" data-dismiss="modal" aria-hidden="true">x</button>
+                                <iframe class="descriptionVideo wkmultivideo" t-att-width="640" t-att-height="360" t-att-src="pvid.getEmbedUrl()" t-att-frameborder="frameborder" allowfullscreen="allowfullscreen" />
+                            </div>
+                        </div>
+                    </div>
+                </t>
+                <t t-if="len(image_ids) == 0">
+                    <t t-if="len(video_ids) or variant_img">
+                        <a class="carousel-control left" href="#o-carousel-product" role="button" data-slide="prev" >
+                            <span class="fa fa-chevron-left" aria-hidden="true"/>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control right" href="#o-carousel-product" role="button" data-slide="next">
+                            <span class="fa fa-chevron-right" aria-hidden="true"/>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </t>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>

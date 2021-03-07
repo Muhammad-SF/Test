@@ -1,0 +1,250 @@
+.mail-xs() {
+    .o_main {
+        .ad_rightbar {
+            .o_content {
+                .o_mail_chat:not(.ad_chat) {
+                    .o_mail_chat_content {
+                        margin-left: 0px;
+                        .o_mailbox_inbox {
+                            display: none;
+                            .o_mail_thread {
+                                padding: 0px;
+                            }
+                        }
+                    }
+                    .o_mail_chat_tab_pane {
+                        padding: 0px 10px;
+                        .o_mail_channel_preview {
+                            padding: 10px 5px;
+                            height: 65px;
+                            background-color: @white;
+                            border-bottom: 1px solid @border;
+                            .o_mail_channel_image {
+                                width: 50px;
+                                height: 50px;
+                                & > img {
+                                    .round-border;
+                                }
+                            }
+                            .o_channel_info {
+                                .o_channel_title {
+                                    color: @brand-secondary;
+                                }
+                                .o_last_message_date {
+                                    color: @text-muted;
+                                }
+                                .o_last_message_preview {
+                                    color: @Label-value;
+                                }
+                            }
+                        }
+                        .o_mail_add_channel {
+                            border: none;
+                            margin: 10px 0px;
+                            input {
+                                border-bottom: 1px solid @border;
+                                &:focus {
+                                    .border-animation;
+                                }
+                            }
+                        }
+                    }
+                }
+                .o_mail_chat.ad_mobile_conversation {
+                    .o_mail_mobile_tabs {
+                        border: 1px solid @brand-secondary;
+                        .o_mail_mobile_tab {
+                            background-color: @brand-secondary;
+                            color: @white;
+                            & > sapn {
+                                color: @white;
+                            }
+                            &.active {
+                                .border-animation-white;
+                                background-color: @brand-secondary;
+                                & > span {
+                                    color: @white;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Web - responsive view
+    .o_mail_chat {
+        .o-flex-display();
+        .o-flex-flow(column, nowrap);
+        background: white;
+        .o_mail_chat_sidebar {
+            width: 100% !important;
+        }
+        .o_mail_chat_mobile_control_panel {
+            .o-flex(0, 0, auto);
+            padding: 5px;
+            min-height: 44px;
+            z-index: 1;
+            .o_searchview {
+                border: none;
+                padding: 5px 5px 0px 5px;
+                .o_searchview_input {
+                    font-size: 15px;
+                }
+                .o_searchview_more {
+                    display: none;
+                }
+            }
+            .o_enable_searchview, .o_enable_searchview:focus,
+            .o_enable_searchview:hover, .o_enable_searchview:active {
+                .o-position-absolute(@right: 5px, @top: 5px);
+                background: none;
+                font-size: 15px;
+                &:active {
+                    box-shadow: none;
+                }
+            }
+        }
+
+        .o_mail_chat_mobile_inbox_buttons {
+            .o-flex-display();
+            .o-flex(0, 0, auto);
+            z-index: 2;
+
+            .o_channel_inbox_item {
+                .o-flex(1, 1, auto);
+                width: 50%;
+                padding: 2%;
+
+                &.btn-default {
+                    border-bottom: 1px solid @border;
+                }
+            }
+        }
+
+        .o_mail_chat_content {
+            .o-flex(1, 0, 0);
+            margin-left: 0;
+            background-color: transparent;
+            .o_mail_no_content {
+                .o-position-absolute(@top: 30%);
+                text-align: center;
+                width: 100%;
+            }
+            .o_mail_annoying_notification_bar {
+                display: none;
+            }
+        }
+
+        .o_mail_chat_tab_pane {
+            overflow-x: scroll;
+            .o_mail_add_channel {
+                display: none;
+                position: relative;
+                padding: 5px 0px;
+                margin: 10px;
+                border: 1px solid @border;
+                border-radius: 4px;
+                > span {
+                    .o-position-absolute(@top: 10px, @left: 10px);
+                }
+                > input {
+                    border: none;
+                    padding: 5px 8px;
+                    padding-left: 20px;
+                }
+            }
+        }
+        /*.o_mail_mobile_tabs {
+            .o-flex(0, 0, auto);
+        }*/
+    }
+    .o_mail_channel_preview {
+        .o-flex-display();
+        cursor: pointer;
+        overflow: hidden;
+        position: relative;
+        &:not(:last-child) {
+            border-bottom: 1px solid @border;
+        }
+        .o_mail_channel_image {
+            .o-flex(0, 0, auto);
+            position: relative;
+            > img {
+                .square(100%);
+                border-radius: 50%;
+            }
+            &.o_mail_channel_app > img {
+                border-radius: 2px;
+            }
+            .o_mail_user_status {
+                .o-position-absolute(@bottom: 0px, @right: 0px);
+            }
+        }
+        .o_channel_info {
+            .o-flex(1, 1, 100%);
+            overflow: hidden;
+            .o_channel_title {
+                .o-flex-display();
+                .o_channel_name {
+                    .o-flex(0, 1, auto);
+                    .o-text-overflow();
+                }
+                .o_channel_counter {
+                    .o-flex(1, 1, auto);
+                }
+                .o_last_message_date {
+                    .o-flex(0, 0, auto);
+                    font-weight: 500;
+                }
+            }
+            .o_last_message_preview {
+                width: 100%;
+                max-height: 20px;
+                .o-text-overflow();
+            }
+        }
+        &.o_channel_unread {
+            background-color: transparent;
+            .o_channel_info {
+                .o_channel_title {
+                    .o_channel_name, .o_channel_counter {
+                        font-weight: 700;
+                    }
+                }
+            }
+        }
+    }
+
+    @o-mail-chatter-mobile-gap: 2%;
+
+    .o_main_navbar > ul.o_menu_systray > li.open .dropdown-menu {
+        border: none;
+    }
+
+    .o_mail_channel_preview {
+        padding: @o-mail-chatter-mobile-gap;
+
+        .o_channel_info, .o_last_message_date {
+            margin-left: @o-mail-chatter-mobile-gap;
+        }
+
+        .o_channel_name {
+            font-size: 1.1em;
+        }
+
+        .o_last_message_date {
+            font-size: 0.9em;
+        }
+
+        .o_last_message_preview {
+            margin-top: @o-mail-chatter-mobile-gap*0.5;
+        }
+    }
+    // Web - responsive view
+
+}
+.o_web_client.ad_mobile {
+    .mail-xs;
+}

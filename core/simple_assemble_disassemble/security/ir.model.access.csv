@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_disassemble,access.res.disassemble,model_res_disassemble,,1,1,1,0
+access_disassemble_materials,access.disassemble.materials,model_disassemble_materials,,1,1,1,1
+access_disassemble_products_form,access.disassemble.products.form,model_disassemble_products_form,,1,1,1,1
+access_component_materials,access.component.materials,model_component_materials,,1,1,1,1
+access_res_assemble,access.res.assemble,model_res_assemble,,1,1,1,0
+access_assemble_materials,access.assemble.materials,model_assemble_materials,,1,1,1,1

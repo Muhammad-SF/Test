@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template_custom_pos_coupon_extended" inherit_id="point_of_sale.template" xml:space="preserve">
+        <!-- Add Coupon in PosTicket -->
+        <t t-extend="PosTicket">
+            <t t-jquery="[t-if='receipt.footer']" t-operation="after"><br />
+            <t t-if='receipt.coupon_availed'>
+                Congratulations you got a coupon: <t t-esc="receipt.coupon_availed_code"/><br /> <br />
+                <br />
+               	<br />
+                <div align="center" style="margin-top: 13px;"><img id="barcode" style="height: 100px;"/></div>
+                
+            </t>
+            
+                    <!--t t-if="coupon">
+
+                        Congratulation you get a coupon from your purchase<br />
+                        your coupon code is
+                        <t t-esc="coupon"/> <br />
+                        you could use this in your next purchase
+                    </t-->
+            </t>
+        </t>
+</templates>
+
+

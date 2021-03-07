@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+         <record id="customer_invoice" model="ir.sequence">
+            <field name="name">customer invoices sequence</field>
+            <field name="code">account.invoice</field>
+            <field name="prefix">INV/%(range_year)s/</field>
+            <field name="number_next" eval="1"/>
+            <field name="number_increment" eval="1"/>
+            <field name="use_date_range" eval="True"/>
+            <field name="company_id" eval="False"/>
+            <field name="padding">4</field>
+         </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+            <record id="view_pos_config_settings_ext" model="ir.ui.view">
+            <field name="name">pos.config.settings.ext</field>
+            <field name="model">pos.config.settings</field>
+            <field name="inherit_id" ref="point_of_sale.view_sale_config_settings_form_pos"/>
+            <field name="arch" type="xml">
+ 				<xpath expr="//field[@name='module_pos_reprint']" position="after">
+ 					<label for="pos_coupon_code"/>
+					<div>
+						<div>
+							<field name="pos_coupon_code" widget="radio"/>
+<!--							<label for="allow_one_card_per_customer" -->
+<!--                                   string="Allow only one membership card per customer (It is checked for new cards when they are created.)"/>-->
+						</div>
+					</div>
+ 				</xpath>
+            </field>
+        </record>
+
+        <record id="pos_config_logo_inherit_view" model="ir.ui.view">
+            <field name="name">pos.config.inherit.form</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_config_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="image" widget='image' class="oe_avatar"/>
+                </field>
+            </field>
+        </record>
+
+
+</odoo>

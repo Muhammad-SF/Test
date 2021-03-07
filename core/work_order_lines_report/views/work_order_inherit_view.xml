@@ -1,0 +1,38 @@
+<odoo>
+	<data>
+		<!--<record id="work_order_inherit_view" model="ir.ui.view">
+			<field name="name">work.order.inherit.view</field>
+			<field name="model">mrp.workorder</field>
+			<field name="inherit_id" ref="work_order_expansion.mrp_production_workcenter_form_view_inherit_add_fields"></field>
+				<field name="arch" type="xml">
+					<xpath expr="//notebook/page/field[@name='workorder_bomlines']/tree/field[@name='actual_usage']" position="after">
+						<field name="consumed_quantity" invisible="1"/>
+						<field name="lost_quantity" invisible="1"/>
+						<field name="material_date_planned" invisible="1"/>
+					</xpath>
+				</field>
+		</record>-->
+		<record id="mrp_workorder_consume_view_inherit" model="ir.ui.view">
+			<field name="name">workorder.consumption.line.view.inherit</field>
+			<field name="model">workorder.consumption.line</field>
+			<field name="arch" type="xml">
+				<pivot string="Workorder Order Lines">
+					<field name="workorder_id" type="row"/>
+            		<field name="product_id" type="row"/>
+            		<!--<field name="material_date_planned" interval="day" type="row"/>-->
+            		<field name="product_qty" type="measure"/>
+            		<field name="consumed_quantity" type="measure"/>
+            		<field name="lost_quantity" type="measure"/>
+					<!-- <field name="material_consumed_date" type="row"/> -->
+         		</pivot>
+			</field>
+		</record>
+		<record id="action_mrp_workorder" model="ir.actions.act_window">
+	            <field name="name">Work Order Lines</field>
+	            <field name="res_model">workorder.consumption.line</field>
+	            <field name="view_type">form</field>
+	            <field name="view_mode">pivot</field>
+	    </record>
+	    <menuitem id="menu_work_order_pivot_view" name="Work Order Lines" parent="mrp.menu_mrp_reporting" sequence="24" action="action_mrp_workorder"/>
+	</data>
+</odoo>

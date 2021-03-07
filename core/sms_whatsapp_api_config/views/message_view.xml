@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mail_message_settings_search" model="ir.ui.view">
+        <field name="name">Mail Message Settings Search</field>
+        <field name="model">mail.message.settings</field>
+        <field name="arch" type="xml">
+            <search string="Mail Message Settings Search">
+                <field name="name"/>
+                <filter string="Default" name="default" domain="[('default','=',True)]"/>
+                <filter string="SMS" name="sms" domain="[('message_type','=','sms')]"/>
+                <filter string="WhatsApp" name="whatsapp" domain="[('message_type','=','whatsapp')]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="mail_message_settings_form" model="ir.ui.view">
+        <field name="name">Mail Message Settings Form</field>
+        <field name="model">mail.message.settings</field>
+        <field name="arch" type="xml">
+            <form string="Mail Message Settings Form">
+                <header>
+                    <button name="set_default" string="Set Default" type="object" class="btn btn-primary" attrs="{'invisible': [('default','=',True)]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" string="Name"/>
+                        <h1>
+                            <field name="name" placeholder="Name..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="left">
+                            <field name="message_type" required="1"/>
+                            <field name="auth_type" required="1"/>
+                            <field name="default" invisible="1"/>
+                        </group>
+                        <group name="right">
+                            <field name="username" attrs="{'invisible': [('auth_type','!=','username')], 'required': [('auth_type','=','username')]}"/>
+                            <field name="password" attrs="{'invisible': [('auth_type','!=','username')], 'required': [('auth_type','=','username')]}"/>
+                            <field name="key_token" attrs="{'invisible': [('auth_type','!=','apikey')], 'required': [('auth_type','=','apikey')]}"/>
+                        </group>
+                    </group>
+                    <separator string="Service URL"/>
+                    <field name="url" required="1"/>
+                    <separator string=" " name="adding_space"/>
+                    <p>
+                        Use below tags in url to replace the corresponding value
+                        <ul>
+                            <li>&lt;%%username%%&gt; - for Username</li>
+                            <li>&lt;%%password%%&gt; - for Password</li>
+                            <li>&lt;%%key_token%%&gt; - for API Key / Token</li>
+                            <li>&lt;%%message%%&gt; - Message</li>
+                            <li>&lt;%%number%%&gt; - Mobile Number</li>
+                        </ul>
+                    </p>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mail_message_settings_tree" model="ir.ui.view">
+        <field name="name">Mail Message Settings Tree</field>
+        <field name="model">mail.message.settings</field>
+        <field name="arch" type="xml">
+            <tree string="Mail Message Settings Tree">
+                <field name="name"/>
+                <field name="message_type"/>
+                <field name="auth_type"/>
+                <field name="username"/>
+                <field name="password"/>
+                <field name="key_token"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_mail_message_settings" model="ir.actions.act_window">
+        <field name="name">Message Settings</field>
+        <field name="res_model">mail.message.settings</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click here to define a new message settings.
+            </p>
+        </field>
+    </record>
+
+    <record id="mail_message_log_search" model="ir.ui.view">
+        <field name="name">Mail Message Log Search</field>
+        <field name="model">mail.message.log</field>
+        <field name="arch" type="xml">
+            <search string="Mail Message Log Search">
+                <field name="mobile_no"/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Sent" name="sent" domain="[('state','=','done')]"/>
+                <filter string="Failed" name="failed" domain="[('state','=','fail')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Status" name="state" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="mail_message_log_form" model="ir.ui.view">
+        <field name="name">Mail Message Log Form</field>
+        <field name="model">mail.message.log</field>
+        <field name="arch" type="xml">
+            <form string="Mail Message Log Form">
+                <header>
+                    <button name="action_retry" string="Retry" type="object" states='fail' class="btn btn-primary"/>
+                    <button name="action_send" string="Send Now" type="object" states='draft' class="btn btn-primary"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group name="left">
+                            <field name="mobile_no" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="message" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                        <group name="right">
+                            <field name="creation_date" readonly="1"/>
+                            <field name="message_settings_id" required="1" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                    </group>
+                    <separator string="Service URL" attrs="{'invisible': [('state','=','draft')]}"/>
+                    <field name="url" attrs="{'invisible': [('state','=','draft')]}"/>
+                    <separator string=" " name="adding_space"/>
+                    <separator string="Response" attrs="{'invisible': [('state','=','draft')]}"/>
+                    <field name="response" readonly="1" attrs="{'invisible': [('state','=','draft')]}"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mail_message_log_tree" model="ir.ui.view">
+        <field name="name">Mail Message Log Tree</field>
+        <field name="model">mail.message.log</field>
+        <field name="arch" type="xml">
+            <tree string="Mail Message Log Tree">
+                <field name="creation_date"/>
+                <field name="message_settings_id"/>
+                <field name="mobile_no"/>
+                <field name="message"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_mail_message_log" model="ir.actions.act_window">
+        <field name="name">Message Log</field>
+        <field name="res_model">mail.message.log</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click here to define a new message log.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_message" name="SMS / WhatsApp" parent="base.menu_custom" sequence="1"/>
+    <menuitem id="menu_message_settings" action="action_mail_message_settings" sequence="5" parent="menu_message"/>
+    <menuitem id="menu_message_log" action="action_mail_message_log" sequence="10" parent="menu_message"/>
+
+</odoo>

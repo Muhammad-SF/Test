@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="res_disassemble_tree" model="ir.ui.view">
+        <field name="name">Disassemble Tree</field>
+        <field name="model">res.disassemble</field>
+        <field name="arch" type="xml">
+            <tree string="Disassemble">
+                <!--<field name="assemble_id"/>-->
+                <field name="name"/>
+                <field name="product_id"/>
+                <field name="stock_production_prod"/>
+                <field name="quantity_pro"/>
+                <field name="date_disassemble"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="res_disassemble_form_view" model="ir.ui.view">
+        <field name="name">Disassemble Form</field>
+        <field name="model">res.disassemble</field>
+        <field name="arch" type="xml">
+            <form class="oe_form_configuration">
+                <header>
+                    <button name="action_process" type="object" states="draft" string="Process" class="oe_highlight"/>
+                    <button name="action_calculate" type="object"
+                            states="pending" string="Calculate"
+                            class="oe_highlight" invisible="context.get('request_menu')"/>
+                    <button name="action_disassemble" type="object"
+                            states="pending" string="Disassemble"
+                            class="oe_highlight" invisible="context.get('request_menu')"/>
+                    <button name="action_cancel" type="object" states="draft" string="Cancel"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,pending,done" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_journal_entry" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible': [('move_count', '=', 0)]}">
+                            <field name="move_count" widget="statinfo" string="Journal Entry"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <!--<field name="assemble_id" required="1" domain="[('state', '=', 'done')]"/>-->
+                            <field name="product_id" required="1"/>
+                            <field name="product_product_id" invisible="1"/>
+                            <field name="location_src_id" domain="[('usage','=','internal')]" required="1"/>
+                            <field name="tracking" invisible="1"/>
+                            <!--<field name="lot_ids" invisible="1"/>-->
+                            <field name="stock_production_prod" attrs="{'invisible':['|',('tracking','=','none'),('product_id','=',False)]}" groups="stock.group_production_lot"/>
+                        </group>
+                        <group>
+                            <field name="quantity_pro" required="1"/>
+                            <field name="date_disassemble"/>
+                        </group>
+                    </group>
+                    <separator string="Materials"/>
+                    <field name="material_id" attrs="{'invisible': [('state', 'in', ('pending', 'done'))]}">
+                        <tree string="Materials" editable="bottom">
+                            <field name="disassemble_state" invisible="1"/>
+                            <field name="product_id" required="1"/>
+                            <field name="qty_pro" required="1"/>
+                            <field name="stock_lot" domain="[('product_id','=',product_id)]"
+                                   groups="stock.group_production_lot"/>
+                            <!--<field name="allocation_cost" invisible="1"/>-->
+<!--                            <field name="cost_price" sum="Total Cost"/>-->
+                        </tree>
+                    </field>
+
+                    <field name="material_id_pending" attrs="{'invisible': [('state', '=', 'draft')]}">
+                        <tree string="Materials" editable="bottom" create="false" delete="false">
+                            <field name="disassemble_state" invisible="1"/>
+                            <field name="product_id" required="1" attrs="{'readonly': [('disassemble_state', 'in', ('pending', 'done'))]}"/>
+                            <field name="qty_pro" required="1" attrs="{'readonly': [('disassemble_state', 'in', ('pending', 'done'))]}"/>
+                            <field name="stock_lot" domain="[('product_id','=',product_id)]"
+                                   groups="stock.group_production_lot"
+                                   attrs="{'readonly': [('disassemble_state', 'in', ('pending', 'done'))]}"/>
+                            <!--<field name="allocation_cost" invisible="1"/>-->
+                            <field name="cost_price" sum="Total Cost" invisible="context.get('request_menu')" attrs="{'readonly': [('disassemble_state', '=', 'done')]}"/>
+                        </tree>
+                    </field>
+                    <!--<separator string="Products to Form"/>-->
+                    <!--<field name="material_form_id">-->
+                        <!--<tree string="Products to Form" editable="bottom" create="false">-->
+                            <!--<field name="product_id" readonly="1"/>-->
+                            <!--<field name="materials" readonly="1"/>-->
+                            <!--<field name="possible_qty" invisible="1"/>-->
+                            <!--<field name="possible_qty_dynamic" readonly="1" string="Possible Quantity"/>-->
+                            <!--<field name="quantity" required="1"/>-->
+                        <!--</tree>-->
+                    <!--</field>-->
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="res_disassemble_request_action" model="ir.actions.act_window">
+        <field name="name">Disassemble Request</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.disassemble</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="domain">[('state', '=', 'draft')]</field>
+        <field name="context">{'request_menu':1}</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to define a new Disassemble.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_res_disassemble_request" name="Disassemble Request"
+              action="res_disassemble_request_action" parent="stock.menu_stock_warehouse_mgmt" sequence="2"/>
+
+    <record id="res_disassemble_approval_action" model="ir.actions.act_window">
+        <field name="name">Disassemble Approval</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.disassemble</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_type">form</field>
+        <field name="domain">[('state', 'in', ('pending', 'done'))]</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                Click to define a new Disassemble.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_res_disassemble_approval" name="Disassemble Approval"
+              action="res_disassemble_approval_action" parent="stock.menu_stock_warehouse_mgmt" sequence="2"/>
+</odoo>

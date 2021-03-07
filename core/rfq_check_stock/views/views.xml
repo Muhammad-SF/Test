@@ -1,0 +1,53 @@
+<odoo>
+
+
+  <record model="ir.ui.view" id="stock_by_product_form_view1">
+    <field name="name">product.product.stock.form1</field>
+    <field name="model">product.product</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <field name="stock_location" nolable="1">
+            <tree>
+              <field name="stock_location_id"/>
+              <field name="on_hand_qty"/>
+              <field name="reserved_qty"/>
+              <field name="available_qty"/>
+              <field name="incoming_qty"/>
+              <field name="forcasted_qty"/>
+<!--               <field name="out_qty"/> -->
+              <field name="custom_product_id" invisible="1"/>
+            
+              <!-- <field name="stock_location_id"/>
+              <field name="on_hand_qty"/>
+              <field name="qty"/>
+              <field name="reserved_available_qty"/>
+              <field name="incoming_qty"/>
+              <field name="available_qty"/>
+              <field name="custom_product_id" invisible="1"/> -->
+            </tree>
+          </field>
+        </sheet>
+        <footer>
+          <button string='Close' class='btn-default' special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+    <record id="button_check_stock" model="ir.ui.view">
+            <field name="name">inherit.stock.check</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/notebook/page/field[@name='order_line']/tree/field[@name='price_subtotal']" position="after"> 
+                     <button name="show_stock" type="object" string="Show Stock"/>
+                </xpath>
+            </field>
+    </record>
+
+
+</odoo>
+
+
+

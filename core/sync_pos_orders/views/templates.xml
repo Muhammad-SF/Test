@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="assets_backend" name="sync_pos_orders assets" inherit_id="point_of_sale.assets">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/sync_pos_orders/static/src/js/pos_longpolling.js"></script>
+                <script type="text/javascript" src="/sync_pos_orders/static/src/js/sync_pos_orders.js"></script>
+                <link rel="stylesheet" href="/sync_pos_orders/static/src/css/sync_pos_orders.css"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>

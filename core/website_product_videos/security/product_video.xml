@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<odoo noupdate="0">
+    <record id="website_product_videos.group_website_multi_video" model="res.groups">
+        <field name="name">Show multi video on eCommerce</field>
+        <field name="category_id" ref="base.module_category_hidden"/>
+    </record>
+
+    <record id="base.group_user" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('website_product_videos.group_website_multi_video'))]"/>
+    </record>
+
+    <record id="base.group_public" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('website_product_videos.group_website_multi_video'))]"/>
+    </record>
+
+    <record id="base.group_portal" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('website_product_videos.group_website_multi_video'))]"/>
+    </record>
+
+    <record id="base.group_user" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('website_sale.group_website_multi_image'))]"/>
+    </record>
+
+    <record id="base.group_public" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('website_sale.group_website_multi_image'))]"/>
+    </record>
+
+    <record id="base.group_portal" model="res.groups">
+        <field name="implied_ids" eval="[(4, ref('website_sale.group_website_multi_image'))]"/>
+    </record>
+</odoo>

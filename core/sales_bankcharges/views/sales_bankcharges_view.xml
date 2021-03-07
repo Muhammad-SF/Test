@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+         <record id="view_account_payment_invoice_form" model="ir.ui.view">
+            <field name="name">account.payment.invoice.form</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_invoice_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet/group/group[2]" position="after">
+                    <group>
+                        <field name="bank_charges_boolean" attrs="{'invisible':[('show_bank_charges', '=', False)]}" />
+                        <field name="bank_charges_amount" attrs="{'invisible': [('bank_charges_boolean', '=', False)], 'required': [('bank_charges_boolean', '=', True)]}" />
+                        <field name="show_bank_charges" invisible="1" />
+                        <field name="bank_account_id" attrs="{'invisible': [('bank_charges_boolean', '=', False)], 'required': [('bank_charges_boolean', '=', True)]}"/>
+                    </group>
+                    <group></group>
+                </xpath>
+                <!--<field name="payment_difference" position="attributes">-->
+                    <!--<attribute name="attrs">{'invisible': [('payment_difference', '<', 0.0)]}</attribute>-->
+                <!--</field>-->
+                <!--<field name="payment_difference_handling" position="attributes">-->
+                    <!--<attribute name="attrs">{'invisible': [('payment_difference', '<', 0.0)]}</attribute>-->
+               <!--</field>-->
+
+                <field name="writeoff_account_id" position="attributes">
+                    <attribute name="attrs">
+                        {'invisible': [('payment_difference_handling','!=','reconcile')
+                        ],
+                        'required': [('payment_difference_handling', '=', 'reconcile'),
+                        ('bank_charges_boolean','=', False),
+                        ]}</attribute>
+                </field>
+             </field>
+         </record>
+    </data>
+</odoo>

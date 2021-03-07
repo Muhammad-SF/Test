@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <template id="report_customer_soa_document">
+            <t t-call="sg_statementofaccounts.external_layout_invoice_tax">
+            <t t-set="o" t-value="o.with_context({'lang':o.lang})"/>
+                <div class="page">
+                    <div class="row">
+                        <div class="col-xs-12" style="margin-top:70px">
+                        <div class="col-xs-7 text-left" style="display: table-header-group">
+                            <span style="font-size:12px;font-weight:bold;" t-esc="o.company_id.name or ''"/>
+                            <br/>
+                            <span style="font-size:12px;font-weight:1px" t-esc="o.street"/>
+                            <br/>
+                            <span style="font-size:12px;font-weight:1px" t-esc="o.street2"/>
+                            <br/>
+                            <span style="font-size:12px;font-weight:1px" t-esc="o.city"/>
+                            <span style="font-size:12px;font-weight:1px" t-esc="o.country_id.name"/>
+                            <br/>
+                            <span style="font-size:12px;font-weight:bold">Attention &#160; :</span><span style="font-size:12px;font-weight:bold" t-esc="o.name"></span>
+                            <div style="text-decoration: underline"><span style="font-size:12px;font-weight:bold">(email :</span><span style="font-size:12px;font-weight:bold" t-esc="o.email"></span>)</div>
+                            <br/>
+                        </div>
+                        <div class="col-xs-5" >
+                            <span style="font-size:22px;font-weight:bold">Statement of Account</span>
+                            <br/>
+                            <span style="font-size:22px;font-weight:bold">As at <span t-field="o.today_date" t-field-options="{&quot;format&quot;: &quot;dd/MM/yy&quot;}" />
+                            </span>
+
+                        </div>
+                        </div>
+                        <br/>
+                    </div>
+
+                    <table class="table table-condensed" >
+                        <thead>
+                            <tr style="border-top:1px solid black;border-bottom:1px solid black;">
+                                    <th >Inv Date</th>
+                                    <th >Document No.</th>
+                                    <th >Description</th>
+                                    <th >Currency</th>
+                                    <th >Exchange Rate</th>
+                                    <th >Amount(Forex)</th>
+                                    <th >Amount(SGD)</th>
+                            </tr>
+                        </thead>
+                        <tbody style="min-height: 500px;">
+                            <t t-set="total" t-value="0"/>
+                            <tr t-foreach="o.invoice_ids" t-as="invoice" style="border-top:1px solid black;">
+                                <t t-if="invoice.state == 'open'">
+                                    <td ><span t-field="invoice.date_invoice" /></td>
+                                    <td ><span t-esc="invoice.number"/></td>
+                                    <td >
+                                        <t t-foreach="invoice.invoice_line_ids" t-as="line">
+                                            <span t-esc="line.product_id.name">&#160; </span>
+                                        </t>
+                                            <span t-if="invoice.name"/><span> - PO:</span><span t-esc="invoice.name"/>
+                                    </td>
+                                    <td ><span t-field="invoice.currency_id.name"/></td>
+                                    <td ><span t-field="invoice.currency_id.rate"/></td>
+                                    <td ><span t-esc="'%.2f'% invoice.residual_signed"/></td>
+                                    <td ><span t-esc="'%.2f'% invoice.residual_company_signed"/><t t-set="total" t-value="total+invoice.residual_company_signed"/></td>
+                                </t>
+                            </tr>
+                            <tr style="border:hidden;">
+                                <td style="border:hidden">&#160;</td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                            </tr>
+                            <tr style="border:hidden;">
+                                <td style="border:hidden">&#160;</td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                            </tr>
+                            <tr style="border:hidden;">
+                                <td style="border:hidden">&#160;</td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                            </tr>
+                            <tr style="border:hidden;">
+                                <td style="border:hidden">&#160;</td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                            </tr><tr style="border:hidden;">
+                                <td style="border:hidden">&#160;</td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                            </tr><tr style="border:hidden;">
+                                <td style="border:hidden">&#160;</td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                            </tr><tr style="border:hidden;">
+                                <td style="border:hidden">&#160;</td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                                <td style="border:hidden"></td>
+                            </tr>
+                            <tr style="border-bottom:1px solid black;">
+                                <td style="border-bottom:1px solid black;border-top:hidden;border-left:hidden;border-right:hidden;">&#160;</td>
+                                <td style="border-bottom:1px solid black;border-top:hidden;border-left:hidden;border-right:hidden;"></td>
+                                <td style="border-bottom:1px solid black;border-top:hidden;border-left:hidden;border-right:hidden;"></td>
+                                <td style="border-bottom:1px solid black;border-top:hidden;border-left:hidden;border-right:hidden;"></td>
+                                <td style="border-bottom:1px solid black;border-top:hidden;border-left:hidden;border-right:hidden;"></td>
+                                <td style="border-bottom:1px solid black;border-top:hidden;border-left:hidden;border-right:hidden;"></td>
+                                <td style="border-bottom:1px solid black;border-top:hidden;border-left:hidden;border-right:hidden;"></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr style="border:1px solid black;border-top:1px solid black;border-bottom:3px solid black;border-left:hidden;border-right:hidden;">
+                                <th colspan="2" style="background:yellow;">ACCOUNT BALANCE(<span t-esc="o.currency_id.name"/>)</th>
+                                <th></th>
+                                <th class="text-right"><span t-esc="total"/></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <table class="table table-condensed" style="border-collapse: collapse;border:hidden;font-size:12px;background:orange">
+                            <tr style="border:hidden">
+                                <td >AGEING</td>
+                                <td >Current Due</td>
+                                <td >31 to 60 days due</td>
+                                <td >61 to 90 days due</td>
+                                <td >Over 91 days Due</td>
+                            </tr>
+
+                            <tr style="border:hidden">
+                                <td ></td>
+                                <td ><span t-esc="o.get_current_due()"/></td>
+                                <td ><span t-esc="o.get_date_31_60()"/></td>
+                                <td ><span t-esc="o.get_date_61_90()"/></td>
+                                <td ><span t-esc="o.get_date_91()"/></td>
+                            </tr>
+                    </table>
+                    <span style="font-size:12px">NOTE: PAYMENT RECEIVED AFTER STATEMENT DATE WILL BE REFLECTED IN THE NEXT STATEMENT</span>
+                </div>
+            </t>
+        </template>
+        <template id="report_customer_soa">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="sg_statementofaccounts.report_customer_soa_document" t-lang="o.lang"/>
+            </t>
+        </template>
+
+        <!-- QWeb Reports -->
+        <report
+            id="picking_customer_soa"
+            model="res.partner"
+            string="Customer SOA"
+            report_type="qweb-pdf"
+            name="sg_statementofaccounts.report_customer_soa"
+            file="sg_statementofaccounts.report_customer_soa"
+        />
+    </data>
+</odoo>

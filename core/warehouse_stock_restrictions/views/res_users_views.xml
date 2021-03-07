@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_users_form_inherit_custom" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="warehouse_stock_restrictions.view_users_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='default_picking_type_ids']/.." position="replace">
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_location_security_users_form" model="ir.ui.view">
+        <field name="name">location_security.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="warehouse_stock_restrictions.view_location_security_users_form"/>
+        <field name="arch" type="xml">
+            <field name="stock_location_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="stock_location_ids" position="after">
+                <field name="default_picking_type_ids" invisible="1"/>
+                <field name="warehouse_location_operation_ids">
+                    <tree editable="bottom">
+                        <field name="warehouse_id" required="1"/>
+                        <field name="location_ids" widget="many2many_tags"/>
+                        <field name="picking_type_ids" widget="many2many_tags"/>
+                        <field name="user_id" invisible="1"/>
+                    </tree>
+                </field>
+            </field>
+        </field>
+    </record>
+</odoo>

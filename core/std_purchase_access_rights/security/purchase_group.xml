@@ -1,0 +1,68 @@
+<odoo>
+    <data>
+        <record id="purchase_settings_manager" model="res.groups">
+            <field name="name">Manage Purchase Settings</field>
+        </record>
+        <record id="purchase_vendor_access" model="res.groups">
+            <field name="name">Vendor Access</field>
+        </record>
+
+        <!--        <record id="purchase_user" model="res.groups">-->
+        <!--            <field name="name">Purchase User</field>-->
+        <!--            <field name="category_id" ref="base.module_category_purchase_management"/>-->
+        <!--            <field name="implied_ids"-->
+        <!--                   eval="[(4, ref('purchase.group_purchase_user')),(4, ref('stock.group_stock_user')),(4, ref('purchase_request.group_purchase_request_user'))]"/>-->
+        <!--        </record>-->
+
+        <!--        <record id="purchase_manager" model="res.groups">-->
+        <!--            <field name="name">Purchase Manager</field>-->
+        <!--            <field name="category_id" ref="base.module_category_purchase_management"/>-->
+        <!--            <field name="implied_ids"-->
+        <!--                   eval="[(4, ref('purchase.group_purchase_manager')),(4, ref('stock.group_stock_manager')),(4, ref('purchase_request.group_purchase_request_manager'))]"/>-->
+        <!--        </record>-->
+
+        <record id="purchase_request.purchase_request_rule" model="ir.rule">
+            <field name="name">Purchase Request User</field>
+            <field name="model_id" ref="purchase_request.model_purchase_request"/>
+            <field name="groups" eval="[(6,0, [ref('purchase_request.group_purchase_request_user')])]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="domain_force">[('requested_by','=',user.id)]</field>
+        </record>
+
+
+        <record id="purchase_request_rule__own_user" model="ir.rule">
+            <field name="name">Purchase Request User Own</field>
+            <field name="model_id" ref="base.model_res_users"/>
+            <field name="groups" eval="[(6,0, [ref('purchase_request.group_purchase_request_user')])]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="domain_force">[('id','=',user.id)]</field>
+        </record>
+
+        <record id="purchase_request.purchase_request_line_rule" model="ir.rule">
+            <field name="name">Purchase Request Line User</field>
+            <field name="model_id" ref="purchase_request.model_purchase_request_line"/>
+            <field name="groups" eval="[(6,0, [ref('purchase_request.group_purchase_request_user')])]"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+            <field name="domain_force">[('request_id.requested_by','=',user.id)]</field>
+        </record>
+
+
+        <record id="purchase_settings_manager" model="res.groups">
+            <field name="name">Manage Purchase Settings</field>
+        </record>
+        <menuitem id="purchase.menu_purchase_general_settings" name="Settings" parent="purchase.menu_purchase_config"
+                  sequence="0" action="purchase.action_purchase_configuration"
+                  groups="std_purchase_access_rights.purchase_settings_manager"/>
+
+
+    </data>
+</odoo>

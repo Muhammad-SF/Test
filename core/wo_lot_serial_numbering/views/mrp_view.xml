@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<record id="mrp_production_form_view_ro" model="ir.ui.view">
+        <field name="name">mrp.production.form</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="manufacturing_order_extended.mrp_production_form_view_ro"/>
+        <field name="arch" type="xml">
+          <xpath expr="//field[@name='planned_materials']/tree/field[@name='quantity_done']" position="attributes">
+        		<attribute name="invisible">0</attribute>
+        	</xpath>
+        </field>
+    </record>
+</odoo>

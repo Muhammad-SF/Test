@@ -1,0 +1,35 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="purchase_qty_warning_popup_view">
+            <field name="name">purchase.qty.warning.wiz.view.form</field>
+            <field name="model">purchase.qty.warning.wiz</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="warning_msg" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button name="approve_order" string="Approve" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="purchase_qty_warning_popup_view_2">
+            <field name="name">purchase.qty.warning.wiz.view.form.2</field>
+            <field name="model">purchase.qty.warning.wiz</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="warning_msg" nolabel="1"/>
+                    </group>
+                    <footer>
+                        <button name="approve_no_backorder" string="Approve" type="object" class="oe_highlight"/>
+                        <button string="Cancel" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

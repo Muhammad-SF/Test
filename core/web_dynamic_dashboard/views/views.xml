@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="web_dashboard_dashboard" model="ir.ui.view">
+            <field name="name">web.dashboard.dashboard</field>
+            <field name="model">web.dashboard</field>
+            <field name="type">ddashboard</field>
+            <field name="arch" type="xml">
+                <ddashboard string="Dashboard Views">
+                </ddashboard>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="web_dashboard_action">
+            <field name="name">All Dashboards</field>
+            <field name="res_model">web.dashboard</field>
+            <field name="view_mode">ddashboard,tree,form</field>
+            <field name="context">{'dashboard_id': 0, 'active_test': False}</field>
+        </record>
+
+        <menuitem id="web_dashboard_menu" name="Dashboard Management" sequence="0" web_icon="web_dynamic_dashboard,static/icon/proyek.png"/>
+        <menuitem id="sub_web_dashboard_menu" parent="web_dashboard_menu" name="All Dashboards" sequence="50" action="web_dashboard_action" />
+        
+        <!-- Groups -->
+        <record id="group_ddashboard_manager" model="res.groups">
+            <field name="name">Dashboard Manager</field>
+            <field name="implied_ids" eval="[
+                (4,ref('base.group_user'))
+                ]"/>
+            <field name="users" eval="[
+                (4,ref('base.user_root'))
+                ]"/>
+        </record>
+        
+        <!-- Tree view for the menuitem -->
+        <record id="web_dashboard_tree" model="ir.ui.view">
+            <field name="name">web.dashboard.tree</field>
+            <field name="model">web.dashboard</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="menu_id"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Form view for the menuitem -->
+        <record id="web_dashboard_form" model="ir.ui.view">
+            <field name="name">web.dashboard.form</field>
+            <field name="model">web.dashboard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <!-- <header>
+                        </header> -->
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="parent_menu_id" domain="[('child_id', '!=', False)]"/>
+                                <field name="menu_id" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="dashboard_source"/>
+                                <field name="tableau_url"
+                                    attrs="{
+                                        'required':[('dashboard_source', '=', 'tableau')],
+                                        'invisible':[('dashboard_source', '!=', 'tableau')]
+                                    }"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Dashboard Blocks">
+                                <field name="block_ids">
+                                    <tree>
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="block_size"/>
+                                        <field name="block_type"/>
+                                        <field name="active"/>
+                                    </tree>
+                                    <form string="Dashboard Blocks">
+                                        <div class="oe_title">
+                                            <h1>
+                                                <field name="name"/>
+                                            </h1>
+                                        </div>
+                                        <group string="What to Calculate">
+                                            <field name="data_source"/>
+                                            <field name="data_function" 
+                                                attrs="{
+                                                    'required':[('data_source', '=', 'function')],
+                                                    'invisible':[('data_source', '!=', 'function')]
+                                                }"/>
+                                            <field name="operation"
+                                                attrs="{
+                                                    'required':[('data_source', '=', 'query')],
+                                                    'invisible':[('data_source', '!=', 'query')]
+                                                }"/>
+                                            <field name="model_id" 
+                                                attrs="{
+                                                    'required':[('data_source', '=', 'query')],
+                                                    'invisible':[('data_source', '!=', 'query')]
+                                                }"/>
+                                            <field name="model" invisible="1"
+                                                attrs="{
+                                                    'required':[('data_source', '=', 'query')],
+                                                    'invisible':[('data_source', '!=', 'query')]
+                                                }"/>
+                                            <field name="field_id"
+                                                attrs="{
+                                                    'required':[('data_source', '=', 'query')],
+                                                    'invisible':[('data_source', '!=', 'query')]
+                                                }"/>
+                                            <!-- <field name="domain" widget="char_domain"  options="{'model_field': 'model', 'in_dialog': True}" string="Filters"
+                                                attrs="{
+                                                    'invisible':[('data_source', '!=', 'query')]
+                                                }"/> -->
+                                            <field name="domain_date"
+                                                attrs="{
+                                                    'invisible':[('data_source', '!=', 'query')]
+                                                }"/>
+                                            <field name="domain_date_field_id"
+                                                attrs="{
+                                                    'required':[('domain_date', '!=', False)],
+                                                    'invisible':['|', ('domain_date', '=', False), ('data_source', '!=', 'query')]
+                                                }"/>
+                                            <field name="limit" invisible="1"/>
+                                            <field name="sort" invisible="1"/>
+                                            <field name="others_operation" invisible="1"/>
+                                            <field name="block_type" string="Type"/>
+                                        </group>
+                                        <group string="Calculate By / Group By"
+                                            attrs="{
+                                                'invisible':['|', ('block_type', '=', False), ('block_type', '=', 'tile')]
+                                            }">
+                                            <group>
+                                                <field name="group_field_id"/>
+                                                <!-- TODO: Nanti -->
+                                                <!-- <field name="group_field_id_model_name" invisible="1"/>
+                                                <field name="group_relation_field_id"
+                                                    attrs="{
+                                                        'invisible':[('group_field_id_model_name', '=', False)]
+                                                    }"/> -->
+                                                <field name="group_field_ttype" invisible="1"/>
+                                                <field name="group_date_format"
+                                                    attrs="{
+                                                        'required':[('group_field_ttype', 'in', ['date', 'datetime'])],
+                                                        'invisible':[('group_field_ttype', 'not in', ['date', 'datetime'])]
+                                                    }"/>
+                                                <field name="show_group" invisible="1"/>
+                                                <field name="group_limit"/>
+                                                <field name="show_group_others"/>
+                                            </group>
+                                            <group
+                                                attrs="{
+                                                    'invisible':[('block_type', 'not in', ['line', 'area', 
+                                                        'bar', 'hbar', 'stackbar'])]
+                                                }">
+                                                <field name="subgroup_field_id"/>
+                                                <!-- TODO: Nanti -->
+                                                <!-- <field name="subgroup_field_id_model_name" invisible="1"/>
+                                                <field name="subgroup_relation_field_id"
+                                                    attrs="{
+                                                        'invisible':[('subgroup_field_id_model_name', '=', False)]
+                                                    }"/> -->
+                                                <field name="subgroup_field_ttype" invisible="1"/>
+                                                <field name="subgroup_date_format"
+                                                    attrs="{
+                                                        'required':[('subgroup_field_ttype', 'in', ['date', 'datetime'])],
+                                                        'invisible':[('subgroup_field_ttype', 'not in', ['date', 'datetime'])]
+                                                    }"/>
+                                                <field name="show_subgroup" invisible="1"/>
+                                                <field name="subgroup_limit"/>
+                                                <field name="show_subgroup_others"/>
+                                            </group>
+                                        </group>
+                                        <group string="Visual Settings">
+                                            <group>
+                                                <field name="block_size"/>
+                                                <!-- TODO: Nanti -->
+                                                <!-- <field name="tile_color"
+                                                    attrs="{
+                                                        'invisible':[('block_type', '!=', 'tile')],
+                                                        'required':[('block_type', '=', 'tile')]
+                                                    }"/> -->
+                                                <field class="icon_picker" name="tile_icon"
+                                                    attrs="{
+                                                        'invisible':[('block_type', '!=', 'tile')],
+                                                        'required':[('block_type', '=', 'tile')]
+                                                    }"/>
+                                                <field name="show_metadata" invisible="1"/>
+                                                <field name="sequence"/>
+                                                <field name="active"/>
+                                            </group>
+                                            <group>
+                                                <field name="menu_id"/>
+                                                <field name="link"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Dashboard Blocks -->
+        <record model="ir.actions.act_window" id="web_dashboard_block_action">
+            <field name="name">Dashboard Blocks</field>
+            <field name="res_model">web.dashboard.block</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <!-- Tree view for the menuitem -->
+        <record id="web_dashboard_block_tree" model="ir.ui.view">
+            <field name="name">web.dashboard.block.tree</field>
+            <field name="model">web.dashboard.block</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="dashboard_id"/>
+                    <field name="model"/>
+                    <field name="field_id"/>
+                    <field name="operation"/>
+                    <field name="block_type"/>
+                    <field name="block_size"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Form view for the menuitem -->
+        <record id="web_dashboard_block_form" model="ir.ui.view">
+            <field name="name">web.dashboard.block.form</field>
+            <field name="model">web.dashboard.block</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group string="What to Calculate">
+                            <field name="data_source"/>
+                            <field name="data_function" 
+                                attrs="{
+                                    'required':[('data_source', '=', 'function')],
+                                    'invisible':[('data_source', '!=', 'function')]
+                                }"/>
+                            <field name="operation"
+                                attrs="{
+                                    'required':[('data_source', '=', 'query')],
+                                    'invisible':[('data_source', '!=', 'query')]
+                                }"/>
+                            <field name="model_id" 
+                                attrs="{
+                                    'required':[('data_source', '=', 'query')],
+                                    'invisible':[('data_source', '!=', 'query')]
+                                }"/>
+                            <field name="model" invisible="1"
+                                attrs="{
+                                    'required':[('data_source', '=', 'query')],
+                                    'invisible':[('data_source', '!=', 'query')]
+                                }"/>
+                            <field name="field_id"
+                                attrs="{
+                                    'required':[('data_source', '=', 'query')],
+                                    'invisible':[('data_source', '!=', 'query')]
+                                }"/>
+                            <!-- <field name="domain" widget="char_domain"  options="{'model_field': 'model', 'in_dialog': True}" string="Filters"
+                                attrs="{
+                                    'invisible':[('data_source', '!=', 'query')]
+                                }"/> -->
+                            <field name="domain_date"
+                                attrs="{
+                                    'invisible':[('data_source', '!=', 'query')]
+                                }"/>
+                            <field name="domain_date_field_id"
+                                attrs="{
+                                    'required':[('domain_date', '!=', False)],
+                                    'invisible':['|', ('domain_date', '=', False), ('data_source', '!=', 'query')]
+                                }"/>
+                            <field name="limit" invisible="1"/>
+                            <field name="sort" invisible="1"/>
+                            <field name="others_operation" invisible="1"/>
+                            <field name="block_type" string="Type"/>
+                        </group>
+                        <group string="Calculate By / Group By"
+                            attrs="{
+                                'invisible':['|', ('block_type', '=', False), ('block_type', '=', 'tile')]
+                            }">
+                            <group>
+                                <field name="group_field_id"/>
+                                <!-- TODO: Nanti -->
+                                <!-- <field name="group_field_id_model_name" invisible="1"/>
+                                <field name="group_relation_field_id"
+                                    attrs="{
+                                        'invisible':[('group_field_id_model_name', '=', False)]
+                                    }"/> -->
+                                <field name="group_field_ttype" invisible="1"/>
+                                <field name="group_date_format"
+                                    attrs="{
+                                        'required':[('group_field_ttype', 'in', ['date', 'datetime'])],
+                                        'invisible':[('group_field_ttype', 'not in', ['date', 'datetime'])]
+                                    }"/>
+                                <field name="show_group" invisible="1"/>
+                                <field name="group_limit"/>
+                                <field name="show_group_others"/>
+                            </group>
+                            <group
+                                attrs="{
+                                    'invisible':[('block_type', 'not in', ['line', 'area', 
+                                        'bar', 'hbar', 'stackbar'])]
+                                }">
+                                <field name="subgroup_field_id"/>
+                                <!-- TODO: Nanti -->
+                                <!-- <field name="subgroup_field_id_model_name" invisible="1"/>
+                                <field name="subgroup_relation_field_id"
+                                    attrs="{
+                                        'invisible':[('subgroup_field_id_model_name', '=', False)]
+                                    }"/> -->
+                                <field name="subgroup_field_ttype" invisible="1"/>
+                                <field name="subgroup_date_format"
+                                    attrs="{
+                                        'required':[('subgroup_field_ttype', 'in', ['date', 'datetime'])],
+                                        'invisible':[('subgroup_field_ttype', 'not in', ['date', 'datetime'])]
+                                    }"/>
+                                <field name="show_subgroup" invisible="1"/>
+                                <field name="subgroup_limit"/>
+                                <field name="show_subgroup_others"/>
+                            </group>
+                        </group>
+                        <group string="Visual Settings">
+                            <group>
+                                <field name="block_size"/>
+                                <!-- TODO: Nanti -->
+                                <!-- <field name="tile_color"
+                                    attrs="{
+                                        'invisible':[('block_type', '!=', 'tile')],
+                                        'required':[('block_type', '=', 'tile')]
+                                    }"/> -->
+                                <field class="icon_picker" name="tile_icon"
+                                    attrs="{
+                                        'invisible':[('block_type', '!=', 'tile')],
+                                        'required':[('block_type', '=', 'tile')]
+                                    }"/>
+                                <field name="show_metadata" invisible="1"/>
+                                <field name="sequence"/>
+                                <field name="active"/>
+                            </group>
+                            <group>
+                                <field name="menu_id"/>
+                                <field name="link"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <menuitem id="sub_web_dashboard_block" parent="web_dashboard_menu" name="Dashboard Blocks" sequence="60" action="web_dashboard_block_action" />
+    </data>
+</odoo>
+

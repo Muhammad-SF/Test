@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <template id="report_delivery_document2_signature" inherit_id="stock.report_delivery_document">
+            <xpath expr="//p[@t-if='o.backorder_id']" position="after">
+                <div style="margin-top:80px;margin-right:30px" class="text-right">
+                    <p>Signatured and Received by</p>
+
+                </div>
+                <div style="height:40px;margin-top:50px">
+                    <span style="margin-left:670px">(</span>
+                    <span style="margin-left:180px">)</span>
+                </div>
+                <br/>
+                <br/>
+                <br/>
+            </xpath>
+        </template>
+
+
+<!--        <template id="singnatue_inherit_pickingope" inherit_id="stock.report_picking">-->
+<!--            <xpath expr="//p[@t-field='o.note']" position="after">-->
+<!--                <div style="margin-top:80px;margin-right:30px" class="text-right">-->
+<!--                    <p>Signatured and Received by</p>-->
+
+<!--                </div>-->
+<!--                <div style="height:40px;margin-top:50px">-->
+<!--                    <span style="margin-left:670px">(</span>-->
+<!--                    <span style="margin-left:180px">)</span>-->
+<!--                </div>-->
+<!--            </xpath>-->
+<!--        </template>-->
+
+
+    </data>
+</odoo>

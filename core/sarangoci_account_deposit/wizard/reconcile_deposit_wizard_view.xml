@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <record id="view_account_deposit_reconcile" model="ir.ui.view">
+        <field name="name">account.deposit.reconcile.form</field>
+        <field name="model">account.deposit.reconcile</field>
+        <field name="arch" type="xml">
+            <form string="Deposit Reconcile">
+                <group>
+                     <group>
+                         <field name="date"/>
+                         <field name="invoice_id" context="{'deposit_reconcile': True}"/>
+                     </group>
+                     <group>
+                     </group>
+                </group>
+                <footer>
+                    <button string='Reconcile Deposit' name="reconcile_deposit" type="object" class="btn-primary" context="{'deposit_active_id':active_id}"/>
+                    <button string="Cancel" class="btn-default" special="cancel"/>
+                </footer>
+           </form>
+        </field>
+    </record>
+
+    <record id="action_account_deposit_reconcile" model="ir.actions.act_window">
+        <field name="name">Reconcile Deposit</field>
+        <field name="res_model">account.deposit.reconcile</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_account_deposit_reconcile"/>
+        <field name="target">new</field>
+    </record>
+
+    </data>
+</odoo>
